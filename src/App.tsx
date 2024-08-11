@@ -1,5 +1,11 @@
+import Cap from "./ui/Cap";
+
 function App() {
-  return <button type="button" onClick={() => console.log("Привет")}>Привет</button>
+  return (
+    <>
+      <Cap />
+    </>
+  );
 }
 
 export default App;
