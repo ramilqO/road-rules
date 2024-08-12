@@ -1,13 +1,13 @@
-import style from "../styleComponents/Cap.module.scss";
+import style from "./Cap.module.scss";
 
-import MoonIcon from "../../public/svg/cap/Moon01";
-import SunIcon from "../../public/svg/cap/Sun01";
-//
-export default function Cap() {
+import MoonIcon from "../../../public/svg/header/MoonIcon";
+// import SunIcon from "../../public/svg/cap/SunIcon";
+
+export default function Header() {
   return (
     <header className={style.cap}>
       <button className={style.cap__buttonChangeTheme}>
-        <SunIcon />
+        <MoonIcon />
       </button>
 
       <nav className={style.navigation}>

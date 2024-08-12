@@ -1,4 +1,6 @@
-export default function Sun01() {
+import React from "react";
+
+export default function SunIcon() {
   return (
     <svg
       width="24"

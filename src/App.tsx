@@ -1,9 +1,9 @@
-import Cap from "./ui/Cap";
+import Header from "./Components/Header/Header";
 
 function App() {
   return (
     <>
-      <Cap />
+      <Header />
     </>
   );
 }

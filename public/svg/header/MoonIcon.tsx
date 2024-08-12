@@ -1,4 +1,4 @@
-export default function Moon01() {
+export default function MoonIcon() {
   return (
     <svg
       width="24"
