@@ -1,5 +1,11 @@
+import Header from "./Components/Header/Header";
+
 function App() {
-  return <button type="button" onClick={() => console.log("Привет")}>Привет</button>
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default App;
