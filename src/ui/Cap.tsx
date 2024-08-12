@@ -2,7 +2,7 @@ import style from "../styleComponents/Cap.module.scss";
 
 import MoonIcon from "../../public/svg/cap/Moon01";
 import SunIcon from "../../public/svg/cap/Sun01";
-
+//
 export default function Cap() {
   return (
     <header className={style.cap}>
