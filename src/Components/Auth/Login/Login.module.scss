@@ -1,0 +1,171 @@
+@import "/src/Styles/Variables.module.scss";
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 20px;
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 30px;
+
+  &__title {
+    align-items: center;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28.8px;
+
+    color: $color-darkTheme-003;
+  }
+
+  &__description {
+    align-items: center;
+
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: $color-darkTheme-004;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 320px;
+  min-height: 352px;
+
+  padding: 24px;
+
+  border-radius: 8px;
+  border: 1px solid $color-darkTheme-002;
+
+  &__error {
+    margin-bottom: 24px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22.4px;
+
+    color: $color-darkTheme-003;
+
+    &--description {
+      color: red;
+    }
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  &:first-child {
+    margin-bottom: 24px;
+  }
+
+  &__label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22.4px;
+
+    color: $color-darkTheme-003;
+  }
+
+  &__input {
+    width: 100%;
+    height: 40px;
+
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+
+    border: 1px solid $color-darkTheme-002;
+    border-radius: 8px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    color: $color-darkTheme-005;
+
+    &::placeholder {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+      color: $color-darkTheme-005;
+    }
+
+    &:last-child {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.visibilityPasswordContainer {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  &__label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22.4px;
+
+    color: $color-darkTheme-003;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
+  gap: 24px;
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    border-radius: 8px;
+    border: 1px solid $color-lightTheme-002;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    cursor: pointer;
+
+    background-color: $color-lightTheme-002;
+    color: $color-lightTheme-005;
+  }
+
+  &__link {
+    text-align: center;
+    text-decoration: underline;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22.4px;
+
+    color: $color-darkTheme-003;
+  }
+}
