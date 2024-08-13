@@ -10,7 +10,9 @@ import Questions from "./Questions/Questions";
 import Results from "./Results/Results";
 
 import Login, { action as loginActionData } from "./Auth/Login/Login";
-import Register from "./Auth/Register/Register";
+import Register, {
+  action as registerActionData,
+} from "./Auth/Register/Register";
 
 import PageNotFound from "./PageNotFound/PageNotFound";
 
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
       { path: "questions", element: <Questions /> },
       { path: "results", element: <Results /> },
       { path: "login", element: <Login />, action: loginActionData },
-      { path: "register", element: <Register /> },
+      { path: "register", element: <Register />, action: registerActionData },
     ],
   },
 ]);
