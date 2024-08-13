@@ -1,6 +1,7 @@
 import style from "./Header.module.scss";
 
 import MoonIcon from "../../../public/svg/header/MoonIcon";
+import { Link } from "react-router-dom";
 // import SunIcon from "../../public/svg/cap/SunIcon";
 
 export default function Header() {
@@ -13,18 +14,20 @@ export default function Header() {
       <nav className={style.navigation}>
         <ul className={style.navigation__auth}>
           <li className={style.navigation__authItem}>
-            <button
-              className={`${style.navigation__authItemButton} ${style["navigation__authItemButton--login"]}`} // когда пользователь авторизован будет добавлятся вот этот класс --- ${style["navigation__authItemButtonLogin--authorized"]}
+            <Link
+              to="/login"
+              className={`${style.navigation__authItemButton} ${style["navigation__authItemButton--login"]}`}
             >
               Логин
-            </button>
+            </Link>
           </li>
           <li className={style.navigation__authItem}>
-            <button
+            <Link
+              to="/register"
               className={`${style.navigation__authItemButton} ${style["navigation__authItemButton--register"]}`}
             >
               Регистрация
-            </button>
+            </Link>
           </li>
         </ul>
       </nav>

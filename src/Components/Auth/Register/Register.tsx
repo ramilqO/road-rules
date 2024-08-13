@@ -156,7 +156,9 @@ export default function Register() {
             {password.length > 0 &&
             repeatPassword.length > 0 &&
             password !== repeatPassword ? (
-              <label className={style['field__label--invalid']}>Пароли не совпадают!</label>
+              <label className={style["field__label--invalid"]}>
+                Пароли не совпадают!
+              </label>
             ) : null}
 
             <div className={style.visibilityPasswordContainer}>
