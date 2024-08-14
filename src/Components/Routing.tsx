@@ -4,13 +4,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import AppLayout from "../Ui/AppLayout";
+import AppLayout from "../Ui/AppLayout/AppLayout";
 import Menu from "./Menu/Menu";
 import Questions from "./Questions/Questions";
 import Results from "./Results/Results";
 
 import Login, { action as loginActionData } from "./Auth/Login/Login";
 import Register from "./Auth/Register/Register";
+import { RegisterAction as registerActionData } from "./Auth/Register/RegisterAction";
 
 import PageNotFound from "./PageNotFound/PageNotFound";
 
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       { path: "questions", element: <Questions /> },
       { path: "results", element: <Results /> },
       { path: "login", element: <Login />, action: loginActionData },
-      { path: "register", element: <Register /> },
+      { path: "register", element: <Register />, action: registerActionData },
     ],
   },
 ]);
