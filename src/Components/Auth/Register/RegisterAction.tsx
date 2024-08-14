@@ -18,10 +18,10 @@ export async function RegisterAction({ request }: { request: Request }) {
   const typedData: FormData = {
     name: String(data.userName),
     surname: String(data.userSurname),
-    email: String(data.email),
-    password: String(data.password),
-    repeatPassword: String(data.repeatPassword),
-    nameAutoschool: String(data.nameAutoschool),
+    email: String(data.userEmail),
+    password: String(data.userPassword),
+    repeatPassword: String(data.userRepeatPassword),
+    nameAutoschool: String(data.userNameAutoschool),
   };
 
   console.log(typedData);
