@@ -1,21 +1,16 @@
-import { Form } from "react-router-dom";
-import { useState } from "react";
-
-import style from "./Register.module.scss";
-
-import Button from "../../../Ui/Button/Button";
-
-import NameInput from "../../../Ui/Input/UserFullNameInput/UserNameInput/NameInput";
-import SurnameInput from "../../../Ui/Input/UserFullNameInput/UserSurnameInput/SurnameInput";
-
-import EmailInput from "../../../Ui/Input/UserEmailInput/EmailInput";
-
-import UserPasswordInput from "../../../Ui/Input/UserPasswordInput/UserPasswordInput/UserPasswordInput";
-import UserRepeatPasswordInput from "../../../Ui/Input/UserPasswordInput/UserRepeatPasswordInput/UserRepeatPasswordInput";
-import UserAutoschoolInput from "../../../Ui/Input/UserAutoschoolInput/UserAutoschoolInput";
+import { useState } from 'react';
+import { Form } from 'react-router-dom';
+import Button from '../../../Ui/Button/Button';
+import UserPasswordInput from '../../../Ui/Input/UserPasswordInput/UserPasswordInput/UserPasswordInput';
+import UserRepeatPasswordInput from '../../../Ui/Input/UserPasswordInput/UserRepeatPasswordInput/UserRepeatPasswordInput';
+import Input from '../../Controls/Input/Input';
+import style from './Register.module.scss';
 
 export default function Register() {
-  const [password, setPassword] = useState<string>("");
+  const [userName, setUserName] = useState('');
+  const [surName, setSurName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className={style.register}>
@@ -26,15 +21,39 @@ export default function Register() {
 
       <Form method="POST" className={style.form}>
         <div>
-          <NameInput />
-          <SurnameInput />
-
-          <EmailInput />
+          <Input
+            value={userName}
+            onChange={setUserName}
+            label="Имя"
+            name="userName"
+            placeholder="Иван"
+          />
+          <Input
+            value={surName}
+            onChange={setSurName}
+            label="Фамилия"
+            name="surName"
+            placeholder="Иванов"
+          />
+          <Input
+            value={email}
+            onChange={setEmail}
+            label="email"
+            type="email"
+            name="email"
+            placeholder="your_email@yandex.ru"
+          />
 
           <UserPasswordInput password={password} setPassword={setPassword} />
           <UserRepeatPasswordInput password={password} />
 
-          <UserAutoschoolInput />
+          <Input
+            value=""
+            onChange={() => {}}
+            label="Название автошколы"
+            name="department"
+            placeholder="Форсаж"
+          />
         </div>
 
         <div className={style.actions}>
