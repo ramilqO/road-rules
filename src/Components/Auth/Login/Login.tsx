@@ -1,22 +1,23 @@
-import { Form, Link, redirect } from "react-router-dom";
-import style from "./Login.module.scss";
+import { Form } from "react-router-dom";
 import { useRef, useState } from "react";
+
+import style from "./Login.module.scss";
+
+import Input from "../../Controls/Input/Input";
+import Checkbox from "../../Controls/Checkbox/Checkbox";
+import Button from "../../../Ui/Button/Button";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const passwordInputRef = useRef(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   function handleChangeVisibility() {
-    if (passwordInputRef.current) {
-      const input = passwordInputRef.current as HTMLInputElement;
-      if (input.type === "password") {
-        input.type = "text";
-      } else {
-        input.type = "password";
-      }
-    }
+    const input = passwordInputRef.current;
+    if (!input) return;
+
+    input.type = input.type === "password" ? "text" : "password";
   }
 
   return (
@@ -28,92 +29,40 @@ export default function Login() {
 
       <Form method="POST" className={style.form}>
         <div>
-          {/* Email */}
-          <div className={`${style.field}`}>
-            <label htmlFor="email" className={`${style.field__label}`}>
-              Email
-            </label>
-            <input
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              name="email"
-              placeholder="your_email@yandex.ru"
-              className={`${style.field__input}`}
-            />
-          </div>
+          <Input
+            label="Email"
+            name="userEmail"
+            value={email}
+            onChange={setEmail}
+            type="email"
+            placeholder="your_email@yandex.ru"
+          />
+          <Input
+            label="Пароль"
+            name="userPassword"
+            value={password}
+            onChange={setPassword}
+            type="password"
+            placeholder="*********"
+            inputRef={passwordInputRef}
+          />
 
-          {/* Password */}
-          <div className={`${style.field}`}>
-            <label htmlFor="password" className={`${style.field__label}`}>
-              Пароль
-            </label>
-            <input
-              id="password"
-              ref={passwordInputRef}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              name="password"
-              placeholder="*********"
-              className={`${style.field__input}`}
-            />
-            <div className={style.visibilityPasswordContainer}>
-              <input
-                type="checkbox"
-                onClick={handleChangeVisibility}
-                className={style.visibilityPasswordContainer__inputCheckBox}
-              />
-              <label className={style.visibilityPasswordContainer__label}>
-                Показать пароль
-              </label>
-            </div>
-          </div>
-
-          {/* Error --- чтобы его отобразить, надо изменить на "true" */}
-          {false && (
-            <p className={style.form__error}>
-              <span>Error: </span>
-              <span className={style["form__error--description"]}>
-                Вы неправильно ввели почту или пароль!
-              </span>
-            </p>
-          )}
+          <Checkbox
+            label="Показать пароль"
+            onToggle={handleChangeVisibility}
+            defaultChecked={false}
+          />
         </div>
 
-        {/* Button */}
         <div className={style.actions}>
-          <button type="submit" className={style.actions__button}>
+          <Button type="submit" className={style.actions__button}>
             Войти
-          </button>
-          <Link to="/register" className={style.actions__link}>
+          </Button>
+          <Button to="/register" className={style.actions__link}>
             Зарегистрироваться
-          </Link>
+          </Button>
         </div>
       </Form>
     </div>
   );
-}
-
-type FormData = {
-  email: string;
-  password: string;
-};
-
-export async function action({ request }: { request: Request }) {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData) as {
-    [key: string]: FormDataEntryValue;
-  };
-
-  // По typedData мы будем делать запрос на БЭК login
-  const typedData: FormData = {
-    email: String(data.email),
-    password: String(data.password),
-  };
-
-  console.log(typedData);
-
-  return redirect("/menu");
 }
