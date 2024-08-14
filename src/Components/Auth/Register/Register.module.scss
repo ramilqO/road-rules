@@ -87,8 +87,7 @@
     font-size: 16px;
     line-height: 16px;
 
-    // background-color: #50C578;
-    color: $color-darkTheme-005;
+    color: $color-lightTheme-001;
 
     &::placeholder {
       font-weight: 400;
@@ -97,10 +96,6 @@
 
       color: $color-darkTheme-005;
     }
-
-    // &:invalid {
-    //   background-color: #E32227;
-    // }
   }
 
   &__error {
@@ -113,55 +108,6 @@
     &--description {
       color: red;
     }
-  }
-}
-
-.securityPassword {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: auto;
-  padding: 0 1px;
-  border-radius: 8px;
-
-  &__field {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 10px;
-    border-radius: 8px;
-    border: 1px solid #000;
-    background-color: lightgrey;
-    transition: background-color 0.3s ease;
-
-    &--full {
-      &:nth-child(1) {
-        background-color: #e32227;
-      }
-
-      &:nth-child(2) {
-        background-color: #fcd54c;
-      }
-
-      &:nth-child(3) {
-        background-color: #50c578;
-      }
-    }
-  }
-}
-
-.visibilityPasswordContainer {
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  &__label {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22.4px;
-
-    color: $color-darkTheme-003;
   }
 }
 

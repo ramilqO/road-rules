@@ -1,46 +1,24 @@
-import { Form, Link, redirect } from "react-router-dom";
-
-import style from "./Register.module.scss";
+import { Form } from "react-router-dom";
 import { useRef, useState } from "react";
 
+import style from "./Register.module.scss";
+
+import SecurityPassword from "../../../Ui/SecurityPassword/SecurityPassword";
+import PasswordInput from "../../../Ui/Input/PasswordInput/PasswordInput";
+import NameInput from "../../../Ui/Input/BasicInput/NameInput";
+import Button from "../../../Ui/Button/Button";
+import EmailInput from "../../../Ui/Input/EmailInput/EmailInput";
+
 export default function Register() {
-  const [name, setName] = useState<string>("");
-  const [surname, setSurname] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const [userSurname, setUserSurname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [repeatPassword, setRepeatPassword] = useState<string>("");
   const [nameAutoschool, setNameAutoSchool] = useState<string>("");
 
-  const passwordInputRef = useRef(null);
-  const repeatPasswordInputRef = useRef(null);
-
-  const isStep1Complete = password.length >= 8; // Если длина пароля больше 8
-  const isStep2Complete =
-    isStep1Complete && /[A-Z]/.test(password) && /[0-9]/.test(password); // Если длина пароля > 8 + есть заглавная буква
-  const isStep3Complete =
-    isStep2Complete && /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password); // Если длина > 8 + заглавная буква + Symbol
-
-  function handleChangeVisibilityPassword() {
-    if (passwordInputRef.current) {
-      const input = passwordInputRef.current as HTMLInputElement;
-      if (input.type === "password") {
-        input.type = "text";
-      } else {
-        input.type = "password";
-      }
-    }
-  }
-
-  function handleChangeVisibilityRepeatPassword() {
-    if (repeatPasswordInputRef.current) {
-      const input = repeatPasswordInputRef.current as HTMLInputElement;
-      if (input.type === "password") {
-        input.type = "text";
-      } else {
-        input.type = "password";
-      }
-    }
-  }
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+  const repeatPasswordInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className={style.register}>
@@ -51,87 +29,47 @@ export default function Register() {
 
       <Form method="POST" className={style.form}>
         <div>
-          {/* Name */}
           <div className={style.field}>
             <label className={style.field__label}>Имя</label>
-            <input
-              type="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+            <NameInput
+              value={userName}
+              className={style.field__input}
+              onChange={(e) => setUserName(e.target.value)}
               name="userName"
               placeholder="Иван"
               required
-              className={style.field__input}
             />
           </div>
-          {/* Surname */}
           <div className={style.field}>
             <label className={style.field__label}>Фамилия</label>
-            <input
-              type="name"
-              value={surname}
-              onChange={(e) => setSurname(e.target.value)}
+            <NameInput
+              value={userSurname}
+              className={style.field__input}
+              onChange={(e) => setUserSurname(e.target.value)}
               name="userSurname"
               placeholder="Иванов"
-              required
-              className={style.field__input}
             />
           </div>
-          {/* Email */}
           <div className={style.field}>
             <label className={style.field__label}>Email</label>
-            <input
-              type="email"
+            <EmailInput
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              name="email"
-              placeholder="your_email@yandex.ru"
-              required
               className={style.field__input}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your_email@yandex.ru"
             />
           </div>
-          {/* Password */}
           <div className={style.field}>
             <label className={style.field__label}>Пароль</label>
-            <input
-              type="password"
+            <PasswordInput
               ref={passwordInputRef}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              name="password"
-              placeholder="*********"
-              required
               className={style.field__input}
+              password={password}
             />
 
-            <div className={style.securityPassword}>
-              <div
-                className={`${style.securityPassword__field} ${
-                  isStep1Complete && style["securityPassword__field--full"]
-                }`}
-              ></div>
-              <div
-                className={`${style.securityPassword__field} ${
-                  isStep2Complete && style["securityPassword__field--full"]
-                }`}
-              ></div>
-              <div
-                className={`${style.securityPassword__field} ${
-                  isStep3Complete && style["securityPassword__field--full"]
-                }`}
-              ></div>
-            </div>
-
-            <div className={style.visibilityPasswordContainer}>
-              <input
-                type="checkbox"
-                onClick={handleChangeVisibilityPassword}
-                className={style.visibilityPasswordContainer__inputCheckBox}
-              />
-              <label className={style.visibilityPasswordContainer__label}>
-                Показать пароль
-              </label>
-            </div>
+            <SecurityPassword password={password} />
 
             {false && (
               <p className={style.form__error}>
@@ -140,38 +78,19 @@ export default function Register() {
               </p>
             )}
           </div>
-          {/* Repeat Password */}
           <div className={style.field}>
             <label className={style.field__label}>Повторите пароль</label>
-            <input
-              type="password"
+            <PasswordInput
+              name={"repeatPassword"}
               ref={repeatPasswordInputRef}
               value={repeatPassword}
               onChange={(e) => setRepeatPassword(e.target.value)}
-              name="repeatPassword"
-              placeholder="*********"
-              required
               className={style.field__input}
+              classNamePasswordIdentity={style["field__label--invalid"]}
+              password={password}
+              repeatPassword={repeatPassword}
+              showPasswordIdentityCheck={true}
             />
-            {password.length > 0 &&
-            repeatPassword.length > 0 &&
-            password !== repeatPassword ? (
-              <label className={style["field__label--invalid"]}>
-                Пароли не совпадают!
-              </label>
-            ) : null}
-
-            <div className={style.visibilityPasswordContainer}>
-              <input
-                type="checkbox"
-                onClick={handleChangeVisibilityRepeatPassword}
-                className={style.visibilityPasswordContainer__inputCheckBox}
-              />
-              <label className={style.visibilityPasswordContainer__label}>
-                Показать пароль
-              </label>
-            </div>
-
             {false && (
               <p className={style.form__error}>
                 <span>Error: </span>
@@ -179,7 +98,6 @@ export default function Register() {
               </p>
             )}
           </div>
-          {/* Name Autoschool */}
           <div className={style.field}>
             <label className={style.field__label}>Название автошколы</label>
             <input
@@ -201,45 +119,15 @@ export default function Register() {
           </div>
         </div>
 
-        {/* Button */}
         <div className={style.actions}>
-          <button type="submit" className={style.actions__button}>
+          <Button type="submit" className={style.actions__button}>
             Зарегестрироваться
-          </button>
-          <Link to="/login" className={style.actions__link}>
+          </Button>
+          <Button to="/login" className={style.actions__link}>
             Уже есть аккаунт?
-          </Link>
+          </Button>
         </div>
       </Form>
     </div>
   );
-}
-
-type FormData = {
-  name: string;
-  surname: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-  nameAutoschool: string;
-};
-
-export async function action({ request }: { request: Request }) {
-  const formdata = await request.formData();
-  const data = (await Object.fromEntries(formdata)) as {
-    [key: string]: FormDataEntryValue;
-  };
-
-  const typedData: FormData = {
-    name: String(data.name),
-    surname: String(data.surname),
-    email: String(data.email),
-    password: String(data.password),
-    repeatPassword: String(data.repeatPassword),
-    nameAutoschool: String(data.nameAutoschool),
-  };
-
-  console.log(typedData);
-
-  return redirect("/menu");
 }
