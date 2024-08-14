@@ -9,7 +9,8 @@ import Menu from "./Menu/Menu";
 import Questions from "./Questions/Questions";
 import Results from "./Results/Results";
 
-import Login, { action as loginActionData } from "./Auth/Login/Login";
+import Login from "./Auth/Login/Login";
+import { LoginAction as loginActionData } from "./Auth/Login/LoginAction";
 import Register from "./Auth/Register/Register";
 import { RegisterAction as registerActionData } from "./Auth/Register/RegisterAction";
 
