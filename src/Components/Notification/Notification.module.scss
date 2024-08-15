@@ -5,35 +5,55 @@
 
   display: flex;
 
-  width: 320px;
-  height: 80px;
+  max-width: 320px;
+  height: 128px;
 
-  padding: 16px;
   gap: 12px;
+  padding: 16px;
 
-  border: 1px solid $color-darkTheme-004;
   border-radius: 8px;
+  border: 1px solid $color-darkTheme-004;
 
-  &--errorLightTheme,
-  &--errorDarkTheme {
+  background-color: $color-darkTheme-001;
+
+  &--error {
     border: 1px solid #ec221f;
-  }
-
-  &--basicDarkTheme {
-    background-color: $color-darkTheme-003;
-  }
-
-  &--errorLightTheme {
     background-color: $color-permanent-002;
   }
+}
 
-  &--errorDarkTheme {
-    background-color: #4d0b0a;
-  }
+.cross {
+  position: absolute;
+
+  top: 16px;
+  right: 16px;
 
   &__button {
-    width: 67px;
-    height: 32px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
+
+.info {
+  display: flex;
+  align-items: start;
+
+  &__button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__button {
+    width: auto;
+    height: auto;
 
     padding: 8px;
 
@@ -43,66 +63,25 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
+
+    background-color: $color-lightTheme-002;
+    color: $color-lightTheme-005;
+
     cursor: pointer;
 
-    color: $color-lightTheme-005;
-    background-color: $color-lightTheme-002;
-
-    &--basicDarkTheme {
-      color: $color-lightTheme-002;
-      background-color: $color-lightTheme-005;
-    }
-
-    &--errorLightTheme {
+    &--error {
       color: $color-darkTheme-005;
       background-color: $color-darkTheme-002;
       border: 1px solid $color-darkTheme-005;
     }
-
-    &--errorDarkTheme {
-      color: $color-permanent-002;
-      background-color: #c00f0c;
-      border: 1px solid #f4776a;
-    }
   }
-}
-
-.cross {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-
-  &__button {
-    cursor: pointer;
-
-    border: none;
-    background-color: transparent;
-  }
-}
-
-.info {
-  display: flex;
-  align-items: start;
-  justify-content: end;
-
-  &__button {
-    cursor: pointer;
-
-    border: none;
-    background-color: transparent;
-  }
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .aboutNotification {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+
+  gap: 5px;
 
   &__title {
     font-weight: 600;
@@ -111,16 +90,8 @@
 
     color: $color-darkTheme-003;
 
-    &--basicDarkTheme {
-      color: $color-darkTheme-001;
-    }
-
-    &--errorLightTheme {
+    &--error {
       color: #900b09;
-    }
-
-    &--errorDarkTheme {
-      color: $color-permanent-002;
     }
   }
 
@@ -131,16 +102,8 @@
 
     color: $color-darkTheme-003;
 
-    &--basicDarkTheme {
-      color: $color-darkTheme-001;
-    }
-
-    &--errorLightTheme {
+    &--error {
       color: #900b09;
-    }
-
-    &--errorDarkTheme {
-      color: $color-permanent-002;
     }
   }
 }
