@@ -1,0 +1,146 @@
+@import "/src/Styles/Variables.module.scss";
+
+.notification {
+  position: relative;
+
+  display: flex;
+
+  width: 320px;
+  height: 80px;
+
+  padding: 16px;
+  gap: 12px;
+
+  border: 1px solid $color-darkTheme-004;
+  border-radius: 8px;
+
+  &--errorLightTheme,
+  &--errorDarkTheme {
+    border: 1px solid #ec221f;
+  }
+
+  &--basicDarkTheme {
+    background-color: $color-darkTheme-003;
+  }
+
+  &--errorLightTheme {
+    background-color: $color-permanent-002;
+  }
+
+  &--errorDarkTheme {
+    background-color: #4d0b0a;
+  }
+
+  &__button {
+    width: 67px;
+    height: 32px;
+
+    padding: 8px;
+
+    border: 1px solid $color-lightTheme-002;
+    border-radius: 8px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    cursor: pointer;
+
+    color: $color-lightTheme-005;
+    background-color: $color-lightTheme-002;
+
+    &--basicDarkTheme {
+      color: $color-lightTheme-002;
+      background-color: $color-lightTheme-005;
+    }
+
+    &--errorLightTheme {
+      color: $color-darkTheme-005;
+      background-color: $color-darkTheme-002;
+      border: 1px solid $color-darkTheme-005;
+    }
+
+    &--errorDarkTheme {
+      color: $color-permanent-002;
+      background-color: #c00f0c;
+      border: 1px solid #f4776a;
+    }
+  }
+}
+
+.cross {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  &__button {
+    cursor: pointer;
+
+    border: none;
+    background-color: transparent;
+  }
+}
+
+.info {
+  display: flex;
+  align-items: start;
+  justify-content: end;
+
+  &__button {
+    cursor: pointer;
+
+    border: none;
+    background-color: transparent;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.aboutNotification {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  &__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22.4px;
+
+    color: $color-darkTheme-003;
+
+    &--basicDarkTheme {
+      color: $color-darkTheme-001;
+    }
+
+    &--errorLightTheme {
+      color: #900b09;
+    }
+
+    &--errorDarkTheme {
+      color: $color-permanent-002;
+    }
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22.4px;
+
+    color: $color-darkTheme-003;
+
+    &--basicDarkTheme {
+      color: $color-darkTheme-001;
+    }
+
+    &--errorLightTheme {
+      color: #900b09;
+    }
+
+    &--errorDarkTheme {
+      color: $color-permanent-002;
+    }
+  }
+}

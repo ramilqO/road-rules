@@ -22,22 +22,19 @@ export default function Register() {
       <Form method="POST" className={style.form}>
         <div>
           <Input
-            value={userName}
-            onChange={setUserName}
+            initialValue={userName}
             label="Имя"
             name="userName"
             placeholder="Иван"
           />
           <Input
-            value={surName}
-            onChange={setSurName}
+            initialValue={surName}
             label="Фамилия"
             name="surName"
             placeholder="Иванов"
           />
           <Input
-            value={email}
-            onChange={setEmail}
+            initialValue={email}
             label="email"
             type="email"
             name="email"
@@ -48,8 +45,7 @@ export default function Register() {
           <UserRepeatPasswordInput password={password} />
 
           <Input
-            value=""
-            onChange={() => {}}
+            initialValue={""}
             label="Название автошколы"
             name="department"
             placeholder="Форсаж"

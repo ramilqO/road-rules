@@ -1,26 +1,28 @@
-import type { RefObject } from 'react';
-import style from './Input.module.scss';
+import { type RefObject, useState } from "react";
+import style from "./Input.module.scss";
 
 interface InputProps {
-  value: string;
-  onChange: (value: string) => void;
   label: string;
   name: string;
   placeholder: string;
+  /** Валидирует данные, принимает значение из инпута, возвращает строку с ошибкой */
+  onValidate?: (value: string) => string;
+  initialValue?: string;
   type?: string;
-  errorText?: string;
   inputRef?: RefObject<HTMLInputElement>;
 }
 export default function Input({
-  value,
-  onChange,
   label,
-  type = 'text',
+  type = "text",
   name,
+  onValidate,
+  initialValue = "",
   placeholder,
-  errorText,
   inputRef,
 }: InputProps) {
+  const [value, setValue] = useState(initialValue);
+  const [validateError, setValidateError] = useState("");
+
   return (
     <div className={style.field}>
       <label className={style.field__label}>{label}</label>
@@ -32,10 +34,13 @@ export default function Input({
         placeholder={placeholder}
         required
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onValidate && setValidateError(onValidate(e.target.value));
+        }}
       />
       {/* TODO: стили для ошибки написать */}
-      {errorText && <p className={style.form__error}>{errorText}</p>}
+      {validateError && <p className={style.form__error}>{validateError}</p>}
     </div>
   );
 }
