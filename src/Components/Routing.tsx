@@ -5,16 +5,16 @@ import {
 } from "react-router-dom";
 
 import AppLayout from "../Ui/AppLayout/AppLayout";
-import Menu from "./Menu/Menu";
-import Questions from "./Questions/Questions";
-import Results from "./Results/Results";
+import Menu from "../Pages/Menu/Menu";
+import Questions from "../Pages/Questions/Questions";
+import Results from "../Pages/Results/Results";
 
-import Login from "./Auth/Login/Login";
-import { LoginAction as loginActionData } from "./Auth/Login/LoginAction";
-import Register from "./Auth/Register/Register";
-import { RegisterAction as registerActionData } from "./Auth/Register/RegisterAction";
+import Login from "../Pages/Auth/Login/Login";
+import { LoginAction as loginActionData } from "../tools/LoginAction";
+import Register from "../Pages/Auth/Register/Register";
+import { RegisterAction as registerActionData } from "../tools/RegisterAction";
 
-import PageNotFound from "./PageNotFound/PageNotFound";
+import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 
 const router = createBrowserRouter([
   {
