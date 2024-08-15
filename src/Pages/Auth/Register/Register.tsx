@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Form } from "react-router-dom";
 import Button from "../../../Ui/Button/Button";
-import UserPasswordInput from "../../../Ui/Input/UserPasswordInput/UserPasswordInput/UserPasswordInput";
-import UserRepeatPasswordInput from "../../../Ui/Input/UserPasswordInput/UserRepeatPasswordInput/UserRepeatPasswordInput";
+import UserPasswordInput from "../../../Ui/Input/UserPasswordInput/UserPasswordInput";
+import UserRepeatPasswordInput from "../../../Ui/Input/UserRepeatPasswordInput/UserRepeatPasswordInput";
 import Input from "../../../Ui/Input/Input";
 import style from "./Register.module.scss";
 
