@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 import style from "./UserRepeatPasswordInput.module.scss";
 
-import UserShowRepeatPassword from "../ShowPassword/UserShowRepeatPassword/UserShowRepeatPassword";
+import UserShowRepeatPassword from "../../Checkbox/Checkbox";
 
 export default function UserRepeatPasswordInput({
   password,
@@ -10,8 +10,18 @@ export default function UserRepeatPasswordInput({
   password: string;
 }) {
   const [repeatPassword, setRepeatPassword] = useState<string>("");
+    const repeatPasswordInputRef = useRef<HTMLInputElement>(null);
+    
+    function handleChangeVisibilityRepeatPassword() {
+      const input = repeatPasswordInputRef.current;
+      if (!input) return;
 
-  const repeatPasswordInputRef = useRef<HTMLInputElement>(null);
+      if (input.type === "password") {
+        input.type = "text";
+      } else {
+        input.type = "password";
+      }
+    }
 
   const isPasswordMismatch =
     password.length > 0 &&
@@ -40,11 +50,17 @@ export default function UserRepeatPasswordInput({
         </p>
       )}
 
-      <UserShowRepeatPassword repeatPasswordInputRef={repeatPasswordInputRef} />
+      <UserShowRepeatPassword
+        onToggle={handleChangeVisibilityRepeatPassword}
+        defaultChecked={false}
+        label="Показать пароль"
+      />
 
-      {isPasswordMismatch && <label className={style["field__error--description"]}>
-        Пароли не совпадают!
-      </label>}
+      {isPasswordMismatch && (
+        <label className={style["field__error--description"]}>
+          Пароли не совпадают!
+        </label>
+      )}
     </div>
   );
 }

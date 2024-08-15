@@ -3,8 +3,8 @@ import { useRef, useState } from "react";
 
 import style from "./Login.module.scss";
 
-import Input from "../../Controls/Input/Input";
-import Checkbox from "../../Controls/Checkbox/Checkbox";
+import Input from "../../../Ui/Input/Input";
+import Checkbox from "../../../Ui/Checkbox/Checkbox";
 import Button from "../../../Ui/Button/Button";
 
 export default function Login() {
