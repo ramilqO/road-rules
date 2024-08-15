@@ -7,9 +7,9 @@ import Input from "../../../Ui/Input/Input";
 import style from "./Register.module.scss";
 
 export default function Register() {
-  const [userName, setUserName] = useState("");
-  const [surName, setSurName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [surName, setSurName] = useState("");
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
@@ -22,22 +22,16 @@ export default function Register() {
       <Form method="POST" className={style.form}>
         <div>
           <Input
-            value={userName}
-            onChange={setUserName}
             label="Имя"
             name="userName"
             placeholder="Иван"
           />
           <Input
-            value={surName}
-            onChange={setSurName}
             label="Фамилия"
             name="surName"
             placeholder="Иванов"
           />
           <Input
-            value={email}
-            onChange={setEmail}
             label="email"
             type="email"
             name="email"
@@ -48,8 +42,7 @@ export default function Register() {
           <UserRepeatPasswordInput password={password} />
 
           <Input
-            value=""
-            onChange={() => {}}
+            initialValue={""}
             label="Название автошколы"
             name="department"
             placeholder="Форсаж"
