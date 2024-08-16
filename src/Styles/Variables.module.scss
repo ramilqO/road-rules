@@ -1,17 +1,57 @@
-$color-darkTheme-001: #ffffff; // Белый
-$color-darkTheme-002: #d9d9d9; // Светло-серый
-$color-darkTheme-003: #1e1e1e; // Почти черный
-$color-darkTheme-004: #757575; // Средне-серый
-$color-darkTheme-005: #b3b3b3; // Светло-серый
-$color-darkTheme-006: #303030; // Тёмно-серый
+$color-darkTheme-001: #ffffff;
+$color-darkTheme-002: #d9d9d9;
+$color-darkTheme-003: #1e1e1e;
+$color-darkTheme-004: #757575;
+$color-darkTheme-005: #b3b3b3;
+$color-darkTheme-006: #303030;
 
-$color-lightTheme-001: #000000; // Черный
-$color-lightTheme-002: #2c2c2c; // Очень тёмный серый
-$color-lightTheme-003: #e3e3e3; // Очень светло-серый
-$color-lightTheme-004: #ffffffb2; // Полупрозрачный белый
-$color-lightTheme-005: #f5f5f5; // Очень светлый серый
-$color-lightTheme-006: #ffffff66; // Полупрозрачный белый
+$color-lightTheme-001: #000000;
+$color-lightTheme-002: #2c2c2c;
+$color-lightTheme-003: #e3e3e3;
+$color-lightTheme-004: #ffffffb2;
+$color-lightTheme-005: #f5f5f5;
+$color-lightTheme-006: #ffffff66;
 
-$color-permanent-001: #900b09; // Ярко-красный
-$color-permanent-002: #fee9e7; // Розовато-белый
-$color-permanent-003: #fdd3d0; // Светло-розовый
+$color-permanent-001: #900b09;
+$color-permanent-002: #fee9e7;
+$color-permanent-003: #fdd3d0;ч
+
+:root {
+  // Notification
+  --basicNotificationColorTitleBodyIcons: #1e1e1e;
+  --basicNotificationColorItemBacg: #ffffff;
+  --basicNotificationColorItemBorder: #757575;
+  --basicNotificationColorButtonBacg: #2c2c2c;
+  --basicNotificationColorButtonText: #f5f5f5;
+
+  --errorNotificationColorTitleBodyIcons: #900b09;
+  --errorNotificationColorItemBacg: #fee9e7;
+  --errorNotificationColorItemBorder: #ec221f;
+  --errorNotificationColorButtonBacg: #d9d9d9;
+  --errorNotificationColorButtonBorderAndText: #b3b3b3;
+
+  // Header
+  --headerColorToggleThemeButtonBorder: #d9d9d9;
+  --headerColorToggleThemeButtonBacg: #f5f5f5;
+
+  --headerColorLoginButtonBorder: #767676;
+  --headerColorLoginButtonBacg: #e3e3e3;
+  --headerColorLoginButtonText: #1e1e1e;
+
+  --headerColorRegisterButtonBacg: #2c2c2c;
+  --headerColorRegisterButtonText: #f5f5f5;
+
+  // Auth
+  --authColorInfoSectionTitle: #1e1e1e;
+  --authColorInfoSectionDescription: #757575;
+
+  --authColorFormBorder: #d9d9d9;
+
+  --authColorFormInputLabelText: #1e1e1e;
+  --authColorFormInputFieldBorder: #d9d9d9;
+  --authColorFormInputFieldColorAndPlaceholderColor: #b3b3b3;
+
+  --authColorFormButtonBacg: #2c2c2c;
+  --authColorFormButtonColor: #f5f5f5;
+  --authColorFormButtonLinkColor: #1e1e1e;
+}
