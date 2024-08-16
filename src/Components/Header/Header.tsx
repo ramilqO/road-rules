@@ -1,15 +1,12 @@
-import style from "./Header.module.scss";
-
-import MoonIcon from "../../../public/svg/header/MoonIcon";
 import { Link } from "react-router-dom";
-// import SunIcon from "../../public/svg/cap/SunIcon";
+
+import style from "./Header.module.scss";
+import ThemeToggle from "../../tools/ThemeToggle/ThemeToggle";
 
 export default function Header() {
   return (
     <header className={style.header}>
-      <button className={style.header__buttonChangeTheme}>
-        <MoonIcon />
-      </button>
+      <ThemeToggle />
 
       <nav className={style.navigation}>
         <ul className={style.navigation__auth}>

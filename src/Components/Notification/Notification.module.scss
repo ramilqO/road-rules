@@ -12,13 +12,13 @@
   padding: 16px;
 
   border-radius: 8px;
-  border: 1px solid $color-darkTheme-004;
+  border: 1px solid var(--basicNotificationColorItemBorder);
 
-  background-color: $color-darkTheme-001;
+  background-color: var(--basicNotificationColorItemBacg);
 
   &--error {
-    border: 1px solid #ec221f;
-    background-color: $color-permanent-002;
+    border: 1px solid var(--errorNotificationColorItemBorder);
+    background-color: var(--errorNotificationColorItemBacg);
   }
 }
 
@@ -57,22 +57,21 @@
 
     padding: 8px;
 
-    border: 1px solid $color-lightTheme-002;
     border-radius: 8px;
 
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
 
-    background-color: $color-lightTheme-002;
-    color: $color-lightTheme-005;
+    background-color: var(--basicNotificationColorButtonBacg);
+    color: var(--basicNotificationColorButtonText);
 
     cursor: pointer;
 
     &--error {
-      color: $color-darkTheme-005;
-      background-color: $color-darkTheme-002;
-      border: 1px solid $color-darkTheme-005;
+      background-color: var(--errorNotificationColorButtonBacg);
+      border: 1px solid var(--errorNotificationColorButtonBorderAndText);
+      color: var(--errorNotificationColorButtonBorderAndText);
     }
   }
 }
@@ -88,10 +87,10 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: $color-darkTheme-003;
+    color: var(--basicNotificationColorTitleBodyIcons);
 
     &--error {
-      color: #900b09;
+      color: var(--errorNotificationColorTitleBodyIcons);
     }
   }
 
@@ -100,10 +99,10 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: $color-darkTheme-003;
+    color: var(--basicNotificationColorTitleBodyIcons);
 
     &--error {
-      color: #900b09;
+      color: var(--errorNotificationColorTitleBodyIcons);
     }
   }
 }

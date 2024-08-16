@@ -1,0 +1,19 @@
+@import "/src/Styles/Variables.module.scss";
+
+.buttonChangeTheme {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  margin-right: 66px;
+
+  background-color: var(--headerColorToggleThemeButtonBacg);
+
+  border-radius: 32px;
+  border: 1px solid var(--headerColorToggleThemeButtonBorder);
+
+  cursor: pointer;
+}
