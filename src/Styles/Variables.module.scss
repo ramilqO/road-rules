@@ -1,23 +1,5 @@
-$color-darkTheme-001: #ffffff;
-$color-darkTheme-002: #d9d9d9;
-$color-darkTheme-003: #1e1e1e;
-$color-darkTheme-004: #757575;
-$color-darkTheme-005: #b3b3b3;
-$color-darkTheme-006: #303030;
-
-$color-lightTheme-001: #000000;
-$color-lightTheme-002: #2c2c2c;
-$color-lightTheme-003: #e3e3e3;
-$color-lightTheme-004: #ffffffb2;
-$color-lightTheme-005: #f5f5f5;
-$color-lightTheme-006: #ffffff66;
-
-$color-permanent-001: #900b09;
-$color-permanent-002: #fee9e7;
-$color-permanent-003: #fdd3d0;ч
-
 :root {
-  // Notification
+  // Notification ✅
   --basicNotificationColorTitleBodyIcons: #1e1e1e;
   --basicNotificationColorItemBacg: #ffffff;
   --basicNotificationColorItemBorder: #757575;
@@ -30,7 +12,7 @@ $color-permanent-003: #fdd3d0;ч
   --errorNotificationColorButtonBacg: #d9d9d9;
   --errorNotificationColorButtonBorderAndText: #b3b3b3;
 
-  // Header
+  // Header ✅
   --headerColorToggleThemeButtonBorder: #d9d9d9;
   --headerColorToggleThemeButtonBacg: #f5f5f5;
 
@@ -41,7 +23,7 @@ $color-permanent-003: #fdd3d0;ч
   --headerColorRegisterButtonBacg: #2c2c2c;
   --headerColorRegisterButtonText: #f5f5f5;
 
-  // Auth
+  // Auth 
   --authColorInfoSectionTitle: #1e1e1e;
   --authColorInfoSectionDescription: #757575;
 

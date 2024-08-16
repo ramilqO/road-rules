@@ -24,7 +24,7 @@
     font-size: 24px;
     line-height: 28.8px;
 
-    color: $color-darkTheme-003;
+    color: var(--authColorInfoSectionTitle);
   }
 
   &__description {
@@ -34,7 +34,7 @@
     font-size: 20px;
     line-height: 24px;
 
-    color: $color-darkTheme-004;
+    color: var(--authColorInfoSectionDescription);
   }
 }
 
@@ -49,7 +49,7 @@
   padding: 24px;
 
   border-radius: 8px;
-  border: 1px solid $color-darkTheme-002;
+  border: 1px solid var(--authColorFormBorder);
 
   &__error {
     margin-bottom: 24px;
@@ -58,7 +58,7 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: $color-darkTheme-003;
+    color: var(--authColorFormInputLabelText);
 
     &--description {
       color: red;
@@ -81,7 +81,7 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: $color-darkTheme-003;
+    color: var(--authColorFormInputLabelText);
   }
 
   &__input {
@@ -93,19 +93,19 @@
     padding-bottom: 12px;
     padding-left: 16px;
 
-    border: 1px solid $color-darkTheme-002;
+    border: 1px solid var(--authColorFormInputFieldBorder);
     border-radius: 8px;
 
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
-    color: $color-darkTheme-005;
+    color: var(--authColorFormInputFieldColorAndPlaceholderColor);
 
     &::placeholder {
       font-weight: 400;
       font-size: 16px;
       line-height: 16px;
-      color: $color-darkTheme-005;
+      color: var(--authColorFormInputFieldColorAndPlaceholderColor);
     }
 
     &:last-child {
@@ -125,7 +125,7 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: $color-darkTheme-003;
+    color: var(--authColorFormInputLabelText);
   }
 }
 
@@ -146,16 +146,16 @@
     padding-top: 16px;
     padding-bottom: 16px;
 
+    border: none;
     border-radius: 8px;
-    border: 1px solid $color-lightTheme-002;
 
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
     cursor: pointer;
 
-    background-color: $color-lightTheme-002;
-    color: $color-lightTheme-005;
+    background-color: var(--authColorFormButtonBacg);
+    color: var(--authColorFormButtonColor);
   }
 
   &__link {
@@ -166,6 +166,6 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: $color-darkTheme-003;
+    color: var(--authColorFormButtonLinkColor);
   }
 }

@@ -21,7 +21,7 @@
     font-size: 24px;
     line-height: 28.8px;
 
-    color: $color-darkTheme-003;
+    color: var(--authColorInfoSectionTitle);
   }
 
   &__description {
@@ -31,7 +31,7 @@
     font-size: 20px;
     line-height: 24px;
 
-    color: $color-darkTheme-004;
+    color: var(--authColorInfoSectionDescription);
   }
 }
 
@@ -48,7 +48,7 @@
   margin-bottom: 75px;
 
   border-radius: 8px;
-  border: 1px solid $color-darkTheme-002;
+  border: 1px solid var(--authColorFormBorder);
 }
 
 .actions {
@@ -74,8 +74,8 @@
     line-height: 16px;
     cursor: pointer;
 
-    background-color: $color-lightTheme-002;
-    color: $color-lightTheme-005;
+    background-color: var(--authColorFormButtonBacg);
+    color: var(--authColorFormButtonColor);
   }
 
   &__link {
@@ -86,6 +86,6 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: $color-darkTheme-003;
+    color: var(--authColorFormButtonLinkColor);
   }
 }

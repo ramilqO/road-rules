@@ -6,7 +6,7 @@
   align-items: center;
 
   padding: 24px;
-  border-bottom: 1px solid $color-darkTheme-002;
+  border-bottom: 1px solid var(--headerColorToggleThemeButtonBorder);
 
   @media screen and (max-width: 425px) {
     padding-top: 16px;
@@ -45,22 +45,22 @@
     line-height: 16px;
 
     &--login {
-      color: $color-darkTheme-003;
-      background-color: $color-lightTheme-003;
+      color: var(--headerColorLoginButtonColor);
+      background-color: var(--headerColorLoginButtonBacg);
 
-      border: 1px solid $color-darkTheme-004;
+      border: 1px solid var(--headerColorLoginButtonBorder);
 
       &--authorized {
         width: auto;
 
-        background-color: $color-darkTheme-001;
+        background-color: transparent;
         border: none;
       }
     }
 
     &--register {
-      color: $color-lightTheme-005;
-      background-color: $color-lightTheme-002;
+      color: var(--headerColorRegisterButtonText);
+      background-color: var(--headerColorRegisterButtonBacg);
       border: none;
     }
   }

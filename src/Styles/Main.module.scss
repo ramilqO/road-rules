@@ -1,8 +1,18 @@
+// Сделано для теста
+
+:root {
+  --bacg-color: #ffffff;
+}
+
 body {
   font-family: Inter, sans-serif;
+  background-color: var(--bacg-color);
+}
+
+[data-theme="darkMode"] {
+  --bacg-color: #000;
 }
 
 input:focus {
-  outline: none; 
+  outline: none;
 }
-
