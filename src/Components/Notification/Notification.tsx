@@ -27,9 +27,12 @@ export default function Notification({
         <div className={style.cross}>
           <button
             type="button"
-            className={style.cross__button}
+            className={`${style.cross__button} ${
+              type === "error"
+                ? style["cross__buttonIcon--error"]
+                : style["cross__buttonIcon--basic"]
+            }`}
             onClick={() => setDisplayNotification(false)}
-            style={{ color: `${type === "error" ? "#900B09" : "#000"}` }}
           >
             <CrossIcon />
           </button>
@@ -38,8 +41,11 @@ export default function Notification({
         <div className={style.info}>
           <button
             type="button"
-            className={style.info__button}
-            style={{ color: `${type === "error" ? "#900b09" : "#000"}` }}
+            className={`${style.info__button} ${
+              type === "error"
+                ? style["info__buttonIcon--error"]
+                : style["info__buttonIcon--basic"]
+            }`}
           >
             <InfoIcon />
           </button>

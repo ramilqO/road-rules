@@ -5,10 +5,11 @@ export default function Menu() {
     <div>
       Menu
       <Notification
+        type="error"
         titleText="Title"
         bodyText="Body"
         button={{
-          text: "Привет",
+          text: "Button text",
           onClick: () => console.log("Button clicked"),
         }}
       />

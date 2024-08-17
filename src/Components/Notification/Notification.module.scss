@@ -32,6 +32,14 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+
+    &Icon--error {
+      color: var(--errorNotificationColorTitleBodyIcons);
+    }
+
+    &Icon--basic {
+      color: var(--basicNotificationColorTitleBodyIcons);
+    }
   }
 }
 
@@ -43,6 +51,14 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+
+    &Icon--error {
+      color: var(--errorNotificationColorTitleBodyIcons);
+    }
+
+    &Icon--basic {
+      color: var(--basicNotificationColorTitleBodyIcons);
+    }
   }
 }
 
@@ -70,7 +86,7 @@
 
     &--error {
       background-color: var(--errorNotificationColorButtonBacg);
-      border: 1px solid var(--errorNotificationColorButtonBorderAndText);
+      border: 1px solid var(--errorNotificationColorButtonBorder);
       color: var(--errorNotificationColorButtonBorderAndText);
     }
   }
