@@ -1,14 +1,20 @@
-import { useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import { Form, Link, redirect } from 'react-router-dom';
 
 import style from './Login.module.scss';
 
-import Input from '../../../Ui/Input/Input';
 import Button from '../../../Ui/Button/Button';
-import UserPasswordInput from '../../../Ui/Input/UserPasswordInput/UserPasswordInput';
+import Checkbox from '../../../Ui/Checkbox/Checkbox';
+import Input from '../../../Ui/Input/Input';
 
 export default function Login() {
-  const [password, setPassword] = useState('');
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+  function handleChangeVisibility() {
+    const input = passwordInputRef.current;
+    if (!input) return;
+
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
 
   return (
     <div className={style.login}>
@@ -25,7 +31,19 @@ export default function Login() {
             type="email"
             placeholder="your_email@yandex.ru"
           />
-          <UserPasswordInput password={password} setPassword={setPassword} />
+          <div style={{ marginBottom: '24px' }}>
+            <Input
+              label="Пароль"
+              name="userPassword"
+              placeholder="*********"
+              inputRef={passwordInputRef}
+            />
+            <Checkbox
+              defaultChecked
+              label="Показать пароль"
+              onToggle={handleChangeVisibility}
+            />
+          </div>
         </div>
 
         <div className={style.actions}>

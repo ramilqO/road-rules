@@ -1,4 +1,4 @@
-import style from "./Checkbox.module.scss";
+import style from './Checkbox.module.scss';
 
 interface CheckboxProps {
   onToggle: () => void;
@@ -13,13 +13,15 @@ export default function Checkbox({
 }: CheckboxProps) {
   return (
     <div className={style.checkbox}>
-      <input
-        type="checkbox"
-        onChange={onToggle}
-        className={style.checkbox__inputCheckBox}
-        defaultChecked={defaultChecked}
-      />
-      <label className={style.checkbox__label}>{label}</label>
+      <label>
+        <input
+          type="checkbox"
+          onChange={onToggle}
+          className={style.checkbox__inputCheckBox}
+          defaultChecked={defaultChecked}
+        />
+        <span className={style.checkbox__label}>{label}</span>
+      </label>
     </div>
   );
 }

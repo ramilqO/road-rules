@@ -1,36 +1,13 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link } from 'react-router-dom';
 
-import style from "./Register.module.scss";
+import style from './Register.module.scss';
 
-import Button from "../../../Ui/Button/Button";
-import Input from "../../../Ui/Input/Input";
-import UserPasswordInput from "../../../Ui/Input/UserPasswordInput/UserPasswordInput";
-import UserRepeatPasswordInput from "../../../Ui/Input/UserRepeatPasswordInput/UserRepeatPasswordInput";
+import Button from '../../../Ui/Button/Button';
+import Input from '../../../Ui/Input/Input';
+
+import Passwords from './Passwords';
 
 export default function Register() {
-  function handleCheckedSecurityPassword(value: string): string {
-    const isStep1Complete = value.length >= 8;
-    if (!isStep1Complete) {
-      return "Длина пароля должна быть не менее 8 символов";
-    }
-    const isStep2Complete = /[A-Z]/.test(value);
-    if (!isStep2Complete) {
-      return "Пароль должен содержать в себе заглавную букву";
-    }
-
-    const isStep3Complete = /[0-9]/.test(value);
-    if (!isStep3Complete) {
-      return "Пароль должен содержать в себе цифру";
-    }
-
-    const isStep4Complete =
-      isStep2Complete && /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value);
-    if (!isStep4Complete) {
-      return "Пароль должен содержать в себе символ";
-    }
-    return "";
-  }
-
   return (
     <div className={style.register}>
       <div className={style.infoSection}>
@@ -39,7 +16,8 @@ export default function Register() {
       </div>
 
       <Form method="POST" className={style.form}>
-        <div>
+        {/* TODO: ширина инпутов была сломана из-за того что у этого дива не было 100 процентов, вынеси это теперь в класс что бы стили не были прописаны инлайном */}
+        <div style={{ width: '100%' }}>
           <Input label="Имя" name="userName" placeholder="Иван" />
           <Input label="Фамилия" name="surName" placeholder="Иванов" />
           <Input
@@ -49,8 +27,7 @@ export default function Register() {
             placeholder="your_email@yandex.ru"
           />
 
-          <UserPasswordInput onValidate={handleCheckedSecurityPassword} />
-          <UserRepeatPasswordInput />
+          <Passwords />
 
           <Input
             label="Название автошколы"

@@ -1,6 +1,6 @@
-import { type RefObject, useState } from "react";
+import { type RefObject, useState } from 'react';
 
-import style from "./Input.module.scss";
+import style from './Input.module.scss';
 
 interface InputProps {
   label: string;
@@ -15,15 +15,15 @@ interface InputProps {
 
 export default function Input({
   label,
-  type = "text",
+  type = 'text',
   name,
   onValidate,
-  initialValue = "",
+  initialValue = '',
   placeholder,
   inputRef,
 }: InputProps) {
   const [value, setValue] = useState(initialValue);
-  const [validateError, setValidateError] = useState("");
+  const [validateError, setValidateError] = useState('');
 
   return (
     <div className={style.field}>
@@ -40,7 +40,6 @@ export default function Input({
           setValue(e.target.value);
           if (onValidate) {
             const error = onValidate(e.target.value);
-            console.log(error)
             setValidateError(error);
           }
         }}
