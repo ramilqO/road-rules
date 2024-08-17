@@ -2,9 +2,10 @@
 
 .notification {
   position: absolute;
-  // TODO: уведомление по центру экрана снизу, как в макете
-  top: 35px;
-  right: 50px;
+
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
 
   display: flex;
 

@@ -1,37 +1,29 @@
-import { type RefObject, useState } from 'react';
-import Checkbox from '../Checkbox/Checkbox';
-import style from './Input.module.scss';
+import { type RefObject, useState } from "react";
 
-interface CheckBoxProps {
-  label: string;
-  onToggle: () => void;
-  defaultChecked: boolean;
-}
+import style from "./Input.module.scss";
 
 interface InputProps {
   label: string;
   name: string;
   placeholder: string;
+  // Делает проверку данных на правильность, принимает значение инпута, а возращает строку с ошибой!
   onValidate?: (value: string) => string;
   initialValue?: string;
   type?: string;
   inputRef?: RefObject<HTMLInputElement>;
-  checkBox?: CheckBoxProps;
 }
 
 export default function Input({
   label,
-  type = 'text',
+  type = "text",
   name,
   onValidate,
-  initialValue = '',
+  initialValue = "",
   placeholder,
   inputRef,
-  checkBox,
 }: InputProps) {
   const [value, setValue] = useState(initialValue);
-  //TODO: можно не указывать ип TS и так понимает что тут строка
-  const [validateError, setValidateError] = useState<string>('');
+  const [validateError, setValidateError] = useState("");
 
   return (
     <div className={style.field}>
@@ -48,17 +40,11 @@ export default function Input({
           setValue(e.target.value);
           if (onValidate) {
             const error = onValidate(e.target.value);
+            console.log(error)
             setValidateError(error);
           }
         }}
       />
-      {checkBox && (
-        <Checkbox
-          label={checkBox.label}
-          onToggle={checkBox.onToggle}
-          defaultChecked={checkBox.defaultChecked}
-        />
-      )}
       {validateError && <p className={style.field__error}>{validateError}</p>}
     </div>
   );

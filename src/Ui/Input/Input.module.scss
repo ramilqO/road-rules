@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: start;
 
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   gap: 8px;
 
   &__label {
@@ -13,7 +13,7 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: var(--authColorFormInputLabelText);
+    color: var(--authColorFormInputLabelTextAndInputText);
 
     &--invalid {
       color: #e32227;
@@ -36,7 +36,7 @@
     font-size: 16px;
     line-height: 16px;
 
-    color: var(--authColorFormInputFieldColorAndPlaceholderColor);
+    color: var(--authColorFormInputLabelTextAndInputText);
 
     &::placeholder {
       font-weight: 400;

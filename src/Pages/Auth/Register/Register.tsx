@@ -1,41 +1,34 @@
-import { useState } from 'react';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link } from "react-router-dom";
 
-import style from './Register.module.scss';
+import style from "./Register.module.scss";
 
-import Button from '../../../Ui/Button/Button';
-import Input from '../../../Ui/Input/Input';
-import UserPasswordInput from '../../../Ui/Input/UserPasswordInput/UserPasswordInput';
-import UserRepeatPasswordInput from '../../../Ui/Input/UserRepeatPasswordInput/UserRepeatPasswordInput';
+import Button from "../../../Ui/Button/Button";
+import Input from "../../../Ui/Input/Input";
+import UserPasswordInput from "../../../Ui/Input/UserPasswordInput/UserPasswordInput";
+import UserRepeatPasswordInput from "../../../Ui/Input/UserRepeatPasswordInput/UserRepeatPasswordInput";
 
 export default function Register() {
-  //TODO: это состояние здесь не нужно, сверку двух паролей я сделаю сам чуть позже после того как ты испровишь это
-  const [password, setPassword] = useState('');
-
-  //TODO: вместо состояния, функция принимает значение из инпута
-  function handleCheckedSecurityPassword(password) {
-    const isStep1Complete = password.length >= 8;
+  function handleCheckedSecurityPassword(value: string): string {
+    const isStep1Complete = value.length >= 8;
     if (!isStep1Complete) {
-      //TODO: вот так это должно работать, функция принимает пароль а возвращает строку с ошибкой
-      return 'Длина пароля должна быть не менее 8 символов';
+      return "Длина пароля должна быть не менее 8 символов";
     }
-    const isStep2Complete = /[A-Z]/.test(password);
+    const isStep2Complete = /[A-Z]/.test(value);
     if (!isStep2Complete) {
-      return; //TODO: добавить текст ошибки
+      return "Пароль должен содержать в себе заглавную букву";
     }
 
-    const isStep3Complete = /[0-9]/.test(password);
+    const isStep3Complete = /[0-9]/.test(value);
     if (!isStep3Complete) {
-      return; //TODO: добавить текст ошибки
+      return "Пароль должен содержать в себе цифру";
     }
 
     const isStep4Complete =
-      isStep2Complete && /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+      isStep2Complete && /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value);
     if (!isStep4Complete) {
-      return; //TODO: добавить текст ошибки
+      return "Пароль должен содержать в себе символ";
     }
-    //TODO: если ошибки нет, то возвращает пустую строку
-    return '';
+    return "";
   }
 
   return (
@@ -56,14 +49,8 @@ export default function Register() {
             placeholder="your_email@yandex.ru"
           />
 
-          {/* TODO: используй 2 отдельных компонента инпут и чекбокс по отдельности */}
-          <UserPasswordInput
-            password={password}
-            setPassword={setPassword}
-            onValidate={handleCheckedSecurityPassword}
-          />
-          {/* TODO: здесь тоже сделай проще используй 2 отдельных компонента инпут и чекбокс по отдельности */}
-          <UserRepeatPasswordInput password={password} />
+          <UserPasswordInput onValidate={handleCheckedSecurityPassword} />
+          <UserRepeatPasswordInput />
 
           <Input
             label="Название автошколы"

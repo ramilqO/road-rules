@@ -8,8 +8,7 @@ import Button from '../../../Ui/Button/Button';
 import UserPasswordInput from '../../../Ui/Input/UserPasswordInput/UserPasswordInput';
 
 export default function Login() {
-  //TODO: можно не указывать тип, TS и так понимает что тут строка
-  const [password, setPassword] = useState<string>('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className={style.login}>

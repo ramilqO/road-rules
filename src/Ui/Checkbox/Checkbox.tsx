@@ -3,13 +3,13 @@ import style from "./Checkbox.module.scss";
 interface CheckboxProps {
   onToggle: () => void;
   label: string;
-  defaultChecked: boolean;
+  defaultChecked?: boolean;
 }
 
 export default function Checkbox({
   onToggle,
   label,
-  defaultChecked,
+  defaultChecked = false,
 }: CheckboxProps) {
   return (
     <div className={style.checkbox}>
