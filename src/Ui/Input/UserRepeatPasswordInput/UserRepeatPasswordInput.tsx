@@ -1,23 +1,24 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 
-import Input from '../Input';
+import Input from "../Input";
+import Checkbox from "../../Checkbox/Checkbox";
 
 export default function UserRepeatPasswordInput({
-  password,
+  password = "",
 }: {
-  password: string;
+  password?: string;
 }) {
-  const [repeatPassword, setRepeatPassword] = useState<string>('');
+  const [repeatPassword, setRepeatPassword] = useState<string>("");
   const repeatPasswordInputRef = useRef<HTMLInputElement>(null);
 
   function handleChangeVisibilityRepeatPassword() {
     const input = repeatPasswordInputRef.current;
     if (!input) return;
 
-    if (input.type === 'password') {
-      input.type = 'text';
+    if (input.type === "password") {
+      input.type = "text";
     } else {
-      input.type = 'password';
+      input.type = "password";
     }
   }
 
@@ -28,19 +29,19 @@ export default function UserRepeatPasswordInput({
 
   return (
     <div>
-      <Input
-        label="Повторите пароль"
-        type="password"
-        name="userRepeatPassword"
-        placeholder="*********"
-        inputRef={repeatPasswordInputRef}
-        checkBox={{
-          label: 'Показать пароль',
-          onToggle: handleChangeVisibilityRepeatPassword,
-          //TODO: у тебя значение и так опциональное, если ты его не будешь передавать оно будет false по умолчанию
-          defaultChecked: false,
-        }}
-      />
+      <div style={{ marginBottom: "24px" }}>
+        <Input
+          label="Повторите пароль"
+          type="password"
+          name="userRepeatPassword"
+          placeholder="*********"
+          inputRef={repeatPasswordInputRef}
+        />
+        <Checkbox
+          label="Показать пароль"
+          onToggle={handleChangeVisibilityRepeatPassword}
+        />
+      </div>
       {isPasswordMismatch && <label>Пароли не совпадают!</label>}
     </div>
   );
