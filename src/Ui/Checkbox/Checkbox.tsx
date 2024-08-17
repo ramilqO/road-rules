@@ -1,4 +1,4 @@
-import style from './Checkbox.module.scss';
+import style from "./Checkbox.module.scss";
 
 interface CheckboxProps {
   onToggle: () => void;

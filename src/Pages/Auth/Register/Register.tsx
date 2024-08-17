@@ -1,17 +1,37 @@
-import { useState } from 'react';
-import { Form } from 'react-router-dom';
-import Button from '../../../Ui/Button/Button';
-import UserPasswordInput from '../../../Ui/Input/UserPasswordInput/UserPasswordInput';
-import UserRepeatPasswordInput from '../../../Ui/Input/UserRepeatPasswordInput/UserRepeatPasswordInput';
-import Input from '../../../Ui/Input/Input';
-import style from './Register.module.scss';
+import { useState } from "react";
+import { Form, Link } from "react-router-dom";
+
+import style from "./Register.module.scss";
+
+import Button from "../../../Ui/Button/Button";
+import UserPasswordInput from "../../../Ui/Input/UserPasswordInput/UserPasswordInput";
+import UserRepeatPasswordInput from "../../../Ui/Input/UserRepeatPasswordInput/UserRepeatPasswordInput";
+import Input from "../../../Ui/Input/Input";
 
 export default function Register() {
-  //TODO: убрать неиспользуемый код
-  // const [userName, setUserName] = useState("");
-  // const [surName, setSurName] = useState("");
-  // const [email, setEmail] = useState("");
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
+
+  function handleCheckedSecurityPassword() {
+    const isStep1Complete = password.length >= 8;
+    if (!isStep1Complete) {
+      return;
+    }
+    const isStep2Complete = /[A-Z]/.test(password);
+    if (!isStep2Complete) {
+      return;
+    }
+
+    const isStep3Complete = /[0-9]/.test(password);
+    if (!isStep3Complete) {
+      return;
+    }
+
+    const isStep4Complete =
+      isStep2Complete && /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+    if (!isStep4Complete) {
+      return;
+    }
+  }
 
   return (
     <div className={style.register}>
@@ -31,12 +51,14 @@ export default function Register() {
             placeholder="your_email@yandex.ru"
           />
 
-          <UserPasswordInput password={password} setPassword={setPassword} />
+          <UserPasswordInput
+            password={password}
+            setPassword={setPassword}
+            onValidate={handleCheckedSecurityPassword}
+          />
           <UserRepeatPasswordInput password={password} />
 
           <Input
-            //TODO: значение и так по умолчанию пустая строка, можно ее не передавать
-            initialValue={''}
             label="Название автошколы"
             name="department"
             placeholder="Форсаж"
@@ -44,12 +66,11 @@ export default function Register() {
         </div>
 
         <div className={style.actions}>
-          <Button type="submit" className={style.actions__button}>
-            Зарегестрироваться
-          </Button>
-          <Button to="/login" className={style.actions__link}>
+          <Button type="submit" text="Зарегестрироваться" />
+
+          <Link to="/login" className={style.actions__link}>
             Уже есть аккаунт?
-          </Button>
+          </Link>
         </div>
       </Form>
     </div>

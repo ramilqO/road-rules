@@ -13,7 +13,7 @@ export default function Header() {
           <li className={style.navigation__authItem}>
             <Link
               to="/login"
-              className={`${style.navigation__authItemButton} ${style['navigation_authItemButton--login']}`}
+              className={`${style.navigation__authItemButton} ${style['navigation__authItemButton--login']}`}
             >
               Логин
             </Link>

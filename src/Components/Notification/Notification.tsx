@@ -1,6 +1,7 @@
 import { useState } from "react";
+
 import style from "./Notification.module.scss";
-import Button from "../../Ui/Button/Button";
+
 import CrossIcon from "../../../public/svg/notification/CrossIcon";
 import InfoIcon from "../../../public/svg/notification/InfoIcon";
 
@@ -70,14 +71,14 @@ export default function Notification({
           </div>
 
           {button.text.length > 0 && (
-            <Button
+            <button
               className={`${style.container__button} ${
                 style[`container__button--${type}`]
               }`}
               onClick={button.onClick}
             >
               {button.text}
-            </Button>
+            </button>
           )}
         </div>
       </div>

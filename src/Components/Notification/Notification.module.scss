@@ -1,11 +1,13 @@
 @import "/src/Styles/Variables.module.scss";
 
 .notification {
-  position: relative;
+  position: absolute;
+  top: 35px;
+  right: 50px;
 
   display: flex;
 
-  max-width: 320px;
+  min-width: 320px;
   height: 128px;
 
   gap: 12px;

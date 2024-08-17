@@ -1,16 +1,24 @@
 import { type RefObject, useState } from "react";
 import style from "./Input.module.scss";
+import Checkbox from "../Checkbox/Checkbox";
+
+interface CheckBoxProps {
+  label: string;
+  onToggle: () => void;
+  defaultChecked: boolean;
+}
 
 interface InputProps {
   label: string;
   name: string;
   placeholder: string;
-  /** Валидирует данные, принимает значение из инпута, возвращает строку с ошибкой */
   onValidate?: (value: string) => string;
   initialValue?: string;
   type?: string;
   inputRef?: RefObject<HTMLInputElement>;
+  checkBox?: CheckBoxProps;
 }
+
 export default function Input({
   label,
   type = "text",
@@ -19,9 +27,10 @@ export default function Input({
   initialValue = "",
   placeholder,
   inputRef,
+  checkBox,
 }: InputProps) {
   const [value, setValue] = useState(initialValue);
-  const [validateError, setValidateError] = useState("");
+  const [validateError, setValidateError] = useState<string>("");
 
   return (
     <div className={style.field}>
@@ -36,11 +45,20 @@ export default function Input({
         value={value}
         onChange={(e) => {
           setValue(e.target.value);
-          onValidate && setValidateError(onValidate(e.target.value));
+          if (onValidate) {
+            const error = onValidate(e.target.value);
+            setValidateError(error);
+          }
         }}
       />
-      {/* TODO: стили для ошибки написать */}
-      {validateError && <p className={style.form__error}>{validateError}</p>}
+      {checkBox && (
+        <Checkbox
+          label={checkBox.label}
+          onToggle={checkBox.onToggle}
+          defaultChecked={checkBox.defaultChecked}
+        />
+      )}
+      {validateError && <p className={style.field__error}>{validateError}</p>}
     </div>
   );
 }
