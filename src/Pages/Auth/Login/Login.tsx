@@ -1,21 +1,14 @@
+import { useState } from "react";
 import { Form, Link, redirect } from "react-router-dom";
-import { useRef } from "react";
 
 import style from "./Login.module.scss";
 
 import Input from "../../../Ui/Input/Input";
-import Checkbox from "../../../Ui/Checkbox/Checkbox";
 import Button from "../../../Ui/Button/Button";
+import UserPasswordInput from "../../../Ui/Input/UserPasswordInput/UserPasswordInput";
 
 export default function Login() {
-  const passwordInputRef = useRef<HTMLInputElement>(null);
-
-  function handleChangeVisibility() {
-    const input = passwordInputRef.current;
-    if (!input) return;
-
-    input.type = input.type === "password" ? "text" : "password";
-  }
+  const [password, setPassword] = useState<string>("");
 
   return (
     <div className={style.login}>
@@ -32,23 +25,16 @@ export default function Login() {
             type="email"
             placeholder="your_email@yandex.ru"
           />
-          <Input
-            label="Пароль"
-            name="userPassword"
-            type="password"
-            placeholder="*********"
-            inputRef={passwordInputRef}
-          />
-
-          <Checkbox
-            label="Показать пароль"
-            onToggle={handleChangeVisibility}
-            defaultChecked={false}
-          />
+          <UserPasswordInput password={password} setPassword={setPassword} />
         </div>
 
         <div className={style.actions}>
-          <Button type="submit" text="Войти" onClick={() => redirect("/menu")} />
+          <Button
+            type="submit"
+            text="Войти"
+            onClick={() => redirect("/menu")}
+          />
+
           <Link to="/register" className={style.actions__link}>
             Зарегистрироваться
           </Link>

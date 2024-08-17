@@ -67,6 +67,7 @@ export default function Register() {
 
         <div className={style.actions}>
           <Button type="submit" text="Зарегестрироваться" />
+
           <Link to="/login" className={style.actions__link}>
             Уже есть аккаунт?
           </Link>

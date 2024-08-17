@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 
-import Checkbox from "../../Checkbox/Checkbox";
 import Input from "../Input";
 
 export default function UserRepeatPasswordInput({
@@ -35,11 +34,11 @@ export default function UserRepeatPasswordInput({
         name="userRepeatPassword"
         placeholder="*********"
         inputRef={repeatPasswordInputRef}
-      />
-      <Checkbox
-        onToggle={handleChangeVisibilityRepeatPassword}
-        defaultChecked={false}
-        label="Показать пароль"
+        checkBox={{
+          label: "Показать пароль",
+          onToggle: handleChangeVisibilityRepeatPassword,
+          defaultChecked: false,
+        }}
       />
       {isPasswordMismatch && <label>Пароли не совпадают!</label>}
     </div>

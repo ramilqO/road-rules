@@ -1,5 +1,12 @@
 import { type RefObject, useState } from "react";
 import style from "./Input.module.scss";
+import Checkbox from "../Checkbox/Checkbox";
+
+interface CheckBoxProps {
+  label: string;
+  onToggle: () => void;
+  defaultChecked: boolean;
+}
 
 interface InputProps {
   label: string;
@@ -9,6 +16,7 @@ interface InputProps {
   initialValue?: string;
   type?: string;
   inputRef?: RefObject<HTMLInputElement>;
+  checkBox?: CheckBoxProps;
 }
 
 export default function Input({
@@ -19,6 +27,7 @@ export default function Input({
   initialValue = "",
   placeholder,
   inputRef,
+  checkBox,
 }: InputProps) {
   const [value, setValue] = useState(initialValue);
   const [validateError, setValidateError] = useState<string>("");
@@ -42,6 +51,13 @@ export default function Input({
           }
         }}
       />
+      {checkBox && (
+        <Checkbox
+          label={checkBox.label}
+          onToggle={checkBox.onToggle}
+          defaultChecked={checkBox.defaultChecked}
+        />
+      )}
       {validateError && <p className={style.field__error}>{validateError}</p>}
     </div>
   );

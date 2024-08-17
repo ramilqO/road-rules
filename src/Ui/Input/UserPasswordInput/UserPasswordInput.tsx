@@ -1,12 +1,11 @@
 import { useRef } from "react";
-import Checkbox from "../../Checkbox/Checkbox";
+
 import Input from "../Input";
-import style from "./UserPasswordInput.module.scss";
 
 interface UserPasswordInputProps {
   password: string;
   setPassword: (value: string) => void;
-  onValidate: () => void;
+  onValidate?: () => void;
 }
 
 export default function UserPasswordInput({
@@ -24,23 +23,25 @@ export default function UserPasswordInput({
   }
 
   return (
-    <div className={style.field}>
+    <div>
       <Input
         initialValue={password}
         onValidate={(value: string) => {
           setPassword(value);
-          onValidate();
+          if (onValidate) {
+            onValidate();
+          }
           return "";
         }}
         label="Пароль"
         name="userPassword"
         placeholder="*********"
         inputRef={passwordInputRef}
-      />
-      <Checkbox
-        label="Показать пароль"
-        onToggle={handleChangeVisibility}
-        defaultChecked={false}
+        checkBox={{
+          label: "Показать пароль",
+          onToggle: handleChangeVisibility,
+          defaultChecked: false,
+        }}
       />
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState } from "react";
+
 import style from "./Notification.module.scss";
-import Button from "../../Ui/Button/Button";
+
 import CrossIcon from "../../../public/svg/notification/CrossIcon";
 import InfoIcon from "../../../public/svg/notification/InfoIcon";
 
