@@ -6,6 +6,8 @@ export default function CrossIcon() {
       viewBox="0 0 20 20"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Закрыть"
     >
       <path
         d="M15 5L5 15M5 5L15 15"

@@ -6,6 +6,8 @@ export default function InfoIcon() {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Инфо"
     >
       <g clipPath="url(#clip0_112_1133)">
         <path

@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 
-import Header from "../../Components/Header/Header";
+import Header from '../../Components/Header/Header';
 
 export default function AppLayout() {
   return (
@@ -9,6 +9,7 @@ export default function AppLayout() {
 
       <main>
         <Outlet />
+        {/* TODO: вставить Notification компонент сюда, повесить его наабсолют,что бы он был поверх всего контента на любой страницу */}
       </main>
     </div>
   );

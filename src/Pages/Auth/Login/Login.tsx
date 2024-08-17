@@ -1,15 +1,15 @@
-import { Form } from "react-router-dom";
-import { useRef, useState } from "react";
+import { Form } from 'react-router-dom';
+import { useRef, useState } from 'react';
 
-import style from "./Login.module.scss";
+import style from './Login.module.scss';
 
-import Input from "../../../Ui/Input/Input";
-import Checkbox from "../../../Ui/Checkbox/Checkbox";
-import Button from "../../../Ui/Button/Button";
+import Input from '../../../Ui/Input/Input';
+import Checkbox from '../../../Ui/Checkbox/Checkbox';
+import Button from '../../../Ui/Button/Button';
 
 export default function Login() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
@@ -17,7 +17,7 @@ export default function Login() {
     const input = passwordInputRef.current;
     if (!input) return;
 
-    input.type = input.type === "password" ? "text" : "password";
+    input.type = input.type === 'password' ? 'text' : 'password';
   }
 
   return (
@@ -30,6 +30,7 @@ export default function Login() {
       <Form method="POST" className={style.form}>
         <div>
           <Input
+            //TODO: исправить ошибки типизации, передать правильный пропс
             label="Email"
             name="userEmail"
             value={email}
@@ -38,6 +39,7 @@ export default function Login() {
             placeholder="your_email@yandex.ru"
           />
           <Input
+            //TODO: исправить ошибки типизации, передать правильный пропс
             label="Пароль"
             name="userPassword"
             value={password}

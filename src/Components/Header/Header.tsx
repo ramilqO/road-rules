@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import style from "./Header.module.scss";
-import ThemeToggle from "../../tools/ThemeToggle/ThemeToggle";
+import style from './Header.module.scss';
+import ThemeToggle from '../../tools/ThemeToggle/ThemeToggle';
 
 export default function Header() {
   return (
@@ -13,7 +13,7 @@ export default function Header() {
           <li className={style.navigation__authItem}>
             <Link
               to="/login"
-              className={`${style.navigation__authItemButton} ${style["navigation__authItemButton--login"]}`}
+              className={`${style.navigation__authItemButton} ${style['navigation_authItemButton--login']}`}
             >
               Логин
             </Link>
@@ -21,7 +21,7 @@ export default function Header() {
           <li className={style.navigation__authItem}>
             <Link
               to="/register"
-              className={`${style.navigation__authItemButton} ${style["navigation__authItemButton--register"]}`}
+              className={`${style.navigation__authItemButton} ${style['navigation__authItemButton--register']}`}
             >
               Регистрация
             </Link>

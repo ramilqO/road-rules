@@ -1,25 +1,27 @@
-import { MouseEventHandler } from "react";
-import { Link } from "react-router-dom";
+import type { MouseEventHandler } from 'react';
+import { Link } from 'react-router-dom';
 
+type ButtonType = 'submit' | 'reset' | 'button';
 interface IButton {
-  type?: buttonType;
-  to?: string;
+  type?: ButtonType;
+  to?: string; //TODO: этот проп не нужен
   children: React.ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
-  className?: string;
+  className?: string; //TODO: этот проп не нужен
 }
-
-type buttonType = "submit" | "reset" | "button";
 
 export default function Button({
   type = 'button',
   to,
+  //TODO: children лучше преименовать на text это имя создано для другого
   children = '',
   onClick,
   disabled = false,
+  //TODO: классы не нужно передавать снаружи, все стили должны быть описаны внутри самой кнопки
   className = '',
 }: IButton) {
+  //TODO: проп to не нужно передавать, сделай нуный тебе редирект в функции onClick когда будет передавать эту функцию
   if (to)
     return (
       <Link to={to} className={className}>

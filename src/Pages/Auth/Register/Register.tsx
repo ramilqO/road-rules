@@ -1,16 +1,17 @@
-import { useState } from "react";
-import { Form } from "react-router-dom";
-import Button from "../../../Ui/Button/Button";
-import UserPasswordInput from "../../../Ui/Input/UserPasswordInput/UserPasswordInput";
-import UserRepeatPasswordInput from "../../../Ui/Input/UserRepeatPasswordInput/UserRepeatPasswordInput";
-import Input from "../../../Ui/Input/Input";
-import style from "./Register.module.scss";
+import { useState } from 'react';
+import { Form } from 'react-router-dom';
+import Button from '../../../Ui/Button/Button';
+import UserPasswordInput from '../../../Ui/Input/UserPasswordInput/UserPasswordInput';
+import UserRepeatPasswordInput from '../../../Ui/Input/UserRepeatPasswordInput/UserRepeatPasswordInput';
+import Input from '../../../Ui/Input/Input';
+import style from './Register.module.scss';
 
 export default function Register() {
+  //TODO: убрать неиспользуемый код
   // const [userName, setUserName] = useState("");
   // const [surName, setSurName] = useState("");
   // const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   return (
     <div className={style.register}>
@@ -21,16 +22,8 @@ export default function Register() {
 
       <Form method="POST" className={style.form}>
         <div>
-          <Input
-            label="Имя"
-            name="userName"
-            placeholder="Иван"
-          />
-          <Input
-            label="Фамилия"
-            name="surName"
-            placeholder="Иванов"
-          />
+          <Input label="Имя" name="userName" placeholder="Иван" />
+          <Input label="Фамилия" name="surName" placeholder="Иванов" />
           <Input
             label="email"
             type="email"
@@ -42,7 +35,8 @@ export default function Register() {
           <UserRepeatPasswordInput password={password} />
 
           <Input
-            initialValue={""}
+            //TODO: значение и так по умолчанию пустая строка, можно ее не передавать
+            initialValue={''}
             label="Название автошколы"
             name="department"
             placeholder="Форсаж"
