@@ -1,14 +1,15 @@
-import { useState } from "react";
-import { Form, Link, redirect } from "react-router-dom";
+import { useState } from 'react';
+import { Form, Link, redirect } from 'react-router-dom';
 
-import style from "./Login.module.scss";
+import style from './Login.module.scss';
 
-import Input from "../../../Ui/Input/Input";
-import Button from "../../../Ui/Button/Button";
-import UserPasswordInput from "../../../Ui/Input/UserPasswordInput/UserPasswordInput";
+import Input from '../../../Ui/Input/Input';
+import Button from '../../../Ui/Button/Button';
+import UserPasswordInput from '../../../Ui/Input/UserPasswordInput/UserPasswordInput';
 
 export default function Login() {
-  const [password, setPassword] = useState<string>("");
+  //TODO: можно не указывать тип, TS и так понимает что тут строка
+  const [password, setPassword] = useState<string>('');
 
   return (
     <div className={style.login}>
@@ -32,7 +33,7 @@ export default function Login() {
           <Button
             type="submit"
             text="Войти"
-            onClick={() => redirect("/menu")}
+            onClick={() => redirect('/menu')}
           />
 
           <Link to="/register" className={style.actions__link}>

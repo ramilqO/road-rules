@@ -1,6 +1,6 @@
-import { type RefObject, useState } from "react";
-import style from "./Input.module.scss";
-import Checkbox from "../Checkbox/Checkbox";
+import { type RefObject, useState } from 'react';
+import Checkbox from '../Checkbox/Checkbox';
+import style from './Input.module.scss';
 
 interface CheckBoxProps {
   label: string;
@@ -21,16 +21,17 @@ interface InputProps {
 
 export default function Input({
   label,
-  type = "text",
+  type = 'text',
   name,
   onValidate,
-  initialValue = "",
+  initialValue = '',
   placeholder,
   inputRef,
   checkBox,
 }: InputProps) {
   const [value, setValue] = useState(initialValue);
-  const [validateError, setValidateError] = useState<string>("");
+  //TODO: можно не указывать ип TS и так понимает что тут строка
+  const [validateError, setValidateError] = useState<string>('');
 
   return (
     <div className={style.field}>

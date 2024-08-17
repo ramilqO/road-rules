@@ -1,4 +1,4 @@
-import { redirect } from "react-router-dom";
+import { redirect } from 'react-router-dom';
 
 type FormData = {
   name: string;
@@ -11,6 +11,8 @@ type FormData = {
 
 export async function RegisterAction({ request }: { request: Request }) {
   const formdata = await request.formData();
+  //TODO: fromEntries не возвращает проис, его можно не ждать
+  //TODO: data и так имеет такой тип, можно не писать его руками, если ты его удалишь ничего не сломается
   const data = (await Object.fromEntries(formdata)) as {
     [key: string]: FormDataEntryValue;
   };
@@ -26,5 +28,5 @@ export async function RegisterAction({ request }: { request: Request }) {
 
   console.log(typedData);
 
-  return redirect("/menu");
+  return redirect('/menu');
 }

@@ -1,23 +1,23 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
-import Input from "../Input";
+import Input from '../Input';
 
 export default function UserRepeatPasswordInput({
   password,
 }: {
   password: string;
 }) {
-  const [repeatPassword, setRepeatPassword] = useState<string>("");
+  const [repeatPassword, setRepeatPassword] = useState<string>('');
   const repeatPasswordInputRef = useRef<HTMLInputElement>(null);
 
   function handleChangeVisibilityRepeatPassword() {
     const input = repeatPasswordInputRef.current;
     if (!input) return;
 
-    if (input.type === "password") {
-      input.type = "text";
+    if (input.type === 'password') {
+      input.type = 'text';
     } else {
-      input.type = "password";
+      input.type = 'password';
     }
   }
 
@@ -35,8 +35,9 @@ export default function UserRepeatPasswordInput({
         placeholder="*********"
         inputRef={repeatPasswordInputRef}
         checkBox={{
-          label: "Показать пароль",
+          label: 'Показать пароль',
           onToggle: handleChangeVisibilityRepeatPassword,
+          //TODO: у тебя значение и так опциональное, если ты его не будешь передавать оно будет false по умолчанию
           defaultChecked: false,
         }}
       />

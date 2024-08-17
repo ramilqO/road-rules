@@ -1,6 +1,6 @@
-import style from "./PageNotFound.module.scss";
+import style from './PageNotFound.module.scss';
 
-import Button from "../../Ui/Button/Button";
+import Button from '../../Ui/Button/Button';
 
 export default function PageNotFound() {
   return (
@@ -14,6 +14,7 @@ export default function PageNotFound() {
         </div>
 
         <div className={style.link}>
+          {/* TODO: поправить типизацию */}
           <Button className={style.link__ToHome} to="/menu">
             На главную
           </Button>

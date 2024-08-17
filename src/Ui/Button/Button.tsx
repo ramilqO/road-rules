@@ -1,20 +1,19 @@
-import React from "react";
-import { MouseEventHandler } from "react";
+import type { MouseEventHandler, ReactNode } from 'react';
 
-import style from "./Button.module.scss";
+import style from './Button.module.scss';
 
-type ButtonType = "submit" | "reset" | "button";
+type ButtonType = 'submit' | 'reset' | 'button';
 
 interface IButton {
   type?: ButtonType;
-  text: React.ReactNode;
+  text: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
 }
 
 export default function Button({
-  type = "button",
-  text = "",
+  type = 'button',
+  text = '',
   onClick,
   disabled = false,
 }: IButton) {
