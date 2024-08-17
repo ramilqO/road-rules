@@ -1,5 +1,5 @@
 :root {
-  // Notification ✅
+  // Notification
   --basicNotificationColorTitleBodyIcons: #1e1e1e;
   --basicNotificationColorItemBacg: #ffffff;
   --basicNotificationColorItemBorder: #757575;
@@ -11,8 +11,9 @@
   --errorNotificationColorItemBorder: #ec221f;
   --errorNotificationColorButtonBacg: #d9d9d9;
   --errorNotificationColorButtonBorderAndText: #b3b3b3;
+  --errorNotificationColorButtonBorder: #b3b3b3;
 
-  // Header ✅
+  // Header
   --headerColorToggleThemeButtonBorder: #d9d9d9;
   --headerColorToggleThemeButtonBacg: #f5f5f5;
 
@@ -23,7 +24,7 @@
   --headerColorRegisterButtonBacg: #2c2c2c;
   --headerColorRegisterButtonText: #f5f5f5;
 
-  // Auth 
+  // Auth
   --authColorInfoSectionTitle: #1e1e1e;
   --authColorInfoSectionDescription: #757575;
 
@@ -36,4 +37,23 @@
   --authColorFormButtonBacg: #2c2c2c;
   --authColorFormButtonColor: #f5f5f5;
   --authColorFormButtonLinkColor: #1e1e1e;
+
+  // PageNotFound
+  --pageNotFoundColorBorder: #d9d9d9;
+  --pageNotFoundColorInfoSectionTitleAndDescription: #1e1e1e;
+  --pageNotFoundColorButtonBacg: #2c2c2c;
+  --pageNotFoundColorButtonText: #f5f5f5;
+}
+
+[data-theme="darkMode"] {
+  --basicNotificationColorTitleBodyIcons: #ffffff;
+  --basicNotificationColorItemBacg: #1e1e1e;
+  --basicNotificationColorButtonBacg: #f5f5f5;
+  --basicNotificationColorButtonText: #1e1e1e;
+
+  --errorNotificationColorTitleBodyIcons: #fee9e7;
+  --errorNotificationColorItemBacg: #4d0b0a;
+  --errorNotificationColorButtonBacg: #c00f0c;
+  --errorNotificationColorButtonBorderAndText: #fee9e7;
+  --errorNotificationColorButtonBorder: #f4776a;
 }
