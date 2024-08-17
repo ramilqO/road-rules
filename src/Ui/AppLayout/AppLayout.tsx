@@ -1,15 +1,25 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
 
-import Header from '../../Components/Header/Header';
+import style from "./AppLayout.module.scss";
+
+import Header from "../../Components/Header/Header";
+import Notification from "../../Components/Notification/Notification";
 
 export default function AppLayout() {
   return (
     <div>
       <Header />
 
-      <main>
+      <main className={style.main}>
         <Outlet />
-        {/* TODO: вставить Notification компонент сюда, повесить его наабсолют,что бы он был поверх всего контента на любой страницу */}
+        <div className={style.notification}>
+          <Notification
+            type="basic"
+            titleText="Title"
+            bodyText="Body text"
+            button={{ text: "Button", onClick() {} }}
+          />
+        </div>
       </main>
     </div>
   );

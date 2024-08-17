@@ -5,12 +5,12 @@ interface InputProps {
   label: string;
   name: string;
   placeholder: string;
-  /** Валидирует данные, принимает значение из инпута, возвращает строку с ошибкой */
   onValidate?: (value: string) => string;
   initialValue?: string;
   type?: string;
   inputRef?: RefObject<HTMLInputElement>;
 }
+
 export default function Input({
   label,
   type = "text",
@@ -21,7 +21,7 @@ export default function Input({
   inputRef,
 }: InputProps) {
   const [value, setValue] = useState(initialValue);
-  const [validateError, setValidateError] = useState("");
+  const [validateError, setValidateError] = useState<string>("");
 
   return (
     <div className={style.field}>
@@ -36,11 +36,13 @@ export default function Input({
         value={value}
         onChange={(e) => {
           setValue(e.target.value);
-          onValidate && setValidateError(onValidate(e.target.value));
+          if (onValidate) {
+            const error = onValidate(e.target.value);
+            setValidateError(error);
+          }
         }}
       />
-      {/* TODO: стили для ошибки написать */}
-      {validateError && <p className={style.form__error}>{validateError}</p>}
+      {validateError && <p className={style.field__error}>{validateError}</p>}
     </div>
   );
 }

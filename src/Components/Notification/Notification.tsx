@@ -70,14 +70,14 @@ export default function Notification({
           </div>
 
           {button.text.length > 0 && (
-            <Button
+            <button
               className={`${style.container__button} ${
                 style[`container__button--${type}`]
               }`}
               onClick={button.onClick}
             >
               {button.text}
-            </Button>
+            </button>
           )}
         </div>
       </div>

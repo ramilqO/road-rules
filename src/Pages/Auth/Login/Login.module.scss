@@ -43,90 +43,13 @@
   flex-direction: column;
   justify-content: space-between;
 
-  width: 320px;
+  min-width: 320px;
   min-height: 352px;
 
   padding: 24px;
 
   border-radius: 8px;
   border: 1px solid var(--authColorFormBorder);
-
-  &__error {
-    margin-bottom: 24px;
-
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22.4px;
-
-    color: var(--authColorFormInputLabelText);
-
-    &--description {
-      color: red;
-    }
-  }
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-
-  gap: 8px;
-
-  &:first-child {
-    margin-bottom: 24px;
-  }
-
-  &__label {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22.4px;
-
-    color: var(--authColorFormInputLabelText);
-  }
-
-  &__input {
-    width: 100%;
-    height: 40px;
-
-    padding-top: 12px;
-    padding-right: 16px;
-    padding-bottom: 12px;
-    padding-left: 16px;
-
-    border: 1px solid var(--authColorFormInputFieldBorder);
-    border-radius: 8px;
-
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 16px;
-    color: var(--authColorFormInputFieldColorAndPlaceholderColor);
-
-    &::placeholder {
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 16px;
-      color: var(--authColorFormInputFieldColorAndPlaceholderColor);
-    }
-
-    &:last-child {
-      margin-bottom: 8px;
-    }
-  }
-}
-
-.visibilityPasswordContainer {
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  &__label {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22.4px;
-
-    color: var(--authColorFormInputLabelText);
-  }
 }
 
 .actions {
@@ -135,28 +58,6 @@
   justify-content: end;
 
   gap: 24px;
-
-  &__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 40px;
-
-    padding-top: 16px;
-    padding-bottom: 16px;
-
-    border: none;
-    border-radius: 8px;
-
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 16px;
-    cursor: pointer;
-
-    background-color: var(--authColorFormButtonBacg);
-    color: var(--authColorFormButtonColor);
-  }
 
   &__link {
     text-align: center;
