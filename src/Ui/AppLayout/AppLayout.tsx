@@ -7,11 +7,12 @@ import Notification from '../../Components/Notification/Notification';
 
 export default function AppLayout() {
   return (
-    <div>
+    <div className={style.wrapper}>
       <Header />
 
       <main className={style.main}>
         <Outlet />
+
         <Notification
           type="basic"
           titleText="Title"
