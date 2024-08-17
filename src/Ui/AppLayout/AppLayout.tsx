@@ -12,14 +12,12 @@ export default function AppLayout() {
 
       <main className={style.main}>
         <Outlet />
-        <div className={style.notification}>
           <Notification
             type="basic"
             titleText="Title"
             bodyText="Body text"
             button={{ text: "Button", onClick() {} }}
           />
-        </div>
       </main>
     </div>
   );

@@ -1,7 +1,9 @@
 @import "/src/Styles/Variables.module.scss";
 
 .notification {
-  position: relative;
+  position: absolute;
+  top: 35px;
+  right: 50px;
 
   display: flex;
 
