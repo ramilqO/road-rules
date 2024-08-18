@@ -7,9 +7,9 @@ interface IUserStore {
 }
 
 class UserStore implements IUserStore {
-  firstName: string = "";
-  secondName: string = "";
-  isAuth: boolean = false;
+  firstName = "";
+  secondName = "";
+  isAuth = false;
 
   constructor() {
     makeAutoObservable(this);
