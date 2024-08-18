@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import type { RefObject } from 'react';
 
 import Checkbox from '../../../Ui/Checkbox/Checkbox';
@@ -7,9 +7,7 @@ import Input from '../../../Ui/Input/Input';
 export default function Passwords() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const repeatPasswordInputRef = useRef<HTMLInputElement>(null);
-
-  let password = '';
-  let repeatPassword = '';
+  const [matchError, setMatchError] = useState('');
 
   function checkValidation(value: string): string {
     const isStep1Complete = value.length >= 8;
@@ -32,14 +30,21 @@ export default function Passwords() {
       return 'Пароль должен содержать в себе символ';
     }
 
-    return validatePasswordMatch();
+    validatePasswordMatch();
+    return '';
   }
 
   function validatePasswordMatch() {
-    if (!password || !repeatPassword) {
-      return '';
+    if (
+      !passwordInputRef.current?.value ||
+      !repeatPasswordInputRef.current?.value
+    ) {
+      return setMatchError('');
     }
-    return password === repeatPassword ? '' : 'Пароли не совпадают!';
+    return passwordInputRef.current?.value ===
+      repeatPasswordInputRef.current?.value
+      ? setMatchError('')
+      : setMatchError('Пароли не совпадают!');
   }
 
   function handleChangeVisibility(ref: RefObject<HTMLInputElement>) {
@@ -54,36 +59,36 @@ export default function Passwords() {
       <div style={{ marginBottom: '24px' }}>
         <Input
           onValidate={(value) => {
-            password = value;
             return checkValidation(value);
           }}
-          label="Пароль"
-          name="userPassword"
-          placeholder="*********"
+          label='Пароль'
+          name='userPassword'
+          placeholder='*********'
           inputRef={passwordInputRef}
+          otherErrorMessage={matchError}
         />
 
         <Checkbox
           defaultChecked
-          label="Показать пароль"
+          label='Показать пароль'
           onToggle={() => handleChangeVisibility(passwordInputRef)}
         />
       </div>
       <div style={{ marginBottom: '24px' }}>
         <Input
           onValidate={(value) => {
-            repeatPassword = value;
             return checkValidation(value);
           }}
-          label="Повторите пароль"
-          name="repeatUserPassword"
-          placeholder="*********"
+          label='Повторите пароль'
+          name='repeatUserPassword'
+          placeholder='*********'
           inputRef={repeatPasswordInputRef}
+          otherErrorMessage={matchError}
         />
 
         <Checkbox
           defaultChecked
-          label="Показать пароль"
+          label='Показать пароль'
           onToggle={() => handleChangeVisibility(repeatPasswordInputRef)}
         />
       </div>
