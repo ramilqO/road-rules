@@ -1,19 +1,22 @@
-import { RefObject, useRef, useState } from 'react';
-import { Form, Link, redirect } from 'react-router-dom';
+import { useRef } from "react";
+import { Form, redirect } from "react-router-dom";
 
-import style from './Login.module.scss';
+import useNavigation from "../../../tools/useNavigation";
+import style from "./Login.module.scss";
 
-import Button from '../../../Ui/Button/Button';
-import Checkbox from '../../../Ui/Checkbox/Checkbox';
-import Input from '../../../Ui/Input/Input';
+import Button from "../../../Ui/Button/Button";
+import Checkbox from "../../../Ui/Checkbox/Checkbox";
+import Input from "../../../Ui/Input/Input";
 
 export default function Login() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
+
+  const { goToPath } = useNavigation();
   function handleChangeVisibility() {
     const input = passwordInputRef.current;
     if (!input) return;
 
-    input.type = input.type === 'password' ? 'text' : 'password';
+    input.type = input.type === "password" ? "text" : "password";
   }
 
   return (
@@ -31,7 +34,7 @@ export default function Login() {
             type="email"
             placeholder="your_email@yandex.ru"
           />
-          <div style={{ marginBottom: '24px' }}>
+          <div style={{ marginBottom: "24px" }}>
             <Input
               label="Пароль"
               name="userPassword"
@@ -50,12 +53,14 @@ export default function Login() {
           <Button
             type="submit"
             text="Войти"
-            onClick={() => redirect('/menu')}
+            onClick={() => redirect("/menu")}
           />
 
-          <Link to="/register" className={style.actions__link}>
-            Зарегистрироваться
-          </Link>
+          <Button
+            buttonStyle="link"
+            text="Зарегистрироваться"
+            onClick={() => goToPath("/register")}
+          />
         </div>
       </Form>
     </div>

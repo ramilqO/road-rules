@@ -1,8 +1,11 @@
 import style from "./PageNotFound.module.scss";
 
-import { Link } from "react-router-dom";
+import Button from "../../Ui/Button/Button";
+import useNavigation from "../../tools/useNavigation";
 
 export default function PageNotFound() {
+  const { goToPath } = useNavigation();
+
   return (
     <div className={style.pageNotFound}>
       <div className={style.container}>
@@ -13,10 +16,12 @@ export default function PageNotFound() {
           </p>
         </div>
 
-        <div className={style.link}>
-          <Link className={style.link__ToHome} to="/menu">
-            На главную
-          </Link>
+        <div className={style.actions}>
+          <Button
+            type="button"
+            text="На главную"
+            onClick={() => goToPath("/menu")}
+          />
         </div>
       </div>
     </div>

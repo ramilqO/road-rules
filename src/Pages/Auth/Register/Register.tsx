@@ -1,13 +1,16 @@
-import { Form, Link } from 'react-router-dom';
+import { Form } from "react-router-dom";
 
-import style from './Register.module.scss';
+import style from "./Register.module.scss";
 
-import Button from '../../../Ui/Button/Button';
-import Input from '../../../Ui/Input/Input';
+import Button from "../../../Ui/Button/Button";
+import Input from "../../../Ui/Input/Input";
 
-import Passwords from './Passwords';
+import Passwords from "./Passwords";
+import useNavigation from "../../../tools/useNavigation";
 
 export default function Register() {
+  const { goToPath } = useNavigation();
+
   return (
     <div className={style.register}>
       <div className={style.infoSection}>
@@ -16,8 +19,7 @@ export default function Register() {
       </div>
 
       <Form method="POST" className={style.form}>
-        {/* TODO: ширина инпутов была сломана из-за того что у этого дива не было 100 процентов, вынеси это теперь в класс что бы стили не были прописаны инлайном */}
-        <div style={{ width: '100%' }}>
+        <div className={style.container}>
           <Input label="Имя" name="userName" placeholder="Иван" />
           <Input label="Фамилия" name="surName" placeholder="Иванов" />
           <Input
@@ -39,9 +41,7 @@ export default function Register() {
         <div className={style.actions}>
           <Button type="submit" text="Зарегестрироваться" />
 
-          <Link to="/login" className={style.actions__link}>
-            Уже есть аккаунт?
-          </Link>
+          <Button buttonStyle="link" text="Уже есть аккаунт?" onClick={() => goToPath("/login")} />
         </div>
       </Form>
     </div>
