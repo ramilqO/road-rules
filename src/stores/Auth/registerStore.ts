@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import axios, { AxiosResponse } from "axios";
 
-import { AuthStore } from "./authStore";
+import authStore from "./authStore";
 import errorHandling from "../../tools/errorHandling";
 import notificationStore from "../notificationStore";
 
@@ -22,9 +22,9 @@ interface IRegisterResponse {
 }
 
 class RegisterStore {
-  private authStore: AuthStore;
+  private authStore: typeof authStore;
 
-  constructor(authStore: AuthStore) {
+  constructor() {
     this.authStore = authStore;
     makeAutoObservable(this);
   }
@@ -41,8 +41,6 @@ class RegisterStore {
 
       const data = response.data;
 
-      console.log(data);
-
       this.authStore.setToken(data.token);
       this.authStore.data = {
         firstName: data.firstName,
@@ -57,6 +55,5 @@ class RegisterStore {
   }
 }
 
-const authStore = new AuthStore();
-const registerStore = new RegisterStore(authStore);
+const registerStore = new RegisterStore();
 export default registerStore;
