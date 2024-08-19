@@ -1,11 +1,11 @@
 import { makeAutoObservable } from "mobx";
 
-import { AuthStore } from "./authStore";
+import authStore from "./authStore";
 
 class LogoutStore {
-  private authStore: AuthStore;
+  private authStore: typeof authStore;
 
-  constructor(authStore: AuthStore) {
+  constructor() {
     this.authStore = authStore;
     makeAutoObservable(this);
   }
@@ -20,6 +20,5 @@ class LogoutStore {
   }
 }
 
-const authStore = new AuthStore();
-const logoutStore = new LogoutStore(authStore);
+const logoutStore = new LogoutStore();
 export default logoutStore;
