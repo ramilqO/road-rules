@@ -13,6 +13,7 @@ interface IData {
 interface IAuth {
   data: IData;
   isLoading: boolean;
+  isAuth: boolean;
 }
 
 export class AuthStore implements IAuth {
@@ -22,6 +23,7 @@ export class AuthStore implements IAuth {
     email: "",
   };
   isLoading = false;
+  isAuth = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -33,6 +35,15 @@ export class AuthStore implements IAuth {
 
   unset() {
     tokenServices.unset();
+  }
+
+  logout() {
+    this.unset();
+    this.data = {
+      firstName: "",
+      secondName: "",
+      email: "",
+    };
   }
 }
 

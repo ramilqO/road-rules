@@ -31,6 +31,7 @@ class RegisterStore {
 
   async register(credentials: IRegisterCredentials) {
     this.authStore.isLoading = true;
+    this.authStore.isAuth = false;
     notificationStore.setBodyText("");
 
     try {
@@ -40,6 +41,8 @@ class RegisterStore {
       );
 
       const data = response.data;
+
+      this.authStore.isAuth = true;
 
       this.authStore.setToken(data.token);
       this.authStore.data = {

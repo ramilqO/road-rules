@@ -27,6 +27,7 @@ class LoginStore {
 
   async login(credentials: ILoginCredentials) {
     this.authStore.isLoading = true;
+    this.authStore.isAuth = false;
     notificationStore.setBodyText("");
 
     try {
@@ -36,6 +37,8 @@ class LoginStore {
       );
 
       const data = response.data;
+
+      this.authStore.isAuth = true;
 
       this.authStore.setToken(data.token);
       this.authStore.data = {
