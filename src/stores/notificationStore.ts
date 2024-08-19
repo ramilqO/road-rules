@@ -18,6 +18,10 @@ class NotificationStore implements INotificationStore {
   constructor() {
     makeAutoObservable(this);
   }
+
+  setBodyText(message: string) {
+    this.bodyText = message;
+  }
 }
 
 const notificationStore = new NotificationStore();

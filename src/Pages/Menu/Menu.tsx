@@ -1,6 +1,8 @@
 import { observer } from "mobx-react-lite";
 
-import authOperations from "../../stores/Auth/authOperations";
+import loginStore from "../../stores/Auth/loginStore";
+import registerStore from "../../stores/Auth/registerStore";
+import logoutStore from "../../stores/Auth/logoutStore";
 
 const Menu = observer(() => {
   const exampleCredentialsLogin = {
@@ -22,7 +24,7 @@ const Menu = observer(() => {
 
       <button
         onClick={() => {
-          authOperations.register(exampleCredentialsRegister);
+          registerStore.register(exampleCredentialsRegister);
         }}
       >
         Зарегистрироватся
@@ -30,10 +32,18 @@ const Menu = observer(() => {
 
       <button
         onClick={() => {
-          authOperations.login(exampleCredentialsLogin);
+          loginStore.login(exampleCredentialsLogin);
         }}
       >
         Войти в аккаунт
+      </button>
+
+      <button
+        onClick={() => {
+          logoutStore.logout();
+        }}
+      >
+        Выйти
       </button>
     </div>
   );

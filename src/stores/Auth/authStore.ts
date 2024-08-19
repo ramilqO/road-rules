@@ -4,20 +4,14 @@ import axios from "axios";
 
 axios.defaults.baseURL = "http://road-rules-backend.webtm.ru/";
 
-// ХЗ, добавил ещё email на всякий случай, может где-то пригодится
 interface IData {
   firstName: string;
   secondName: string;
   email?: string;
 }
 
-interface IError {
-  message: string;
-}
-
 interface IAuth {
   data: IData;
-  error: IError;
   isLoading: boolean;
 }
 
@@ -26,9 +20,6 @@ export class AuthStore implements IAuth {
     firstName: "",
     secondName: "",
     email: "",
-  };
-  error = {
-    message: "",
   };
   isLoading = false;
 
@@ -45,5 +36,5 @@ export class AuthStore implements IAuth {
   }
 }
 
-const authStore = new AuthStore()
+const authStore = new AuthStore();
 export default authStore;
