@@ -1,6 +1,5 @@
 import { makeAutoObservable } from "mobx";
 import axios, { AxiosResponse } from "axios";
-
 import { AuthStore } from "./authStore";
 import errorHandling from "../../tools/errorHandling";
 import notificationStore from "../notificationStore";
@@ -45,8 +44,11 @@ class LoginStore {
         secondName: data.secondName,
         email: credentials.email,
       };
+      console.log(this.authStore.data.firstName)
     } catch (error) {
       errorHandling(error);
+    } finally {
+      this.authStore.isLoading = false;
     }
   }
 }

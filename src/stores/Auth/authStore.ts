@@ -16,7 +16,7 @@ interface IAuth {
 }
 
 export class AuthStore implements IAuth {
-  data = {
+  data: IData = {
     firstName: "",
     secondName: "",
     email: "",
