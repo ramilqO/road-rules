@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
 interface Button {
-  buttonText: string;
-  buttonAction: () => void;
+  text: string;
+  onClick: () => void;
 }
 
 interface NotificationInfo {

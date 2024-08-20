@@ -22,14 +22,7 @@ const AppLayout = observer(() => {
             type={notification.type}
             titleText={notification.titleText}
             bodyText={notification.bodyText}
-            button={
-              notification.button
-                ? {
-                    text: notification.button.buttonText,
-                    onClick: notification.button.buttonAction,
-                  }
-                : undefined
-            }
+            button={notification.button}
           />
         )}
       </main>
