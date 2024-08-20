@@ -84,7 +84,7 @@ function Notification() {
               style[`container__button--${notification.type}`]
             }`}
             onClick={() => {
-              notification.button?.onClick;
+              notification.button?.onClick();
               notificationStore.deleteNotification();
             }}
             type="button"
