@@ -21,6 +21,7 @@ class NotificationStore {
 
   setNotification(notificationInfo: NotificationInfo) {
     this.notification = notificationInfo;
+    console.log(this.notification.titleText, this.notification.bodyText)
   }
 
   deleteNotification() {

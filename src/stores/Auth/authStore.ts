@@ -44,6 +44,7 @@ export class AuthStore implements IAuth {
       secondName: "",
       email: "",
     };
+    this.isAuth = false
   }
 }
 
