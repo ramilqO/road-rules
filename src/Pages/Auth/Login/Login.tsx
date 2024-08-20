@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { Form, redirect, useNavigate } from "react-router-dom";
 
 import style from "./Login.module.scss";
 
@@ -34,7 +34,7 @@ export default function Login() {
             type="email"
             placeholder="your_email@yandex.ru"
           />
-          <div style={{ marginBottom: "24px" }}>
+          <div className={style.wrapper}>
             <Input
               label="Пароль"
               name="userPassword"
@@ -50,10 +50,20 @@ export default function Login() {
         </div>
 
         <div className={style.actions}>
+          {/* Хочу поделится знаниями между вами. Когда у меня был onClick() у меня при отправке формы
+           у меня выводилось вот такое предупреждение и не выводились данные в loginAction --> 
+           ⚠ Form submission canceled because the form is not connected. Я полез в интернет искать, и оказалось, что onClick на 
+           элементе button всегда выполняется первым чем метод "submit" на кнопке. Но я потом убрал onClick и всё начало работать
+           , НО :) У нас в onClick было действие перенаправление navigate(/menu) и оно по идее должно было перенаправлять,
+           но дурной метод navigate именно перенаправляет, из-за этого метода у меня перенаправлялось без проверки success form или нет
+           в этом случае надо использовать redirect(/menu), потому что этот метод перенаправляет только тогда, когда
+           выполнилось что-то. Короче, когда надо перенаправить с условием выполнения то redirect, когда просто перенаправить
+           то navigate */}
+
           <Button
             type="submit"
             text="Войти"
-            onClick={() => navigate("/menu")}
+            onClick={() => redirect("/menu")}
           />
 
           <Button
