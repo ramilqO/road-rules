@@ -18,7 +18,7 @@ export async function LoginAction({ request }: { request: Request }) {
 
   await loginStore.login(credentials);
 
-  if (notificationStore.notification) return;
+  if (notificationStore.notification) return redirect("/login");
 
   return redirect("/menu");
 }

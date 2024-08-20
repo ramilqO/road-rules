@@ -24,6 +24,7 @@
 
 .navigation__auth {
   display: flex;
+  align-items: center;
   gap: 12px;
 
   list-style: none;
@@ -50,13 +51,6 @@
       background-color: var(--headerColorLoginButtonBacg);
 
       border: 1px solid var(--headerColorLoginButtonBorder);
-
-      &--authorized {
-        width: auto;
-
-        background-color: transparent;
-        border: none;
-      }
     }
 
     &--register {
@@ -64,5 +58,13 @@
       background-color: var(--headerColorRegisterButtonBacg);
       border: none;
     }
+  }
+
+  &ItemDescription {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+
+    color: var(--headerColorLoginButtonColor);
   }
 }

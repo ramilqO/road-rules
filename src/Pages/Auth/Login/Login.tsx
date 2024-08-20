@@ -1,13 +1,16 @@
 import { useRef } from "react";
 import { Form, redirect, useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
+import authStore from "../../../stores/Auth/authStore";
 import style from "./Login.module.scss";
 
 import Button from "../../../Ui/Button/Button";
 import Checkbox from "../../../Ui/Checkbox/Checkbox";
 import Input from "../../../Ui/Input/Input";
+import Loader from "../../../Ui/Loader/Loader";
 
-export default function Login() {
+const Login = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
@@ -18,6 +21,8 @@ export default function Login() {
 
     input.type = input.type === "password" ? "text" : "password";
   }
+
+  if (authStore.isLoading) return <Loader />;
 
   return (
     <div className={style.login}>
@@ -75,4 +80,6 @@ export default function Login() {
       </Form>
     </div>
   );
-}
+});
+
+export default Login;

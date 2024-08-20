@@ -1,7 +1,9 @@
 import { Form, redirect, useNavigate } from "react-router-dom";
 
+import authStore from "../../../stores/Auth/authStore";
 import style from "./Register.module.scss";
 
+import Loader from "../../../Ui/Loader/Loader";
 import Button from "../../../Ui/Button/Button";
 import Input from "../../../Ui/Input/Input";
 
@@ -9,6 +11,8 @@ import Passwords from "./Passwords/Passwords";
 
 export default function Register() {
   const navigate = useNavigate();
+
+  if (authStore.isLoading) return <Loader />;
 
   return (
     <div className={style.register}>
