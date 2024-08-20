@@ -1,28 +1,30 @@
 import { redirect } from "react-router-dom";
+import registerStore from "../stores/Auth/registerStore";
+import notificationStore from "../stores/notificationStore";
 
-type FormData = {
-  name: string;
-  surname: string;
+interface ICredentials {
+  firstName: string;
+  secondName: string;
   email: string;
   password: string;
-  repeatPassword: string;
-  nameAutoschool: string;
-};
+  department: string;
+}
 
 export async function RegisterAction({ request }: { request: Request }) {
-  const formdata = await request.formData();
-  const data = Object.fromEntries(formdata);
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
 
-  const typedData: FormData = {
-    name: String(data.userName),
-    surname: String(data.userSurname),
-    email: String(data.userEmail),
+  const credentials: ICredentials = {
+    email: String(data.email),
     password: String(data.userPassword),
-    repeatPassword: String(data.userRepeatPassword),
-    nameAutoschool: String(data.userNameAutoschool),
+    firstName: String(data.userName),
+    secondName: String(data.surName),
+    department: String(data.department),
   };
 
-  console.log(typedData);
+  await registerStore.register(credentials);
+
+  if (notificationStore.notification) return;
 
   return redirect("/menu");
 }

@@ -1,11 +1,11 @@
-import { Form, useNavigate } from "react-router-dom";
+import { Form, redirect, useNavigate } from "react-router-dom";
 
 import style from "./Register.module.scss";
 
 import Button from "../../../Ui/Button/Button";
 import Input from "../../../Ui/Input/Input";
 
-import Passwords from "./Passwords";
+import Passwords from "./Passwords/Passwords";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -19,13 +19,18 @@ export default function Register() {
 
       <Form method="POST" className={style.form}>
         <div className={style.container}>
-          <Input label="Имя" name="userName" placeholder="Иван" />
-          <Input label="Фамилия" name="surName" placeholder="Иванов" />
+          <Input label="Имя" name="userName" placeholder="Иван" type="name" />
+          <Input
+            label="Фамилия"
+            name="surName"
+            placeholder="Иванов"
+            type="name"
+          />
           <Input
             label="email"
-            type="email"
             name="email"
             placeholder="your_email@yandex.ru"
+            type="email"
           />
 
           <Passwords />
@@ -38,7 +43,11 @@ export default function Register() {
         </div>
 
         <div className={style.actions}>
-          <Button type="submit" text="Зарегестрироваться" />
+          <Button
+            type="submit"
+            text="Зарегестрироваться"
+            onClick={() => redirect("/menu")}
+          />
 
           <Button
             buttonStyle="link"
