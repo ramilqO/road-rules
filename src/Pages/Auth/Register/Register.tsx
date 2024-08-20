@@ -1,4 +1,4 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 
 import style from "./Register.module.scss";
 
@@ -6,10 +6,9 @@ import Button from "../../../Ui/Button/Button";
 import Input from "../../../Ui/Input/Input";
 
 import Passwords from "./Passwords";
-import useNavigation from "../../../tools/useNavigation";
 
 export default function Register() {
-  const { goToPath } = useNavigation();
+  const navigate = useNavigate();
 
   return (
     <div className={style.register}>
@@ -41,7 +40,11 @@ export default function Register() {
         <div className={style.actions}>
           <Button type="submit" text="Зарегестрироваться" />
 
-          <Button buttonStyle="link" text="Уже есть аккаунт?" onClick={() => goToPath("/login")} />
+          <Button
+            buttonStyle="link"
+            text="Уже есть аккаунт?"
+            onClick={() => navigate("/login")}
+          />
         </div>
       </Form>
     </div>

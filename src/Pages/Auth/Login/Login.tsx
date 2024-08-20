@@ -1,7 +1,6 @@
 import { useRef } from "react";
-import { Form, redirect } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 
-import useNavigation from "../../../tools/useNavigation";
 import style from "./Login.module.scss";
 
 import Button from "../../../Ui/Button/Button";
@@ -11,7 +10,8 @@ import Input from "../../../Ui/Input/Input";
 export default function Login() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
-  const { goToPath } = useNavigation();
+  const navigate = useNavigate();
+
   function handleChangeVisibility() {
     const input = passwordInputRef.current;
     if (!input) return;
@@ -53,14 +53,13 @@ export default function Login() {
           <Button
             type="submit"
             text="Войти"
-            //TODO: или вот здесь ты ведь просто используешь redirect и все, тебе не нужна эта обертка goToPath
-            onClick={() => redirect("/menu")}
+            onClick={() => navigate("/menu")}
           />
 
           <Button
             buttonStyle="link"
             text="Зарегистрироваться"
-            onClick={() => goToPath("/register")}
+            onClick={() => navigate("/register")}
           />
         </div>
       </Form>
