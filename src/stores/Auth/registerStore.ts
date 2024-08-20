@@ -32,7 +32,7 @@ class RegisterStore {
   async register(credentials: IRegisterCredentials) {
     this.authStore.isLoading = true;
     this.authStore.isAuth = false;
-    notificationStore.setBodyText("");
+    notificationStore.deleteNotification();
 
     try {
       const response: AxiosResponse<IRegisterResponse> = await axios.post(

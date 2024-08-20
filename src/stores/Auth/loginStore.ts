@@ -28,7 +28,7 @@ class LoginStore {
   async login(credentials: ILoginCredentials) {
     this.authStore.isLoading = true;
     this.authStore.isAuth = false;
-    notificationStore.setBodyText("");
+    notificationStore.deleteNotification();
 
     try {
       const response: AxiosResponse<ILoginResponse> = await axios.post(

@@ -1,22 +1,22 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import style from './Notification.module.scss';
+import style from "./Notification.module.scss";
 
-import CrossIcon from '../../../public/svg/notification/CrossIcon';
-import InfoIcon from '../../../public/svg/notification/InfoIcon';
+import CrossIcon from "../../../public/svg/notification/CrossIcon";
+import InfoIcon from "../../../public/svg/notification/InfoIcon";
 
 interface INotification {
-  type?: 'basic' | 'error';
+  type?: "basic" | "error";
   titleText: string;
   bodyText: string;
   button?: { text: string; onClick: () => void };
 }
 
 export default function Notification({
-  type = 'error',
+  type = "error",
   titleText,
   bodyText,
-  button = { text: '', onClick() {} },
+  button = { text: "", onClick() {} },
 }: INotification) {
   const [displayNotification, setDisplayNotification] = useState(true);
 
@@ -29,9 +29,9 @@ export default function Notification({
           <button
             type="button"
             className={`${style.cross__button} ${
-              type === 'error'
-                ? style['cross__buttonIcon--error']
-                : style['cross__buttonIcon--basic']
+              type === "error"
+                ? style["cross__buttonIcon--error"]
+                : style["cross__buttonIcon--basic"]
             }`}
             onClick={() => setDisplayNotification(false)}
           >
@@ -43,9 +43,9 @@ export default function Notification({
           <button
             type="button"
             className={`${style.info__button} ${
-              type === 'error'
-                ? style['info__buttonIcon--error']
-                : style['info__buttonIcon--basic']
+              type === "error"
+                ? style["info__buttonIcon--error"]
+                : style["info__buttonIcon--basic"]
             }`}
           >
             <InfoIcon />
