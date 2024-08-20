@@ -1,23 +1,19 @@
 import { useState } from "react";
 
+import notificationStore from "../../stores/notificationStore";
 import style from "./Notification.module.scss";
 
 import CrossIcon from "../../../public/svg/notification/CrossIcon";
 import InfoIcon from "../../../public/svg/notification/InfoIcon";
 
 interface INotification {
-  type?: "basic" | "error";
+  type: "basic" | "error";
   titleText: string;
   bodyText: string;
   button?: { text: string; onClick: () => void };
 }
 
-export default function Notification({
-  type = "error",
-  titleText,
-  bodyText,
-  button = { text: "", onClick() {} },
-}: INotification) {
+const Notification = ({ type, titleText, bodyText, button }: INotification) => {
   const [displayNotification, setDisplayNotification] = useState(true);
 
   return (
@@ -33,7 +29,10 @@ export default function Notification({
                 ? style["cross__buttonIcon--error"]
                 : style["cross__buttonIcon--basic"]
             }`}
-            onClick={() => setDisplayNotification(false)}
+            onClick={() => {
+              setDisplayNotification(false);
+              notificationStore.deleteNotification();
+            }}
           >
             <CrossIcon />
           </button>
@@ -70,7 +69,7 @@ export default function Notification({
             </p>
           </div>
 
-          {button.text.length > 0 && (
+          {button && button.text.length > 0 && (
             <button
               className={`${style.container__button} ${
                 style[`container__button--${type}`]
@@ -85,4 +84,6 @@ export default function Notification({
       </div>
     )
   );
-}
+};
+
+export default Notification;

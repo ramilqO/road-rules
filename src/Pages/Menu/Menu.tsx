@@ -6,7 +6,7 @@ import Button from "../../Ui/Button/Button";
 
 const exampleCredentialsLogin = {
   email: "user4@yandex.ru",
-  password: "user4qweqwe",
+  password: "user5qweqwe",
 };
 
 const exampleCredentialsRegister = {
