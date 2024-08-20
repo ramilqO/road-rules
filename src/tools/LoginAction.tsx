@@ -1,21 +1,24 @@
 import { redirect } from "react-router-dom";
+import loginStore from "../stores/Auth/loginStore";
+import notificationStore from "../stores/notificationStore";
 
-type FormData = {
+interface ICredentials {
   email: string;
   password: string;
-};
+}
 
 export async function LoginAction({ request }: { request: Request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
-  // По typedData мы будем делать запрос на БЭК login
-  const typedData: FormData = {
+  const credentials: ICredentials = {
     email: String(data.userEmail),
     password: String(data.userPassword),
   };
 
-  console.log(typedData);
+  await loginStore.login(credentials);
+
+  if (notificationStore.notification) return redirect("/login");
 
   return redirect("/menu");
 }

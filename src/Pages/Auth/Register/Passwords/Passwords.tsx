@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import type { RefObject } from "react";
 
-import Checkbox from "../../../Ui/Checkbox/Checkbox";
-import Input from "../../../Ui/Input/Input";
+import style from "./Passwords.module.scss";
+
+import Checkbox from "../../../../Ui/Checkbox/Checkbox";
+import Input from "../../../../Ui/Input/Input";
 
 export default function Passwords() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -56,7 +58,7 @@ export default function Passwords() {
 
   return (
     <>
-      <div style={{ marginBottom: "24px" }}>
+      <div className={style.wrapper}>
         <Input
           onValidate={(value) => {
             return checkValidation(value);
@@ -74,7 +76,7 @@ export default function Passwords() {
           onToggle={() => handleChangeVisibility(passwordInputRef)}
         />
       </div>
-      <div style={{ marginBottom: "24px" }}>
+      <div className={style.wrapper}>
         <Input
           onValidate={(value) => {
             return checkValidation(value);
