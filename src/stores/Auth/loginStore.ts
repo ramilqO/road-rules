@@ -29,21 +29,21 @@ class LoginStore {
     notificationStore.deleteNotification();
 
     try {
-      const response: AxiosResponse<ILoginResponse> = await axios.post(
+      const { data }: AxiosResponse<ILoginResponse> = await axios.post(
         "api/auth/login",
-        credentials,
+        credentials
       );
 
-      const data = response.data;
+      console.log(data)
 
-      //TODO: вот этот код у тебя один и тот же в регистрации и в регистрации, сделай метод login в authStore и вызывай его вместо того что бы здесь управлять отдельными данными
-      authStore.setToken(data.token);
-      authStore.setIsAuth(true);
-      authStore.setData({
-        firstName: data.firstName,
-        secondName: data.secondName,
-        email: credentials.email,
-      });
+      authStore.login(
+        {
+          firstName: data.firstName,
+          secondName: data.secondName,
+          email: credentials.email,
+        },
+        data.token
+      );
     } catch (error) {
       errorHandling(error);
     } finally {

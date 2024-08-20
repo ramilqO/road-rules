@@ -26,8 +26,8 @@ const Menu = observer(() => {
     return (
       <div>
         <p>
-          {authStore.data.firstName} {authStore.data.secondName} --{`>`}{" "}
-          {authStore.data.email}
+          {authStore.userInfo.firstName} {authStore.userInfo.secondName} --{`>`}{" "}
+          {authStore.userInfo.email}
         </p>
         <Button onClick={() => authStore.logout()} text="Выйти" />
       </div>

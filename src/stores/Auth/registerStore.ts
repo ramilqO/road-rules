@@ -23,40 +23,32 @@ interface IRegisterResponse {
 }
 
 class RegisterStore {
-  // TODO: посмотри как я переписал authStore он стал чище, но при этом так же работает, тебе не нужно приватное поле, которое ты потом вызываешь через this. можно сразу писать authStore.login() это выглядит чище и читаеться легче
-  private authStore: typeof authStore;
-
   constructor() {
-    this.authStore = authStore;
     makeAutoObservable(this);
   }
 
   async register(credentials: IRegisterCredentials) {
-    this.authStore.setIsLoading(true);
-    // TODO: нет смысла делать setIsAuth в то время как ты пытаешься зарегестрироваться, у тебя будет кнопка выйти из аккаунта которая это сделает, а после нее уже появляются кнопки для регистрации
-    this.authStore.setIsAuth(false);
+    authStore.setIsLoading(true);
     notificationStore.deleteNotification();
 
     try {
-      const response: AxiosResponse<IRegisterResponse> = await axios.post(
+      const { data }: AxiosResponse<IRegisterResponse> = await axios.post(
         "api/auth/register",
-        credentials,
+        credentials
       );
 
-      const data = response.data;
-
-      //TODO: вот этот код у тебя один и тот же в логине и в регистрации, сделай метод login в authStore и вызывай его вместо того что бы здесь управлять отдельными данными
-      this.authStore.setToken(data.token);
-      this.authStore.setIsAuth(true);
-      this.authStore.data = {
-        firstName: data.firstName,
-        secondName: data.secondName,
-        email: data.email,
-      };
+      authStore.login(
+        {
+          firstName: data.firstName,
+          secondName: data.secondName,
+          email: data.email,
+        },
+        data.token
+      );
     } catch (error) {
       errorHandling(error);
     } finally {
-      this.authStore.setIsLoading(false);
+      authStore.setIsLoading(false);
     }
   }
 }
