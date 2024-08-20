@@ -53,6 +53,7 @@ export default function Login() {
           <Button
             type="submit"
             text="Войти"
+            //TODO: или вот здесь ты ведь просто используешь redirect и все, тебе не нужна эта обертка goToPath
             onClick={() => redirect("/menu")}
           />
 

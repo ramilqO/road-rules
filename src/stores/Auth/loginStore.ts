@@ -1,9 +1,10 @@
+import axios from "axios";
+import type { AxiosResponse } from "axios";
 import { makeAutoObservable } from "mobx";
-import axios, { AxiosResponse } from "axios";
 
-import authStore from "./authStore";
 import errorHandling from "../../tools/errorHandling";
 import notificationStore from "../notificationStore";
+import authStore from "./authStore";
 
 interface ILoginCredentials {
   email: string;
@@ -18,29 +19,27 @@ interface ILoginResponse {
 }
 
 class LoginStore {
-  private authStore: typeof authStore;
-
   constructor() {
-    this.authStore = authStore;
     makeAutoObservable(this);
   }
 
   async login(credentials: ILoginCredentials) {
-    this.authStore.setIsLoading(true);
-    this.authStore.setIsAuth(false);
+    authStore.setIsLoading(true);
+    authStore.setIsAuth(false);
     notificationStore.deleteNotification();
 
     try {
       const response: AxiosResponse<ILoginResponse> = await axios.post(
         "api/auth/login",
-        credentials
+        credentials,
       );
 
       const data = response.data;
 
-      this.authStore.setToken(data.token);
-      this.authStore.setIsAuth(true);
-      this.authStore.setData({
+      //TODO: вот этот код у тебя один и тот же в регистрации и в регистрации, сделай метод login в authStore и вызывай его вместо того что бы здесь управлять отдельными данными
+      authStore.setToken(data.token);
+      authStore.setIsAuth(true);
+      authStore.setData({
         firstName: data.firstName,
         secondName: data.secondName,
         email: credentials.email,
@@ -48,7 +47,7 @@ class LoginStore {
     } catch (error) {
       errorHandling(error);
     } finally {
-      this.authStore.setIsLoading(false);
+      authStore.setIsLoading(false);
     }
   }
 }
