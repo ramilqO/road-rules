@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import axios, { AxiosResponse } from "axios";
 
-import { AuthStore } from "./authStore";
+import authStore from "./authStore";
 import errorHandling from "../../tools/errorHandling";
 import notificationStore from "../notificationStore";
 
@@ -18,16 +18,17 @@ interface ILoginResponse {
 }
 
 class LoginStore {
-  private authStore: AuthStore;
+  private authStore: typeof authStore;
 
-  constructor(authStore: AuthStore) {
+  constructor() {
     this.authStore = authStore;
     makeAutoObservable(this);
   }
 
   async login(credentials: ILoginCredentials) {
-    this.authStore.isLoading = true;
-    notificationStore.setBodyText("");
+    this.authStore.setIsLoading(true);
+    this.authStore.setIsAuth(false);
+    notificationStore.deleteNotification();
 
     try {
       const response: AxiosResponse<ILoginResponse> = await axios.post(
@@ -37,20 +38,20 @@ class LoginStore {
 
       const data = response.data;
 
-      console.log(data);
-
       this.authStore.setToken(data.token);
-      this.authStore.data = {
+      this.authStore.setIsAuth(true);
+      this.authStore.setData({
         firstName: data.firstName,
         secondName: data.secondName,
         email: credentials.email,
-      };
+      });
     } catch (error) {
       errorHandling(error);
+    } finally {
+      this.authStore.setIsLoading(false);
     }
   }
 }
 
-const authStore = new AuthStore();
-const loginStore = new LoginStore(authStore);
+const loginStore = new LoginStore();
 export default loginStore;

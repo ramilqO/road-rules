@@ -1,49 +1,55 @@
 import { observer } from "mobx-react-lite";
-
+import authStore from "../../stores/Auth/authStore";
 import loginStore from "../../stores/Auth/loginStore";
 import registerStore from "../../stores/Auth/registerStore";
-import logoutStore from "../../stores/Auth/logoutStore";
+import Button from "../../Ui/Button/Button";
+
+const exampleCredentialsLogin = {
+  email: "user4@yandex.ru",
+  password: "user4qweqwe",
+};
+
+const exampleCredentialsRegister = {
+  email: "user4@yandex.ru",
+  password: "user4qweqwe",
+  firstName: "Олег",
+  secondName: "Виник",
+  department: "2",
+};
 
 const Menu = observer(() => {
-  const exampleCredentialsLogin = {
-    email: "user3@yandex.ru",
-    password: "user1qwe",
-  };
+  if (authStore.isLoading) {
+    return <p>Загрузка...</p>;
+  }
 
-  const exampleCredentialsRegister = {
-    email: "user3@yandex.ru",
-    password: "user1qwe",
-    firstName: "Вася",
-    secondName: "Пупкин",
-    department: "1",
-  };
+  if (authStore.isAuth) {
+    return (
+      <div>
+        <p>
+          {authStore.data.firstName} {authStore.data.secondName} --{`>`}{" "}
+          {authStore.data.email}
+        </p>
+        <Button onClick={() => authStore.logout()} text="Выйти" />
+      </div>
+    );
+  }
 
   return (
     <div>
       <h1>Menu</h1>
-
       <button
         onClick={() => {
           registerStore.register(exampleCredentialsRegister);
         }}
       >
-        Зарегистрироватся
+        Зарегистрироваться
       </button>
-
       <button
         onClick={() => {
           loginStore.login(exampleCredentialsLogin);
         }}
       >
         Войти в аккаунт
-      </button>
-
-      <button
-        onClick={() => {
-          logoutStore.logout();
-        }}
-      >
-        Выйти
       </button>
     </div>
   );

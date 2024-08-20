@@ -1,26 +1,31 @@
 import { makeAutoObservable } from "mobx";
 
-type ButtonType = "basic" | "error";
-
-interface INotificationStore {
-  type: ButtonType;
-  titleText: string;
-  bodyText: string;
-  button: { text: string; onClick: () => void };
+interface Button {
+  buttonText: string;
+  buttonAction: () => void;
 }
 
-class NotificationStore implements INotificationStore {
-  type: ButtonType = "basic";
-  titleText = "";
-  bodyText = "";
-  button = { text: "", onClick: () => {} };
+interface NotificationInfo {
+  type: "basic" | "error";
+  titleText: string;
+  bodyText: string;
+  button?: Button;
+}
+
+class NotificationStore {
+  notification: NotificationInfo | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setBodyText(message: string) {
-    this.bodyText = message;
+  setNotification(notificationInfo: NotificationInfo) {
+    this.notification = notificationInfo;
+    console.log(this.notification.titleText, this.notification.bodyText)
+  }
+
+  deleteNotification() {
+    this.notification = null;
   }
 }
 
