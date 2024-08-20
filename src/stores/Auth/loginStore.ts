@@ -34,8 +34,6 @@ class LoginStore {
         credentials
       );
 
-      console.log(data)
-
       authStore.login(
         {
           firstName: data.firstName,

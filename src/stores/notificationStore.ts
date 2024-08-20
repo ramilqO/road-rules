@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
 interface Button {
-  buttonText: string;
-  buttonAction: () => void;
+  text: string;
+  onClick: () => void;
 }
 
 interface NotificationInfo {
@@ -21,7 +21,6 @@ class NotificationStore {
 
   setNotification(notificationInfo: NotificationInfo) {
     this.notification = notificationInfo;
-    console.log(this.notification.titleText, this.notification.bodyText)
   }
 
   deleteNotification() {

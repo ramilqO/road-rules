@@ -1,11 +1,13 @@
-import { Outlet } from 'react-router-dom';
+import { observer } from "mobx-react-lite";
+import { Outlet } from "react-router-dom";
 
-import style from './AppLayout.module.scss';
+import notificationStore from "../../stores/notificationStore";
+import style from "./AppLayout.module.scss";
 
-import Header from '../../Components/Header/Header';
-import Notification from '../../Components/Notification/Notification';
+import Header from "../../Components/Header/Header";
+import Notification from "../../Components/Notification/Notification";
 
-export default function AppLayout() {
+const AppLayout = observer(() => {
   return (
     <div className={style.wrapper}>
       <Header />
@@ -13,13 +15,10 @@ export default function AppLayout() {
       <main className={style.main}>
         <Outlet />
 
-        <Notification
-          type="basic"
-          titleText="Title"
-          bodyText="Body text"
-          button={{ text: 'Button', onClick() {} }}
-        />
+        {notificationStore.notification && <Notification />}
       </main>
     </div>
   );
-}
+});
+
+export default AppLayout;
