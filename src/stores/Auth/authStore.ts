@@ -7,7 +7,7 @@ axios.defaults.baseURL = "http://road-rules-backend.webtm.ru/";
 interface IData {
   firstName: string;
   secondName: string;
-  email?: string;
+  email: string;
 }
 
 interface IAuth {
@@ -37,6 +37,18 @@ export class AuthStore implements IAuth {
     tokenServices.unset();
   }
 
+  setData(data: IData) {
+    this.data = data;
+  }
+
+  setIsLoading(isLoading: boolean) {
+    this.isLoading = isLoading;
+  }
+
+  setIsAuth(isAuth: boolean) {
+    this.isAuth = isAuth;
+  }
+
   logout() {
     this.unset();
     this.data = {
@@ -44,7 +56,7 @@ export class AuthStore implements IAuth {
       secondName: "",
       email: "",
     };
-    this.isAuth = false
+    this.isAuth = false;
   }
 }
 
