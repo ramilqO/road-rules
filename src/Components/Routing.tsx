@@ -16,15 +16,42 @@ import { RegisterAction as registerActionData } from "../tools/RegisterAction";
 
 import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 
+import PrivateRoute from "./PrivateRoute";
+
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
     errorElement: <PageNotFound />,
     children: [
-      { index: true, element: <Navigate replace to="menu" /> },
-      { path: "menu", element: <Menu /> },
-      { path: "questions", element: <Questions /> },
-      { path: "results", element: <Results /> },
+      {
+        index: true,
+        element: <Navigate replace to="menu" />,
+      },
+      {
+        path: "menu",
+        element: (
+          <PrivateRoute>
+            <Menu />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "questions",
+        element: (
+          <PrivateRoute>
+            <Questions />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "results",
+        element: (
+          <PrivateRoute>
+            <Results />
+          </PrivateRoute>
+        ),
+      },
+
       { path: "login", element: <Login />, action: loginActionData },
       { path: "register", element: <Register />, action: registerActionData },
     ],
