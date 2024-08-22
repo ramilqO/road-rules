@@ -39,8 +39,9 @@ export class AuthStore implements IAuth {
   isLoading = false;
   isAuth = !!localStorageUserInfo?.token;
 
-  emailFieldSuccess: boolean = false;
-  passwordFieldSuccess: boolean = false;
+  emailFieldIsSuccess: boolean = false;
+  passwordFieldIsSuccess: boolean = false;
+  userPassword: string = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -53,7 +54,7 @@ export class AuthStore implements IAuth {
     const domainPart = value.substring(atIndex + 1);
 
     if (!isValidBasic) {
-      this.emailFieldSuccess = false;
+      this.emailFieldIsSuccess = false;
 
       if (value.indexOf("@") === -1 && value.length < 5)
         return "Введите имя почты";
@@ -68,17 +69,18 @@ export class AuthStore implements IAuth {
       return "Введите корректный адрес электронной почты";
     }
 
-    this.emailFieldSuccess = true;
+    this.emailFieldIsSuccess = true;
     return "";
   };
 
   validatePasswordFiled = (value: string): string => {
     if (value.length <= 6) {
-      this.passwordFieldSuccess = false;
+      this.passwordFieldIsSuccess = false;
       return "Пароль должен быть не меньше 6 символов";
     }
 
-    this.passwordFieldSuccess = true;
+    this.passwordFieldIsSuccess = true;
+    this.userPassword = value;
     return "";
   };
 

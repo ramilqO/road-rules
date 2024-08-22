@@ -13,7 +13,7 @@ import Loader from "../../../Ui/Loader/Loader";
 const Login = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const fieldIsSuccess =
-    authStore.emailFieldSuccess && authStore.passwordFieldSuccess;
+    authStore.emailFieldIsSuccess && authStore.passwordFieldIsSuccess;
 
   const navigate = useNavigate();
 

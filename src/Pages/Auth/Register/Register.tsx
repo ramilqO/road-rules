@@ -8,6 +8,7 @@ import Button from "../../../Ui/Button/Button";
 import Input from "../../../Ui/Input/Input";
 
 import Passwords from "./Passwords/Passwords";
+import registerStore from "../../../stores/Auth/registerStore";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -23,18 +24,26 @@ export default function Register() {
 
       <Form method="POST" className={style.form}>
         <div className={style.container}>
-          <Input label="Имя" name="userName" placeholder="Иван" type="name" />
+          <Input
+            label="Имя"
+            name="userName"
+            placeholder="Иван"
+            type="name"
+            onValidate={registerStore.validateUserNameField}
+          />
           <Input
             label="Фамилия"
             name="surName"
             placeholder="Иванов"
             type="name"
+            onValidate={registerStore.validateUserSurnameField}
           />
           <Input
             label="email"
             name="email"
             placeholder="your_email@yandex.ru"
             type="email"
+            onValidate={authStore.validateEmailField}
           />
 
           <Passwords />
@@ -43,6 +52,7 @@ export default function Register() {
             label="Название автошколы"
             name="department"
             placeholder="Форсаж"
+            onValidate={registerStore.validateUserDepartmentField}
           />
         </div>
 
