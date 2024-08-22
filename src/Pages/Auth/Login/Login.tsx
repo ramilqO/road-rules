@@ -3,6 +3,7 @@ import { Form, redirect, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import authStore from "../../../stores/Auth/authStore";
+import loginStore from "../../../stores/Auth/loginStore";
 import style from "./Login.module.scss";
 
 import Button from "../../../Ui/Button/Button";
@@ -13,7 +14,7 @@ import Loader from "../../../Ui/Loader/Loader";
 const Login = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const fieldIsSuccess =
-    authStore.emailFieldIsSuccess && authStore.passwordFieldIsSuccess;
+    loginStore.emailFieldIsSuccess && loginStore.passwordFieldIsSuccess;
 
   const navigate = useNavigate();
 
@@ -40,7 +41,7 @@ const Login = observer(() => {
             name="userEmail"
             type="email"
             placeholder="your_email@yandex.ru"
-            onValidate={authStore.validateEmailField}
+            onValidate={loginStore.validateEmailField}
           />
           <div className={style.wrapper}>
             <Input
@@ -48,7 +49,7 @@ const Login = observer(() => {
               name="userPassword"
               placeholder="*********"
               inputRef={passwordInputRef}
-              onValidate={authStore.validatePasswordFiled}
+              onValidate={loginStore.validatePasswordField}
             />
 
             <Checkbox
