@@ -19,20 +19,30 @@ interface ILoginResponse {
 }
 
 class LoginStore {
-  emailFieldSuccess: boolean = false;
-
-  handleValidateEmailField = (value: string): string => {
-    if (value.length < 10) {
-      this.emailFieldSuccess = false;
-      return "Email должен содержать не менее 10 символов.";
-    }
-    this.emailFieldSuccess = true;
-    return "";
-  }
+  emailFieldIsSuccess: boolean = false;
+  passwordFieldIsSuccess: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
   }
+
+  validateEmailField = (value: string): string => {
+    if (value.length <= 6) {
+      this.emailFieldIsSuccess = false;
+      return "Почта должна быть не менее 6 символов";
+    }
+    this.emailFieldIsSuccess = true;
+    return "";
+  };
+
+  validatePasswordField = (value: string): string => {
+    if (value.length <= 6) {
+      this.passwordFieldIsSuccess = false;
+      return "Пароль должна быть не менее 6 символов";
+    }
+    this.passwordFieldIsSuccess = true;
+    return "";
+  };
 
   async login(credentials: ILoginCredentials) {
     authStore.setIsLoading(true);

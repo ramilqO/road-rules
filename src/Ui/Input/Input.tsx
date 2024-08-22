@@ -12,6 +12,7 @@ interface InputProps {
   initialValue?: string;
   type?: string;
   inputRef?: RefObject<HTMLInputElement>;
+  disabled?: boolean;
 }
 
 export default function Input({
@@ -23,6 +24,7 @@ export default function Input({
   initialValue = "",
   placeholder,
   inputRef,
+  disabled = false,
 }: InputProps) {
   const [value, setValue] = useState(initialValue);
   const [validateError, setValidateError] = useState("");
@@ -34,14 +36,18 @@ export default function Input({
         ref={inputRef}
         type={type}
         name={name}
-        className={style.field__input}
+        className={`${style.field__input} ${
+          disabled && style["field__input--disabled"]
+        }`}
         placeholder={placeholder}
         required
+        disabled={disabled}
         value={value}
         onChange={(e) => {
           setValue(e.target.value);
           if (onValidate) {
-            const error = onValidate(e.target.value);
+            const value = e.target.value;
+            const error = onValidate(value.trim());
             setValidateError(error);
           }
         }}

@@ -7,7 +7,8 @@
 
   margin-bottom: 8px;
   gap: 8px;
-  width: 100%;
+  max-width: 320px;
+
   &__label {
     font-weight: 400;
     font-size: 16px;
@@ -38,6 +39,10 @@
 
     color: var(--authColorFormInputLabelTextAndInputText);
 
+    &--disabled {
+      cursor: not-allowed;
+    }
+
     &::placeholder {
       font-weight: 400;
       font-size: 16px;
@@ -48,6 +53,9 @@
   }
 
   &__error {
+    display: flex;
+    flex-wrap: wrap;
+
     font-weight: 400;
     font-size: 16px;
     line-height: 22.4px;

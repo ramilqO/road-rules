@@ -23,9 +23,118 @@ interface IRegisterResponse {
 }
 
 class RegisterStore {
+  emailFieldIsSuccess: boolean = false;
+
+  nameFieldIsSuccess: boolean = false;
+  surnameFieldIsSuccess: boolean = false;
+
+  userPassword: string = "";
+  passwordFieldIsSuccess: boolean = false;
+  repeatPasswordFieldIsSuccess: boolean = false;
+
+  departmentFieldIsSuccess: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  validateEmailField = (value: string): string => {
+    const basicRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isValidBasic = basicRegex.test(value);
+    const atIndex = value.indexOf("@");
+    const domainPart = value.substring(atIndex + 1);
+
+    if (!isValidBasic) {
+      this.emailFieldIsSuccess = false;
+
+      if (value.indexOf("@") === -1 && value.length < 5)
+        return "Введите имя почты";
+      if (!value.includes("@")) return "Почта должна содержать @";
+      if (atIndex !== -1 && atIndex === value.length - 1) {
+        return "После символа @ должно содержаться доменное имя";
+      }
+      if (!/\.[a-zA-Z]{2,}$/.test(domainPart)) {
+        return "Доменное имя должно заканчиваться на .com, .ru или другой допустимый домен";
+      }
+
+      return "Введите корректный адрес электронной почты";
+    }
+
+    this.emailFieldIsSuccess = true;
+    return "";
+  };
+
+  validateNameField = (value: string): string => {
+    if (value.length <= 2) {
+      this.nameFieldIsSuccess = false;
+      return "Имя должно быть не менее 2 символов";
+    }
+
+    this.nameFieldIsSuccess = true;
+    return "";
+  };
+
+  validateSurnameField = (value: string): string => {
+    if (value.length <= 2) {
+      this.surnameFieldIsSuccess = false;
+      return "Фамилия должна быть не менее 2 символов";
+    }
+
+    this.surnameFieldIsSuccess = true;
+    return "";
+  };
+
+  validatePasswordField = (value: string): string => {
+    if (value.length <= 6) {
+      this.passwordFieldIsSuccess = false;
+      return "Пароль должен быть не меньше 6 символов";
+    } else {
+      this.passwordFieldIsSuccess = true;
+      this.userPassword = value;
+    }
+
+    if (this.passwordFieldIsSuccess) {
+      if (value.length < 8) {
+        return "Не обязательно! Длина пароля должна быть не менее 8 символов";
+      }
+
+      if (!/[A-Z]/.test(value)) {
+        return "Не обязательно! Пароль должен содержать заглавную букву";
+      }
+
+      if (!/[0-9]/.test(value)) {
+        return "Не обязательно! Пароль должен содержать цифру";
+      }
+
+      if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value)) {
+        return "Не обязательно! Пароль должен содержать специальный символ";
+      }
+    }
+
+    return "";
+  };
+
+  validateRepeatPassword = (value: string): string => {
+    if (value !== this.userPassword) {
+      this.repeatPasswordFieldIsSuccess = false;
+      if (this.userPassword.length === 0)
+        return "Пароль ещё не введён в другом поле ввода";
+      return "Пароли не совпадают!";
+    }
+
+    this.repeatPasswordFieldIsSuccess = true;
+    return "";
+  };
+
+  validateDepartmentField = (value: string): string => {
+    if (value.length <= 1) {
+      this.departmentFieldIsSuccess = false;
+      return "Название департамента должно быть не менее 1 символа";
+    }
+
+    this.departmentFieldIsSuccess = true;
+    return "";
+  };
 
   async register(credentials: IRegisterCredentials) {
     authStore.setIsLoading(true);

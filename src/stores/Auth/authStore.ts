@@ -10,20 +10,34 @@ interface IUserInfo {
   email: string;
 }
 
+interface ILocalStorageUserInfo {
+  firstName: string;
+  secondName: string;
+  email: string;
+  token: string;
+}
+
 interface IAuth {
   userInfo: IUserInfo;
   isLoading: boolean;
   isAuth: boolean;
 }
 
+const getLocalStorageUserInfo = (): ILocalStorageUserInfo | null => {
+  const storedData = localStorage.getItem("userInfo");
+  return storedData ? JSON.parse(storedData) : null;
+};
+
+const localStorageUserInfo = getLocalStorageUserInfo();
+
 export class AuthStore implements IAuth {
-  userInfo = {
-    firstName: "",
-    secondName: "",
-    email: "",
+  userInfo: IUserInfo = {
+    firstName: localStorageUserInfo?.firstName || "",
+    secondName: localStorageUserInfo?.secondName || "",
+    email: localStorageUserInfo?.email || "",
   };
   isLoading = false;
-  isAuth = false;
+  isAuth = !!localStorageUserInfo?.token;
 
   constructor() {
     makeAutoObservable(this);
@@ -41,9 +55,15 @@ export class AuthStore implements IAuth {
     tokenServices.set(token);
     this.setIsAuth(true);
     this.userInfo = userInfo;
+
+    const localStorageUserInfo = { ...userInfo, token };
+
+    localStorage.setItem("userInfo", JSON.stringify(localStorageUserInfo));
   }
 
   logout() {
+    localStorage.removeItem("userInfo");
+
     tokenServices.unset();
     this.userInfo = {
       firstName: "",

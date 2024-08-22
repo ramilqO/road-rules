@@ -16,7 +16,10 @@ export default function errorHandling(error: unknown) {
     notificationStore.setNotification({
       type: "error",
       titleText: "Неизвестная ошибка",
-      bodyText: error.message,
+      bodyText:
+        error.message || error.message === "Network Error"
+          ? "Нет соеденения с интернетом"
+          : "",
     });
   }
 }

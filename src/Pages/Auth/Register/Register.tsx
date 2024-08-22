@@ -1,7 +1,7 @@
 import { Form, redirect, useNavigate } from "react-router-dom";
 
 import authStore from "../../../stores/Auth/authStore";
-import loginStore from "../../../stores/Auth/loginStore";
+import registerStore from "../../../stores/Auth/registerStore";
 import style from "./Register.module.scss";
 
 import Loader from "../../../Ui/Loader/Loader";
@@ -24,19 +24,26 @@ export default function Register() {
 
       <Form method="POST" className={style.form}>
         <div className={style.container}>
-          <Input label="Имя" name="userName" placeholder="Иван" type="name" />
+          <Input
+            label="Имя"
+            name="userName"
+            placeholder="Иван"
+            type="name"
+            onValidate={registerStore.validateNameField}
+          />
           <Input
             label="Фамилия"
             name="surName"
             placeholder="Иванов"
             type="name"
+            onValidate={registerStore.validateSurnameField}
           />
           <Input
             label="email"
             name="email"
             placeholder="your_email@yandex.ru"
             type="email"
-            onValidate={loginStore.handleValidateEmailField}
+            onValidate={registerStore.validateEmailField}
           />
 
           <Passwords />
@@ -45,6 +52,7 @@ export default function Register() {
             label="Название автошколы"
             name="department"
             placeholder="Форсаж"
+            onValidate={registerStore.validateDepartmentField}
           />
         </div>
 

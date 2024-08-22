@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { observer } from "mobx-react-lite";
 
 import notificationStore from "../../stores/notificationStore";
 import style from "./Notification.module.scss";
@@ -6,7 +7,7 @@ import style from "./Notification.module.scss";
 import CrossIcon from "../../../public/svg/notification/CrossIcon";
 import InfoIcon from "../../../public/svg/notification/InfoIcon";
 
-function Notification() {
+const Notification = observer(() => {
   const notification = notificationStore.notification;
 
   useEffect(() => {
@@ -95,6 +96,6 @@ function Notification() {
       </div>
     </div>
   );
-}
+});
 
 export default Notification;

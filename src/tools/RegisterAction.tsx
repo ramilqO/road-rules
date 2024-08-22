@@ -17,8 +17,8 @@ export async function RegisterAction({ request }: { request: Request }) {
   const credentials: ICredentials = {
     email: String(data.email),
     password: String(data.userPassword),
-    firstName: String(data.userName),
-    secondName: String(data.surName),
+    firstName: String(data.userName).charAt(0).toUpperCase(),
+    secondName: String(data.surName).charAt(0).toUpperCase(),
     department: String(data.department),
   };
 

@@ -23,7 +23,9 @@ export default function Button({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={buttonStyle === "button" ? style.button : style.link}
+      className={`${buttonStyle === "button" ? style.button : style.link} ${
+        disabled && style["button--disabled"]
+      } `}
     >
       {text}
     </button>
