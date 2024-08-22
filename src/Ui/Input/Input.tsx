@@ -41,7 +41,8 @@ export default function Input({
         onChange={(e) => {
           setValue(e.target.value);
           if (onValidate) {
-            const error = onValidate(e.target.value);
+            const value = e.target.value;
+            const error = onValidate(value.trim());
             setValidateError(error);
           }
         }}

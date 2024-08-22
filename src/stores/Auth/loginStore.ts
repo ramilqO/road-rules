@@ -19,17 +19,6 @@ interface ILoginResponse {
 }
 
 class LoginStore {
-  emailFieldSuccess: boolean = false;
-
-  handleValidateEmailField = (value: string): string => {
-    if (value.length < 10) {
-      this.emailFieldSuccess = false;
-      return "Email должен содержать не менее 10 символов.";
-    }
-    this.emailFieldSuccess = true;
-    return "";
-  }
-
   constructor() {
     makeAutoObservable(this);
   }

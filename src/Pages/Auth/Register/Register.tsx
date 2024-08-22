@@ -1,7 +1,6 @@
 import { Form, redirect, useNavigate } from "react-router-dom";
 
 import authStore from "../../../stores/Auth/authStore";
-import loginStore from "../../../stores/Auth/loginStore";
 import style from "./Register.module.scss";
 
 import Loader from "../../../Ui/Loader/Loader";
@@ -36,7 +35,6 @@ export default function Register() {
             name="email"
             placeholder="your_email@yandex.ru"
             type="email"
-            onValidate={loginStore.handleValidateEmailField}
           />
 
           <Passwords />

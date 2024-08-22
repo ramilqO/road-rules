@@ -39,9 +39,48 @@ export class AuthStore implements IAuth {
   isLoading = false;
   isAuth = !!localStorageUserInfo?.token;
 
+  emailFieldSuccess: boolean = false;
+  passwordFieldSuccess: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  validateEmailField = (value: string): string => {
+    const basicRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isValidBasic = basicRegex.test(value);
+    const atIndex = value.indexOf("@");
+    const domainPart = value.substring(atIndex + 1);
+
+    if (!isValidBasic) {
+      this.emailFieldSuccess = false;
+
+      if (value.indexOf("@") === -1 && value.length < 5)
+        return "Введите имя почты";
+      if (!value.includes("@")) return "Почта должна содержать в себе @";
+      if (atIndex !== -1 && atIndex === value.length - 1) {
+        return "После символа @ должно содержатся доменное имя";
+      }
+      if (!/\.[a-zA-Z]{2,}$/.test(domainPart)) {
+        return "Доменное имя должно заканчиваться на .com, .ru или другой допустимый домен";
+      }
+
+      return "Введите корректный адрес электронной почты";
+    }
+
+    this.emailFieldSuccess = true;
+    return "";
+  };
+
+  validatePasswordFiled = (value: string): string => {
+    if (value.length <= 6) {
+      this.passwordFieldSuccess = false;
+      return "Пароль должен быть не меньше 6 символов";
+    }
+
+    this.passwordFieldSuccess = true;
+    return "";
+  };
 
   setIsLoading(isLoading: boolean) {
     this.isLoading = isLoading;
