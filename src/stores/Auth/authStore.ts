@@ -18,7 +18,7 @@ interface ILocalStorageUserInfo {
 }
 
 interface IAuth {
-  userInfo: IUserInfo;
+  userInfo: IUserInfo | null;
   isLoading: boolean;
   isAuth: boolean;
 }
@@ -31,7 +31,7 @@ const getLocalStorageUserInfo = (): ILocalStorageUserInfo | null => {
 const localStorageUserInfo = getLocalStorageUserInfo();
 
 export class AuthStore implements IAuth {
-  userInfo: IUserInfo = {
+  userInfo: IUserInfo | null = {
     firstName: localStorageUserInfo?.firstName || "",
     secondName: localStorageUserInfo?.secondName || "",
     email: localStorageUserInfo?.email || "",
@@ -65,11 +65,7 @@ export class AuthStore implements IAuth {
     localStorage.removeItem("userInfo");
 
     tokenServices.unset();
-    this.userInfo = {
-      firstName: "",
-      secondName: "",
-      email: "",
-    };
+    this.userInfo = null
     this.isAuth = false;
   }
 }

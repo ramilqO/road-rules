@@ -1,4 +1,5 @@
 import { Form, redirect, useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
 import authStore from "../../../stores/Auth/authStore";
 import registerStore from "../../../stores/Auth/registerStore";
@@ -10,8 +11,15 @@ import Input from "../../../Ui/Input/Input";
 
 import Passwords from "./Passwords/Passwords";
 
-export default function Register() {
+const Register = observer(() => {
   const navigate = useNavigate();
+  const fieldsIsSuccess =
+    registerStore.emailFieldIsSuccess &&
+    registerStore.nameFieldIsSuccess &&
+    registerStore.surnameFieldIsSuccess &&
+    registerStore.passwordFieldIsSuccess &&
+    registerStore.repeatPasswordFieldIsSuccess &&
+    registerStore.departmentFieldIsSuccess;
 
   if (authStore.isLoading) return <Loader />;
 
@@ -61,6 +69,7 @@ export default function Register() {
             type="submit"
             text="Зарегестрироваться"
             onClick={() => redirect("/menu")}
+            disabled={!fieldsIsSuccess}
           />
 
           <Button
@@ -72,4 +81,6 @@ export default function Register() {
       </Form>
     </div>
   );
-}
+});
+
+export default Register;
