@@ -1,8 +1,8 @@
-import React from "react";
+import type React from "react";
 import { Navigate } from "react-router-dom";
 
-import authStore from "../../stores/Auth/authStore";
 import { observer } from "mobx-react-lite";
+import authStore from "../../stores/Auth/authStore";
 
 interface IPrivateRoute {
   children: React.ReactElement;

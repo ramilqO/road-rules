@@ -27,6 +27,7 @@ export async function RegisterAction({ request }: { request: Request }) {
 
   await registerStore.register(credentials);
 
+  //TODO: зачем проверять на уведомление? проще проверять на isAuth
   if (notificationStore.notification) return redirect("/register");
 
   return redirect("/menu");

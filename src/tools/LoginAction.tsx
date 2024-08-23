@@ -18,6 +18,7 @@ export async function LoginAction({ request }: { request: Request }) {
 
   await loginStore.login(credentials);
 
+  //TODO: зачем проверять на уведомление? проще проверять на isAuth
   if (notificationStore.notification) return redirect("/login");
 
   return redirect("/menu");

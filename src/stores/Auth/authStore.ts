@@ -37,6 +37,7 @@ export class AuthStore implements IAuth {
     email: localStorageUserInfo?.email || "",
   };
   isLoading = false;
+
   isAuth = !!localStorageUserInfo?.token;
 
   constructor() {
@@ -47,6 +48,7 @@ export class AuthStore implements IAuth {
     this.isLoading = isLoading;
   }
 
+  //TODO: этот метод не нужен, поле классы ты и здесь можешь поменять в login или logout методе
   setIsAuth(isAuth: boolean) {
     this.isAuth = isAuth;
   }
@@ -65,7 +67,7 @@ export class AuthStore implements IAuth {
     localStorage.removeItem("userInfo");
 
     tokenServices.unset();
-    this.userInfo = null
+    this.userInfo = null;
     this.isAuth = false;
   }
 }

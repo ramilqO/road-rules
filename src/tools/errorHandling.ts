@@ -1,6 +1,7 @@
 import axios from "axios";
 import notificationStore from "../stores/notificationStore";
 
+//TODO:  Пробрасывай сюда поле title еще, хочется знать что за ошибка, "Ошибка логина" "Ошибка регистрации" или еще какая-то
 export default function errorHandling(error: unknown) {
   // Если у нас есть ошибка + есть сообщение от сервера о ошибке то это 👇
 
@@ -19,7 +20,7 @@ export default function errorHandling(error: unknown) {
       bodyText:
         error.message || error.message === "Network Error"
           ? "Нет соеденения с интернетом"
-          : "",
+          : error.message,
     });
   }
 }

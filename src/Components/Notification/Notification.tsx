@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
 import notificationStore from "../../stores/notificationStore";
 import style from "./Notification.module.scss";
@@ -11,6 +11,7 @@ const Notification = observer(() => {
   const notification = notificationStore.notification;
 
   useEffect(() => {
+    //TODO: старайся не использовать any нужно описать тип ивента который сюда приходит
     function handleEscapeKeyPress(e: any) {
       if (e.key === "Escape") {
         notificationStore.deleteNotification();

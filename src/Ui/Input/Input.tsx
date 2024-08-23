@@ -8,7 +8,6 @@ interface InputProps {
   placeholder: string;
   // Делает проверку данных на правильность, принимает значение инпута, а возращает строку с ошибой!
   onValidate?: (value: string) => string;
-  otherErrorMessage?: string;
   initialValue?: string;
   type?: string;
   inputRef?: RefObject<HTMLInputElement>;
@@ -20,7 +19,6 @@ export default function Input({
   type = "text",
   name,
   onValidate,
-  otherErrorMessage,
   initialValue = "",
   placeholder,
   inputRef,
@@ -52,11 +50,7 @@ export default function Input({
           }
         }}
       />
-      {(otherErrorMessage || validateError) && (
-        <p className={style.field__error}>
-          {otherErrorMessage || validateError}
-        </p>
-      )}
+      {validateError && <p className={style.field__error}>{validateError}</p>}
     </div>
   );
 }

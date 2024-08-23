@@ -19,15 +19,20 @@ interface ILoginResponse {
 }
 
 class LoginStore {
-  emailFieldIsSuccess: boolean = false;
-  passwordFieldIsSuccess: boolean = false;
+  // Перед конструктором ты описываешь типизацию полей класса
+  emailFieldIsSuccess: boolean;
+  passwordFieldIsSuccess: boolean;
 
   constructor() {
+    // В конструкторе ты уже присваиваешь этим полям значения, тут же можно вставить значения из localStorage если что-то нужно было сохранить
+    this.emailFieldIsSuccess = false;
+    this.passwordFieldIsSuccess = false;
+
     makeAutoObservable(this);
   }
 
   validateEmailField = (value: string): string => {
-    if (value.length <= 6) {
+    if (value.length < 6) {
       this.emailFieldIsSuccess = false;
       return "Почта должна быть не менее 6 символов";
     }
@@ -36,7 +41,7 @@ class LoginStore {
   };
 
   validatePasswordField = (value: string): string => {
-    if (value.length <= 6) {
+    if (value.length < 6) {
       this.passwordFieldIsSuccess = false;
       return "Пароль должна быть не менее 6 символов";
     }
@@ -44,6 +49,7 @@ class LoginStore {
     return "";
   };
 
+  //TODO: после логина меня должно перенаправлять на страницу меню, но вместо этого поля срасываются и ничего не происходит
   async login(credentials: ILoginCredentials) {
     authStore.setIsLoading(true);
     authStore.setIsAuth(false);
@@ -52,7 +58,7 @@ class LoginStore {
     try {
       const { data }: AxiosResponse<ILoginResponse> = await axios.post(
         "api/auth/login",
-        credentials
+        credentials,
       );
 
       authStore.login(
@@ -61,7 +67,7 @@ class LoginStore {
           secondName: data.secondName,
           email: credentials.email,
         },
-        data.token
+        data.token,
       );
     } catch (error) {
       errorHandling(error);
