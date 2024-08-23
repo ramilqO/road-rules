@@ -22,6 +22,7 @@ interface IRegisterResponse {
   userId: string;
 }
 
+//TODO: регистрация все еще написана неверно, поля класса не инициализированы в конструкторе
 class RegisterStore {
   emailFieldIsSuccess: boolean = false;
   nameFieldIsSuccess: boolean = false;
@@ -135,7 +136,7 @@ class RegisterStore {
     try {
       const { data }: AxiosResponse<IRegisterResponse> = await axios.post(
         "api/auth/register",
-        credentials
+        credentials,
       );
 
       authStore.login(
@@ -144,7 +145,7 @@ class RegisterStore {
           secondName: data.secondName,
           email: data.email,
         },
-        data.token
+        data.token,
       );
     } catch (error) {
       errorHandling(error, "Регистрация");

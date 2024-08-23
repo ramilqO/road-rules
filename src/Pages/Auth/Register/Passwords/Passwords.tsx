@@ -1,14 +1,14 @@
+import { observer } from "mobx-react-lite";
 import { useRef } from "react";
 import type { RefObject } from "react";
-import { observer } from "mobx-react-lite";
 
 import style from "./Passwords.module.scss";
 
 import Checkbox from "../../../../Ui/Checkbox/Checkbox";
 import Input from "../../../../Ui/Input/Input";
 
-import registerStore from "../../../../stores/Auth/registerStore";
 import SecurityPassword from "../../../../Ui/SecurityPassword/SecurityPassword";
+import registerStore from "../../../../stores/Auth/registerStore";
 
 const Passwords = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -35,6 +35,7 @@ const Passwords = observer(() => {
         />
 
         {registerStore.userPassword.length > 0 && (
+          //TODO: Зачем передавать props если можно взять сразу из стора
           <SecurityPassword password={registerStore.userPassword} />
         )}
 
