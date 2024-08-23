@@ -19,12 +19,10 @@ interface ILoginResponse {
 }
 
 class LoginStore {
-  // Перед конструктором ты описываешь типизацию полей класса
   emailFieldIsSuccess: boolean;
   passwordFieldIsSuccess: boolean;
 
   constructor() {
-    // В конструкторе ты уже присваиваешь этим полям значения, тут же можно вставить значения из localStorage если что-то нужно было сохранить
     this.emailFieldIsSuccess = false;
     this.passwordFieldIsSuccess = false;
 
@@ -49,16 +47,14 @@ class LoginStore {
     return "";
   };
 
-  //TODO: после логина меня должно перенаправлять на страницу меню, но вместо этого поля срасываются и ничего не происходит
   async login(credentials: ILoginCredentials) {
     authStore.setIsLoading(true);
-    authStore.setIsAuth(false);
     notificationStore.deleteNotification();
 
     try {
       const { data }: AxiosResponse<ILoginResponse> = await axios.post(
         "api/auth/login",
-        credentials,
+        credentials
       );
 
       authStore.login(
@@ -67,10 +63,10 @@ class LoginStore {
           secondName: data.secondName,
           email: credentials.email,
         },
-        data.token,
+        data.token
       );
     } catch (error) {
-      errorHandling(error);
+      errorHandling(error, 'Логина');
     } finally {
       authStore.setIsLoading(false);
     }

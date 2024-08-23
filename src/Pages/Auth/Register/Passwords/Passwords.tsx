@@ -8,6 +8,7 @@ import Checkbox from "../../../../Ui/Checkbox/Checkbox";
 import Input from "../../../../Ui/Input/Input";
 
 import registerStore from "../../../../stores/Auth/registerStore";
+import SecurityPassword from "../../../../Ui/SecurityPassword/SecurityPassword";
 
 const Passwords = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -32,6 +33,10 @@ const Passwords = observer(() => {
           placeholder="*********"
           inputRef={passwordInputRef}
         />
+
+        {registerStore.userPassword.length > 0 && (
+          <SecurityPassword password={registerStore.userPassword} />
+        )}
 
         <Checkbox
           defaultChecked

@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 import loginStore from "../stores/Auth/loginStore";
-import notificationStore from "../stores/notificationStore";
+import authStore from "../stores/Auth/authStore";
 
 interface ICredentials {
   email: string;
@@ -18,8 +18,7 @@ export async function LoginAction({ request }: { request: Request }) {
 
   await loginStore.login(credentials);
 
-  //TODO: зачем проверять на уведомление? проще проверять на isAuth
-  if (notificationStore.notification) return redirect("/login");
+  if (!authStore.isAuth) return redirect("/login");
 
   return redirect("/menu");
 }

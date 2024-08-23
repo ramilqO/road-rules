@@ -11,8 +11,7 @@ const Notification = observer(() => {
   const notification = notificationStore.notification;
 
   useEffect(() => {
-    //TODO: старайся не использовать any нужно описать тип ивента который сюда приходит
-    function handleEscapeKeyPress(e: any) {
+    function handleEscapeKeyPress(e: KeyboardEvent) {
       if (e.key === "Escape") {
         notificationStore.deleteNotification();
       }

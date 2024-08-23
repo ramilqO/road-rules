@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 import registerStore from "../stores/Auth/registerStore";
-import notificationStore from "../stores/notificationStore";
 import capitalizeFirstLetter from "./capitalizeFirstLetter";
+import authStore from "../stores/Auth/authStore";
 
 interface ICredentials {
   firstName: string;
@@ -27,8 +27,7 @@ export async function RegisterAction({ request }: { request: Request }) {
 
   await registerStore.register(credentials);
 
-  //TODO: зачем проверять на уведомление? проще проверять на isAuth
-  if (notificationStore.notification) return redirect("/register");
+  if (!authStore.isAuth) return redirect("/register");
 
   return redirect("/menu");
 }
