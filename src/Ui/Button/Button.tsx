@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import style from "./Button.module.scss";
 
 type ButtonType = "submit" | "reset" | "button";
@@ -6,7 +7,7 @@ type ButtonStyleType = "link" | "button";
 interface IButton {
   type?: ButtonType;
   buttonStyle?: ButtonStyleType;
-  text: string;
+  text: string | ReactNode;
   onClick?: () => void;
   disabled?: boolean;
 }
@@ -20,6 +21,7 @@ export default function Button({
 }: IButton) {
   return (
     <button
+      color="#ffffff"
       type={type}
       disabled={disabled}
       onClick={onClick}

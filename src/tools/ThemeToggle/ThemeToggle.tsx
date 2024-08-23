@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import style from "./ThemeToggle.module.scss";
-
 import MoonIcon from "../../../public/svg/header/MoonIcon";
 import SunIcon from "../../../public/svg/header/SunIcon";
+
+import Button from "../../Ui/Button/Button";
 
 export default function ThemeToggle() {
   const [themeMode, setThemeMode] = useState("whiteMode");
@@ -20,13 +20,10 @@ export default function ThemeToggle() {
     setThemeMode(themeMode === "whiteMode" ? "darkMode" : "whiteMode");
 
   return (
-    // TODO: давай эта кнопка тоже будет черного цвета, как остальные кнопки, а то она не туда и не сюда серая непонятная в макете поправлю
-    <button
-      className={style.buttonChangeTheme}
-      onClick={toggleTheme}
+    <Button
       type="button"
-    >
-      {themeMode === "whiteMode" ? <MoonIcon /> : <SunIcon />}
-    </button>
+      text={themeMode === "whiteMode" ? <MoonIcon /> : <SunIcon />}
+      onClick={toggleTheme}
+    />
   );
 }

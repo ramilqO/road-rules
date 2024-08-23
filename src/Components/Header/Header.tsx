@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import authStore from "../../stores/Auth/authStore";
 
@@ -9,6 +9,8 @@ import Button from "../../Ui/Button/Button";
 import ThemeToggle from "../../tools/ThemeToggle/ThemeToggle";
 
 const Header = observer(() => {
+  const navigate = useNavigate();
+
   return (
     <header className={style.header}>
       <ThemeToggle />
@@ -16,31 +18,24 @@ const Header = observer(() => {
       <nav className={style.navigation}>
         <ul className={style.navigation__auth}>
           <li className={style.navigation__authItem}>
-            {/* TODO: не нужно сверять на false, !authStore.isAuth делает тоже самое  */}
-            {authStore.isAuth === false ? (
-              <Link
-                to="/login"
-                // TODO: давай обе кнопки будут черными, без серого варианта
-                className={`${style.navigation__authItemButton} ${style["navigation__authItemButton--login"]}`}
-              >
-                Логин
-              </Link>
+            {!authStore.isAuth ? (
+              <Button
+                buttonStyle="button"
+                text="Логин"
+                onClick={() => navigate("/login")}
+              />
             ) : (
               <p className={style.navigation__authItemDescription}>
-                {/* TODO: TS оишибки 'authStore.userInfo' is possibly 'null'.*/}
-                {authStore.userInfo.firstName} {authStore.userInfo.secondName}
+                {authStore.userInfo?.firstName} {authStore.userInfo?.secondName}
               </p>
             )}
           </li>
           <li className={style.navigation__authItem}>
-            {/* TODO: не нужно сверять на false, !authStore.isAuth делает тоже самое  */}
-            {authStore.isAuth === false ? (
-              <Link
-                to="/register"
-                className={`${style.navigation__authItemButton} ${style["navigation__authItemButton--register"]}`}
-              >
-                Регистрация
-              </Link>
+            {!authStore.isAuth ? (
+              <Button
+                text="Регистрация"
+                onClick={() => navigate("/register")}
+              />
             ) : (
               <Button onClick={() => authStore.logout()} text="Выйти" />
             )}

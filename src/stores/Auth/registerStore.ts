@@ -23,17 +23,12 @@ interface IRegisterResponse {
 }
 
 class RegisterStore {
-  //TODO: у тебя здесь намешано и типизация и сразу же значения, но ты их объявил до конструктора
-  // Поля конструктора создаются в момент вызова класса, поэтому они должы быть там
   emailFieldIsSuccess: boolean = false;
-
   nameFieldIsSuccess: boolean = false;
   surnameFieldIsSuccess: boolean = false;
-
   userPassword: string = "";
   passwordFieldIsSuccess: boolean = false;
   repeatPasswordFieldIsSuccess: boolean = false;
-
   departmentFieldIsSuccess: boolean = false;
 
   constructor() {
@@ -48,17 +43,13 @@ class RegisterStore {
 
     if (!isValidBasic) {
       this.emailFieldIsSuccess = false;
-
       if (value.indexOf("@") === -1 && value.length < 5)
         return "Введите имя почты";
       if (!value.includes("@")) return "Почта должна содержать @";
-      if (atIndex !== -1 && atIndex === value.length - 1) {
+      if (atIndex !== -1 && atIndex === value.length - 1)
         return "После символа @ должно содержаться доменное имя";
-      }
-      if (!/\.[a-zA-Z]{2,}$/.test(domainPart)) {
+      if (!/\.[a-zA-Z]{2,}$/.test(domainPart))
         return "Доменное имя должно заканчиваться на .com, .ru или другой допустимый домен";
-      }
-
       return "Введите корректный адрес электронной почты";
     }
 
@@ -87,7 +78,6 @@ class RegisterStore {
   };
 
   validatePasswordField = (value: string): string => {
-    //TODO: определись с длиной пароля 6 или 8
     if (value.length < 6) {
       this.passwordFieldIsSuccess = false;
       return "Пароль должен быть не меньше 6 символов";
@@ -95,38 +85,33 @@ class RegisterStore {
 
     this.passwordFieldIsSuccess = true;
     this.userPassword = value;
-
-    if (this.passwordFieldIsSuccess) {
-      if (value.length < 8) {
-        return "Не обязательно! Длина пароля должна быть не менее 8 символов";
-      }
-
-      //TODO: Я ввел русскую букву большую но она все равно не считаеться
-      // Добавь в регулярку русские символы тогда
-      // А вообще нужно убрать все необязательные проверки, они сбивают пользователя с толку
-      // Или сделать их обязательными
-      if (!/[A-Z]/.test(value)) {
-        return "Не обязательно! Пароль должен содержать заглавную букву";
-      }
-
-      if (!/[0-9]/.test(value)) {
-        return "Не обязательно! Пароль должен содержать цифру";
-      }
-
-      if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value)) {
-        return "Не обязательно! Пароль должен содержать специальный символ";
-      }
-    }
-
     return "";
+  };
+
+  // В registerStore.ts
+  securityPasswordField = (value: string): number => {
+    let steps = 0;
+
+    if (value.length >= 6) steps = 1;
+    if (value.length >= 8 || /[A-Z;А-Я]/.test(value)) steps = 2;
+    if (value.length >= 8 && /[A-Z;А-Я]/.test(value)) steps = 3;
+    if (
+      value.length >= 8 &&
+      /[A-Z;А-Я]/.test(value) &&
+      /[0-9]/.test(value) &&
+      /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value)
+    )
+      steps = 4;
+
+    return steps;
   };
 
   validateRepeatPassword = (value: string): string => {
     if (value !== this.userPassword) {
       this.repeatPasswordFieldIsSuccess = false;
-      if (this.userPassword.length === 0)
-        return "Пароль ещё не введён в другом поле ввода";
-      return "Пароли не совпадают!";
+      return this.userPassword.length === 0
+        ? "Пароль ещё не введён в другом поле ввода"
+        : "Пароли не совпадают!";
     }
 
     this.repeatPasswordFieldIsSuccess = true;
@@ -142,7 +127,7 @@ class RegisterStore {
     this.departmentFieldIsSuccess = true;
     return "";
   };
-  //TODO: после регистрации меня должно перенаправлять на страницу меню, но вместо этого поля срасываются и меня отправляют на страницу логина
+
   async register(credentials: IRegisterCredentials) {
     authStore.setIsLoading(true);
     notificationStore.deleteNotification();
@@ -150,7 +135,7 @@ class RegisterStore {
     try {
       const { data }: AxiosResponse<IRegisterResponse> = await axios.post(
         "api/auth/register",
-        credentials,
+        credentials
       );
 
       authStore.login(
@@ -159,10 +144,10 @@ class RegisterStore {
           secondName: data.secondName,
           email: data.email,
         },
-        data.token,
+        data.token
       );
     } catch (error) {
-      errorHandling(error);
+      errorHandling(error, "Регистрация");
     } finally {
       authStore.setIsLoading(false);
     }

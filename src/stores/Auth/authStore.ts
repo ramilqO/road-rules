@@ -31,16 +31,18 @@ const getLocalStorageUserInfo = (): ILocalStorageUserInfo | null => {
 const localStorageUserInfo = getLocalStorageUserInfo();
 
 export class AuthStore implements IAuth {
-  userInfo: IUserInfo | null = {
-    firstName: localStorageUserInfo?.firstName || "",
-    secondName: localStorageUserInfo?.secondName || "",
-    email: localStorageUserInfo?.email || "",
-  };
+  userInfo: IUserInfo | null;
   isLoading = false;
 
   isAuth = !!localStorageUserInfo?.token;
 
   constructor() {
+    this.userInfo = {
+      firstName: localStorageUserInfo?.firstName || "",
+      secondName: localStorageUserInfo?.secondName || "",
+      email: localStorageUserInfo?.email || "",
+    };
+
     makeAutoObservable(this);
   }
 
@@ -48,14 +50,9 @@ export class AuthStore implements IAuth {
     this.isLoading = isLoading;
   }
 
-  //TODO: этот метод не нужен, поле классы ты и здесь можешь поменять в login или logout методе
-  setIsAuth(isAuth: boolean) {
-    this.isAuth = isAuth;
-  }
-
   login(userInfo: IUserInfo, token: string) {
     tokenServices.set(token);
-    this.setIsAuth(true);
+    this.isAuth = true;
     this.userInfo = userInfo;
 
     const localStorageUserInfo = { ...userInfo, token };
