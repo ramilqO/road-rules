@@ -22,17 +22,24 @@ interface IRegisterResponse {
   userId: string;
 }
 
-//TODO: регистрация все еще написана неверно, поля класса не инициализированы в конструкторе
 class RegisterStore {
-  emailFieldIsSuccess: boolean = false;
-  nameFieldIsSuccess: boolean = false;
-  surnameFieldIsSuccess: boolean = false;
+  emailFieldIsSuccess: boolean;
+  nameFieldIsSuccess: boolean;
+  surnameFieldIsSuccess: boolean;
   userPassword: string = "";
-  passwordFieldIsSuccess: boolean = false;
-  repeatPasswordFieldIsSuccess: boolean = false;
-  departmentFieldIsSuccess: boolean = false;
+  passwordFieldIsSuccess: boolean;
+  repeatPasswordFieldIsSuccess: boolean;
+  departmentFieldIsSuccess: boolean;
 
   constructor() {
+    this.emailFieldIsSuccess = false;
+    this.nameFieldIsSuccess = false;
+    this.surnameFieldIsSuccess = false;
+    this.userPassword = "";
+    this.passwordFieldIsSuccess = false;
+    this.repeatPasswordFieldIsSuccess = false;
+    this.departmentFieldIsSuccess = false;
+
     makeAutoObservable(this);
   }
 
@@ -81,6 +88,7 @@ class RegisterStore {
   validatePasswordField = (value: string): string => {
     if (value.length < 6) {
       this.passwordFieldIsSuccess = false;
+      this.userPassword = value;
       return "Пароль должен быть не меньше 6 символов";
     }
 
@@ -89,22 +97,35 @@ class RegisterStore {
     return "";
   };
 
-  // В registerStore.ts
-  securityPasswordField = (value: string): number => {
+  securityPasswordField = (
+    value: string
+  ): { steps: number; message: string } => {
     let steps = 0;
+    let message = "";
 
-    if (value.length >= 6) steps = 1;
-    if (value.length >= 8 || /[A-Z;А-Я]/.test(value)) steps = 2;
-    if (value.length >= 8 && /[A-Z;А-Я]/.test(value)) steps = 3;
+    if (value.length >= 6) {
+      steps = 1;
+      message = "Не надежный";
+    }
+    if (value.length >= 8 || /[A-Z;А-Я]/.test(value)) {
+      steps = 2;
+      message = "Надёжный";
+    }
+    if (value.length >= 8 && /[A-Z;А-Я]/.test(value)) {
+      steps = 3;
+      message = "Надёжный";
+    }
     if (
       value.length >= 8 &&
       /[A-Z;А-Я]/.test(value) &&
       /[0-9]/.test(value) &&
       /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value)
-    )
+    ) {
       steps = 4;
+      message = "Безопасный";
+    }
 
-    return steps;
+    return { steps, message };
   };
 
   validateRepeatPassword = (value: string): string => {
@@ -136,7 +157,7 @@ class RegisterStore {
     try {
       const { data }: AxiosResponse<IRegisterResponse> = await axios.post(
         "api/auth/register",
-        credentials,
+        credentials
       );
 
       authStore.login(
@@ -145,7 +166,7 @@ class RegisterStore {
           secondName: data.secondName,
           email: data.email,
         },
-        data.token,
+        data.token
       );
     } catch (error) {
       errorHandling(error, "Регистрация");
