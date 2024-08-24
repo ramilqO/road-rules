@@ -71,6 +71,14 @@ const router = createBrowserRouter([
         ),
         action: registerActionData,
       },
+      {
+        path: "*",
+        element: (
+          <PublicRoute>
+            <PageNotFound />
+          </PublicRoute>
+        ),
+      },
     ],
   },
 ]);
