@@ -26,7 +26,7 @@ class RegisterStore {
   emailFieldIsSuccess: boolean;
   nameFieldIsSuccess: boolean;
   surnameFieldIsSuccess: boolean;
-  userPassword: string = "";
+  userPassword: string;
   passwordFieldIsSuccess: boolean;
   repeatPasswordFieldIsSuccess: boolean;
   departmentFieldIsSuccess: boolean;
@@ -98,7 +98,7 @@ class RegisterStore {
   };
 
   securityPasswordField = (
-    value: string
+    value: string,
   ): { steps: number; message: string } => {
     let steps = 0;
     let message = "";
@@ -157,7 +157,7 @@ class RegisterStore {
     try {
       const { data }: AxiosResponse<IRegisterResponse> = await axios.post(
         "api/auth/register",
-        credentials
+        credentials,
       );
 
       authStore.login(
@@ -166,7 +166,7 @@ class RegisterStore {
           secondName: data.secondName,
           email: data.email,
         },
-        data.token
+        data.token,
       );
     } catch (error) {
       errorHandling(error, "Регистрация");

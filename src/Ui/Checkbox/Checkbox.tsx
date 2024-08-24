@@ -20,7 +20,7 @@ export default function Checkbox({
           className={style.checkbox__inputCheckBox}
           defaultChecked={defaultChecked}
         />
-        <span className={style.checkbox__inputCheckBoxCustom}></span>
+        <span className={style.checkbox__inputCheckBoxCustom} />
       </label>
       <span className={style.checkbox__label}>{label}</span>
     </div>

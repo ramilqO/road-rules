@@ -1,5 +1,5 @@
-import { Form, redirect, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+import { Form, redirect, useNavigate } from "react-router-dom";
 
 import registerStore from "../../../stores/Auth/registerStore";
 import style from "./Register.module.scss";
@@ -7,8 +7,8 @@ import style from "./Register.module.scss";
 import Button from "../../../Ui/Button/Button";
 import Input from "../../../Ui/Input/Input";
 
-import Passwords from "./Passwords/Passwords";
 import authStore from "../../../stores/Auth/authStore";
+import Passwords from "./Passwords/Passwords";
 
 const Register = observer(() => {
   const navigate = useNavigate();
@@ -76,9 +76,10 @@ const Register = observer(() => {
           />
         </div>
       </Form>
+      {/* TODO: лоадер лучше вынести в отдельный компонент ибо он у тебя уже используется 2 раза, а будет еще несколько раз использован */}
       {authStore.isLoading && (
         <div className={style.container}>
-          <div className={style.loader}></div>
+          <div className={style.loader} />
         </div>
       )}
     </div>
