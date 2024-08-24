@@ -17,7 +17,7 @@
     color: var(--authColorFormInputLabelTextAndInputText);
 
     &--invalid {
-      color: #e32227;
+      color: var(--authColorFormInputLabelError);
     }
   }
 
@@ -37,6 +37,7 @@
     font-size: 16px;
     line-height: 16px;
 
+    background-color: var(--authColorFormInputFieldBacg);
     color: var(--authColorFormInputLabelTextAndInputText);
 
     &--disabled {
