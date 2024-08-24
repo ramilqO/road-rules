@@ -34,10 +34,7 @@ const Passwords = observer(() => {
           inputRef={passwordInputRef}
         />
 
-        {registerStore.userPassword.length > 0 && (
-          //TODO: Зачем передавать props если можно взять сразу из стора
-          <SecurityPassword password={registerStore.userPassword} />
-        )}
+        <SecurityPassword />
 
         <Checkbox
           defaultChecked
