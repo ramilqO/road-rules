@@ -13,15 +13,16 @@ export default function Checkbox({
 }: CheckboxProps) {
   return (
     <div className={style.checkbox}>
-      <label>
+      <label className={style.wrapper}>
         <input
           type="checkbox"
           onChange={onToggle}
           className={style.checkbox__inputCheckBox}
           defaultChecked={defaultChecked}
         />
-        <span className={style.checkbox__label}>{label}</span>
+        <span className={style.checkbox__inputCheckBoxCustom}></span>
       </label>
+      <span className={style.checkbox__label}>{label}</span>
     </div>
   );
 }

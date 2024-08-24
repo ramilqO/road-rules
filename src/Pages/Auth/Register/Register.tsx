@@ -28,7 +28,7 @@ const Register = observer(() => {
       </div>
 
       <Form method="POST" className={style.form}>
-        <div className={style.container}>
+        <div className={style.wrapper}>
           <Input
             label="Имя"
             name="userName"
