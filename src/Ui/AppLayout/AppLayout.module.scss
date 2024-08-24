@@ -1,11 +1,11 @@
 .wrapper{
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Заставляет контейнер быть как минимум высотой в окно видимости */
+  min-height: 100vh; 
 }
 .main {
   position: relative;
-  flex: 1 1 auto; /* Контент растягивается для заполнения оставшейся высоты */
-  overflow-y: auto; /* С учетом всех возможных сценариев, можно добавить эту строку */
+  flex: 1 1 auto; 
+  overflow-y: auto; 
 
 }
