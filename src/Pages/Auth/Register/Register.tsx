@@ -1,15 +1,14 @@
 import { Form, redirect, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
-import authStore from "../../../stores/Auth/authStore";
 import registerStore from "../../../stores/Auth/registerStore";
 import style from "./Register.module.scss";
 
-import Loader from "../../../Ui/Loader/Loader";
 import Button from "../../../Ui/Button/Button";
 import Input from "../../../Ui/Input/Input";
 
 import Passwords from "./Passwords/Passwords";
+import authStore from "../../../stores/Auth/authStore";
 
 const Register = observer(() => {
   const navigate = useNavigate();
@@ -21,8 +20,6 @@ const Register = observer(() => {
     registerStore.repeatPasswordFieldIsSuccess &&
     registerStore.departmentFieldIsSuccess;
 
-  if (authStore.isLoading) return <Loader />;
-
   return (
     <div className={style.register}>
       <div className={style.infoSection}>
@@ -31,7 +28,7 @@ const Register = observer(() => {
       </div>
 
       <Form method="POST" className={style.form}>
-        <div className={style.container}>
+        <div className={style.wrapper}>
           <Input
             label="Имя"
             name="userName"
@@ -79,6 +76,11 @@ const Register = observer(() => {
           />
         </div>
       </Form>
+      {authStore.isLoading && (
+        <div className={style.container}>
+          <div className={style.loader}></div>
+        </div>
+      )}
     </div>
   );
 });

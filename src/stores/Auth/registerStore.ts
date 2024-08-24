@@ -86,14 +86,14 @@ class RegisterStore {
   };
 
   validatePasswordField = (value: string): string => {
+    this.userPassword = value;
+
     if (value.length < 6) {
       this.passwordFieldIsSuccess = false;
-      this.userPassword = value;
       return "Пароль должен быть не меньше 6 символов";
     }
 
     this.passwordFieldIsSuccess = true;
-    this.userPassword = value;
     return "";
   };
 

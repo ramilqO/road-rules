@@ -9,7 +9,6 @@ import style from "./Login.module.scss";
 import Button from "../../../Ui/Button/Button";
 import Checkbox from "../../../Ui/Checkbox/Checkbox";
 import Input from "../../../Ui/Input/Input";
-import Loader from "../../../Ui/Loader/Loader";
 
 const Login = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -24,8 +23,6 @@ const Login = observer(() => {
 
     input.type = input.type === "password" ? "text" : "password";
   }
-
-  if (authStore.isLoading) return <Loader />;
 
   return (
     <div className={style.login}>
@@ -75,6 +72,11 @@ const Login = observer(() => {
           />
         </div>
       </Form>
+      {authStore.isLoading && (
+        <div className={style.container}>
+          <div className={style.loader}></div>
+        </div>
+      )}
     </div>
   );
 });

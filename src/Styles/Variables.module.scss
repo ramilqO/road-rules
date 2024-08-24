@@ -1,4 +1,7 @@
 :root {
+  // Main
+  --mainBacg: #ffffff;
+
   // Notification
   --basicNotificationColorTitleBodyIcons: #1e1e1e;
   --basicNotificationColorItemBacg: #ffffff;
@@ -15,14 +18,7 @@
 
   // Header
   --headerColorToggleThemeButtonBorder: #d9d9d9;
-  --headerColorToggleThemeButtonBacg: #f5f5f5;
-
-  --headerColorLoginButtonBorder: #767676;
-  --headerColorLoginButtonBacg: #e3e3e3;
-  --headerColorLoginButtonText: #1e1e1e;
-
-  --headerColorRegisterButtonBacg: #2c2c2c;
-  --headerColorRegisterButtonText: #f5f5f5;
+  --headerColorLoginButtonColor: #1E1E1E;
 
   // Auth
   --authColorInfoSectionTitle: #1e1e1e;
@@ -31,6 +27,7 @@
   --authColorFormBorder: #d9d9d9;
 
   --authColorFormInputLabelTextAndInputText: #1e1e1e;
+  --authColorFormInputLabelError: #ff2c2c;
   --authColorFormInputFieldBorder: #d9d9d9;
   --authColorFormInputFieldColorAndPlaceholderColor: #b3b3b3;
 
@@ -43,9 +40,26 @@
   --pageNotFoundColorInfoSectionTitleAndDescription: #1e1e1e;
   --pageNotFoundColorButtonBacg: #2c2c2c;
   --pageNotFoundColorButtonText: #f5f5f5;
+
+  // Checkbox
+  --checkboxColorCheckedBacgAndBorder: #2c2c2c;
+  --checkboxColorUncheckedBacg: transperent;
+
+  --checkboxUrlIcon: url("/public/svg/checkbox/IconWhite.svg");
+
+  // SecurityPassword
+  --securityPasswordColorDescription: #1e1e1e;
+
+  --securityPasswordProgressBarStep1: #ff2c2c;
+  --securityPasswordProgressBarStep2: #ffff00;
+  --securityPasswordProgressBarStep3: #228c22;
 }
 
 [data-theme="darkMode"] {
+  // Main
+  --mainBacg: #2c2c2c;
+
+  // Notification
   --basicNotificationColorTitleBodyIcons: #ffffff;
   --basicNotificationColorItemBacg: #1e1e1e;
   --basicNotificationColorButtonBacg: #f5f5f5;
@@ -56,4 +70,33 @@
   --errorNotificationColorButtonBacg: #c00f0c;
   --errorNotificationColorButtonBorderAndText: #fee9e7;
   --errorNotificationColorButtonBorder: #f4776a;
+
+  // Header 
+  --headerColorLoginButtonColor: #FFFFFF;
+
+  // Auth
+  --authColorInfoSectionTitle: #f5f5f5;
+  --authColorInfoSectionDescription: #e3e3e3;
+
+  --authColorFormInputLabelTextAndInputText: #ffffff;
+  --authColorFormInputFieldBacg: #1e1e1e;
+  --authColorFormInputFieldBorder: #444444;
+  --authColorFormInputFieldColorAndPlaceholderColor: #b3b3b3;
+
+  --authColorFormButtonBacg: #f5f5f5;
+  --authColorFormButtonColor: #1e1e1e;
+  --authColorFormButtonLinkColor: #f5f5f5;
+
+  // PageNotFound
+  --pageNotFoundColorBorder: #d9d9d9;
+  --pageNotFoundColorInfoSectionTitleAndDescription: #ffffff;
+  --pageNotFoundColorButtonBacg: #f5f5f5;
+  --pageNotFoundColorButtonText: #1e1e1e;
+
+  // Checkbox
+  --checkboxColorCheckedBacgAndBorder: #f5f5f5;
+  --checkboxUrlIcon: url("/public/svg/checkbox/IconDark.svg");
+
+  // SecurityPassword
+  --securityPasswordColorDescription: #FFFFFF;
 }
