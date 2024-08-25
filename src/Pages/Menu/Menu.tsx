@@ -8,7 +8,6 @@ import Button from "../../Ui/Button/Button";
 
 import ticketsStore from "../../stores/Tickets/ticketsStore";
 import examStore from "../../stores/Exam/examStore";
-// import authStore from "../../stores/Auth/authStore";
 
 const Menu = observer(() => {
   const navigate = useNavigate();
@@ -17,6 +16,8 @@ const Menu = observer(() => {
     ticketsStore.getListTickets();
   }, []);
 
+  if (ticketsStore.tickets.length === 0) return null;
+
   return (
     <div className={style.wrapper}>
       <div className={style.menu}>
@@ -24,7 +25,8 @@ const Menu = observer(() => {
 
         <ul className={style.menu__listTickets}>
           {ticketsStore.tickets.map((ticket, i) => (
-            <li className={style.listTickets__itemTicket} key={i}>
+            // Изменил на ticket т.к. index передавать нельзя по правилам как знаешь
+            <li className={style.listTickets__itemTicket} key={ticket}>
               <Button
                 buttonStyle="ticketButton"
                 text={`Билет ${i + 1}`}
