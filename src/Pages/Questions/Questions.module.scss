@@ -1,0 +1,52 @@
+@import "/src/Styles/Variables.module.scss";
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 45px;
+
+  &__paginationWrapper {
+    display: flex;
+    justify-content: center;
+
+    overflow-x: auto;
+
+    width: 100%;
+
+    margin-bottom: 20px;
+  }
+
+  &__listPagination {
+    display: flex;
+    overflow-x: auto;
+
+    gap: 8px;
+  }
+
+  .listPagination__button {
+    text-align: center;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 8px;
+    border-style: none;
+
+    cursor: pointer;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+
+    background-color: transparent;
+    color: var(--questionsColorButtonText);
+
+    &--current {
+      color: var(--questionsColorCurrentButtonText);
+      background-color: var(--questionsColorCurrentButtonBacg);
+    }
+  }
+}
