@@ -7,7 +7,6 @@ import style from "./Register.module.scss";
 import Button from "../../../Ui/Button/Button";
 import Input from "../../../Ui/Input/Input";
 
-import authStore from "../../../stores/Auth/authStore";
 import Passwords from "./Passwords/Passwords";
 
 const Register = observer(() => {
@@ -76,12 +75,6 @@ const Register = observer(() => {
           />
         </div>
       </Form>
-      {/* TODO: лоадер лучше вынести в отдельный компонент ибо он у тебя уже используется 2 раза, а будет еще несколько раз использован */}
-      {authStore.isLoading && (
-        <div className={style.container}>
-          <div className={style.loader} />
-        </div>
-      )}
     </div>
   );
 });

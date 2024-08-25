@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  margin-top: 20px;
 }
 
 .infoSection {
@@ -11,8 +13,7 @@
   align-items: center;
   flex-direction: column;
 
-  margin-top: 20px;
-  margin-bottom: 75px;
+  margin-bottom: 30px;
 
   &__title {
     text-align: center;
@@ -37,62 +38,25 @@
 
 .form {
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: space-between;
 
   width: 320px;
 
   padding: 24px;
-  margin-bottom: 75px;
 
   border-radius: 8px;
   border: 1px solid var(--authColorFormBorder);
 }
 
 .wrapper {
-  width: 100%;
+  margin-bottom: 24px;
 }
 
 .actions {
   display: flex;
   flex-direction: column;
-
-  width: 100%;
+  justify-content: end;
 
   gap: 24px;
-}
-
-.container {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  inset: 0;
-  background-color: rgb(226, 232, 240);
-  backdrop-filter: blur(4px);
-}
-
-.loader {
-  width: 45px;
-  aspect-ratio: 0.75;
-  --c: no-repeat linear-gradient(#333 0 0); 
-  background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
-  background-size: 20% 50%;
-  animation: loading 1s infinite linear;
-}
-
-@keyframes loading {
-  20% {
-    background-position: 0% 0%, 50% 50%, 100% 50%;
-  }
-  40% {
-    background-position: 0% 100%, 50% 0%, 100% 50%;
-  }
-  60% {
-    background-position: 0% 50%, 50% 100%, 100% 0%;
-  }
-  80% {
-    background-position: 0% 50%, 50% 50%, 100% 100%;
-  }
 }

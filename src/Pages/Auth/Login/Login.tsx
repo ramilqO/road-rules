@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite";
 import { useRef } from "react";
 import { Form, redirect, useNavigate } from "react-router-dom";
 
-import authStore from "../../../stores/Auth/authStore";
 import loginStore from "../../../stores/Auth/loginStore";
 import style from "./Login.module.scss";
 
@@ -72,11 +71,6 @@ const Login = observer(() => {
           />
         </div>
       </Form>
-      {authStore.isLoading && (
-        <div className={style.container}>
-          <div className={style.loader} />
-        </div>
-      )}
     </div>
   );
 });
