@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+
+  width: 320px;
+  height: auto;
+
+  margin-top: 20px;
+  padding: 10px;
+  gap: 10px;
+
+  border: 1px solid var(--menuColorBorder);
+  border-radius: 8px;
+}
+
+.menu__buttonExam {
+  margin-bottom: 10px;
+}
+
+.menu__listTickets {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
+  gap: 10px;
+}
+
+.listTickets__itemTicket {
+  width: 48%;
+}

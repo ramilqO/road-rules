@@ -2,6 +2,9 @@
   // Main
   --mainBacg: #ffffff;
 
+  // Menu
+  --menuColorBorder: #757575;
+
   // Notification
   --basicNotificationColorTitleBodyIcons: #1e1e1e;
   --basicNotificationColorItemBacg: #ffffff;
@@ -55,7 +58,7 @@
   --securityPasswordProgressBarStep3: #228c22;
 
   // Loader
-  --loaderColor: #FFF 0 0;
+  --loaderColor: #fff 0 0;
 }
 
 [data-theme="darkMode"] {

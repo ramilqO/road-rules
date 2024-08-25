@@ -8,7 +8,7 @@ import authStore from "../../stores/Auth/authStore";
 import Loader from "../Loader/Loader";
 
 type ButtonType = "submit" | "reset" | "button";
-type ButtonStyleType = "link" | "button";
+type ButtonStyleType = "link" | "button" | "ticketButton";
 
 interface IButton {
   type?: ButtonType;
@@ -32,7 +32,12 @@ const Button = observer(
         type={type}
         disabled={authStore.isLoading || disabled}
         onClick={onClick}
-        className={`${buttonStyle === "button" ? style.button : style.link} ${
+        className={`${
+          (buttonStyle === "button" && style.button) ||
+          (buttonStyle === "link" && style.link) ||
+          (buttonStyle === "ticketButton" &&
+            ` ${style.button} ${style["button--ticket"]}`)
+        } ${
           ((type === "submit" && authStore.isLoading) || disabled) &&
           style["button--disabled"]
         } `}
