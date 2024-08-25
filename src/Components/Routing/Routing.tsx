@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "questions",
+        path: "menu/:ticketId",
         element: (
           <PrivateRoute>
             <Questions />

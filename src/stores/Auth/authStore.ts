@@ -9,16 +9,10 @@ interface IUserInfo {
   firstName: string;
   secondName: string;
   email: string;
-}
-
-interface ILocalStorageUserInfo {
-  firstName: string;
-  secondName: string;
-  email: string;
   token: string;
 }
 
-const getLocalStorageUserInfo = (): ILocalStorageUserInfo | null => {
+const getLocalStorageUserInfo = (): IUserInfo | null => {
   const storedData = localStorage.getItem(storageSelectors.userInfo);
   return storedData ? JSON.parse(storedData) : null;
 };
@@ -35,6 +29,7 @@ export class AuthStore {
       firstName: localStorageUserInfo?.firstName || "",
       secondName: localStorageUserInfo?.secondName || "",
       email: localStorageUserInfo?.email || "",
+      token: localStorageUserInfo?.token || "",
     };
     this.isAuth = !!localStorageUserInfo?.token;
     this.isLoading = false;
@@ -52,7 +47,10 @@ export class AuthStore {
 
     const localStorageUserInfo = { ...userInfo, token };
 
-    localStorage.setItem(storageSelectors.userInfo, JSON.stringify(localStorageUserInfo));
+    localStorage.setItem(
+      storageSelectors.userInfo,
+      JSON.stringify(localStorageUserInfo)
+    );
   }
 
   logout() {

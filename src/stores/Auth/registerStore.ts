@@ -98,7 +98,7 @@ class RegisterStore {
   };
 
   securityPasswordField = (
-    value: string,
+    value: string
   ): { steps: number; message: string } => {
     let steps = 0;
     let message = "";
@@ -157,7 +157,7 @@ class RegisterStore {
     try {
       const { data }: AxiosResponse<IRegisterResponse> = await axios.post(
         "api/auth/register",
-        credentials,
+        credentials
       );
 
       authStore.login(
@@ -165,8 +165,9 @@ class RegisterStore {
           firstName: data.firstName,
           secondName: data.secondName,
           email: data.email,
+          token: data.token,
         },
-        data.token,
+        data.token
       );
     } catch (error) {
       errorHandling(error, "Регистрация");
