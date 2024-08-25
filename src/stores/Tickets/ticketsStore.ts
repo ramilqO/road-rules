@@ -6,23 +6,26 @@ import errorHandling from "../../tools/errorHandling";
 import tokenServices from "../tokenServices";
 
 class TicketsStore {
-  tickets: [];
+  tickets: string[];
 
   constructor() {
     this.tickets = [];
     makeAutoObservable(this);
   }
 
-  setTickets(tickets: []) {
+  setTickets(tickets: string[]) {
     this.tickets = tickets;
   }
 
   async getListTickets() {
     authStore.setIsLoading(true);
-    const persistedToken: string | undefined = authStore.userInfo?.token;
+    const persistedToken = authStore.userInfo?.token;
 
     if (!persistedToken) {
-      errorHandling("", "Ошибка при получении билетов. Отсутствует токен");
+      errorHandling(
+        "Ошибка при получении билетов. Отсутствует токен.",
+        "Билетов"
+      );
       return;
     }
     tokenServices.set(persistedToken);

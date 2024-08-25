@@ -7,7 +7,8 @@ import style from "./Menu.module.scss";
 import Button from "../../Ui/Button/Button";
 
 import ticketsStore from "../../stores/Tickets/ticketsStore";
-import authStore from "../../stores/Auth/authStore";
+import examStore from "../../stores/Exam/examStore";
+// import authStore from "../../stores/Auth/authStore";
 
 const Menu = observer(() => {
   const navigate = useNavigate();
@@ -16,12 +17,10 @@ const Menu = observer(() => {
     ticketsStore.getListTickets();
   }, []);
 
-  if (authStore.isLoading) return null;
-
   return (
     <div className={style.wrapper}>
       <div className={style.menu}>
-        <Button text="Экзамен" />
+        <Button text="Экзамен" onClick={() => examStore.getExam()} />
 
         <ul className={style.menu__listTickets}>
           {ticketsStore.tickets.map((ticket, i) => (
