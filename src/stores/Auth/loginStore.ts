@@ -62,6 +62,7 @@ class LoginStore {
           firstName: data.firstName,
           secondName: data.secondName,
           email: credentials.email,
+          token: data.token
         },
         data.token
       );

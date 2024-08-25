@@ -1,3 +1,11 @@
+import { useParams } from "react-router-dom";
+
 export default function Questions() {
-  return <div>Questions</div>;
+  const { ticketId } = useParams();
+
+  return (
+    <div>
+      <h1>Questions {ticketId}</h1>
+    </div>
+  );
 }
