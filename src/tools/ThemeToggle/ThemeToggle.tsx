@@ -4,12 +4,17 @@ import MoonIcon from "../../../public/svg/header/MoonIcon";
 import SunIcon from "../../../public/svg/header/SunIcon";
 
 import Button from "../../Ui/Button/Button";
+import { storageSelectors } from "../../stores/storageSelectors";
 
 export default function ThemeToggle() {
-  const [themeMode, setThemeMode] = useState("whiteMode");
+  const [themeMode, setThemeMode] = useState(() => {
+    const savedTheme = localStorage.getItem(storageSelectors.theme);
+    return savedTheme || "whiteMode";
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", themeMode);
+    localStorage.setItem(storageSelectors.theme, themeMode);
 
     return () => {
       document.documentElement.removeAttribute("data-theme");

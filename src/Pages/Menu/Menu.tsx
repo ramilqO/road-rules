@@ -9,7 +9,7 @@ function Menu() {
 
         <ul className={style.menu__listTickets}>
           {Array.from({ length: 6 }, (_, i) => (
-            <li className={style.listTickets__itemTicket}>
+            <li className={style.listTickets__itemTicket} key={i}>
               <Button buttonStyle="ticketButton" text={`Билет ${i + 1}`} />
             </li>
           ))}
