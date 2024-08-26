@@ -25,7 +25,7 @@ export default function Questions() {
         </ul>
       </div>
 
-      <Question currentQuestion={currentQuestion} />
+      <Question indexQuestion={currentQuestion} />
     </div>
   );
 }

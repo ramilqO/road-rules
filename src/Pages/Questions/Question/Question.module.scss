@@ -17,7 +17,7 @@
   border-radius: 8px;
 
   &__img {
-    object-fit: cover;
+    object-fit: contain;
 
     width: 100%;
     height: auto;
@@ -26,9 +26,6 @@
   }
 
   &__titleQuestion {
-    text-align: center;
-    text-wrap: wrap;
-
     font-weight: 600;
     font-size: 24px;
     line-height: 28.8px;

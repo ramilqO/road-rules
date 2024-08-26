@@ -1,24 +1,42 @@
-import style from "./Question.module.scss";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-function Question({ currentQuestion }: { currentQuestion: number }) {
+import style from "./Question.module.scss";
+import ticketsStore from "../../../stores/Tickets/ticketsStore";
+import { observer } from "mobx-react-lite";
+
+const Question = observer(({ indexQuestion }: { indexQuestion: number }) => {
+  const { ticketId } = useParams();
+  const currentQuestion = ticketsStore.questions[indexQuestion];
+
+  useEffect(function () {
+    ticketsStore.getTicketQuestions(String(ticketId));
+  }, []);
+
+  if (currentQuestion === undefined) return;
+
   return (
     <div className={style.question}>
       <img
         // Короче, если с бэка не прилеьтит фотография то тогда будет empty
-        src="/public/png/empty-image.png"
+        src={`${
+          currentQuestion.img.length > 0
+            ? currentQuestion.img
+            : "/public/png/empty-image.png"
+        }`}
         alt="Пустая фотография"
         className={style.question__img}
       />
 
       <h1 className={style.question__titleQuestion}>
-        Вопрос {currentQuestion}: Сдашь ты на права или нет
+        {currentQuestion.question}
       </h1>
 
       <ul className={style.question__listAnswers}>
-        {Array.from({ length: 4 }, (_, i) => (
-          <li className={style.listAnswers__item} key={i}>
+        {currentQuestion.answers.map((answer) => (
+          <li className={style.listAnswers__item} key={answer.answerId}>
             <button type="submit" className={style.listAnswers__button}>
-              Насколько ты оцениваешь вот эту ситуацию на дороге - {i + 1}
+              {answer.answerText}
             </button>
           </li>
         ))}
@@ -50,6 +68,6 @@ function Question({ currentQuestion }: { currentQuestion: number }) {
       </ul>
     </div>
   );
-}
+});
 
 export default Question;
