@@ -31,7 +31,6 @@ const Questions = observer(() => {
               className={style.listPagination__item}
               key={question.questionId}
             >
-              {/* TODO: у тебя есть компонент кнопки, не нужно заново их рисовать */}
               <button
                 className={`${style.listPagination__button} ${
                   currentQuestion === i + 1 &&
