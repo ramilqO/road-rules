@@ -1,55 +1,96 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import style from "./Question.module.scss";
+import ticketsStore from "../../../stores/Tickets/ticketsStore";
+import { observer } from "mobx-react-lite";
 
-function Question({ currentQuestion }: { currentQuestion: number }) {
-  return (
-    <div className={style.question}>
-      <img
-        // Короче, если с бэка не прилеьтит фотография то тогда будет empty
-        src="/public/png/empty-image.png"
-        alt="Пустая фотография"
-        className={style.question__img}
-      />
+const Question = observer(
+  ({
+    indexQuestion,
+    action,
+  }: {
+    indexQuestion: number;
+    action: (value: number) => void;
+  }) => {
+    const { ticketId } = useParams();
 
-      <h1 className={style.question__titleQuestion}>
-        Вопрос {currentQuestion}: Сдашь ты на права или нет
-      </h1>
+    const questions = ticketsStore.questions;
+    const currentQuestion = questions[indexQuestion];
 
-      <ul className={style.question__listAnswers}>
-        {Array.from({ length: 4 }, (_, i) => (
-          <li className={style.listAnswers__item} key={i}>
-            <button type="submit" className={style.listAnswers__button}>
-              Насколько ты оцениваешь вот эту ситуацию на дороге - {i + 1}
+    const isFirstQuestion = indexQuestion === 1;
+    const isLastQuestion = indexQuestion === questions.length - 1;
+
+    useEffect(() => {
+      ticketsStore.getTicketQuestions(String(ticketId));
+    }, [ticketId]);
+
+    if (!currentQuestion) return null;
+
+    return (
+      <div className={style.question}>
+        <img
+          src={
+            currentQuestion.img.length > 0
+              ? currentQuestion.img
+              : "/public/png/empty-image.png"
+          }
+          alt="Пустая фотография"
+          className={style.question__img}
+        />
+
+        <h1 className={style.question__titleQuestion}>
+          {currentQuestion.question}
+        </h1>
+
+        <ul className={style.question__listAnswers}>
+          {currentQuestion.answers.map((answer) => (
+            <li className={style.listAnswers__item} key={answer.answerId}>
+              <button type="submit" className={style.listAnswers__button}>
+                {answer.answerText}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <ul className={style.question__navigationList}>
+          <li className={style.navigationList__item}>
+            <button
+              className={`${style.navigationList__button} ${
+                isFirstQuestion && style["navigationList__button--disabled"]
+              }`}
+              disabled={isFirstQuestion}
+              onClick={() => action(indexQuestion - 1)}
+            >
+              <span>
+                <img
+                  src="/public/svg/question/Arrow left.svg"
+                  alt="Предыдущий вопрос"
+                />
+              </span>
+              Предыдущий вопрос
             </button>
           </li>
-        ))}
-      </ul>
-
-      <ul className={style.question__navigationList}>
-        <li className={style.navigationList__item}>
-          <button className={style.navigationList__button}>
-            <span>
-              <img
-                src="/public/svg/question/Arrow left.svg"
-                alt="Предыдущий вопрос"
-              />
-            </span>
-            Предыдущий вопрос
-          </button>
-        </li>
-        <li className={style.navigationList__item}>
-          <button className={style.navigationList__button}>
-            Следующий вопрос
-            <span>
-              <img
-                src="/public/svg/question/Arrow right.svg"
-                alt="Следующий вопрос"
-              />
-            </span>
-          </button>
-        </li>
-      </ul>
-    </div>
-  );
-}
+          <li className={style.navigationList__item}>
+            <button
+              className={`${style.navigationList__button} ${
+                isLastQuestion && style["navigationList__button--disabled"]
+              }`}
+              disabled={isLastQuestion}
+              onClick={() => action(indexQuestion + 1)}
+            >
+              Следующий вопрос
+              <span>
+                <img
+                  src="/public/svg/question/Arrow right.svg"
+                  alt="Следующий вопрос"
+                />
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    );
+  }
+);
 
 export default Question;

@@ -17,7 +17,7 @@
   border-radius: 8px;
 
   &__img {
-    object-fit: cover;
+    object-fit: contain;
 
     width: 100%;
     height: auto;
@@ -26,9 +26,6 @@
   }
 
   &__titleQuestion {
-    text-align: center;
-    text-wrap: wrap;
-
     font-weight: 600;
     font-size: 24px;
     line-height: 28.8px;
@@ -59,6 +56,7 @@
 
       background-color: #2c2c2c; // момент
       color: #f5f5f5; // момент
+      cursor: pointer;
     }
   }
 
@@ -83,8 +81,12 @@
 
     background-color: transparent;
     color: #1e1e1e; // момент
-
     cursor: pointer;
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
 
     span {
       display: flex;
