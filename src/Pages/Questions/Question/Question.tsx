@@ -1,8 +1,8 @@
+import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import style from "./Question.module.scss";
 import ticketsStore from "../../../stores/Tickets/ticketsStore";
-import { observer } from "mobx-react-lite";
+import style from "./Question.module.scss";
 
 const Question = observer(
   ({
@@ -44,6 +44,7 @@ const Question = observer(
 
         <ul className={style.question__listAnswers}>
           {currentQuestion.answers.map((answer) => (
+            // TODO: у тебя есть компонент кнопки, не нужно заново их рисовать
             <li className={style.listAnswers__item} key={answer.answerId}>
               <button type="submit" className={style.listAnswers__button}>
                 {answer.answerText}
@@ -60,6 +61,7 @@ const Question = observer(
               }`}
               disabled={isFirstQuestion}
               onClick={() => action(indexQuestion - 1)}
+              type="button"
             >
               <span>
                 <img
@@ -77,6 +79,7 @@ const Question = observer(
               }`}
               disabled={isLastQuestion}
               onClick={() => action(indexQuestion + 1)}
+              type="button"
             >
               Следующий вопрос
               <span>
@@ -90,7 +93,7 @@ const Question = observer(
         </ul>
       </div>
     );
-  }
+  },
 );
 
 export default Question;

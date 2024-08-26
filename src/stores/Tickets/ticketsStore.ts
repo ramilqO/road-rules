@@ -1,8 +1,9 @@
+import axios from "axios";
+import type { AxiosResponse } from "axios";
 import { makeAutoObservable } from "mobx";
-import axios, { AxiosResponse } from "axios";
 
-import authStore from "../Auth/authStore";
 import errorHandling from "../../tools/errorHandling";
+import authStore from "../Auth/authStore";
 import tokenServices from "../tokenServices";
 
 interface IQuestion {
@@ -41,7 +42,7 @@ class TicketsStore {
     if (!persistedToken) {
       errorHandling(
         "Ошибка при получении данных. Отсутствует токен.",
-        "Билетов"
+        "Билетов",
       );
       return;
     }
@@ -66,7 +67,7 @@ class TicketsStore {
   async getTicketQuestions(ticketId: string) {
     await this.fetchData(async () => {
       const { data }: AxiosResponse<IQuestion[]> = await axios.get(
-        `api/tickets/${ticketId}`
+        `api/tickets/${ticketId}`,
       );
       this.setQuestions(data);
     });
