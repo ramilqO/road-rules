@@ -1,14 +1,26 @@
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import ticketsStore from "../../stores/Tickets/ticketsStore";
-import Question from "./Question/Question";
 import style from "./Questions.module.scss";
 
+import Question from "./Question/Question";
+import Loader from "../../Ui/Loader/Loader";
+
+import authStore from "../../stores/Auth/authStore";
+import ticketsStore from "../../stores/Tickets/ticketsStore";
+
 const Questions = observer(() => {
+  const { ticketId } = useParams();
+
   const [currentQuestion, setCurrentQuestion] = useState(1);
-  // TODO: вот это я не совем понял, зачем ты делаешь копию массива?
   const questionsToRender = ticketsStore.questions.slice(0, -1);
+
+  useEffect(() => {
+    ticketsStore.getTicketQuestions(String(ticketId));
+  }, []);
+
+  if (authStore.isLoading) return <Loader loaderStyle="huge" />;
 
   return (
     <div className={style.questions}>

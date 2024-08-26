@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+
 import ticketsStore from "../../../stores/Tickets/ticketsStore";
 import style from "./Question.module.scss";
 
@@ -12,17 +11,11 @@ const Question = observer(
     indexQuestion: number;
     action: (value: number) => void;
   }) => {
-    const { ticketId } = useParams();
-
     const questions = ticketsStore.questions;
     const currentQuestion = questions[indexQuestion];
 
     const isFirstQuestion = indexQuestion === 1;
     const isLastQuestion = indexQuestion === questions.length - 1;
-
-    useEffect(() => {
-      ticketsStore.getTicketQuestions(String(ticketId));
-    }, [ticketId]);
 
     if (!currentQuestion) return null;
 
@@ -93,7 +86,7 @@ const Question = observer(
         </ul>
       </div>
     );
-  },
+  }
 );
 
 export default Question;
