@@ -69,7 +69,6 @@ class TicketsStore {
         `api/tickets/${ticketId}`
       );
       this.setQuestions(data);
-      console.log(data)
     });
   }
 }

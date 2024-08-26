@@ -1,16 +1,23 @@
 import { useState } from "react";
+import { observer } from "mobx-react-lite";
+
 import style from "./Questions.module.scss";
 import Question from "./Question/Question";
+import ticketsStore from "../../stores/Tickets/ticketsStore";
 
-export default function Questions() {
+const Questions = observer(() => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
+  const questionsToRender = ticketsStore.questions.slice(0, -1);
 
   return (
     <div className={style.questions}>
       <div className={style.questions__paginationWrapper}>
         <ul className={style.questions__listPagination}>
-          {Array.from({ length: 20 }, (_, i) => (
-            <li className={style.listPagination__item} key={i}>
+          {questionsToRender.map((question, i) => (
+            <li
+              className={style.listPagination__item}
+              key={question.questionId}
+            >
               <button
                 className={`${style.listPagination__button} ${
                   currentQuestion === i + 1 &&
@@ -25,7 +32,14 @@ export default function Questions() {
         </ul>
       </div>
 
-      <Question indexQuestion={currentQuestion} />
+      <Question
+        indexQuestion={currentQuestion}
+        action={(newCurrentQuestionIndex: number) =>
+          setCurrentQuestion(newCurrentQuestionIndex)
+        }
+      />
     </div>
   );
-}
+});
+
+export default Questions;
