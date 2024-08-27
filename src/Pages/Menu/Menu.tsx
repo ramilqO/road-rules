@@ -8,6 +8,8 @@ import Button from "../../Ui/Button/Button";
 
 import ticketsStore from "../../stores/Tickets/ticketsStore";
 import examStore from "../../stores/Exam/examStore";
+import authStore from "../../stores/Auth/authStore";
+import Loader from "../../Ui/Loader/Loader";
 
 const Menu = observer(() => {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ const Menu = observer(() => {
   }, []);
 
   if (ticketsStore.tickets.length === 0) return null;
+  if (authStore.isLoading) return <Loader loaderStyle="huge" />;
 
   return (
     <div className={style.wrapper}>
