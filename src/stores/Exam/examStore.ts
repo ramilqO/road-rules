@@ -45,7 +45,6 @@ class ExamStore {
     try {
       const { data } = await axios.get("api/exam");
       this.setExam(data);
-      console.log(data)
     } catch (error) {
       errorHandling(error, "Экзамена");
     } finally {
