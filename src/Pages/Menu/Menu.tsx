@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom";
 import style from "./Menu.module.scss";
 
 import Button from "../../Ui/Button/Button";
+import Loader from "../../Ui/Loader/Loader";
 
 import ticketsStore from "../../stores/Tickets/ticketsStore";
-import examStore from "../../stores/Exam/examStore";
 import authStore from "../../stores/Auth/authStore";
-import Loader from "../../Ui/Loader/Loader";
 
 const Menu = observer(() => {
   const navigate = useNavigate();
@@ -24,16 +23,15 @@ const Menu = observer(() => {
   return (
     <div className={style.wrapper}>
       <div className={style.menu}>
-        <Button text="Экзамен" onClick={() => examStore.getExam()} />
+        <Button text="Экзамен" onClick={() => navigate("/exam")} />
 
         <ul className={style.menu__listTickets}>
           {ticketsStore.tickets.map((ticket, i) => (
-            // Изменил на ticket т.к. index передавать нельзя по правилам как знаешь
             <li className={style.listTickets__itemTicket} key={ticket}>
               <Button
                 buttonStyle="ticketButton"
                 text={`Билет ${i + 1}`}
-                onClick={() => navigate(`/menu/${String(ticket)}`)}
+                onClick={() => navigate(`/tickets/${String(ticket)}`)}
               />
             </li>
           ))}

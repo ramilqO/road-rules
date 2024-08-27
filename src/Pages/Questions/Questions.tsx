@@ -9,19 +9,34 @@ import Loader from "../../Ui/Loader/Loader";
 
 import authStore from "../../stores/Auth/authStore";
 import ticketsStore from "../../stores/Tickets/ticketsStore";
+import examStore from "../../stores/Exam/examStore";
 
 const Questions = observer(() => {
   const { ticketId } = useParams();
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  const [currentQuestion, setCurrentQuestion] = useState(1);
-  const questionsToRender = ticketsStore.questions.slice(0, -1);
+  const questionsToRender =
+    ticketsStore.questions.length > 0 ? ticketsStore.questions : examStore.exam;
+  const isFirstQuestion = currentQuestionIndex === 0;
+  const isLastQuestion = currentQuestionIndex === questionsToRender.length - 1;
 
-  useEffect(() => {
-    ticketsStore.getTicketQuestions(String(ticketId));
-  }, []);
+  function handleButtonClick(index: number) {
+    if (index >= 0 && index < questionsToRender.length) {
+      setCurrentQuestionIndex(index);
+    }
+  }
+
+  if (ticketId)
+    useEffect(() => {
+      ticketsStore.getTicketQuestions(String(ticketId));
+    }, []);
+  else {
+    useEffect(() => {
+      examStore.getExam();
+    }, []);
+  }
 
   if (authStore.isLoading) return <Loader loaderStyle="huge" />;
-
   return (
     <div className={style.questions}>
       <div className={style.questions__paginationWrapper}>
@@ -33,10 +48,10 @@ const Questions = observer(() => {
             >
               <button
                 className={`${style.listPagination__button} ${
-                  currentQuestion === i + 1 &&
+                  currentQuestionIndex === i &&
                   style["listPagination__button--current"]
                 }`}
-                onClick={() => setCurrentQuestion(i + 1)}
+                onClick={() => handleButtonClick(i)}
                 type="button"
               >
                 {i + 1}
@@ -47,10 +62,13 @@ const Questions = observer(() => {
       </div>
 
       <Question
-        indexQuestion={currentQuestion}
-        action={(newCurrentQuestionIndex: number) =>
-          setCurrentQuestion(newCurrentQuestionIndex)
+        indexQuestion={currentQuestionIndex}
+        action={(newCurrentQuestionIndex) =>
+          handleButtonClick(newCurrentQuestionIndex)
         }
+        currentQuestion={questionsToRender[currentQuestionIndex]}
+        isFirstQuestion={isFirstQuestion}
+        isLastQuestion={isLastQuestion}
       />
     </div>
   );

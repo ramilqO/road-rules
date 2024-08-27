@@ -37,7 +37,15 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "menu/:ticketId",
+        path: "tickets/:ticketId",
+        element: (
+          <PrivateRoute>
+            <Questions />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "exam",
         element: (
           <PrivateRoute>
             <Questions />
