@@ -28,8 +28,10 @@ const Questions = observer(() => {
 
   if (ticketId)
     useEffect(() => {
+      console.log(ticketsStore.currentTicketId);
+      if (ticketId === ticketsStore.currentTicketId) return;
       ticketsStore.getTicketQuestions(String(ticketId));
-    }, []);
+    }, [ticketId]);
   else {
     useEffect(() => {
       examStore.getExam();
@@ -44,7 +46,8 @@ const Questions = observer(() => {
           {questionsToRender.map((question, i) => (
             <li
               className={style.listPagination__item}
-              key={question.questionId}
+              // TODO На время, пока не будет исправлено на бэке
+              key={question.questionId + i}
             >
               <button
                 className={`${style.listPagination__button} ${
