@@ -7,7 +7,7 @@ import style from "./Questions.module.scss";
 const Question = lazy(() => import("./Question/Question"));
 const Loader = lazy(() => import("../../Ui/Loader/Loader"));
 
-import authStore from "../../stores/Auth/authStore";
+import authStore from "../../stores/Auth/authStore1";
 import ticketsStore from "../../stores/Tickets/ticketsStore";
 import examStore from "../../stores/Exam/examStore";
 

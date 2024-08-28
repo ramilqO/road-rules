@@ -1,7 +1,7 @@
 import type React from "react";
+import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 
-import { observer } from "mobx-react-lite";
 import authStore from "../../stores/Auth/authStore";
 
 interface IPrivateRoute {

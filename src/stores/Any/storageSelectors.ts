@@ -1,6 +1,8 @@
-export const storageSelectors = {
+const storageSelectors = {
   userInfo: "userInfo",
   theme: "theme",
   questions: "questions",
   currentTicketId: "currentTicketId",
 };
+
+export default storageSelectors;

@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
-import registerStore from "../stores/Auth/registerStore";
-import capitalizeFirstLetter from "./capitalizeFirstLetter";
-import authStore from "../stores/Auth/authStore";
+import registerStore from "../../stores/Auth/registerStore";
+import capitalizeFirstLetter from "../Helpers/capitalizeFirstLetter.ts";
+import authStore from "../../stores/Auth/authStore";
 
 interface ICredentials {
   firstName: string;
