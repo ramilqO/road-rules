@@ -2,7 +2,7 @@ import { lazy, type ReactNode } from "react";
 import { observer } from "mobx-react-lite";
 
 import style from "./Button.module.scss";
-import authStore from "../../stores/Auth/authStore1";
+import authStore from "../../stores/Auth/authStore";
 
 const Loader = lazy(() => import("../Loader/Loader"));
 
