@@ -1,8 +1,13 @@
+import { lazy } from "react";
 import { observer } from "mobx-react-lite";
 import style from "./Question.module.scss";
 
-import ArrowLeftIcon from "../../../../public/svg/question/ArrowLeftIcon";
-import ArrowRightIcon from "../../../../public/svg/question/ArrowRightIcon";
+const ArrowLeftIcon = lazy(
+  () => import("../../../../public/svg/question/ArrowLeftIcon")
+);
+const ArrowRightIcon = lazy(
+  () => import("../../../../public/svg/question/ArrowRightIcon")
+);
 
 interface IAnswer {
   answerText: string;

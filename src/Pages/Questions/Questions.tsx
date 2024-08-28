@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import style from "./Questions.module.scss";
 
-import Question from "./Question/Question";
-import Loader from "../../Ui/Loader/Loader";
+const Question = lazy(() => import("./Question/Question"));
+const Loader = lazy(() => import("../../Ui/Loader/Loader"));
 
 import authStore from "../../stores/Auth/authStore";
 import ticketsStore from "../../stores/Tickets/ticketsStore";

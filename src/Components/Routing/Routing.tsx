@@ -1,20 +1,22 @@
+import { lazy } from "react";
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from "react-router-dom";
 
-import AppLayout from "../../Ui/AppLayout/AppLayout";
-import Menu from "../../Pages/Menu/Menu";
-import Questions from "../../Pages/Questions/Questions";
-import Results from "../../Pages/Results/Results";
+const AppLayout = lazy(() => import("../../Ui/AppLayout/AppLayout"));
+const Menu = lazy(() => import("../../Pages/Menu/Menu"));
+const Questions = lazy(() => import("../../Pages/Questions/Questions"));
+const Results = lazy(() => import("../../Pages/Results/Results"));
+const Login = lazy(() => import("../../Pages/Auth/Login/Login"));
+const Register = lazy(() => import("../../Pages/Auth/Register/Register"));
+const PageNotFound = lazy(
+  () => import("../../Pages/PageNotFound/PageNotFound")
+);
 
-import Login from "../../Pages/Auth/Login/Login";
 import { LoginAction as loginActionData } from "../../tools/LoginAction";
-import Register from "../../Pages/Auth/Register/Register";
 import { RegisterAction as registerActionData } from "../../tools/RegisterAction";
-
-import PageNotFound from "../../Pages/PageNotFound/PageNotFound";
 
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
