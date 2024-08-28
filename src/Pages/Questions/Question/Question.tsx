@@ -1,38 +1,56 @@
+import { lazy } from "react";
 import { observer } from "mobx-react-lite";
-
-import ticketsStore from "../../../stores/Tickets/ticketsStore";
 import style from "./Question.module.scss";
 
-import ArrowLeftIcon from "../../../../public/svg/question/ArrowLeftIcon";
-import ArrowRightIcon from "../../../../public/svg/question/ArrowRightIcon";
+const ArrowLeftIcon = lazy(
+  () => import("../../../../public/svg/question/ArrowLeftIcon")
+);
+const ArrowRightIcon = lazy(
+  () => import("../../../../public/svg/question/ArrowRightIcon")
+);
+
+interface IAnswer {
+  answerText: string;
+  answerId: string;
+}
+
+interface ICurrentQuestion {
+  img: string;
+  question: string;
+  ticketId: string;
+  questionId: string;
+  answers: IAnswer[];
+}
+
+interface QuestionProps {
+  indexQuestion: number;
+  action: (value: number) => void;
+  currentQuestion: ICurrentQuestion;
+  isFirstQuestion: boolean;
+  isLastQuestion: boolean;
+}
 
 const Question = observer(
   ({
     indexQuestion,
     action,
-  }: {
-    indexQuestion: number;
-    action: (value: number) => void;
-  }) => {
-    const questions = ticketsStore.questions;
-    const currentQuestion = questions[indexQuestion];
-
-    const isFirstQuestion = indexQuestion === 1;
-    const isLastQuestion = indexQuestion === questions.length - 1;
-
+    currentQuestion,
+    isFirstQuestion,
+    isLastQuestion,
+  }: QuestionProps) => {
     if (!currentQuestion) return null;
 
     return (
       <div className={style.question}>
-        {currentQuestion.img.length > 0 ? (
+        {currentQuestion.img ? (
           <img
             src={currentQuestion.img}
-            alt="Пустая фотография"
+            alt="Изображение вопроса"
             className={style.question__img}
           />
         ) : (
-          <div className={style.wrapperEmeptyImage}>
-            <h1 className={style.wrapperEmeptyImage__title}>
+          <div className={style.wrapperEmptyImage}>
+            <h1 className={style.wrapperEmptyImage__title}>
               Вопрос без изображения
             </h1>
           </div>
@@ -45,7 +63,7 @@ const Question = observer(
         <ul className={style.question__listAnswers}>
           {currentQuestion.answers.map((answer) => (
             <li className={style.listAnswers__item} key={answer.answerId}>
-              <button type="submit" className={style.listAnswers__button}>
+              <button type="button" className={style.listAnswers__button}>
                 {answer.answerText}
               </button>
             </li>
@@ -56,13 +74,13 @@ const Question = observer(
           <li className={style.navigationList__item}>
             <button
               className={`${style.navigationList__button} ${
-                isFirstQuestion && style["navigationList__button--disabled"]
+                isFirstQuestion ? style["navigationList__button--disabled"] : ""
               }`}
               disabled={isFirstQuestion}
               onClick={() => action(indexQuestion - 1)}
               type="button"
             >
-              <span color="#f5f5f5">
+              <span>
                 <ArrowLeftIcon />
               </span>
               Предыдущий вопрос
@@ -71,14 +89,13 @@ const Question = observer(
           <li className={style.navigationList__item}>
             <button
               className={`${style.navigationList__button} ${
-                isLastQuestion && style["navigationList__button--disabled"]
+                isLastQuestion ? style["navigationList__button--disabled"] : ""
               }`}
               disabled={isLastQuestion}
               onClick={() => action(indexQuestion + 1)}
               type="button"
             >
               Следующий вопрос
-              
               <ArrowRightIcon />
             </button>
           </li>

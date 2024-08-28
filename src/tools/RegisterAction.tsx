@@ -23,8 +23,6 @@ export async function RegisterAction({ request }: { request: Request }) {
     department: String(data.department),
   };
 
-  console.log(credentials);
-
   await registerStore.register(credentials);
 
   if (!authStore.isAuth) return redirect("/register");

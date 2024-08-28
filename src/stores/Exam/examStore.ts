@@ -13,18 +13,18 @@ interface IExam {
   answers: {
     answerText: string;
     answerId: string;
-  };
+  }[];
 }
 
 class ExamStore {
-  exam: IExam | null;
+  exam: IExam[];
 
   constructor() {
-    this.exam = null;
+    this.exam = [];
     makeAutoObservable(this);
   }
 
-  setExam(exam: IExam) {
+  setExam(exam: IExam[]) {
     this.exam = exam;
   }
 

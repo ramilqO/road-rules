@@ -2,6 +2,7 @@ import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import tokenServices from "../tokenServices";
 import { storageSelectors } from "../storageSelectors";
+import getLocalStorage from "../../tools/getLocalStorageData";
 
 axios.defaults.baseURL = "http://road-rules-backend.webtm.ru/";
 
@@ -12,12 +13,9 @@ interface IUserInfo {
   token: string;
 }
 
-const getLocalStorageUserInfo = (): IUserInfo | null => {
-  const storedData = localStorage.getItem(storageSelectors.userInfo);
-  return storedData ? JSON.parse(storedData) : null;
-};
-
-const localStorageUserInfo = getLocalStorageUserInfo();
+const localStorageUserInfo = getLocalStorage<IUserInfo>(
+  storageSelectors.userInfo
+);
 
 export class AuthStore {
   userInfo: IUserInfo | null;

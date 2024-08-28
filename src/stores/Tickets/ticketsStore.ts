@@ -2,6 +2,9 @@ import axios from "axios";
 import type { AxiosResponse } from "axios";
 import { makeAutoObservable } from "mobx";
 
+import { storageSelectors } from "../storageSelectors";
+import getLocalStorage from "../../tools/getLocalStorageData";
+
 import errorHandling from "../../tools/errorHandling";
 import authStore from "../Auth/authStore";
 import tokenServices from "../tokenServices";
@@ -17,13 +20,25 @@ interface IQuestion {
   }[];
 }
 
+const localStorageQuestions = getLocalStorage<IQuestion[]>(
+  storageSelectors.questions
+);
+const localStorageCurrentTicketId = getLocalStorage(
+  storageSelectors.currentTicketId
+);
+
 class TicketsStore {
   tickets: string[];
+  currentTicketId: string;
   questions: IQuestion[];
 
   constructor() {
+    this.questions = localStorageQuestions || [];
     this.tickets = [];
-    this.questions = [];
+    this.currentTicketId = localStorageCurrentTicketId
+      ? String(localStorageCurrentTicketId)
+      : "";
+
     makeAutoObservable(this);
   }
 
@@ -31,8 +46,12 @@ class TicketsStore {
     this.tickets = tickets;
   }
 
-  setQuestions(questions: IQuestion[]) {
+  setQuestions(questions: IQuestion[], ticketId?: string) {
+    this.currentTicketId = ticketId || "";
     this.questions = questions;
+
+    localStorage.setItem(storageSelectors.questions, JSON.stringify(questions));
+    localStorage.setItem(storageSelectors.currentTicketId, ticketId || "");
   }
 
   async fetchData(callback: () => Promise<void>) {
@@ -42,7 +61,7 @@ class TicketsStore {
     if (!persistedToken) {
       errorHandling(
         "Ошибка при получении данных. Отсутствует токен.",
-        "Билетов",
+        "Билетов"
       );
       return;
     }
@@ -67,9 +86,9 @@ class TicketsStore {
   async getTicketQuestions(ticketId: string) {
     await this.fetchData(async () => {
       const { data }: AxiosResponse<IQuestion[]> = await axios.get(
-        `api/tickets/${ticketId}`,
+        `api/tickets/${ticketId}`
       );
-      this.setQuestions(data);
+      this.setQuestions(data, ticketId);
     });
   }
 }

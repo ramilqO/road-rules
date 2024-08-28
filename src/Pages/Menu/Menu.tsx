@@ -1,43 +1,57 @@
-import { useEffect } from "react";
+import { lazy, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 
 import style from "./Menu.module.scss";
 
-import Button from "../../Ui/Button/Button";
+const Button = lazy(() => import("../../Ui/Button/Button"));
+const Loader = lazy(() => import("../../Ui/Loader/Loader"));
 
 import ticketsStore from "../../stores/Tickets/ticketsStore";
-import examStore from "../../stores/Exam/examStore";
 import authStore from "../../stores/Auth/authStore";
-import Loader from "../../Ui/Loader/Loader";
 
 const Menu = observer(() => {
   const navigate = useNavigate();
+  const [countTicketToRenderCount, setCountTicketToRender] = useState(8);
+
+  const ticketsToRender = ticketsStore.tickets.slice(
+    0,
+    countTicketToRenderCount
+  );
 
   useEffect(() => {
     ticketsStore.getListTickets();
   }, []);
 
-  if (ticketsStore.tickets.length === 0) return null;
   if (authStore.isLoading) return <Loader loaderStyle="huge" />;
+  if (ticketsStore.tickets.length === 0) return null;
 
   return (
     <div className={style.wrapper}>
       <div className={style.menu}>
-        <Button text="Экзамен" onClick={() => examStore.getExam()} />
+        <Button text="Экзамен" onClick={() => navigate("/exam")} />
 
         <ul className={style.menu__listTickets}>
-          {ticketsStore.tickets.map((ticket, i) => (
-            // Изменил на ticket т.к. index передавать нельзя по правилам как знаешь
+          {ticketsToRender.map((ticket, i) => (
             <li className={style.listTickets__itemTicket} key={ticket}>
               <Button
                 buttonStyle="ticketButton"
                 text={`Билет ${i + 1}`}
-                onClick={() => navigate(`/menu/${String(ticket)}`)}
+                onClick={() => navigate(`/tickets/${String(ticket)}`)}
               />
             </li>
           ))}
         </ul>
+        {countTicketToRenderCount !== ticketsStore.tickets.length && (
+          <Button
+            text="Показать больше"
+            onClick={() =>
+              setCountTicketToRender(
+                (countTicketToRenderCount) => countTicketToRenderCount + 8
+              )
+            }
+          />
+        )}
       </div>
     </div>
   );
