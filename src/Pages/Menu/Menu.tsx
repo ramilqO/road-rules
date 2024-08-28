@@ -17,8 +17,8 @@ const Menu = observer(() => {
     ticketsStore.getListTickets();
   }, []);
 
-  if (ticketsStore.tickets.length === 0) return null;
   if (authStore.isLoading) return <Loader loaderStyle="huge" />;
+  if (ticketsStore.tickets.length === 0) return null;
 
   return (
     <div className={style.wrapper}>
