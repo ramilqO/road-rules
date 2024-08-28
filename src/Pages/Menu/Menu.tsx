@@ -29,8 +29,6 @@ const Menu = observer(() => {
   return (
     <div className={style.wrapper}>
       <div className={style.menu}>
-        <Button text="Экзамен" onClick={() => navigate("/exam")} />
-
         <ul className={style.menu__listTickets}>
           {ticketsToRender.map((ticket, i) => (
             <li className={style.listTickets__itemTicket} key={ticket}>
@@ -42,7 +40,7 @@ const Menu = observer(() => {
             </li>
           ))}
         </ul>
-        {countTicketToRenderCount !== ticketsStore.tickets.length && (
+        {countTicketToRenderCount !== ticketsStore.tickets.length ? (
           <Button
             text="Показать больше"
             onClick={() =>
@@ -51,6 +49,8 @@ const Menu = observer(() => {
               )
             }
           />
+        ) : (
+          <Button text="Скрыть" onClick={() => setCountTicketToRender(8)} />
         )}
       </div>
     </div>

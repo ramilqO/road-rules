@@ -24,10 +24,6 @@ class ExamStore {
     makeAutoObservable(this);
   }
 
-  setExam(exam: IExam[]) {
-    this.exam = exam;
-  }
-
   async getExam() {
     authStore.setIsLoading(true);
     const persistedToken = authStore.userInfo?.token;
@@ -44,7 +40,7 @@ class ExamStore {
 
     try {
       const { data } = await axios.get("api/exam");
-      this.setExam(data);
+      this.exam = data;
     } catch (error) {
       errorHandling(error, "Экзамена");
     } finally {
