@@ -94,8 +94,8 @@ function checkInternetConnection(titleText: string) {
 }
 
 function checkToken(titleText: string) {
-  const token = authStore.userInfo?.token;
-  if (token && token.length === 0) {
+  const tokenAuthorization = authStore.userInfo?.token;
+  if (!tokenAuthorization) {
     notificationStore.setNotification({
       type: "error",
       titleText: `Ошибка ${titleText}`,
@@ -104,6 +104,7 @@ function checkToken(titleText: string) {
     authStore.setIsLoading(false);
     return;
   }
+  token.set(tokenAuthorization);
   return token;
 }
 
