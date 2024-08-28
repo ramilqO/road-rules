@@ -16,7 +16,9 @@ const Questions = observer(() => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const questionsToRender =
-    ticketsStore.questions.length > 0 ? ticketsStore.questions : examStore.exam;
+    ticketsStore.questions.length > 0 && ticketId
+      ? ticketsStore.questions
+      : examStore.exam;
   const isFirstQuestion = currentQuestionIndex === 0;
   const isLastQuestion = currentQuestionIndex === questionsToRender.length - 1;
 
@@ -26,17 +28,15 @@ const Questions = observer(() => {
     }
   }
 
-  if (ticketId)
-    useEffect(() => {
-      console.log(ticketsStore.currentTicketId);
-      if (ticketId === ticketsStore.currentTicketId) return;
-      ticketsStore.getTicketQuestions(String(ticketId));
-    }, [ticketId]);
-  else {
-    useEffect(() => {
+  useEffect(() => {
+    if (ticketId) {
+      if (String(ticketId) !== String(ticketsStore.currentTicketId)) {
+        ticketsStore.getTicketQuestions(String(ticketId));
+      }
+    } else if (!ticketId) {
       examStore.getExam();
-    }, []);
-  }
+    }
+  }, [ticketId]);
 
   if (authStore.isLoading) return <Loader loaderStyle="huge" />;
   return (
@@ -46,7 +46,6 @@ const Questions = observer(() => {
           {questionsToRender.map((question, i) => (
             <li
               className={style.listPagination__item}
-              // TODO На время, пока не будет исправлено на бэке
               key={question.questionId + i}
             >
               <button

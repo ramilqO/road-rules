@@ -20,18 +20,12 @@ interface IQuestion {
   }[];
 }
 
-interface ILocalStorageCurrentTicketId {
-  ticketId: string;
-}
-
 const localStorageQuestions = getLocalStorage<IQuestion[]>(
   storageSelectors.questions
 );
-
-const localStorageCurrentTicketId =
-  getLocalStorage<ILocalStorageCurrentTicketId>(
-    storageSelectors.currentTicketId
-  );
+const localStorageCurrentTicketId = getLocalStorage(
+  storageSelectors.currentTicketId
+);
 
 class TicketsStore {
   tickets: string[];
@@ -39,10 +33,10 @@ class TicketsStore {
   questions: IQuestion[];
 
   constructor() {
-    this.questions = localStorageQuestions ? localStorageQuestions : [];
+    this.questions = localStorageQuestions || [];
     this.tickets = [];
     this.currentTicketId = localStorageCurrentTicketId
-      ? localStorageCurrentTicketId.ticketId
+      ? String(localStorageCurrentTicketId)
       : "";
 
     makeAutoObservable(this);
@@ -53,8 +47,8 @@ class TicketsStore {
   }
 
   setQuestions(questions: IQuestion[], ticketId?: string) {
-    this.questions = questions;
     this.currentTicketId = ticketId || "";
+    this.questions = questions;
 
     localStorage.setItem(storageSelectors.questions, JSON.stringify(questions));
     localStorage.setItem(storageSelectors.currentTicketId, ticketId || "");
