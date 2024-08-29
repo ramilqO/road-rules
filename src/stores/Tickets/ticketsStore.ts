@@ -38,6 +38,10 @@ class TicketsStore {
     makeAutoObservable(this);
   }
 
+  setTickets(tickets: string[]) {
+    this.tickets = tickets;
+  }
+
   setQuestions(questions: IQuestion[], ticketId?: string) {
     this.currentTicketId = ticketId || "";
     this.questions = questions;
@@ -49,7 +53,7 @@ class TicketsStore {
   async getListTickets() {
     const listTicketsResponse = await api.getListTickets();
     if (listTicketsResponse) {
-      this.tickets = listTicketsResponse;
+      this.setTickets(listTicketsResponse);
     }
   }
 
