@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
+import type { AxiosResponse } from "axios";
 
 import authStore from "../Auth/authStore";
 import notificationStore from "../Notification/notificationStore";
@@ -60,7 +61,8 @@ const token = {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    delete axios.defaults.headers.common.Authorization;
+    // Поставил undefined вместо delete что бы biome не ругался
+    axios.defaults.headers.common.Authorization = undefined;
   },
 };
 
@@ -119,12 +121,12 @@ const api = {
 
       const { data }: AxiosResponse<IResponseLogin> = await axios.post(
         "/api/auth/login",
-        credentials
+        credentials,
       );
       token.set(data.token);
       return data;
     } catch (error) {
-      errorHandling(error, "Логина");
+      errorHandling(error, "логина");
       return null;
     } finally {
       authStore.setIsLoading(false);
@@ -132,7 +134,7 @@ const api = {
   },
 
   async register(
-    credentials: ICredentialsRegister
+    credentials: ICredentialsRegister,
   ): Promise<IResponseRegister | null> {
     notificationStore.deleteNotification();
 
@@ -144,12 +146,12 @@ const api = {
 
       const { data }: AxiosResponse<IResponseRegister> = await axios.post(
         "/api/auth/register",
-        credentials
+        credentials,
       );
       token.set(data.token);
       return data;
     } catch (error) {
-      errorHandling(error, "Регистрации");
+      errorHandling(error, "регистрации");
       return null;
     } finally {
       authStore.setIsLoading(false);
@@ -175,7 +177,7 @@ const api = {
       const { data }: AxiosResponse<string[]> = await axios.get("/api/tickets");
       return data;
     } catch (error) {
-      errorHandling(error, "Билетов");
+      errorHandling(error, "получения билетов");
       return null;
     } finally {
       authStore.setIsLoading(false);
@@ -183,7 +185,7 @@ const api = {
   },
 
   async getTicketQuestions(
-    ticketId: string
+    ticketId: string,
   ): Promise<IResponseQuestion[] | null> {
     notificationStore.deleteNotification();
 
@@ -197,11 +199,11 @@ const api = {
       if (!token) return null;
 
       const { data }: AxiosResponse<IResponseQuestion[]> = await axios.get(
-        `/api/tickets/${ticketId}`
+        `/api/tickets/${ticketId}`,
       );
       return data;
     } catch (error) {
-      errorHandling(error, "Билетов");
+      errorHandling(error, "получения билета");
       return null;
     } finally {
       authStore.setIsLoading(false);
@@ -218,12 +220,11 @@ const api = {
       const token = checkToken("получения экзамена");
       if (!token) return null;
 
-      const { data }: AxiosResponse<IResponseExam[]> = await axios.get(
-        "/api/exam"
-      );
+      const { data }: AxiosResponse<IResponseExam[]> =
+        await axios.get("/api/exam");
       return data;
     } catch (error) {
-      errorHandling(error, "Экзамена");
+      errorHandling(error, "получения экзамена");
       return null;
     } finally {
       authStore.setIsLoading(false);

@@ -39,6 +39,7 @@ class LoginStore {
 
   async login(credentials: ICredentialsLogin) {
     const loginResponse = await api.login(credentials);
+    //TODO: в целом мелочб, но лучше использовать досрочный выход вместо вложенности в if
     if (loginResponse) {
       authStore.login({
         firstName: loginResponse.firstName,

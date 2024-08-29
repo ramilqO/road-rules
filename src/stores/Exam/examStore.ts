@@ -22,6 +22,7 @@ class ExamStore {
 
   async getExam() {
     const responseExam = await api.getExam();
+    //TODO: в целом мелочб, но лучше использовать досрочный выход вместо вложенности в if
     if (responseExam) {
       this.exam = responseExam;
     }

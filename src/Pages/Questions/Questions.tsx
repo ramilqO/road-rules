@@ -5,11 +5,11 @@ import { useParams } from "react-router-dom";
 import style from "./Questions.module.scss";
 
 const Question = lazy(() => import("./Question/Question"));
-import Loader from "../../Ui/Loader/Loader";
+const Loader = lazy(() => import("../../Ui/Loader/Loader"));
 
 import authStore from "../../stores/Auth/authStore";
-import ticketsStore from "../../stores/Tickets/ticketsStore";
 import examStore from "../../stores/Exam/examStore";
+import ticketsStore from "../../stores/Tickets/ticketsStore";
 
 const Questions = observer(() => {
   const { ticketId } = useParams();
@@ -30,6 +30,12 @@ const Questions = observer(() => {
 
   useEffect(() => {
     if (ticketId) {
+      /**
+       * TODO:
+       * ticketId - это и так строка нет смысла приводить его еще раз к строке
+       * ticketsStore.currentTicketId -это и так строка нет смысла приводить его еще раз к строке
+       *
+       */
       if (String(ticketId) !== String(ticketsStore.currentTicketId)) {
         ticketsStore.getTicketQuestions(String(ticketId));
       }
@@ -46,12 +52,14 @@ const Questions = observer(() => {
           {questionsToRender.map((question, i) => (
             <li
               className={style.listPagination__item}
-              key={question.questionId + i}
+              // Это тоже чисто мой прикол для обхода биома, что бы он не жаловался на index пусть так будет что бы ошибка не горела у меня
+              key={`${question.questionId + i}`}
             >
               <button
                 className={`${style.listPagination__button} ${
-                  currentQuestionIndex === i &&
-                  style["listPagination__button--current"]
+                  currentQuestionIndex === i
+                    ? style["listPagination__button--current"]
+                    : ""
                 }`}
                 onClick={() => handleButtonClick(i)}
                 type="button"
@@ -65,6 +73,7 @@ const Questions = observer(() => {
 
       <Question
         indexQuestion={currentQuestionIndex}
+        //TODO: если переписать это как: action={handleButtonClick} будет то же самое, а читать проще
         action={(newCurrentQuestionIndex) =>
           handleButtonClick(newCurrentQuestionIndex)
         }

@@ -35,6 +35,7 @@ const Question = observer(
     isFirstQuestion,
     isLastQuestion,
   }: QuestionProps) => {
+    // Выведи здесь что ни будь по типу "Вопрос не найден" а то пустая страница такое себе
     if (!currentQuestion) return null;
 
     return (
@@ -99,7 +100,7 @@ const Question = observer(
         </ul>
       </div>
     );
-  }
+  },
 );
 
 export default Question;
