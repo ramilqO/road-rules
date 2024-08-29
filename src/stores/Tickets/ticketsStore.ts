@@ -1,13 +1,9 @@
-import axios from "axios";
-import type { AxiosResponse } from "axios";
 import { makeAutoObservable } from "mobx";
 
-import { storageSelectors } from "../storageSelectors";
-import getLocalStorage from "../../tools/getLocalStorageData";
+import storageSelectors from "../Any/storageSelectors";
+import getLocalStorage from "../../tools/Helpers/getLocalStorageData";
 
-import errorHandling from "../../tools/errorHandling";
-import authStore from "../Auth/authStore";
-import tokenServices from "../tokenServices";
+import api from "../Any/requestsOperations";
 
 interface IQuestion {
   question: string;
@@ -33,17 +29,13 @@ class TicketsStore {
   questions: IQuestion[];
 
   constructor() {
-    this.questions = localStorageQuestions || [];
     this.tickets = [];
+    this.questions = localStorageQuestions || [];
     this.currentTicketId = localStorageCurrentTicketId
       ? String(localStorageCurrentTicketId)
       : "";
 
     makeAutoObservable(this);
-  }
-
-  setTickets(tickets: string[]) {
-    this.tickets = tickets;
   }
 
   setQuestions(questions: IQuestion[], ticketId?: string) {
@@ -54,42 +46,18 @@ class TicketsStore {
     localStorage.setItem(storageSelectors.currentTicketId, ticketId || "");
   }
 
-  async fetchData(callback: () => Promise<void>) {
-    authStore.setIsLoading(true);
-    const persistedToken = authStore.userInfo?.token;
-
-    if (!persistedToken) {
-      errorHandling(
-        "Ошибка при получении данных. Отсутствует токен.",
-        "Билетов"
-      );
-      return;
-    }
-    tokenServices.set(persistedToken);
-
-    try {
-      await callback();
-    } catch (error) {
-      errorHandling(error, "Билетов");
-    } finally {
-      authStore.setIsLoading(false);
-    }
-  }
-
   async getListTickets() {
-    await this.fetchData(async () => {
-      const { data } = await axios.get("api/tickets");
-      this.setTickets(data);
-    });
+    const listTicketsResponse = await api.getListTickets();
+    if (listTicketsResponse) {
+      this.tickets = listTicketsResponse;
+    }
   }
 
   async getTicketQuestions(ticketId: string) {
-    await this.fetchData(async () => {
-      const { data }: AxiosResponse<IQuestion[]> = await axios.get(
-        `api/tickets/${ticketId}`
-      );
-      this.setQuestions(data, ticketId);
-    });
+    const ticketQuestionsResponse = await api.getTicketQuestions(ticketId);
+    if (ticketQuestionsResponse) {
+      this.setQuestions(ticketQuestionsResponse, ticketId);
+    }
   }
 }
 

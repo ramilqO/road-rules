@@ -1,10 +1,9 @@
-import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import tokenServices from "../tokenServices";
-import { storageSelectors } from "../storageSelectors";
-import getLocalStorage from "../../tools/getLocalStorageData";
 
-axios.defaults.baseURL = "http://road-rules-backend.webtm.ru/";
+import api from "../Any/requestsOperations";
+
+import getLocalStorage from "../../tools/Helpers/getLocalStorageData";
+import storageSelectors from "../Any/storageSelectors";
 
 interface IUserInfo {
   firstName: string;
@@ -31,6 +30,7 @@ export class AuthStore {
     };
     this.isAuth = !!localStorageUserInfo?.token;
     this.isLoading = false;
+
     makeAutoObservable(this);
   }
 
@@ -38,25 +38,19 @@ export class AuthStore {
     this.isLoading = isLoading;
   }
 
-  login(userInfo: IUserInfo, token: string) {
-    tokenServices.set(token);
-    this.isAuth = true;
+  login(userInfo: IUserInfo) {
     this.userInfo = userInfo;
+    this.isAuth = true;
 
-    const localStorageUserInfo = { ...userInfo, token };
-
-    localStorage.setItem(
-      storageSelectors.userInfo,
-      JSON.stringify(localStorageUserInfo)
-    );
+    localStorage.setItem(storageSelectors.userInfo, JSON.stringify(userInfo));
   }
 
   logout() {
-    localStorage.removeItem(storageSelectors.userInfo);
+    api.logout();
 
-    tokenServices.unset();
     this.userInfo = null;
     this.isAuth = false;
+    localStorage.removeItem(storageSelectors.userInfo);
   }
 }
 

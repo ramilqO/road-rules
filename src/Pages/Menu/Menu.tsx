@@ -42,7 +42,7 @@ const Menu = observer(() => {
             </li>
           ))}
         </ul>
-        {countTicketToRenderCount !== ticketsStore.tickets.length && (
+        {countTicketToRenderCount !== ticketsStore.tickets.length ? (
           <Button
             text="Показать больше"
             onClick={() =>
@@ -51,6 +51,8 @@ const Menu = observer(() => {
               )
             }
           />
+        ) : (
+          <Button text="Скрыть" onClick={() => setCountTicketToRender(8)} />
         )}
       </div>
     </div>

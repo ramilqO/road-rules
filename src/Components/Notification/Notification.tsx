@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { lazy, useEffect } from "react";
 
 import style from "./Notification.module.scss";
-import notificationStore from "../../stores/notificationStore";
+import notificationStore from "../../stores/Notification/notificationStore";
 
 const CrossIcon = lazy(
   () => import("../../../public/svg/notification/CrossIcon")

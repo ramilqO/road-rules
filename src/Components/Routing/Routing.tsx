@@ -15,8 +15,8 @@ const PageNotFound = lazy(
   () => import("../../Pages/PageNotFound/PageNotFound")
 );
 
-import { LoginAction as loginActionData } from "../../tools/LoginAction";
-import { RegisterAction as registerActionData } from "../../tools/RegisterAction";
+import { LoginAction as loginActionData } from "../../tools/Actions/LoginAction";
+import { RegisterAction as registerActionData } from "../../tools/Actions/RegisterAction";
 
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";

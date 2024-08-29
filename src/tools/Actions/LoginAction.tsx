@@ -1,6 +1,7 @@
 import { redirect } from "react-router-dom";
-import loginStore from "../stores/Auth/loginStore";
-import authStore from "../stores/Auth/authStore";
+
+import loginStore from "../../stores/Auth/loginStore";
+import authStore from "../../stores/Auth/authStore";
 
 interface ICredentials {
   email: string;

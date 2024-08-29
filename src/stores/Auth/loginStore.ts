@@ -1,21 +1,11 @@
-import axios from "axios";
-import type { AxiosResponse } from "axios";
 import { makeAutoObservable } from "mobx";
 
-import errorHandling from "../../tools/errorHandling";
-import notificationStore from "../notificationStore";
+import api from "../Any/requestsOperations";
 import authStore from "./authStore";
 
-interface ILoginCredentials {
+interface ICredentialsLogin {
   email: string;
   password: string;
-}
-
-interface ILoginResponse {
-  firstName: string;
-  secondName: string;
-  token: string;
-  isAppointExam: boolean;
 }
 
 class LoginStore {
@@ -41,35 +31,21 @@ class LoginStore {
   validatePasswordField = (value: string): string => {
     if (value.length < 6) {
       this.passwordFieldIsSuccess = false;
-      return "Пароль должна быть не менее 6 символов";
+      return "Пароль должен быть не менее 6 символов";
     }
     this.passwordFieldIsSuccess = true;
     return "";
   };
 
-  async login(credentials: ILoginCredentials) {
-    authStore.setIsLoading(true);
-    notificationStore.deleteNotification();
-
-    try {
-      const { data }: AxiosResponse<ILoginResponse> = await axios.post(
-        "api/auth/login",
-        credentials
-      );
-
-      authStore.login(
-        {
-          firstName: data.firstName,
-          secondName: data.secondName,
-          email: credentials.email,
-          token: data.token
-        },
-        data.token
-      );
-    } catch (error) {
-      errorHandling(error, 'Логина');
-    } finally {
-      authStore.setIsLoading(false);
+  async login(credentials: ICredentialsLogin) {
+    const loginResponse = await api.login(credentials);
+    if (loginResponse) {
+      authStore.login({
+        firstName: loginResponse.firstName,
+        secondName: loginResponse.secondName,
+        email: credentials.email,
+        token: loginResponse.token,
+      });
     }
   }
 }

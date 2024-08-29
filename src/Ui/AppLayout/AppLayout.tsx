@@ -2,7 +2,7 @@ import { lazy } from "react";
 import { observer } from "mobx-react-lite";
 import { Outlet } from "react-router-dom";
 
-import notificationStore from "../../stores/notificationStore";
+import notificationStore from "../../stores/Notification/notificationStore";
 import style from "./AppLayout.module.scss";
 
 const Header = lazy(() => import("../../Components/Header/Header"));

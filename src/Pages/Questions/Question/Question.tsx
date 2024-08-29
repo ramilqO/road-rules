@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { observer } from "mobx-react-lite";
+
 import style from "./Question.module.scss";
 
 const ArrowLeftIcon = lazy(

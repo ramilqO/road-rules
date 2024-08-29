@@ -1,9 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import axios from "axios";
-
-import authStore from "../Auth/authStore";
-import tokenServices from "../tokenServices";
-import errorHandling from "../../tools/errorHandling";
+import api from "../Any/requestsOperations";
 
 interface IExam {
   img: string;
@@ -24,31 +20,10 @@ class ExamStore {
     makeAutoObservable(this);
   }
 
-  setExam(exam: IExam[]) {
-    this.exam = exam;
-  }
-
   async getExam() {
-    authStore.setIsLoading(true);
-    const persistedToken = authStore.userInfo?.token;
-
-    if (!persistedToken) {
-      errorHandling(
-        "Ошибка при получение Экзамена. Отсутствует токен.",
-        "Экзамена"
-      );
-      return;
-    }
-
-    tokenServices.set(persistedToken);
-
-    try {
-      const { data } = await axios.get("api/exam");
-      this.setExam(data);
-    } catch (error) {
-      errorHandling(error, "Экзамена");
-    } finally {
-      authStore.setIsLoading(false);
+    const responseExam = await api.getExam();
+    if (responseExam) {
+      this.exam = responseExam;
     }
   }
 }
