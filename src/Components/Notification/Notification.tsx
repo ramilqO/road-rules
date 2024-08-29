@@ -1,15 +1,11 @@
 import { observer } from "mobx-react-lite";
-import { lazy, useEffect } from "react";
+import { useEffect } from "react";
 
 import style from "./Notification.module.scss";
 import notificationStore from "../../stores/Notification/notificationStore";
 
-const CrossIcon = lazy(
-  () => import("../../../public/svg/notification/CrossIcon")
-);
-const InfoIcon = lazy(
-  () => import("../../../public/svg/notification/InfoIcon")
-);
+import CrossIcon from "../../../public/svg/notification/CrossIcon";
+import InfoIcon from "../../../public/svg/notification/InfoIcon";
 
 const Notification = observer(() => {
   const notification = notificationStore.notification;
