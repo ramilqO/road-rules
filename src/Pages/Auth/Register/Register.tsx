@@ -1,13 +1,12 @@
-import { lazy } from "react";
 import { observer } from "mobx-react-lite";
 import { Form, redirect, useNavigate } from "react-router-dom";
 
 import registerStore from "../../../stores/Auth/registerStore";
 import style from "./Register.module.scss";
 
-const Button = lazy(() => import("../../../Ui/Button/Button"));
-const Input = lazy(() => import("../../../Ui/Input/Input"));
-const Passwords = lazy(() => import("./Passwords/Passwords"));
+import Button from "../../../Ui/Button/Button";
+import Input from "../../../Ui/Input/Input";
+import Passwords from "./Passwords/Passwords";
 
 const Register = observer(() => {
   const navigate = useNavigate();

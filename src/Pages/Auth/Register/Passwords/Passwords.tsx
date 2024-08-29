@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
-import { lazy, useRef } from "react";
+import { useRef } from "react";
 import type { RefObject } from "react";
 
 import style from "./Passwords.module.scss";
 
-const Checkbox = lazy(() => import("../../../../Ui/Checkbox/Checkbox"));
-const Input = lazy(() => import("../../../../Ui/Input/Input"));
+import Checkbox from "../../../../Ui/Checkbox/Checkbox";
+import Input from "../../../../Ui/Input/Input";
 
 import SecurityPassword from "../../../../Ui/SecurityPassword/SecurityPassword";
 import registerStore from "../../../../stores/Auth/registerStore";

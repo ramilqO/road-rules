@@ -1,13 +1,13 @@
 import { observer } from "mobx-react-lite";
-import { lazy, useRef } from "react";
+import {  useRef } from "react";
 import { Form, redirect, useNavigate } from "react-router-dom";
 
 import loginStore from "../../../stores/Auth/loginStore";
 import style from "./Login.module.scss";
 
-const Button = lazy(() => import("../../../Ui/Button/Button"));
-const Checkbox = lazy(() => import("../../../Ui/Checkbox/Checkbox"));
-const Input = lazy(() => import("../../../Ui/Input/Input"));
+import Button from"../../../Ui/Button/Button";
+import Checkbox from"../../../Ui/Checkbox/Checkbox";
+import Input from"../../../Ui/Input/Input";
 
 const Login = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);

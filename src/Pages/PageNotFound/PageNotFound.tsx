@@ -1,9 +1,8 @@
-import { lazy } from "react";
 import { useNavigate } from "react-router-dom";
 
 import style from "./PageNotFound.module.scss";
 
-const Button = lazy(() => import("../../Ui/Button/Button"));
+import Button from "../../Ui/Button/Button";
 
 export default function PageNotFound() {
   const navigate = useNavigate();

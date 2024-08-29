@@ -1,11 +1,11 @@
-import { lazy, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 
 import style from "./Menu.module.scss";
 
-const Button = lazy(() => import("../../Ui/Button/Button"));
-const Loader = lazy(() => import("../../Ui/Loader/Loader"));
+import Button from "../../Ui/Button/Button";
+import Loader from "../../Ui/Loader/Loader";
 
 import ticketsStore from "../../stores/Tickets/ticketsStore";
 import authStore from "../../stores/Auth/authStore";
