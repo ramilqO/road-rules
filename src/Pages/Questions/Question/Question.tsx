@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite";
 
+import notificationStore from "../../../stores/Notification/notificationStore";
 import style from "./Question.module.scss";
 
 import ArrowLeftIcon from "../../../../public/svg/question/ArrowLeftIcon";
-
 import ArrowRightIcon from "../../../../public/svg/question/ArrowRightIcon";
 
 interface IAnswer {
@@ -35,8 +35,12 @@ const Question = observer(
     isFirstQuestion,
     isLastQuestion,
   }: QuestionProps) => {
-    // Выведи здесь что ни будь по типу "Вопрос не найден" а то пустая страница такое себе
-    if (!currentQuestion) return null;
+    if (!currentQuestion)
+      notificationStore.setNotification({
+        type: "basic",
+        titleText: "⚠ Что-то пошло не по плану",
+        bodyText: "Вопрос не был найден",
+      });
 
     return (
       <div className={style.question}>
@@ -100,7 +104,7 @@ const Question = observer(
         </ul>
       </div>
     );
-  },
+  }
 );
 
 export default Question;
