@@ -52,7 +52,10 @@ class TicketsStore {
 
   async getListTickets() {
     const listTicketsResponse = await api.getListTickets();
-    if (!listTicketsResponse) return;
+    if (!listTicketsResponse) {
+      localStorage.removeItem(storageSelectors.currentTicketId);
+      return "";
+    }
     this.setTickets(listTicketsResponse);
   }
 

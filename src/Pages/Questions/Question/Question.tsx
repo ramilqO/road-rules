@@ -1,10 +1,14 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import notificationStore from "../../../stores/Notification/notificationStore";
+import { useNavigate } from "react-router-dom";
+
 import style from "./Question.module.scss";
+
 import ArrowLeftIcon from "../../../../public/svg/question/ArrowLeftIcon";
 import ArrowRightIcon from "../../../../public/svg/question/ArrowRightIcon";
+
 import Loader from "../../../Ui/Loader/Loader";
+import Button from "../../../Ui/Button/Button";
 
 interface IAnswer {
   answerText: string;
@@ -36,19 +40,35 @@ const Question = observer(
     isLastQuestion,
   }: QuestionProps) => {
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
       setIsLoading(true);
-    }, [currentQuestion.img]);
+    }, [currentQuestion?.img]);
 
     if (!currentQuestion) {
-      notificationStore.setNotification({
-        type: "error",
-        titleText: "⚠ Что-то пошло не по плану",
-        bodyText: "Вопрос не был найден",
-      });
+      return (
+        <div className={style.questionNotFound}>
+          <div className={style.container}>
+            <div className={style.infoSection}>
+              <h3 className={style.infoSection__title}>Билет не найдено</h3>
+              <p className={style.infoSection__description}>
+                Пожалуйста, проверьте, правильный ли билет указан в URL, или
+                убедитесь, что билет еще не был удален. Возможно, произошла
+                ошибка при его загрузке.
+              </p>
+            </div>
 
-      return null;
+            <div className={style.actions}>
+              <Button
+                type="button"
+                text="На главную"
+                onClick={() => navigate("/menu")}
+              />
+            </div>
+          </div>
+        </div>
+      );
     }
 
     return (

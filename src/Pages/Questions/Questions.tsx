@@ -31,7 +31,7 @@ const Questions = observer(() => {
   useEffect(() => {
     if (ticketId) {
       if (ticketId !== ticketsStore.currentTicketId) {
-        ticketsStore.getTicketQuestions(String(ticketId));
+        ticketsStore.getTicketQuestions(ticketId);
       }
     } else if (!ticketId) {
       examStore.getExam();

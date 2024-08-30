@@ -20,10 +20,15 @@ class ExamStore {
     makeAutoObservable(this);
   }
 
+  setExam(exam: IExam[]) {
+    this.exam = exam;
+  }
+
   async getExam() {
     const responseExam = await api.getExam();
     if (!responseExam) return;
-    this.exam = responseExam;
+    // TODO --> если тут изменять на прямую всё равно предупреждение
+    this.setExam(responseExam);
   }
 }
 
