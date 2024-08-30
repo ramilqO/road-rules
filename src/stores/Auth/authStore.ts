@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
+import helpers from "../../tools/Helpers/helpers";
 import api from "../Any/requestsOperations";
 
-import getLocalStorage from "../../tools/Helpers/getLocalStorageData";
 import storageSelectors from "../Any/storageSelectors";
 
 interface IUserInfo {
@@ -12,7 +12,7 @@ interface IUserInfo {
   token: string;
 }
 
-const localStorageUserInfo = getLocalStorage<IUserInfo>(
+const localStorageUserInfo = helpers.getLocalStorage<IUserInfo>(
   storageSelectors.userInfo
 );
 

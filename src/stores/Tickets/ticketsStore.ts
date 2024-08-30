@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 import storageSelectors from "../Any/storageSelectors";
-import getLocalStorage from "../../tools/Helpers/getLocalStorageData";
+import helpers from "../../tools/Helpers/helpers";
 
 import api from "../Any/requestsOperations";
 
@@ -16,10 +16,10 @@ interface IQuestion {
   }[];
 }
 
-const localStorageQuestions = getLocalStorage<IQuestion[]>(
+const localStorageQuestions = helpers.getLocalStorage<IQuestion[]>(
   storageSelectors.questions
 );
-const localStorageCurrentTicketId = getLocalStorage(
+const localStorageCurrentTicketId = helpers.getLocalStorage(
   storageSelectors.currentTicketId
 );
 

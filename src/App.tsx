@@ -6,7 +6,7 @@ import Loader from "./Ui/Loader/Loader";
 function App() {
   return (
     <Suspense fallback={<Loader loaderStyle="huge" />}>
-      <Routing />;
+      <Routing />
     </Suspense>
   );
 }
