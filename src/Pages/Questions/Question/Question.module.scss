@@ -16,23 +16,28 @@
   border: 1px solid var(--questionColorBorder);
   border-radius: 8px;
 
+  .hiddenImg {
+    display: none;
+  }
+
   &__img {
     object-fit: contain;
 
     width: 100%;
-    height: auto;
+    height: 50vw;
+    max-height: 280px;
 
     border-radius: 8px;
   }
 
   &__titleQuestion {
+    text-align: center;
+
     margin-bottom: 10px;
 
     font-weight: 600;
     font-size: 24px;
     line-height: 28.8px;
-
-    text-align: center;
 
     color: var(--questionColorQuestionTitle);
   }
@@ -109,7 +114,7 @@
 
   width: 100%;
   height: 50vw;
-  max-height: 420px;
+  max-height: 280px;
 
   border-radius: 8px;
   background-color: var(--questionColorEmeptyImgBacg);

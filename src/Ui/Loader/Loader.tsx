@@ -1,13 +1,23 @@
 import style from "./Loader.module.scss";
 
-type LoaderStyle = "basic" | "huge";
+type LoaderStyle = "questionImgLoader" | "huge" | "buttonLoader";
 
-function Loader({ loaderStyle = "basic" }: { loaderStyle?: LoaderStyle }) {
-  if (loaderStyle === "basic") return <div className={style.loader} />;
+function Loader({
+  loaderStyle = "buttonLoader",
+}: {
+  loaderStyle?: LoaderStyle;
+}) {
+  if (loaderStyle === "buttonLoader") return <div className={style.loader} />;
+  if (loaderStyle === "questionImgLoader")
+    return (
+      <div className={style.questionImgLoader}>
+        <div className={style.loader__questionImgLoader} />;
+      </div>
+    );
   if (loaderStyle === "huge")
     return (
       <div className={style.wrapper}>
-        <div className={style.loaderHuge}></div>
+        <div className={style.loader__huge}></div>
       </div>
     );
 }

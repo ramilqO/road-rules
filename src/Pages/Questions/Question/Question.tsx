@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite";
-
+import { useEffect, useState } from "react";
 import notificationStore from "../../../stores/Notification/notificationStore";
 import style from "./Question.module.scss";
-
 import ArrowLeftIcon from "../../../../public/svg/question/ArrowLeftIcon";
 import ArrowRightIcon from "../../../../public/svg/question/ArrowRightIcon";
+import Loader from "../../../Ui/Loader/Loader";
 
 interface IAnswer {
   answerText: string;
@@ -35,21 +35,39 @@ const Question = observer(
     isFirstQuestion,
     isLastQuestion,
   }: QuestionProps) => {
-    if (!currentQuestion)
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+      setIsLoading(true);
+    }, [currentQuestion.img]);
+
+    if (!currentQuestion) {
       notificationStore.setNotification({
-        type: "basic",
+        type: "error",
         titleText: "⚠ Что-то пошло не по плану",
         bodyText: "Вопрос не был найден",
       });
 
+      return null;
+    }
+
     return (
       <div className={style.question}>
         {currentQuestion.img ? (
-          <img
-            src={currentQuestion.img}
-            alt="Изображение вопроса"
-            className={style.question__img}
-          />
+          <>
+            {isLoading && (
+              <div>
+                <Loader loaderStyle="questionImgLoader" />
+              </div>
+            )}
+            <img
+              src={currentQuestion.img}
+              alt="Изображение вопроса"
+              className={isLoading ? style.hiddenImg : style.question__img}
+              onLoad={() => setIsLoading(false)}
+              onError={() => setIsLoading(false)}
+            />
+          </>
         ) : (
           <div className={style.wrapperEmptyImage}>
             <h1 className={style.wrapperEmptyImage__title}>
