@@ -30,14 +30,8 @@ const Questions = observer(() => {
 
   useEffect(() => {
     if (ticketId) {
-      /**
-       * TODO:
-       * ticketId - это и так строка нет смысла приводить его еще раз к строке
-       * ticketsStore.currentTicketId -это и так строка нет смысла приводить его еще раз к строке
-       *
-       */
-      if (String(ticketId) !== String(ticketsStore.currentTicketId)) {
-        ticketsStore.getTicketQuestions(String(ticketId));
+      if (ticketId !== ticketsStore.currentTicketId) {
+        ticketsStore.getTicketQuestions(ticketId);
       }
     } else if (!ticketId) {
       examStore.getExam();
@@ -52,7 +46,6 @@ const Questions = observer(() => {
           {questionsToRender.map((question, i) => (
             <li
               className={style.listPagination__item}
-              // Это тоже чисто мой прикол для обхода биома, что бы он не жаловался на index пусть так будет что бы ошибка не горела у меня
               key={`${question.questionId + i}`}
             >
               <button
@@ -73,10 +66,7 @@ const Questions = observer(() => {
 
       <Question
         indexQuestion={currentQuestionIndex}
-        //TODO: если переписать это как: action={handleButtonClick} будет то же самое, а читать проще
-        action={(newCurrentQuestionIndex) =>
-          handleButtonClick(newCurrentQuestionIndex)
-        }
+        action={handleButtonClick}
         currentQuestion={questionsToRender[currentQuestionIndex]}
         isFirstQuestion={isFirstQuestion}
         isLastQuestion={isLastQuestion}

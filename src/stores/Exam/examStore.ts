@@ -20,12 +20,15 @@ class ExamStore {
     makeAutoObservable(this);
   }
 
+  setExam(exam: IExam[]) {
+    this.exam = exam;
+  }
+
   async getExam() {
     const responseExam = await api.getExam();
-    //TODO: в целом мелочб, но лучше использовать досрочный выход вместо вложенности в if
-    if (responseExam) {
-      this.exam = responseExam;
-    }
+    if (!responseExam) return;
+    // TODO --> если тут изменять на прямую всё равно предупреждение
+    this.setExam(responseExam);
   }
 }
 

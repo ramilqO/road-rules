@@ -1,10 +1,14 @@
 import { observer } from "mobx-react-lite";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import style from "./Question.module.scss";
 
 import ArrowLeftIcon from "../../../../public/svg/question/ArrowLeftIcon";
-
 import ArrowRightIcon from "../../../../public/svg/question/ArrowRightIcon";
+
+import Loader from "../../../Ui/Loader/Loader";
+import Button from "../../../Ui/Button/Button";
 
 interface IAnswer {
   answerText: string;
@@ -35,17 +39,55 @@ const Question = observer(
     isFirstQuestion,
     isLastQuestion,
   }: QuestionProps) => {
-    // Выведи здесь что ни будь по типу "Вопрос не найден" а то пустая страница такое себе
-    if (!currentQuestion) return null;
+    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      setIsLoading(true);
+    }, [currentQuestion?.img]);
+
+    if (!currentQuestion) {
+      return (
+        <div className={style.questionNotFound}>
+          <div className={style.container}>
+            <div className={style.infoSection}>
+              <h3 className={style.infoSection__title}>Билет не найдено</h3>
+              <p className={style.infoSection__description}>
+                Пожалуйста, проверьте, правильный ли билет указан в URL, или
+                убедитесь, что билет еще не был удален. Возможно, произошла
+                ошибка при его загрузке.
+              </p>
+            </div>
+
+            <div className={style.actions}>
+              <Button
+                type="button"
+                text="На главную"
+                onClick={() => navigate("/menu")}
+              />
+            </div>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div className={style.question}>
         {currentQuestion.img ? (
-          <img
-            src={currentQuestion.img}
-            alt="Изображение вопроса"
-            className={style.question__img}
-          />
+          <>
+            {isLoading && (
+              <div>
+                <Loader loaderStyle="questionImgLoader" />
+              </div>
+            )}
+            <img
+              src={currentQuestion.img}
+              alt="Изображение вопроса"
+              className={isLoading ? style.hiddenImg : style.question__img}
+              onLoad={() => setIsLoading(false)}
+              onError={() => setIsLoading(false)}
+            />
+          </>
         ) : (
           <div className={style.wrapperEmptyImage}>
             <h1 className={style.wrapperEmptyImage__title}>
@@ -100,7 +142,7 @@ const Question = observer(
         </ul>
       </div>
     );
-  },
+  }
 );
 
 export default Question;

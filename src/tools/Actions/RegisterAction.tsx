@@ -1,7 +1,9 @@
 import { redirect } from "react-router-dom";
+
 import registerStore from "../../stores/Auth/registerStore";
-import capitalizeFirstLetter from "../Helpers/capitalizeFirstLetter.ts";
 import authStore from "../../stores/Auth/authStore";
+
+import helpers from "../Helpers/helpers";
 
 interface ICredentials {
   firstName: string;
@@ -18,8 +20,8 @@ export async function RegisterAction({ request }: { request: Request }) {
   const credentials: ICredentials = {
     email: String(data.email),
     password: String(data.userPassword),
-    firstName: capitalizeFirstLetter(String(data.userName)),
-    secondName: capitalizeFirstLetter(String(data.surName)),
+    firstName: helpers.capitalizeFirstLetter(String(data.userName)),
+    secondName: helpers.capitalizeFirstLetter(String(data.surName)),
     department: String(data.department),
   };
 

@@ -87,7 +87,7 @@ class RegisterStore {
   };
 
   securityPasswordField = (
-    value: string,
+    value: string
   ): { steps: number; message: string } => {
     let steps = 0;
     let message = "";
@@ -141,15 +141,13 @@ class RegisterStore {
 
   async register(credentials: ICredentialsRegister) {
     const registerResponse = await api.register(credentials);
-    //TODO: в целом мелочб, но лучше использовать досрочный выход вместо вложенности в if
-    if (registerResponse) {
-      authStore.login({
-        firstName: registerResponse.firstName,
-        secondName: registerResponse.secondName,
-        email: registerResponse.email,
-        token: registerResponse.token,
-      });
-    }
+    if (!registerResponse) return;
+    authStore.login({
+      firstName: registerResponse.firstName,
+      secondName: registerResponse.secondName,
+      email: registerResponse.email,
+      token: registerResponse.token,
+    });
   }
 }
 const registerStore = new RegisterStore();

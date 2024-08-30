@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 import storageSelectors from "../Any/storageSelectors";
-import getLocalStorage from "../../tools/Helpers/getLocalStorageData";
+import helpers from "../../tools/Helpers/helpers";
 
 import api from "../Any/requestsOperations";
 
@@ -16,11 +16,11 @@ interface IQuestion {
   }[];
 }
 
-const localStorageQuestions = getLocalStorage<IQuestion[]>(
-  storageSelectors.questions,
+const localStorageQuestions = helpers.getLocalStorage<IQuestion[]>(
+  storageSelectors.questions
 );
-const localStorageCurrentTicketId = getLocalStorage(
-  storageSelectors.currentTicketId,
+const localStorageCurrentTicketId = helpers.getLocalStorage(
+  storageSelectors.currentTicketId
 );
 
 class TicketsStore {
@@ -52,18 +52,17 @@ class TicketsStore {
 
   async getListTickets() {
     const listTicketsResponse = await api.getListTickets();
-    //TODO: в целом мелочб, но лучше использовать досрочный выход вместо вложенности в if
-    if (listTicketsResponse) {
-      this.setTickets(listTicketsResponse);
+    if (!listTicketsResponse) {
+      localStorage.removeItem(storageSelectors.currentTicketId);
+      return "";
     }
+    this.setTickets(listTicketsResponse);
   }
 
   async getTicketQuestions(ticketId: string) {
     const ticketQuestionsResponse = await api.getTicketQuestions(ticketId);
-    //TODO: в целом мелочб, но лучше использовать досрочный выход вместо вложенности в if
-    if (ticketQuestionsResponse) {
-      this.setQuestions(ticketQuestionsResponse, ticketId);
-    }
+    if (!ticketQuestionsResponse) return;
+    this.setQuestions(ticketQuestionsResponse, ticketId);
   }
 }
 
