@@ -43,6 +43,8 @@ const Question = observer(
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
+    const checkIsAnswer = ticketsStore.answers[indexQuestion] !== undefined;
+
     useEffect(() => {
       setIsLoading(true);
     }, [currentQuestion?.img]);
@@ -71,8 +73,6 @@ const Question = observer(
         </div>
       );
     }
-
-    console.log(JSON.parse(JSON.stringify(ticketsStore.answers)));
 
     return (
       <div className={style.question}>
@@ -108,16 +108,46 @@ const Question = observer(
             <li className={style.listAnswers__item} key={answer.answerId}>
               <button
                 type="button"
-                className={style.listAnswers__button}
-                onClick={() =>
+                className={`${style.listAnswers__button} ${
+                  checkIsAnswer ? style["listAnswers__button--answer"] : ""
+                } ${
+                  checkIsAnswer &&
+                  ticketsStore.answers[indexQuestion]?.ourAnswer ===
+                    answer.answerId
+                    ? style["listAnswers__button--thisAnswer"]
+                    : ""
+                }`}
+                disabled={checkIsAnswer}
+                onClick={() => {
                   ticketsStore.sendingAnswer({
                     ticketId: currentQuestion.ticketId,
                     questionId: currentQuestion.questionId,
                     answerId: answer.answerId,
-                  })
-                }
+                  });
+                  action(indexQuestion + 1);
+                }}
               >
-                {answer.answerText}
+                <span
+                  className={`${style.listAnswers__buttonText} ${
+                    checkIsAnswer
+                      ? style["listAnswers__buttonText--answer"]
+                      : ""
+                  } ${
+                    checkIsAnswer &&
+                    ticketsStore.answers[indexQuestion]?.ourAnswer ===
+                      answer.answerId
+                      ? style["listAnswers__buttonText--thisAnswer"]
+                      : ""
+                  }`}
+                >
+                  {answer.answerText}
+                </span>
+                {ticketsStore.answers[indexQuestion]?.ourAnswer ===
+                  answer.answerId && (
+                  <span className={style.listAnswers__thisAnswer}>
+                    Ваш ответ
+                  </span>
+                )}
               </button>
             </li>
           ))}

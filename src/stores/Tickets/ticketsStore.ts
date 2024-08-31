@@ -23,8 +23,9 @@ interface ICredentialsTicketAnswer {
 }
 
 interface IAnswers {
+  ourAnswer: string;
   isCorrect: boolean;
-  correctAnser: string;
+  correctAnswer: string;
   help: string;
 }
 [];

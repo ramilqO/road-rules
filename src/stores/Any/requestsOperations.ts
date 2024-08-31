@@ -62,8 +62,12 @@ interface ICredentialsTicketAnswer {
 
 interface IResponseTicketAnswer {
   isCorrect: boolean;
-  correctAnser: string;
+  correctAnswer: string;
   help: string;
+}
+
+interface IRetureDataTicketAnswer extends IResponseTicketAnswer {
+  ourAnswer: string;
 }
 
 axios.defaults.baseURL = "http://road-rules-backend.webtm.ru";
@@ -217,7 +221,7 @@ const api = {
 
   async sendingAnswerFromTicket(
     credentials: ICredentialsTicketAnswer
-  ): Promise<IResponseTicketAnswer | null> {
+  ): Promise<IRetureDataTicketAnswer | null> {
     try {
       const hasInternet = checkInternetConnection("отправки билета");
       const hasToken = checkToken("отправки билета");
@@ -228,7 +232,11 @@ const api = {
         "/api/tickets",
         credentials
       );
-      return data;
+      const returnedData: IRetureDataTicketAnswer = {
+        ourAnswer: credentials.answerId,
+        ...data,
+      };
+      return returnedData;
     } catch (error) {
       errorHandling(error, "отправки билета");
       return null;
