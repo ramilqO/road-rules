@@ -9,14 +9,7 @@ const helpers = {
   getLocalStorage: <T>(nameStorage: string): T | null => {
     const storedData = localStorage.getItem(nameStorage);
 
-    if (!storedData) {
-      notificationStore.setNotification({
-        type: "error",
-        titleText: "Не удалось получить данные",
-        bodyText: `Не удалось найти данные по ключу "${nameStorage}" в localStorage.`,
-      });
-      return null;
-    }
+    if (!storedData) return null;
 
     try {
       return JSON.parse(storedData) as T;
