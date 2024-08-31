@@ -177,13 +177,10 @@ const api = {
     notificationStore.deleteNotification();
 
     try {
-      const hasInternet = checkInternetConnection("получения билетов");
-      if (!hasInternet) return null;
-
+      const hasInternet = checkInternetConnection("получения билета");
+      const hasToken = checkToken("получения билета");
       authStore.setIsLoading(true);
-
-      const token = checkToken("получения билетов");
-      if (!token) return null;
+      if (!hasInternet || !hasToken) return null;
 
       const { data }: AxiosResponse<string[]> = await axios.get("/api/tickets");
       return data;
@@ -202,12 +199,9 @@ const api = {
 
     try {
       const hasInternet = checkInternetConnection("получения билета");
-      if (!hasInternet) return null;
-
+      const hasToken = checkToken("получения билета");
       authStore.setIsLoading(true);
-
-      const token = checkToken("получения билета");
-      if (!token) return null;
+      if (!hasInternet || !hasToken) return null;
 
       const { data }: AxiosResponse<IResponseQuestion[]> = await axios.get(
         `/api/tickets/${ticketId}`
@@ -221,17 +215,23 @@ const api = {
     }
   },
 
-  async sendingAnswerFromTicket(credentials: ICredentialsTicketAnswer) {
+  async sendingAnswerFromTicket(
+    credentials: ICredentialsTicketAnswer
+  ): Promise<IResponseTicketAnswer | null> {
     try {
       const hasInternet = checkInternetConnection("отправки билета");
       const hasToken = checkToken("отправки билета");
       authStore.setIsLoading(true);
-      if (!hasInternet || !hasToken) return;
+      if (!hasInternet || !hasToken) return null;
 
-      const { data } = await axios.post("/api/tickets", credentials);
+      const { data }: AxiosResponse<IResponseTicketAnswer> = await axios.post(
+        "/api/tickets",
+        credentials
+      );
       return data;
     } catch (error) {
       errorHandling(error, "отправки билета");
+      return null;
     } finally {
       authStore.setIsLoading(false);
     }
@@ -240,12 +240,9 @@ const api = {
   async getExam(): Promise<IResponseExam[] | null> {
     try {
       const hasInternet = checkInternetConnection("получения экзамена");
-      if (!hasInternet) return null;
-
+      const hasToken = checkToken("получения экзамена");
       authStore.setIsLoading(true);
-
-      const token = checkToken("получения экзамена");
-      if (!token) return null;
+      if (!hasInternet || !hasToken) return null;
 
       const { data }: AxiosResponse<IResponseExam[]> = await axios.get(
         "/api/exam"
