@@ -6,8 +6,8 @@ import style from "./Question.module.scss";
 
 import Loader from "../../../Ui/Loader/Loader";
 
-import QuestionNotFound from "./ComponentsQuestion/QuestionNotFound";
-import QuestionNavigationList from "./ComponentsQuestion/QuestionNavigationList";
+import QuestionNotFound from "./ComponentsQuestion/QuestionNotFound/QuestionNotFound";
+import QuestionNavigationList from "./ComponentsQuestion/QuestionNavigationList/QuestionNavigationList";
 
 interface IAnswer {
   answerText: string;

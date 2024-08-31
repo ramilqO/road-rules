@@ -2,8 +2,8 @@ import React from "react";
 
 import style from "./QuestionNavigationList.module.scss";
 
-import ArrowLeftIcon from "../../../../../public/svg/question/ArrowLeftIcon";
-import ArrowRightIcon from "../../../../../public/svg/question/ArrowRightIcon";
+import ArrowLeftIcon from "../../../../../../public/svg/question/ArrowLeftIcon";
+import ArrowRightIcon from "../../../../../../public/svg/question/ArrowRightIcon";
 
 interface IQuestionNavigationList {
   indexQuestion: number;
