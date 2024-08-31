@@ -54,6 +54,18 @@ interface IResponseExam {
   }[];
 }
 
+interface ICredentialsTicketAnswer {
+  ticketId: string;
+  questionId: string;
+  answerId: string;
+}
+
+interface IResponseTicketAnswer {
+  isCorrect: boolean;
+  correctAnser: string;
+  help: string;
+}
+
 axios.defaults.baseURL = "http://road-rules-backend.webtm.ru";
 
 const token = {
@@ -204,6 +216,22 @@ const api = {
     } catch (error) {
       errorHandling(error, "получения билета");
       return null;
+    } finally {
+      authStore.setIsLoading(false);
+    }
+  },
+
+  async sendingAnswerFromTicket(credentials: ICredentialsTicketAnswer) {
+    try {
+      const hasInternet = checkInternetConnection("отправки билета");
+      const hasToken = checkToken("отправки билета");
+      authStore.setIsLoading(true);
+      if (!hasInternet || !hasToken) return;
+
+      const { data } = await axios.post("/api/tickets", credentials);
+      return data;
+    } catch (error) {
+      errorHandling(error, "отправки билета");
     } finally {
       authStore.setIsLoading(false);
     }
