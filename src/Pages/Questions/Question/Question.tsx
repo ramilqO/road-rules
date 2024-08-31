@@ -1,7 +1,8 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
+import ticketsStore from "../../../stores/Tickets/ticketsStore";
 import style from "./Question.module.scss";
 
 import ArrowLeftIcon from "../../../../public/svg/question/ArrowLeftIcon";
@@ -9,7 +10,6 @@ import ArrowRightIcon from "../../../../public/svg/question/ArrowRightIcon";
 
 import Loader from "../../../Ui/Loader/Loader";
 import Button from "../../../Ui/Button/Button";
-import ticketsStore from "../../../stores/Tickets/ticketsStore";
 
 interface IAnswer {
   answerText: string;
@@ -49,19 +49,37 @@ const Question = observer(
       setIsLoading(true);
     }, [currentQuestion?.img]);
 
+    const handleAnswerClick = useCallback(
+      (answerId: string) => {
+        ticketsStore.sendingAnswer({
+          ticketId: currentQuestion.ticketId,
+          questionId: currentQuestion.questionId,
+          answerId,
+        });
+        action(indexQuestion + 1);
+      },
+      [action, currentQuestion, indexQuestion]
+    );
+
+    const handleNavigationClick = useCallback(
+      (newIndex: number) => {
+        action(newIndex);
+      },
+      [action]
+    );
+
     if (!currentQuestion) {
       return (
         <div className={style.questionNotFound}>
           <div className={style.container}>
             <div className={style.infoSection}>
-              <h3 className={style.infoSection__title}>Билет не найдено</h3>
+              <h3 className={style.infoSection__title}>Билет не найден</h3>
               <p className={style.infoSection__description}>
                 Пожалуйста, проверьте, правильный ли билет указан в URL, или
                 убедитесь, что билет еще не был удален. Возможно, произошла
                 ошибка при его загрузке.
               </p>
             </div>
-
             <div className={style.actions}>
               <Button
                 type="button"
@@ -78,11 +96,7 @@ const Question = observer(
       <div className={style.question}>
         {currentQuestion.img ? (
           <>
-            {isLoading && (
-              <div>
-                <Loader loaderStyle="questionImgLoader" />
-              </div>
-            )}
+            {isLoading && <Loader loaderStyle="questionImgLoader" />}
             <img
               src={currentQuestion.img}
               alt="Изображение вопроса"
@@ -104,53 +118,44 @@ const Question = observer(
         </h1>
 
         <ul className={style.question__listAnswers}>
-          {currentQuestion.answers.map((answer) => (
-            <li className={style.listAnswers__item} key={answer.answerId}>
-              <button
-                type="button"
-                className={`${style.listAnswers__button} ${
-                  checkIsAnswer ? style["listAnswers__button--answer"] : ""
-                } ${
-                  checkIsAnswer &&
-                  ticketsStore.answers[indexQuestion]?.ourAnswer ===
-                    answer.answerId
-                    ? style["listAnswers__button--thisAnswer"]
-                    : ""
-                }`}
-                disabled={checkIsAnswer}
-                onClick={() => {
-                  ticketsStore.sendingAnswer({
-                    ticketId: currentQuestion.ticketId,
-                    questionId: currentQuestion.questionId,
-                    answerId: answer.answerId,
-                  });
-                  action(indexQuestion + 1);
-                }}
-              >
-                <span
-                  className={`${style.listAnswers__buttonText} ${
-                    checkIsAnswer
-                      ? style["listAnswers__buttonText--answer"]
-                      : ""
+          {currentQuestion.answers.map(({ answerId, answerText }) => {
+            const isAnswer =
+              checkIsAnswer &&
+              ticketsStore.answers[indexQuestion]?.ourAnswer === answerId;
+            return (
+              <li className={style.listAnswers__item} key={answerId}>
+                <button
+                  type="button"
+                  className={`${style.listAnswers__button} ${
+                    checkIsAnswer ? style["listAnswers__button--answer"] : ""
                   } ${
-                    checkIsAnswer &&
-                    ticketsStore.answers[indexQuestion]?.ourAnswer ===
-                      answer.answerId
-                      ? style["listAnswers__buttonText--thisAnswer"]
-                      : ""
+                    isAnswer ? style["listAnswers__button--thisAnswer"] : ""
                   }`}
+                  disabled={checkIsAnswer}
+                  onClick={() => handleAnswerClick(answerId)}
                 >
-                  {answer.answerText}
-                </span>
-                {ticketsStore.answers[indexQuestion]?.ourAnswer ===
-                  answer.answerId && (
-                  <span className={style.listAnswers__thisAnswer}>
-                    Ваш ответ
+                  <span
+                    className={`${style.listAnswers__buttonText} ${
+                      checkIsAnswer
+                        ? style["listAnswers__buttonText--answer"]
+                        : ""
+                    } ${
+                      isAnswer
+                        ? style["listAnswers__buttonText--thisAnswer"]
+                        : ""
+                    }`}
+                  >
+                    {answerText}
                   </span>
-                )}
-              </button>
-            </li>
-          ))}
+                  {isAnswer && (
+                    <span className={style.listAnswers__thisAnswer}>
+                      Ваш ответ
+                    </span>
+                  )}
+                </button>
+              </li>
+            );
+          })}
         </ul>
 
         <ul className={style.question__navigationList}>
@@ -160,7 +165,7 @@ const Question = observer(
                 isFirstQuestion ? style["navigationList__button--disabled"] : ""
               }`}
               disabled={isFirstQuestion}
-              onClick={() => action(indexQuestion - 1)}
+              onClick={() => handleNavigationClick(indexQuestion - 1)}
               type="button"
             >
               <span>
@@ -175,7 +180,7 @@ const Question = observer(
                 isLastQuestion ? style["navigationList__button--disabled"] : ""
               }`}
               disabled={isLastQuestion}
-              onClick={() => action(indexQuestion + 1)}
+              onClick={() => handleNavigationClick(indexQuestion + 1)}
               type="button"
             >
               Следующий вопрос
