@@ -16,6 +16,19 @@ interface IQuestion {
   }[];
 }
 
+interface ICredentialsTicketAnswer {
+  ticketId: string;
+  questionId: string;
+  answerId: string;
+}
+
+interface IAnswers {
+  isCorrect: boolean;
+  correctAnser: string;
+  help: string;
+}
+[];
+
 const localStorageQuestions = helpers.getLocalStorage<IQuestion[]>(
   storageSelectors.questions
 );
@@ -27,6 +40,7 @@ class TicketsStore {
   tickets: string[];
   currentTicketId: string;
   questions: IQuestion[];
+  answers: IAnswers[];
 
   constructor() {
     this.tickets = [];
@@ -34,12 +48,17 @@ class TicketsStore {
     this.currentTicketId = localStorageCurrentTicketId
       ? String(localStorageCurrentTicketId)
       : "";
+    this.answers = [];
 
     makeAutoObservable(this);
   }
 
   setTickets(tickets: string[]) {
     this.tickets = tickets;
+  }
+
+  setAnswers(answer: IAnswers) {
+    this.answers = [...this.answers, answer];
   }
 
   setQuestions(questions: IQuestion[], ticketId?: string) {
@@ -63,6 +82,14 @@ class TicketsStore {
     const ticketQuestionsResponse = await api.getTicketQuestions(ticketId);
     if (!ticketQuestionsResponse) return;
     this.setQuestions(ticketQuestionsResponse, ticketId);
+  }
+
+  async sendingAnswer(credentials: ICredentialsTicketAnswer) {
+    const sendingAnswerResponse = await api.sendingAnswerFromTicket(
+      credentials
+    );
+    if (!sendingAnswerResponse) return;
+    this.setAnswers(sendingAnswerResponse);
   }
 }
 

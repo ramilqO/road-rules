@@ -9,6 +9,7 @@ import ArrowRightIcon from "../../../../public/svg/question/ArrowRightIcon";
 
 import Loader from "../../../Ui/Loader/Loader";
 import Button from "../../../Ui/Button/Button";
+import ticketsStore from "../../../stores/Tickets/ticketsStore";
 
 interface IAnswer {
   answerText: string;
@@ -71,6 +72,8 @@ const Question = observer(
       );
     }
 
+    console.log(JSON.parse(JSON.stringify(ticketsStore.answers)));
+
     return (
       <div className={style.question}>
         {currentQuestion.img ? (
@@ -103,7 +106,17 @@ const Question = observer(
         <ul className={style.question__listAnswers}>
           {currentQuestion.answers.map((answer) => (
             <li className={style.listAnswers__item} key={answer.answerId}>
-              <button type="button" className={style.listAnswers__button}>
+              <button
+                type="button"
+                className={style.listAnswers__button}
+                onClick={() =>
+                  ticketsStore.sendingAnswer({
+                    ticketId: currentQuestion.ticketId,
+                    questionId: currentQuestion.questionId,
+                    answerId: answer.answerId,
+                  })
+                }
+              >
                 {answer.answerText}
               </button>
             </li>
