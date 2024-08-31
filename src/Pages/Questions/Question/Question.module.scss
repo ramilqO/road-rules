@@ -102,40 +102,6 @@
       background-color: #1e1e1e;
     }
   }
-
-  &__navigationList {
-    display: flex;
-    justify-content: space-between;
-
-    width: 100%;
-  }
-
-  .navigationList__button {
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-
-    border-style: none;
-
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 16px;
-
-    background-color: transparent;
-    color: var(--questionColorNavigationButtonText);
-    cursor: pointer;
-
-    &--disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
-
-    span {
-      display: flex;
-      align-items: center;
-    }
-  }
 }
 
 .wrapperEmptyImage {
@@ -157,50 +123,4 @@
     font-size: 22px;
     line-height: 22.4px;
   }
-}
-
-.questionNotFound {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  max-width: 768;
-  height: 100vh;
-}
-
-.container {
-  padding: 32px;
-
-  border: 1px solid var(--pageNotFoundColorBorder);
-  border-radius: 8px;
-}
-
-.infoSection {
-  display: flex;
-  flex-direction: column;
-
-  gap: 12px;
-  margin-bottom: 24px;
-
-  &__title {
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 28.8px;
-
-    color: var(--pageNotFoundColorInfoSectionTitleAndDescription);
-  }
-
-  &__description {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22.4px;
-
-    color: var(--pageNotFoundColorInfoSectionTitleAndDescription);
-  }
-}
-
-.actions {
-  display: flex;
-  justify-content: end;
 }

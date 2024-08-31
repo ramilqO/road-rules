@@ -1,15 +1,13 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import ticketsStore from "../../../stores/Tickets/ticketsStore";
 import style from "./Question.module.scss";
 
-import ArrowLeftIcon from "../../../../public/svg/question/ArrowLeftIcon";
-import ArrowRightIcon from "../../../../public/svg/question/ArrowRightIcon";
-
 import Loader from "../../../Ui/Loader/Loader";
-import Button from "../../../Ui/Button/Button";
+
+import QuestionNotFound from "./ComponentsQuestion/QuestionNotFound";
+import QuestionNavigationList from "./ComponentsQuestion/QuestionNavigationList";
 
 interface IAnswer {
   answerText: string;
@@ -41,55 +39,23 @@ const Question = observer(
     isLastQuestion,
   }: QuestionProps) => {
     const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate();
-
     const checkIsAnswer = ticketsStore.answers[indexQuestion] !== undefined;
+
+    const handleAnswerClick = (answerId: string) => {
+      ticketsStore.sendingAnswer({
+        ticketId: currentQuestion.ticketId,
+        questionId: currentQuestion.questionId,
+        answerId,
+      });
+      action(indexQuestion + 1);
+    };
 
     useEffect(() => {
       setIsLoading(true);
     }, [currentQuestion?.img]);
 
-    const handleAnswerClick = useCallback(
-      (answerId: string) => {
-        ticketsStore.sendingAnswer({
-          ticketId: currentQuestion.ticketId,
-          questionId: currentQuestion.questionId,
-          answerId,
-        });
-        action(indexQuestion + 1);
-      },
-      [action, currentQuestion, indexQuestion]
-    );
-
-    const handleNavigationClick = useCallback(
-      (newIndex: number) => {
-        action(newIndex);
-      },
-      [action]
-    );
-
     if (!currentQuestion) {
-      return (
-        <div className={style.questionNotFound}>
-          <div className={style.container}>
-            <div className={style.infoSection}>
-              <h3 className={style.infoSection__title}>Билет не найден</h3>
-              <p className={style.infoSection__description}>
-                Пожалуйста, проверьте, правильный ли билет указан в URL, или
-                убедитесь, что билет еще не был удален. Возможно, произошла
-                ошибка при его загрузке.
-              </p>
-            </div>
-            <div className={style.actions}>
-              <Button
-                type="button"
-                text="На главную"
-                onClick={() => navigate("/menu")}
-              />
-            </div>
-          </div>
-        </div>
-      );
+      <QuestionNotFound />;
     }
 
     return (
@@ -158,36 +124,12 @@ const Question = observer(
           })}
         </ul>
 
-        <ul className={style.question__navigationList}>
-          <li className={style.navigationList__item}>
-            <button
-              className={`${style.navigationList__button} ${
-                isFirstQuestion ? style["navigationList__button--disabled"] : ""
-              }`}
-              disabled={isFirstQuestion}
-              onClick={() => handleNavigationClick(indexQuestion - 1)}
-              type="button"
-            >
-              <span>
-                <ArrowLeftIcon />
-              </span>
-              Предыдущий вопрос
-            </button>
-          </li>
-          <li className={style.navigationList__item}>
-            <button
-              className={`${style.navigationList__button} ${
-                isLastQuestion ? style["navigationList__button--disabled"] : ""
-              }`}
-              disabled={isLastQuestion}
-              onClick={() => handleNavigationClick(indexQuestion + 1)}
-              type="button"
-            >
-              Следующий вопрос
-              <ArrowRightIcon />
-            </button>
-          </li>
-        </ul>
+        <QuestionNavigationList
+          indexQuestion={indexQuestion}
+          isFirstQuestion={isFirstQuestion}
+          isLastQuestion={isLastQuestion}
+          action={action}
+        />
       </div>
     );
   }
