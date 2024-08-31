@@ -4,7 +4,7 @@ import MoonIcon from "../../../public/svg/header/MoonIcon";
 import SunIcon from "../../../public/svg/header/SunIcon";
 
 import Button from "../../Ui/Button/Button";
-import storageSelectors from "../../stores/Any/storageSelectors";
+import storageSelectors from "../../stores/Selectors/storageSelectors";
 
 export default function ThemeToggle() {
   const [themeMode, setThemeMode] = useState(() => {

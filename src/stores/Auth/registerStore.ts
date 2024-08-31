@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 import authStore from "./authStore";
-import api from "../Any/requestsOperations";
+import api from "../Request/requestsOperations";
 
 interface ICredentialsRegister {
   email: string;
