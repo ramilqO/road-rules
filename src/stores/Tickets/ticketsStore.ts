@@ -20,6 +20,7 @@ interface ICredentialsTicketAnswer {
   ticketId: string;
   questionId: string;
   answerId: string;
+  indexQuestion: number;
 }
 
 interface IAnswers {
@@ -27,6 +28,7 @@ interface IAnswers {
   isCorrect: boolean;
   correctAnswer: string;
   help: string;
+  indexQuestion: number;
 }
 [];
 

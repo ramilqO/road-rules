@@ -39,12 +39,19 @@ const Question = observer(
     isLastQuestion,
   }: QuestionProps) => {
     const [isLoading, setIsLoading] = useState(true);
-    const checkIsAnswer = ticketsStore.answers[indexQuestion] !== undefined;
+
+    const checkIsAnswer = ticketsStore.answers.some(
+      (answer) => answer.indexQuestion === indexQuestion
+    );
+    const currentAnswer = ticketsStore.answers.find(
+      (answer) => answer.indexQuestion === indexQuestion
+    );
 
     const handleAnswerClick = (answerId: string) => {
       ticketsStore.sendingAnswer({
         ticketId: currentQuestion.ticketId,
         questionId: currentQuestion.questionId,
+        indexQuestion: indexQuestion,
         answerId,
       });
       action(indexQuestion + 1);
@@ -55,8 +62,7 @@ const Question = observer(
     }, [currentQuestion?.img]);
 
     if (!currentQuestion) {
-      <QuestionNotFound />;
-      return;
+      return <QuestionNotFound />;
     }
 
     return (
@@ -86,9 +92,10 @@ const Question = observer(
 
         <ul className={style.question__listAnswers}>
           {currentQuestion.answers.map(({ answerId, answerText }) => {
-            const isAnswer =
-              checkIsAnswer &&
-              ticketsStore.answers[indexQuestion]?.ourAnswer === answerId;
+            const isAnswer = currentAnswer
+              ? currentAnswer.ourAnswer === answerId
+              : false;
+
             return (
               <li className={style.listAnswers__item} key={answerId}>
                 <button

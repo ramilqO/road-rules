@@ -26,10 +26,12 @@ interface ICredentialsTicketAnswer {
   ticketId: string;
   questionId: string;
   answerId: string;
+  indexQuestion: number;
 }
 
 interface IRetureDataTicketAnswer extends IResponseTicketAnswer {
   ourAnswer: string;
+  indexQuestion: number;
 }
 
 const ticketOperations = {
@@ -88,6 +90,7 @@ const ticketOperations = {
       );
       const returnedData: IRetureDataTicketAnswer = {
         ourAnswer: credentials.answerId,
+        indexQuestion: credentials.indexQuestion,
         ...data,
       };
       return returnedData;
