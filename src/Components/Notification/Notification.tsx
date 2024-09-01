@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import style from "./Notification.module.scss";
 import notificationStore from "@/stores/Notification/notificationStore";
 
-import CrossIcon from "@/../public/svg/notification/CrossIcon";
-import InfoIcon from "@/../public/svg/notification/InfoIcon";
+import CrossIcon from "/public/svg/notification/CrossIcon";
+import InfoIcon from "/public/svg/notification/InfoIcon";
 
 const Notification = observer(() => {
   const notification = notificationStore.notification;

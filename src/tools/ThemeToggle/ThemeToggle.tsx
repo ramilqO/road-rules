@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import MoonIcon from "@/../public/svg/header/MoonIcon";
-import SunIcon from "@/../public/svg/header/SunIcon";
+import MoonIcon from "/public/svg/header/MoonIcon";
+import SunIcon from "/public/svg/header/SunIcon";
 
 import Button from "@/Ui/Button/Button";
 import storageSelectors from "@/stores/Selectors/storageSelectors";
