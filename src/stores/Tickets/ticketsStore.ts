@@ -37,6 +37,10 @@ const localStorageCurrentTicketId = helpers.getLocalStorage(
   storageSelectors.currentTicketId
 );
 
+const localStorageAnswers = helpers.getLocalStorage<IAnswers[]>(
+  storageSelectors.answers
+);
+
 class TicketsStore {
   tickets: string[];
   currentTicketId: string;
@@ -49,7 +53,7 @@ class TicketsStore {
     this.currentTicketId = localStorageCurrentTicketId
       ? String(localStorageCurrentTicketId)
       : "";
-    this.answers = [];
+    this.answers = localStorageAnswers || [];
 
     makeAutoObservable(this);
   }
@@ -60,6 +64,14 @@ class TicketsStore {
 
   setAnswers(answer: IAnswers) {
     this.answers = [...this.answers, answer];
+    localStorage.setItem(
+      storageSelectors.answers,
+      JSON.stringify(this.answers)
+    );
+  }
+
+  resetAnswers() {
+    this.answers = [];
   }
 
   setQuestions(questions: IQuestion[], ticketId?: string) {

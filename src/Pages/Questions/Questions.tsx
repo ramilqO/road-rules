@@ -32,6 +32,8 @@ const Questions = observer(() => {
   useEffect(() => {
     if (ticketId) {
       if (ticketId !== ticketsStore.currentTicketId) {
+        ticketsStore.resetAnswers();
+        setCurrentQuestionIndex(0);
         ticketsStore.getTicketQuestions(ticketId);
       }
     } else {
