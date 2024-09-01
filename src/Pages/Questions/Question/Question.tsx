@@ -41,17 +41,16 @@ const Question = observer(
     const [isLoading, setIsLoading] = useState(true);
 
     const checkIsAnswer = ticketsStore.answers.some(
-      (answer) => answer.indexQuestion === indexQuestion
+      (answer) => answer.questionId === currentQuestion.questionId
     );
     const currentAnswer = ticketsStore.answers.find(
-      (answer) => answer.indexQuestion === indexQuestion
+      (answer) => answer.questionId === currentQuestion.questionId
     );
 
     const handleAnswerClick = (answerId: string) => {
       ticketsStore.sendingAnswer({
         ticketId: currentQuestion.ticketId,
         questionId: currentQuestion.questionId,
-        indexQuestion: indexQuestion,
         answerId,
       });
       action(indexQuestion + 1);
