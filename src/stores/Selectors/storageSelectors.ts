@@ -3,6 +3,7 @@ const storageSelectors = {
   theme: "theme",
   questions: "questions",
   currentTicketId: "currentTicketId",
+  currentQuestionPage: "currentQuestionPage"
 };
 
 export default storageSelectors;

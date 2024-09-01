@@ -56,6 +56,7 @@ const Question = observer(
 
     if (!currentQuestion) {
       <QuestionNotFound />;
+      return;
     }
 
     return (
