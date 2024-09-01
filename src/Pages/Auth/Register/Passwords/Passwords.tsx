@@ -4,11 +4,11 @@ import type { RefObject } from "react";
 
 import style from "./Passwords.module.scss";
 
-import Checkbox from "../../../../Ui/Checkbox/Checkbox";
-import Input from "../../../../Ui/Input/Input";
+import Checkbox from "@/Ui/Checkbox/Checkbox";
+import Input from "@/Ui/Input/Input";
 
-import SecurityPassword from "../../../../Ui/SecurityPassword/SecurityPassword";
-import registerStore from "../../../../stores/Auth/registerStore";
+import SecurityPassword from "@/Ui/SecurityPassword/SecurityPassword";
+import registerStore from "@/stores/Auth/registerStore";
 
 const Passwords = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);

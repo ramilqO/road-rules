@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 
-import ticketsStore from "../../../stores/Tickets/ticketsStore";
+import ticketsStore from "@/stores/Tickets/ticketsStore";
 import style from "./Question.module.scss";
 
-import Loader from "../../../Ui/Loader/Loader";
+import Loader from "@/Ui/Loader/Loader";
 
 import QuestionNotFound from "./ComponentsQuestion/QuestionNotFound/QuestionNotFound";
 import QuestionNavigationList from "./ComponentsQuestion/QuestionNavigationList/QuestionNavigationList";

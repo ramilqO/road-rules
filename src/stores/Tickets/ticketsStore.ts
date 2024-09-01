@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 import storageSelectors from "../Selectors/storageSelectors";
-import helpers from "../../tools/Helpers/helpers";
+import helpers from "@/tools/Helpers/helpers";
 
 import api from "../Request/requestsOperations";
 

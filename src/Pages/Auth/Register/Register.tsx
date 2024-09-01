@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
 import { Form, redirect, useNavigate } from "react-router-dom";
 
-import registerStore from "../../../stores/Auth/registerStore";
+import registerStore from "@/stores/Auth/registerStore";
 import style from "./Register.module.scss";
 
-import Button from "../../../Ui/Button/Button";
-import Input from "../../../Ui/Input/Input";
+import Button from "@/Ui/Button/Button";
+import Input from "@/Ui/Input/Input";
 import Passwords from "./Passwords/Passwords";
 
 const Register = observer(() => {

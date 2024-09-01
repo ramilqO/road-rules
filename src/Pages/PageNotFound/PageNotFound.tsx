@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import style from "./PageNotFound.module.scss";
 
-import Button from "../../Ui/Button/Button";
+import Button from "@/Ui/Button/Button";
 
 export default function PageNotFound() {
   const navigate = useNavigate();

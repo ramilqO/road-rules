@@ -5,14 +5,14 @@ import { useParams } from "react-router-dom";
 import style from "./Questions.module.scss";
 
 const Question = lazy(() => import("./Question/Question"));
-const Loader = lazy(() => import("../../Ui/Loader/Loader"));
+const Loader = lazy(() => import("@/Ui/Loader/Loader"));
 
-import authStore from "../../stores/Auth/authStore";
-import examStore from "../../stores/Exam/examStore";
-import ticketsStore from "../../stores/Tickets/ticketsStore";
+import authStore from "@/stores/Auth/authStore";
+import examStore from "@/stores/Exam/examStore";
+import ticketsStore from "@/stores/Tickets/ticketsStore";
 
-import storageSelectors from "../../stores/Selectors/storageSelectors";
-import helpers from "../../tools/Helpers/helpers";
+import storageSelectors from "@/stores/Selectors/storageSelectors";
+import helpers from "@/tools/Helpers/helpers";
 
 const localStorageCurrentQuestionPage = helpers.getLocalStorage(
   storageSelectors.currentQuestionPage

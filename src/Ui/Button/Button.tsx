@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import { observer } from "mobx-react-lite";
 
 import style from "./Button.module.scss";
-import authStore from "../../stores/Auth/authStore";
+import authStore from "@/stores/Auth/authStore";
 
 import Loader from "../Loader/Loader";
 

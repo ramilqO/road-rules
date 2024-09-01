@@ -4,11 +4,11 @@ import { Outlet } from "react-router-dom";
 
 import style from "./AppLayout.module.scss";
 
-import Header from "../../Components/Header/Header";
+import Header from "@/Components/Header/Header";
 
-import notificationStore from "../../stores/Notification/notificationStore";
+import notificationStore from "@/stores/Notification/notificationStore";
 const Notification = lazy(
-  () => import("../../Components/Notification/Notification")
+  () => import("@/Components/Notification/Notification")
 );
 
 const AppLayout = observer(() => {

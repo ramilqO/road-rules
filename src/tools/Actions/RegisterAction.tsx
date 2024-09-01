@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 
-import registerStore from "../../stores/Auth/registerStore";
-import authStore from "../../stores/Auth/authStore";
+import registerStore from "@/stores/Auth/registerStore";
+import authStore from "@/stores/Auth/authStore";
 
 import helpers from "../Helpers/helpers";
 
