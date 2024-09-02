@@ -1,6 +1,6 @@
 :root {
   // Main
-  --mainBacg: #ffffff;
+  --mainBacg: #f5f5f5;
 
   // Menu
   --menuColorBorder: #757575;
@@ -21,7 +21,7 @@
 
   // Notification
   --basicNotificationColorTitleBodyIcons: #1e1e1e;
-  --basicNotificationColorItemBacg: #ffffff;
+  --basicNotificationColorItemBacg: #f5f5f5;
   --basicNotificationColorItemBorder: #757575;
   --basicNotificationColorButtonBacg: #2c2c2c;
   --basicNotificationColorButtonText: #f5f5f5;
@@ -45,7 +45,7 @@
 
   --authColorFormInputLabelTextAndInputText: #1e1e1e;
   --authColorFormInputLabelError: #ff2c2c;
-  --authColorFormInputFieldBacg: #ffffff;
+  --authColorFormInputFieldBacg: #f5f5f5;
   --authColorFormInputFieldBorder: #d9d9d9;
   --authColorFormInputFieldColorAndPlaceholderColor: #b3b3b3;
 
@@ -56,12 +56,9 @@
   // PageNotFound
   --pageNotFoundColorBorder: #d9d9d9;
   --pageNotFoundColorInfoSectionTitleAndDescription: #1e1e1e;
-  --pageNotFoundColorButtonBacg: #2c2c2c;
-  --pageNotFoundColorButtonText: #f5f5f5;
 
   // Checkbox
   --checkboxColorCheckedBacgAndBorder: #2c2c2c;
-  --checkboxColorUncheckedBacg: transperent;
 
   --checkboxUrlIcon: url("/public/svg/checkbox/IconWhite.svg");
 
@@ -73,8 +70,8 @@
   --securityPasswordProgressBarStep3: #228c22;
 
   // Loader
-  --loaderColorHugeAndQuestionImgLoader: #2c2c2c 0 0;
-  --loaderColor: #fff 0 0;
+  --loaderColorHugeAndQuestionImgLoader: #2c2c2c;
+  --loaderColor: #f5f5f5;
 }
 
 [data-theme="darkMode"] {
@@ -88,7 +85,7 @@
   --questionsColorIsCorrectBacg: #228c22;
   --questionsColorIsInvalidBacg: #ff2c2c;
   //   Question    \\
-  --questionColorQuestionTitle: #ffffff;
+  --questionColorQuestionTitle: #f5f5f5;
 
   --questionColorAnswerButtonBacg: #f5f5f5;
   --questionColorAnswerButtonText: #1e1e1e;
@@ -99,7 +96,7 @@
   --questionColorThisAnswerBacg: #2c2c2c;
 
   // Notification
-  --basicNotificationColorTitleBodyIcons: #ffffff;
+  --basicNotificationColorTitleBodyIcons: #f5f5f5;
   --basicNotificationColorItemBacg: #1e1e1e;
   --basicNotificationColorButtonBacg: #f5f5f5;
   --basicNotificationColorButtonText: #1e1e1e;
@@ -111,13 +108,13 @@
   --errorNotificationColorButtonBorder: #f4776a;
 
   // Header
-  --headerColorLoginButtonColor: #ffffff;
+  --headerColorLoginButtonColor: #f5f5f5;
 
   // Auth
   --authColorInfoSectionTitle: #f5f5f5;
   --authColorInfoSectionDescription: #e3e3e3;
 
-  --authColorFormInputLabelTextAndInputText: #ffffff;
+  --authColorFormInputLabelTextAndInputText: #f5f5f5;
   --authColorFormInputFieldBacg: #1e1e1e;
   --authColorFormInputFieldBorder: #444444;
   --authColorFormInputFieldColorAndPlaceholderColor: #b3b3b3;
@@ -128,18 +125,16 @@
 
   // PageNotFound
   --pageNotFoundColorBorder: #d9d9d9;
-  --pageNotFoundColorInfoSectionTitleAndDescription: #ffffff;
-  --pageNotFoundColorButtonBacg: #f5f5f5;
-  --pageNotFoundColorButtonText: #1e1e1e;
+  --pageNotFoundColorInfoSectionTitleAndDescription: #f5f5f5;
 
   // Checkbox
   --checkboxColorCheckedBacgAndBorder: #f5f5f5;
   --checkboxUrlIcon: url("/public/svg/checkbox/IconDark.svg");
 
   // SecurityPassword
-  --securityPasswordColorDescription: #ffffff;
+  --securityPasswordColorDescription: #f5f5f5;
 
   // Loader
-  --loaderColorHugeAndQuestionImgLoader: #f5f5f5 0 0;
-  --loaderColor: #333 0 0;
+  --loaderColorHugeAndQuestionImgLoader: #f5f5f5;
+  --loaderColor: #2c2c2c;
 }

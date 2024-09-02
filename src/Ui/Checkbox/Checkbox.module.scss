@@ -35,7 +35,7 @@
       border: 1px solid var(--checkboxColorCheckedBacgAndBorder);
       border-radius: 4px;
 
-      background-color: var(--checkboxColorUncheckedBacg);
+      background-color: transparent;
       cursor: pointer;
 
       &::after {
