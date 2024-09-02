@@ -22,7 +22,7 @@
     font-size: 24px;
     line-height: 28.8px;
 
-    color: var(--authColorInfoSectionTitle);
+    color: var(--color-dark-text);
   }
 
   &__description {
@@ -32,7 +32,7 @@
     font-size: 20px;
     line-height: 24px;
 
-    color: var(--authColorInfoSectionDescription);
+    color: var(--color-mid-grey);
   }
 }
 
@@ -46,7 +46,7 @@
   padding: 24px;
 
   border-radius: 8px;
-  border: 1px solid var(--authColorFormBorder);
+  border: 1px solid var(--color-light-grey);
 }
 
 .wrapper {

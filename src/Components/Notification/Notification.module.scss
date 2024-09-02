@@ -16,13 +16,13 @@
   padding: 16px;
 
   border-radius: 8px;
-  border: 1px solid var(--basicNotificationColorItemBorder);
+  border: 1px solid var(--color-mid-grey);
 
-  background-color: var(--basicNotificationColorItemBacg);
+  background-color: var(--color-light-bg);
 
   &--error {
-    border: 1px solid var(--errorNotificationColorItemBorder);
-    background-color: var(--errorNotificationColorItemBacg);
+    border: 1px solid var(--color-notification-border);
+    background-color: var(--color-notification-bg);
   }
 }
 
@@ -38,11 +38,11 @@
     cursor: pointer;
 
     &Icon--error {
-      color: var(--errorNotificationColorTitleBodyIcons);
+      color: var(--color-error-bg);
     }
 
     &Icon--basic {
-      color: var(--basicNotificationColorTitleBodyIcons);
+      color: var(--color-dark-text);
     }
   }
 }
@@ -57,11 +57,11 @@
     cursor: pointer;
 
     &Icon--error {
-      color: var(--errorNotificationColorTitleBodyIcons);
+      color: var(--color-error-bg);
     }
 
     &Icon--basic {
-      color: var(--basicNotificationColorTitleBodyIcons);
+      color: var(--color-dark-text);
     }
   }
 }
@@ -83,16 +83,16 @@
     font-size: 16px;
     line-height: 16px;
 
-    background-color: var(--basicNotificationColorButtonBacg);
+    background-color: var(--color-dark-bg);
     border: none;
-    color: var(--basicNotificationColorButtonText);
+    color: var(--color-light-bg);
 
     cursor: pointer;
 
     &--error {
-      background-color: var(--errorNotificationColorButtonBacg);
-      border: 1px solid var(--errorNotificationColorButtonBorder);
-      color: var(--errorNotificationColorButtonBorderAndText);
+      background-color: var(--color-error-button-bg);
+      border: 1px solid var(--color-notification-border);
+      color: var(--color-error-button-border);
     }
   }
 }
@@ -108,10 +108,10 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: var(--basicNotificationColorTitleBodyIcons);
+    color: var(--color-dark-text);
 
     &--error {
-      color: var(--errorNotificationColorTitleBodyIcons);
+      color: var(--color-error-bg);
     }
   }
 
@@ -120,10 +120,10 @@
     font-size: 16px;
     line-height: 22.4px;
 
-    color: var(--basicNotificationColorTitleBodyIcons);
+    color: var(--color-dark-text);
 
     &--error {
-      color: var(--errorNotificationColorTitleBodyIcons);
+      color: var(--color-error-bg);
     }
   }
 }

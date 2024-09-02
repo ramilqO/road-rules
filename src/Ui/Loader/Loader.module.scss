@@ -23,7 +23,7 @@
 .loader {
   width: 35px;
   aspect-ratio: 0.75;
-  --c: no-repeat linear-gradient(var(--loaderColor) 0 0);
+  --c: no-repeat linear-gradient(var(--color-light-bg) 0 0);
   background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
   background-size: 20% 50%;
   animation: loading 1s infinite linear;
@@ -31,7 +31,7 @@
   &__questionImgLoader {
     width: 35px;
     aspect-ratio: 0.75;
-    --c: no-repeat linear-gradient(var(--loaderColorHugeAndQuestionImgLoader) 0 0);
+    --c: no-repeat linear-gradient(var(--color-dark-bg) 0 0);
     background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
     background-size: 20% 50%;
     animation: loading 1s infinite linear;
@@ -40,7 +40,7 @@
   &__huge {
     width: 45px;
     aspect-ratio: 0.75;
-    --c: no-repeat linear-gradient(var(--loaderColorHugeAndQuestionImgLoader) 0 0);
+    --c: no-repeat linear-gradient(var(--color-dark-bg) 0 0);
     background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
     background-size: 20% 50%;
     animation: loading 1s infinite linear;

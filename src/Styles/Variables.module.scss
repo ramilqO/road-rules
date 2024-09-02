@@ -1,140 +1,35 @@
 :root {
-  // Main
-  --mainBacg: #f5f5f5;
+    /* Основные цвета */
+  --color-light-bg: #f5f5f5;
+  --color-dark-text: #1e1e1e;
+  --color-dark-bg: #2c2c2c;
+  --color-mid-grey: #757575;
+  --color-light-grey: #d9d9d9;
+  --color-accent-red: #ff2c2c;
+  --color-accent-yellow: #ffff00;
+  --color-accent-green: #228c22;
+  --color-notification-bg: #fee9e7;
+  --color-notification-border: #ec221f;
+  --color-error-bg: #900b09;
+  --color-error-button-bg: #d9d9d9;
+  --color-error-button-border: #b3b3b3;
+  --color-placeholder: #b3b3b3;
 
-  // Menu
-  --menuColorBorder: #757575;
-
-  // Questions
-  --questionsColorButtonText: #2c2c2c;
-  --questionsColorCurrentButtonText: #f5f5f5;
-  --questionsColorCurrentButtonBacg: #2c2c2c;
-  //   Question    \\
-  --questionColorBorder: #757575;
-  --questionColorQuestionTitle: #1e1e1e;
-  --questionColorAnswerButtonBacg: #2c2c2c;
-  --questionColorAnswerButtonText: #f5f5f5;
-  --questionColorNavigationButtonText: #1e1e1e;
-  --questionColorEmeptyImgBacg: #f5f5f5;
-  --questionColorThisAnswerText: #2c2c2c;
-  --questionColorThisAnswerBacg: #f5f5f5;
-
-  // Notification
-  --basicNotificationColorTitleBodyIcons: #1e1e1e;
-  --basicNotificationColorItemBacg: #f5f5f5;
-  --basicNotificationColorItemBorder: #757575;
-  --basicNotificationColorButtonBacg: #2c2c2c;
-  --basicNotificationColorButtonText: #f5f5f5;
-
-  --errorNotificationColorTitleBodyIcons: #900b09;
-  --errorNotificationColorItemBacg: #fee9e7;
-  --errorNotificationColorItemBorder: #ec221f;
-  --errorNotificationColorButtonBacg: #d9d9d9;
-  --errorNotificationColorButtonBorderAndText: #b3b3b3;
-  --errorNotificationColorButtonBorder: #b3b3b3;
-
-  // Header
-  --headerColorToggleThemeButtonBorder: #d9d9d9;
-  --headerColorLoginButtonColor: #1e1e1e;
-
-  // Auth
-  --authColorInfoSectionTitle: #1e1e1e;
-  --authColorInfoSectionDescription: #757575;
-
-  --authColorFormBorder: #d9d9d9;
-
-  --authColorFormInputLabelTextAndInputText: #1e1e1e;
-  --authColorFormInputLabelError: #ff2c2c;
-  --authColorFormInputFieldBacg: #f5f5f5;
-  --authColorFormInputFieldBorder: #d9d9d9;
-  --authColorFormInputFieldColorAndPlaceholderColor: #b3b3b3;
-
-  --authColorFormButtonBacg: #2c2c2c;
-  --authColorFormButtonColor: #f5f5f5;
-  --authColorFormButtonLinkColor: #1e1e1e;
-
-  // PageNotFound
-  --pageNotFoundColorBorder: #d9d9d9;
-  --pageNotFoundColorInfoSectionTitleAndDescription: #1e1e1e;
-
-  // Checkbox
-  --checkboxColorCheckedBacgAndBorder: #2c2c2c;
-
-  --checkboxUrlIcon: url("/public/svg/checkbox/IconWhite.svg");
-
-  // SecurityPassword
-  --securityPasswordColorDescription: #1e1e1e;
-
-  --securityPasswordProgressBarStep1: #ff2c2c;
-  --securityPasswordProgressBarStep2: #ffff00;
-  --securityPasswordProgressBarStep3: #228c22;
-
-  // Loader
-  --loaderColorHugeAndQuestionImgLoader: #2c2c2c;
-  --loaderColor: #f5f5f5;
+  --icon-checkbox: url("/public/svg/checkbox/IconWhite.svg");
 }
 
 [data-theme="darkMode"] {
-  // Main
-  --mainBacg: #2c2c2c;
+  --color-light-bg: #1e1e1e;
+  --color-dark-bg: #f5f5f5;
+  --color-dark-text: #f5f5f5;
+  --color-error-bg: #fee9e7;
+  --color-notification-bg: #4d0b0a;
+  --color-error-button-bg: #c00f0c;
+  --color-error-button-border: #fee9e7;
+  --color-notification-border: #f4776a;
+  --color-mid-grey: #e3e3e3;
+  --color-placeholder: #b3b3b3;
+  --color-light-grey: #d9d9d9;
 
-  // Questions
-  --questionsColorButtonText: #f5f5f5;
-  --questionsColorCurrentButtonText: #2c2c2c;
-  --questionsColorCurrentButtonBacg: #f5f5f5;
-  --questionsColorIsCorrectBacg: #228c22;
-  --questionsColorIsInvalidBacg: #ff2c2c;
-  //   Question    \\
-  --questionColorQuestionTitle: #f5f5f5;
-
-  --questionColorAnswerButtonBacg: #f5f5f5;
-  --questionColorAnswerButtonText: #1e1e1e;
-
-  --questionColorNavigationButtonText: #f5f5f5;
-
-  --questionColorThisAnswerText: #f5f5f5;
-  --questionColorThisAnswerBacg: #2c2c2c;
-
-  // Notification
-  --basicNotificationColorTitleBodyIcons: #f5f5f5;
-  --basicNotificationColorItemBacg: #1e1e1e;
-  --basicNotificationColorButtonBacg: #f5f5f5;
-  --basicNotificationColorButtonText: #1e1e1e;
-
-  --errorNotificationColorTitleBodyIcons: #fee9e7;
-  --errorNotificationColorItemBacg: #4d0b0a;
-  --errorNotificationColorButtonBacg: #c00f0c;
-  --errorNotificationColorButtonBorderAndText: #fee9e7;
-  --errorNotificationColorButtonBorder: #f4776a;
-
-  // Header
-  --headerColorLoginButtonColor: #f5f5f5;
-
-  // Auth
-  --authColorInfoSectionTitle: #f5f5f5;
-  --authColorInfoSectionDescription: #e3e3e3;
-
-  --authColorFormInputLabelTextAndInputText: #f5f5f5;
-  --authColorFormInputFieldBacg: #1e1e1e;
-  --authColorFormInputFieldBorder: #444444;
-  --authColorFormInputFieldColorAndPlaceholderColor: #b3b3b3;
-
-  --authColorFormButtonBacg: #f5f5f5;
-  --authColorFormButtonColor: #1e1e1e;
-  --authColorFormButtonLinkColor: #f5f5f5;
-
-  // PageNotFound
-  --pageNotFoundColorBorder: #d9d9d9;
-  --pageNotFoundColorInfoSectionTitleAndDescription: #f5f5f5;
-
-  // Checkbox
-  --checkboxColorCheckedBacgAndBorder: #f5f5f5;
-  --checkboxUrlIcon: url("/public/svg/checkbox/IconDark.svg");
-
-  // SecurityPassword
-  --securityPasswordColorDescription: #f5f5f5;
-
-  // Loader
-  --loaderColorHugeAndQuestionImgLoader: #f5f5f5;
-  --loaderColor: #2c2c2c;
+  --icon-checkbox: url("/public/svg/checkbox/IconDark.svg");
 }

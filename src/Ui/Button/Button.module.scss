@@ -17,8 +17,8 @@
   line-height: 16px;
   cursor: pointer;
 
-  background-color: var(--authColorFormButtonBacg);
-  color: var(--authColorFormButtonColor);
+  background-color: var(--color-dark-bg);
+  color: var(--color-light-bg);
 
   &--disabled {
     cursor: not-allowed;
@@ -41,6 +41,6 @@
   cursor: pointer;
   border: none;
 
-  color: var(--authColorFormButtonLinkColor);
+  color: var(--color-dark-text);
   background-color: transparent;
 }

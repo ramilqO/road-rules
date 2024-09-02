@@ -1,7 +1,7 @@
 @import "./Variables.module.scss";
 
 body {
-  background-color: var(--mainBacg);
+  background-color: var(--color-light-bg);
   font-family: Inter, sans-serif;
 }
 html,
@@ -22,13 +22,13 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px var(--authColorFormInputFieldBacg) inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--color-light-bg) inset !important;
   -webkit-text-fill-color: var(
-    --authColorFormInputLabelTextAndInputText
+    --color-dark-text
   ) !important;
 }
 
 input:-moz-autofill {
-  box-shadow: 0 0 0 30px var(--authColorFormInputFieldBacg) inset !important;
-  color: var(--authColorFormInputLabelTextAndInputText) !important;
+  box-shadow: 0 0 0 30px var(--color-light-bg) inset !important;
+  color: var(--color-dark-text) !important;
 }

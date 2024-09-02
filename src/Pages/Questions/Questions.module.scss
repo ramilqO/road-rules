@@ -42,19 +42,19 @@
     line-height: 16px;
 
     background-color: transparent;
-    color: var(--questionsColorButtonText);
+    color: var(--color-dark-bg);
 
     &--current {
-      color: var(--questionsColorCurrentButtonText);
-      background-color: var(--questionsColorCurrentButtonBacg);
+      color: var(--color-light-bg);
+      background-color: var(--color-dark-bg);
     }
 
     &--isCorrect {
-      background-color: var(--questionsColorIsCorrectBacg);
+      background-color: var(--color-accent-green);
     }
 
     &--isInvalid {
-      background-color: var(--questionsColorIsInvalidBacg);
+      background-color: var(--color-error-button-bg);
     }
   }
 }
