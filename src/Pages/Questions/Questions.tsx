@@ -37,6 +37,7 @@ const Questions = observer(() => {
         ticketsStore.getTicketQuestions(ticketId);
       }
     } else {
+      setCurrentQuestionIndex(0);
       localStorage.removeItem(storageSelectors.currentQuestionPage);
       examStore.getExam();
     }

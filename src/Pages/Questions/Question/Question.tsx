@@ -40,6 +40,14 @@ const Question = observer(
   }: QuestionProps) => {
     const [isLoading, setIsLoading] = useState(true);
 
+    useEffect(() => {
+      setIsLoading(true);
+    }, [currentQuestion?.img]);
+
+    if (!currentQuestion) {
+      return <QuestionNotFound />;
+    }
+
     const checkIsAnswer = ticketsStore.answers.some(
       (answer) => answer.questionId === currentQuestion.questionId
     );
@@ -55,14 +63,6 @@ const Question = observer(
       });
       action(indexQuestion + 1);
     };
-
-    useEffect(() => {
-      setIsLoading(true);
-    }, [currentQuestion?.img]);
-
-    if (!currentQuestion) {
-      return <QuestionNotFound />;
-    }
 
     return (
       <div className={style.question}>
