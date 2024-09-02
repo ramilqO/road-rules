@@ -6,8 +6,8 @@ import style from "./Question.module.scss";
 
 import Loader from "@/Ui/Loader/Loader";
 
-import QuestionNotFound from "./ComponentsQuestion/QuestionNotFound/QuestionNotFound";
 import QuestionNavigationList from "./ComponentsQuestion/QuestionNavigationList/QuestionNavigationList";
+import QuestionNotFound from "./ComponentsQuestion/QuestionNotFound/QuestionNotFound";
 
 interface IAnswer {
   answerText: string;
@@ -49,10 +49,11 @@ const Question = observer(
     }
 
     const checkIsAnswer = ticketsStore.answers.some(
-      (answer) => answer.questionId === currentQuestion.questionId
+      (answer) => answer.questionId === currentQuestion.questionId,
     );
+    //TODO: помоему если ты оставишь только эту переменную все будет работать точно так же, только заменить checkIsAnswer на currentAnswer
     const currentAnswer = ticketsStore.answers.find(
-      (answer) => answer.questionId === currentQuestion.questionId
+      (answer) => answer.questionId === currentQuestion.questionId,
     );
 
     const handleAnswerClick = (answerId: string) => {
@@ -91,9 +92,7 @@ const Question = observer(
 
         <ul className={style.listAnswers}>
           {currentQuestion.answers.map(({ answerId, answerText }) => {
-            const isAnswer = currentAnswer
-              ? currentAnswer.ourAnswer === answerId
-              : false;
+            const isAnswer = currentAnswer?.ourAnswer === answerId;
 
             return (
               <li className={style.listAnswers__item} key={answerId}>
@@ -126,7 +125,7 @@ const Question = observer(
         />
       </div>
     );
-  }
+  },
 );
 
 export default Question;
