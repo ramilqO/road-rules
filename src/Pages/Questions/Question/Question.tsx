@@ -89,7 +89,7 @@ const Question = observer(
           {currentQuestion.question}
         </h1>
 
-        <ul className={style.question__listAnswers}>
+        <ul className={style.listAnswers}>
           {currentQuestion.answers.map(({ answerId, answerText }) => {
             const isAnswer = currentAnswer
               ? currentAnswer.ourAnswer === answerId
@@ -101,31 +101,18 @@ const Question = observer(
                   type="button"
                   className={`${style.listAnswers__button} ${
                     checkIsAnswer ? style["listAnswers__button--answer"] : ""
-                  } ${
-                    isAnswer ? style["listAnswers__button--thisAnswer"] : ""
                   }`}
                   disabled={checkIsAnswer}
                   onClick={() => handleAnswerClick(answerId)}
                 >
-                  <span
-                    className={`${style.listAnswers__buttonText} ${
-                      checkIsAnswer
-                        ? style["listAnswers__buttonText--answer"]
-                        : ""
-                    } ${
-                      isAnswer
-                        ? style["listAnswers__buttonText--thisAnswer"]
-                        : ""
-                    }`}
-                  >
-                    {answerText}
-                  </span>
-                  {isAnswer && (
-                    <span className={style.listAnswers__thisAnswer}>
-                      Ваш ответ
-                    </span>
-                  )}
+                  {answerText}
                 </button>
+
+                {isAnswer && (
+                  <span className={style.listAnswers__thisAnswer}>
+                    Ваш ответ
+                  </span>
+                )}
               </li>
             );
           })}
