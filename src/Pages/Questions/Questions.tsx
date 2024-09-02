@@ -53,26 +53,40 @@ const Questions = observer(() => {
 
   return (
     <div className={style.questions}>
-      <div className={style.questions__paginationWrapper}>
-        <ul className={style.questions__listPagination}>
-          {questionsToRender.map((question, i) => (
-            <li
-              className={style.listPagination__item}
-              key={question.questionId + i}
-            >
-              <button
-                className={`${style.listPagination__button} ${
-                  currentQuestionIndex === i
-                    ? style["listPagination__button--current"]
-                    : ""
-                }`}
-                onClick={() => handleButtonClick(i)}
-                type="button"
+      <div className={style.paginationWrapper}>
+        <ul className={style.listPagination}>
+          {questionsToRender.map((question, i) => {
+            const answer = ticketsStore.answers.find(
+              (a) => a.questionId === question.questionId
+            );
+
+            const isCorrect = answer?.isCorrect;
+            const isInvalid = answer !== undefined && !isCorrect;
+            const isCurrent = currentQuestionIndex === i;
+
+            return (
+              <li
+                className={style.listPagination__item}
+                key={question.questionId + i}
               >
-                {i + 1}
-              </button>
-            </li>
-          ))}
+                <button
+                  className={`${style.listPagination__button} ${
+                    isCurrent ? style["listPagination__button--current"] : ""
+                  } ${
+                    isCorrect
+                      ? style["listPagination__button--isCorrect"]
+                      : isInvalid
+                      ? style["listPagination__button--isInvalid"]
+                      : ""
+                  }`}
+                  onClick={() => handleButtonClick(i)}
+                  type="button"
+                >
+                  {i + 1}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
 

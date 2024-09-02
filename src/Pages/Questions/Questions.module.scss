@@ -7,26 +7,26 @@
   align-items: center;
 
   margin-top: 45px;
+}
 
-  &__paginationWrapper {
-    display: flex;
-    justify-content: center;
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
 
-    overflow-x: auto;
+  overflow-x: auto;
 
-    width: 100%;
+  width: 100%;
 
-    margin-bottom: 20px;
-  }
+  margin-bottom: 20px;
+}
 
-  &__listPagination {
-    display: flex;
-    overflow-x: auto;
+.listPagination {
+  display: flex;
+  overflow-x: auto;
 
-    gap: 8px;
-  }
+  gap: 8px;
 
-  .listPagination__button {
+  &__button {
     text-align: center;
 
     width: 32px;
@@ -47,6 +47,14 @@
     &--current {
       color: var(--questionsColorCurrentButtonText);
       background-color: var(--questionsColorCurrentButtonBacg);
+    }
+
+    &--isCorrect {
+      background-color: green;
+    }
+
+    &--isInvalid {
+      background-color: red;
     }
   }
 }
