@@ -30,6 +30,7 @@ interface ICredentialsTicketAnswer {
 
 interface IRetureDataTicketAnswer extends IResponseTicketAnswer {
   ourAnswer: string;
+  questionId: string;
 }
 
 const ticketOperations = {
@@ -88,6 +89,7 @@ const ticketOperations = {
       );
       const returnedData: IRetureDataTicketAnswer = {
         ourAnswer: credentials.answerId,
+        questionId: credentials.questionId,
         ...data,
       };
       return returnedData;

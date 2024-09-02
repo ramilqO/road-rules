@@ -1,4 +1,4 @@
-import notificationStore from "../../stores/Notification/notificationStore";
+import notificationStore from "@/stores/Notification/notificationStore";
 
 const helpers = {
   capitalizeFirstLetter: (text: string) => {

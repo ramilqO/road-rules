@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 import style from "./Menu.module.scss";
 
-import Button from "../../Ui/Button/Button";
-import Loader from "../../Ui/Loader/Loader";
+import Button from "@/Ui/Button/Button";
+import Loader from "@/Ui/Loader/Loader";
 
-import ticketsStore from "../../stores/Tickets/ticketsStore";
-import authStore from "../../stores/Auth/authStore";
+import ticketsStore from "@/stores/Tickets/ticketsStore";
+import authStore from "@/stores/Auth/authStore";
 
 const Menu = observer(() => {
   const navigate = useNavigate();

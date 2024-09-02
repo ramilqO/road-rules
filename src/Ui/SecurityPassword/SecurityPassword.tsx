@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 
-import registerStore from "../../stores/Auth/registerStore";
+import registerStore from "@/stores/Auth/registerStore";
 import styles from "./SecurityPassword.module.scss";
 
 const SecurityPassword = observer(() => {

@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 
-import ticketsStore from "../../../stores/Tickets/ticketsStore";
+import ticketsStore from "@/stores/Tickets/ticketsStore";
 import style from "./Question.module.scss";
 
-import Loader from "../../../Ui/Loader/Loader";
+import Loader from "@/Ui/Loader/Loader";
 
 import QuestionNotFound from "./ComponentsQuestion/QuestionNotFound/QuestionNotFound";
 import QuestionNavigationList from "./ComponentsQuestion/QuestionNavigationList/QuestionNavigationList";
@@ -39,7 +39,13 @@ const Question = observer(
     isLastQuestion,
   }: QuestionProps) => {
     const [isLoading, setIsLoading] = useState(true);
-    const checkIsAnswer = ticketsStore.answers[indexQuestion] !== undefined;
+
+    const checkIsAnswer = ticketsStore.answers.some(
+      (answer) => answer.questionId === currentQuestion.questionId
+    );
+    const currentAnswer = ticketsStore.answers.find(
+      (answer) => answer.questionId === currentQuestion.questionId
+    );
 
     const handleAnswerClick = (answerId: string) => {
       ticketsStore.sendingAnswer({
@@ -55,7 +61,7 @@ const Question = observer(
     }, [currentQuestion?.img]);
 
     if (!currentQuestion) {
-      <QuestionNotFound />;
+      return <QuestionNotFound />;
     }
 
     return (
@@ -83,42 +89,30 @@ const Question = observer(
           {currentQuestion.question}
         </h1>
 
-        <ul className={style.question__listAnswers}>
+        <ul className={style.listAnswers}>
           {currentQuestion.answers.map(({ answerId, answerText }) => {
-            const isAnswer =
-              checkIsAnswer &&
-              ticketsStore.answers[indexQuestion]?.ourAnswer === answerId;
+            const isAnswer = currentAnswer
+              ? currentAnswer.ourAnswer === answerId
+              : false;
+
             return (
               <li className={style.listAnswers__item} key={answerId}>
                 <button
                   type="button"
                   className={`${style.listAnswers__button} ${
                     checkIsAnswer ? style["listAnswers__button--answer"] : ""
-                  } ${
-                    isAnswer ? style["listAnswers__button--thisAnswer"] : ""
                   }`}
                   disabled={checkIsAnswer}
                   onClick={() => handleAnswerClick(answerId)}
                 >
-                  <span
-                    className={`${style.listAnswers__buttonText} ${
-                      checkIsAnswer
-                        ? style["listAnswers__buttonText--answer"]
-                        : ""
-                    } ${
-                      isAnswer
-                        ? style["listAnswers__buttonText--thisAnswer"]
-                        : ""
-                    }`}
-                  >
-                    {answerText}
-                  </span>
-                  {isAnswer && (
-                    <span className={style.listAnswers__thisAnswer}>
-                      Ваш ответ
-                    </span>
-                  )}
+                  {answerText}
                 </button>
+
+                {isAnswer && (
+                  <span className={style.listAnswers__thisAnswer}>
+                    Ваш ответ
+                  </span>
+                )}
               </li>
             );
           })}

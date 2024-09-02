@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../../../../../Ui/Button/Button";
 
+import Button from "@/Ui/Button/Button";
 import style from "./QuestionNotFound.module.scss";
 
 function QuestionNotFound() {

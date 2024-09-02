@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 
-import authStore from "../../stores/Auth/authStore";
+import authStore from "@/stores/Auth/authStore";
 
 import style from "./Header.module.scss";
 
-import Button from "../../Ui/Button/Button";
-import ThemeToggle from "../../tools/ThemeToggle/ThemeToggle";
+import Button from "@/Ui/Button/Button";
+import ThemeToggle from "@/tools/ThemeToggle/ThemeToggle";
 
 const Header = observer(() => {
   const navigate = useNavigate();

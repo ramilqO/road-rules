@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 import storageSelectors from "../Selectors/storageSelectors";
-import helpers from "../../tools/Helpers/helpers";
+import helpers from "@/tools/Helpers/helpers";
 
 import api from "../Request/requestsOperations";
 
@@ -27,6 +27,7 @@ interface IAnswers {
   isCorrect: boolean;
   correctAnswer: string;
   help: string;
+  questionId: string;
 }
 [];
 
@@ -35,6 +36,10 @@ const localStorageQuestions = helpers.getLocalStorage<IQuestion[]>(
 );
 const localStorageCurrentTicketId = helpers.getLocalStorage(
   storageSelectors.currentTicketId
+);
+
+const localStorageAnswers = helpers.getLocalStorage<IAnswers[]>(
+  storageSelectors.answers
 );
 
 class TicketsStore {
@@ -49,7 +54,7 @@ class TicketsStore {
     this.currentTicketId = localStorageCurrentTicketId
       ? String(localStorageCurrentTicketId)
       : "";
-    this.answers = [];
+    this.answers = localStorageAnswers || [];
 
     makeAutoObservable(this);
   }
@@ -60,6 +65,14 @@ class TicketsStore {
 
   setAnswers(answer: IAnswers) {
     this.answers = [...this.answers, answer];
+    localStorage.setItem(
+      storageSelectors.answers,
+      JSON.stringify(this.answers)
+    );
+  }
+
+  resetAnswers() {
+    this.answers = [];
   }
 
   setQuestions(questions: IQuestion[], ticketId?: string) {
