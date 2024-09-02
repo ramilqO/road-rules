@@ -50,11 +50,11 @@
     }
 
     &--isCorrect {
-      background-color: green;
+      background-color: var(--questionsColorIsCorrectBacg);
     }
 
     &--isInvalid {
-      background-color: red;
+      background-color: var(--questionsColorIsInvalidBacg);
     }
   }
 }

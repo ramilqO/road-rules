@@ -71,7 +71,11 @@ const Questions = observer(() => {
               >
                 <button
                   className={`${style.listPagination__button} ${
-                    isCurrent ? style["listPagination__button--current"] : ""
+                    isCorrect || isInvalid
+                      ? ""
+                      : isCurrent
+                      ? style["listPagination__button--current"]
+                      : ""
                   } ${
                     isCorrect
                       ? style["listPagination__button--isCorrect"]
