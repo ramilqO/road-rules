@@ -20,7 +20,7 @@
     display: none;
   }
 
-  &__img {
+  &_img {
     object-fit: contain;
 
     width: 100%;
@@ -30,7 +30,7 @@
     border-radius: 8px;
   }
 
-  &__titleQuestion {
+  &_titleQuestion {
     text-align: center;
 
     margin-bottom: 10px;
@@ -52,14 +52,14 @@
   gap: 10px;
   margin-bottom: 10px;
 
-  &__item {
+  &_item {
     display: flex;
     position: relative;
 
     align-items: center;
   }
 
-  &__button {
+  &_button {
     text-align: center;
 
     width: 100%;
@@ -78,13 +78,13 @@
     background-color: var(--color-dark-bg);
     color: var(--color-light-bg);
 
-    &--answer {
+    &__answer {
       opacity: 0.4;
       cursor: not-allowed;
     }
   }
 
-  &__thisAnswer {
+  &_thisAnswer {
     position: absolute;
 
     right: 12px;
@@ -114,14 +114,15 @@
   max-height: 280px;
 
   border-radius: 8px;
-  background-color: var(--color-light-bg);
 
-  &__title {
+  &_title {
     display: flex;
     align-items: center;
 
     font-weight: 600;
     font-size: 22px;
     line-height: 22.4px;
+
+    color: var(--color-dark-text);
   }
 }

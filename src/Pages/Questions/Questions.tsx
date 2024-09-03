@@ -15,7 +15,7 @@ import storageSelectors from "@/stores/Selectors/storageSelectors";
 import helpers from "@/tools/Helpers/helpers";
 
 const localStorageCurrentQuestionPage = helpers.getLocalStorage(
-  storageSelectors.currentQuestionPage,
+  storageSelectors.currentQuestionPage
 );
 
 const Questions = observer(() => {
@@ -58,7 +58,7 @@ const Questions = observer(() => {
         <ul className={style.listPagination}>
           {questionsToRender.map((question, i) => {
             const answer = ticketsStore.answers.find(
-              (answer) => answer.questionId === question.questionId,
+              (answer) => answer.questionId === question.questionId
             );
 
             const isCorrect = answer?.isCorrect;
@@ -66,23 +66,20 @@ const Questions = observer(() => {
             const isCurrent = currentQuestionIndex === i;
 
             return (
-              <li
-                className={style.listPagination__item}
-                key={question.questionId + i}
-              >
+              <li key={question.questionId + i}>
                 <button
-                  className={`${style.listPagination__button} ${
+                  className={`${style.listPagination_button} ${
                     isCorrect || isInvalid
                       ? ""
                       : isCurrent
-                        ? style["listPagination__button--current"]
-                        : ""
+                      ? style.listPagination__button__current
+                      : ""
                   } ${
                     isCorrect
-                      ? style["listPagination__button--isCorrect"]
+                      ? style.listPagination__button__isCorrect
                       : isInvalid
-                        ? style["listPagination__button--isInvalid"]
-                        : ""
+                      ? style.listPagination__button__isInvalid
+                      : ""
                   }`}
                   onClick={() => handleButtonClick(i)}
                   type="button"

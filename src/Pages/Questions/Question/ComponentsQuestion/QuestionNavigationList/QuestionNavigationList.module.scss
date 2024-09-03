@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-.navigationList__button {
+.navigationList_button {
   display: flex;
   align-items: center;
 
@@ -21,7 +21,7 @@
   color: var(--color-dark-text);
   cursor: pointer;
 
-  &--disabled {
+  &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }

@@ -20,12 +20,9 @@ const QuestionNavigationList: React.FC<IQuestionNavigationList> = ({
 }) => {
   return (
     <ul className={style.navigationList}>
-      <li className={style.navigationList__item}>
+      <li>
         <button
-          className={`${style.navigationList__button} ${
-            // TODO: В css есть псевдокласс :disabled ты можешь опирется на него и тогда не придется создавать свой класс
-            isFirstQuestion ? style["navigationList__button--disabled"] : ""
-          }`}
+          className={style.navigationList_button}
           disabled={isFirstQuestion}
           onClick={() => action(indexQuestion - 1)}
           type="button"
@@ -38,10 +35,7 @@ const QuestionNavigationList: React.FC<IQuestionNavigationList> = ({
       </li>
       <li className={style.navigationList__item}>
         <button
-          className={`${style.navigationList__button} ${
-            // TODO: В css есть псевдокласс :disabled ты можешь опирется на него и тогда не придется создавать свой класс
-            isLastQuestion ? style["navigationList__button--disabled"] : ""
-          }`}
+          className={style.navigationList__button}
           disabled={isLastQuestion}
           onClick={() => action(indexQuestion + 1)}
           type="button"

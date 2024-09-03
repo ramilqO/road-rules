@@ -49,11 +49,11 @@ const Question = observer(
     }
 
     const checkIsAnswer = ticketsStore.answers.some(
-      (answer) => answer.questionId === currentQuestion.questionId,
+      (answer) => answer.questionId === currentQuestion.questionId
     );
     //TODO: помоему если ты оставишь только эту переменную все будет работать точно так же, только заменить checkIsAnswer на currentAnswer
     const currentAnswer = ticketsStore.answers.find(
-      (answer) => answer.questionId === currentQuestion.questionId,
+      (answer) => answer.questionId === currentQuestion.questionId
     );
 
     const handleAnswerClick = (answerId: string) => {
@@ -73,20 +73,20 @@ const Question = observer(
             <img
               src={currentQuestion.img}
               alt="Изображение вопроса"
-              className={isLoading ? style.hiddenImg : style.question__img}
+              className={isLoading ? style.hiddenImg : style.question_img}
               onLoad={() => setIsLoading(false)}
               onError={() => setIsLoading(false)}
             />
           </>
         ) : (
           <div className={style.wrapperEmptyImage}>
-            <h1 className={style.wrapperEmptyImage__title}>
+            <h1 className={style.wrapperEmptyImage_title}>
               Вопрос без изображения
             </h1>
           </div>
         )}
 
-        <h1 className={style.question__titleQuestion}>
+        <h1 className={style.question_titleQuestion}>
           {currentQuestion.question}
         </h1>
 
@@ -95,11 +95,11 @@ const Question = observer(
             const isAnswer = currentAnswer?.ourAnswer === answerId;
 
             return (
-              <li className={style.listAnswers__item} key={answerId}>
+              <li className={style.listAnswers_item} key={answerId}>
                 <button
                   type="button"
-                  className={`${style.listAnswers__button} ${
-                    checkIsAnswer ? style["listAnswers__button--answer"] : ""
+                  className={`${style.listAnswers_button} ${
+                    checkIsAnswer ? style.listAnswers_button__answer : ""
                   }`}
                   disabled={checkIsAnswer}
                   onClick={() => handleAnswerClick(answerId)}
@@ -108,7 +108,7 @@ const Question = observer(
                 </button>
 
                 {isAnswer && (
-                  <span className={style.listAnswers__thisAnswer}>
+                  <span className={style.listAnswers_thisAnswer}>
                     Ваш ответ
                   </span>
                 )}
@@ -125,7 +125,7 @@ const Question = observer(
         />
       </div>
     );
-  },
+  }
 );
 
 export default Question;

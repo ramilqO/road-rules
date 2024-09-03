@@ -20,7 +20,7 @@
 
   background-color: var(--color-light-bg);
 
-  &--error {
+  &_error {
     border: 1px solid var(--color-notification-border);
     background-color: var(--color-notification-bg);
   }
@@ -32,16 +32,16 @@
   top: 16px;
   right: 16px;
 
-  &__button {
+  &_button {
     border: none;
     background-color: transparent;
     cursor: pointer;
 
-    &Icon--error {
+    &Icon__error {
       color: var(--color-error-bg);
     }
 
-    &Icon--basic {
+    &Icon__basic {
       color: var(--color-dark-text);
     }
   }
@@ -51,16 +51,16 @@
   display: flex;
   align-items: start;
 
-  &__button {
+  &_button {
     border: none;
     background-color: transparent;
     cursor: pointer;
 
-    &Icon--error {
+    &Icon__error {
       color: var(--color-error-bg);
     }
 
-    &Icon--basic {
+    &Icon__basic {
       color: var(--color-dark-text);
     }
   }
@@ -71,7 +71,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  &__button {
+  &_button {
     width: auto;
     height: auto;
 
@@ -89,7 +89,7 @@
 
     cursor: pointer;
 
-    &--error {
+    &__error {
       background-color: var(--color-error-button-bg);
       border: 1px solid var(--color-notification-border);
       color: var(--color-error-button-border);
@@ -103,26 +103,26 @@
 
   gap: 5px;
 
-  &__title {
+  &_title {
     font-weight: 600;
     font-size: 16px;
     line-height: 22.4px;
 
     color: var(--color-dark-text);
 
-    &--error {
+    &__error {
       color: var(--color-error-bg);
     }
   }
 
-  &__description {
+  &_description {
     font-weight: 400;
     font-size: 16px;
     line-height: 22.4px;
 
     color: var(--color-dark-text);
 
-    &--error {
+    &__error {
       color: var(--color-error-bg);
     }
   }

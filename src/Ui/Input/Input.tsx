@@ -29,13 +29,13 @@ export default function Input({
 
   return (
     <div className={style.field}>
-      <label className={style.field__label}>{label}</label>
+      <label className={style.field_label}>{label}</label>
       <input
         ref={inputRef}
         type={type}
         name={name}
-        className={`${style.field__input} ${
-          disabled && style["field__input--disabled"]
+        className={`${style.field_input} ${
+          disabled && style.field_input__disabled
         }`}
         placeholder={placeholder}
         required
@@ -50,7 +50,7 @@ export default function Input({
           }
         }}
       />
-      {validateError && <p className={style.field__error}>{validateError}</p>}
+      {validateError && <p className={style.field_error}>{validateError}</p>}
     </div>
   );
 }
