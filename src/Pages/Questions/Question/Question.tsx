@@ -48,12 +48,10 @@ const Question = observer(
       return <QuestionNotFound />;
     }
 
-    const checkIsAnswer = ticketsStore.answers.some(
-      (answer) => answer.questionId === currentQuestion.questionId
-    );
     const currentAnswer = ticketsStore.answers.find(
       (answer) => answer.questionId === currentQuestion.questionId
     );
+    const checkIsAnswer = !!currentAnswer;
 
     const handleAnswerClick = (answerId: string) => {
       ticketsStore.sendingAnswer({
