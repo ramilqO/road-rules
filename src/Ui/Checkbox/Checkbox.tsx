@@ -17,11 +17,11 @@ export default function Checkbox({
         <input
           type="checkbox"
           onChange={onToggle}
-          className={style.checkbox__inputCheckBox}
+          className={style.checkbox_inputCheckBox}
           defaultChecked={defaultChecked}
         />
-        <span className={style.checkbox__inputCheckBoxCustom} />
-        <span className={style.checkbox__label}>{label}</span>
+        <span className={style.checkbox_inputCheckBoxCustom} />
+        <span className={style.checkbox_label}>{label}</span>
       </label>
     </div>
   );

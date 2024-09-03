@@ -51,7 +51,6 @@ const Question = observer(
     const checkIsAnswer = ticketsStore.answers.some(
       (answer) => answer.questionId === currentQuestion.questionId
     );
-    //TODO: помоему если ты оставишь только эту переменную все будет работать точно так же, только заменить checkIsAnswer на currentAnswer
     const currentAnswer = ticketsStore.answers.find(
       (answer) => answer.questionId === currentQuestion.questionId
     );

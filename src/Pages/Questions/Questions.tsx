@@ -72,13 +72,13 @@ const Questions = observer(() => {
                     isCorrect || isInvalid
                       ? ""
                       : isCurrent
-                      ? style.listPagination__button__current
+                      ? style.listPagination_button__current
                       : ""
                   } ${
                     isCorrect
-                      ? style.listPagination__button__isCorrect
+                      ? style.listPagination_button__isCorrect
                       : isInvalid
-                      ? style.listPagination__button__isInvalid
+                      ? style.listPagination_button__isInvalid
                       : ""
                   }`}
                   onClick={() => handleButtonClick(i)}

@@ -13,30 +13,24 @@ const SecurityPassword = observer(() => {
   return (
     <>
       <div className={styles.securityPasswordMessage}>
-        <p className={styles.securityPasswordMessage__description}>
+        <p className={styles.securityPasswordMessage_description}>
           Надёжность пароля: {message}
         </p>
       </div>
       <div className={styles.securityPassword}>
         {steps === 1 && (
           <div
-            className={`${styles.bar} ${
-              steps >= 1 ? styles["bar--step1"] : ""
-            }`}
+            className={`${styles.bar} ${steps >= 1 ? styles.bar__step1 : ""}`}
           />
         )}
         {steps > 1 && steps <= 3 && (
           <div
-            className={`${styles.bar} ${
-              steps >= 2 ? styles["bar--step2"] : ""
-            }`}
+            className={`${styles.bar} ${steps >= 2 ? styles.bar__step2 : ""}`}
           />
         )}
         {steps === 4 && (
           <div
-            className={`${styles.bar} ${
-              steps >= 4 ? styles["bar--step3"] : ""
-            }`}
+            className={`${styles.bar} ${steps >= 4 ? styles.bar__step3 : ""}`}
           />
         )}
       </div>

@@ -27,7 +27,6 @@ class ExamStore {
   async getExam() {
     const responseExam = await api.getExam();
     if (!responseExam) return;
-    // TODO --> если тут изменять на прямую всё равно предупреждение
     this.setExam(responseExam);
   }
 }

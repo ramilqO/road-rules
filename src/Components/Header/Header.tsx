@@ -16,8 +16,8 @@ const Header = observer(() => {
       <ThemeToggle />
 
       <nav className={style.navigation}>
-        <ul className={style.navigation__auth}>
-          <li className={style.navigation__authItem}>
+        <ul className={style.navigation_auth}>
+          <li>
             {!authStore.isAuth ? (
               <Button
                 buttonStyle="button"
@@ -25,12 +25,12 @@ const Header = observer(() => {
                 onClick={() => navigate("/login")}
               />
             ) : (
-              <p className={style.navigation__authItemDescription}>
+              <p className={style.navigation_authItemDescription}>
                 {authStore.userInfo?.firstName} {authStore.userInfo?.secondName}
               </p>
             )}
           </li>
-          <li className={style.navigation__authItem}>
+          <li>
             {!authStore.isAuth ? (
               <Button
                 text="Регистрация"

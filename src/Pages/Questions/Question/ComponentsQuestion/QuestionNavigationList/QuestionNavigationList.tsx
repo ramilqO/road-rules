@@ -33,9 +33,9 @@ const QuestionNavigationList: React.FC<IQuestionNavigationList> = ({
           Предыдущий вопрос
         </button>
       </li>
-      <li className={style.navigationList__item}>
+      <li className={style.navigationList_item}>
         <button
-          className={style.navigationList__button}
+          className={style.navigationList_button}
           disabled={isLastQuestion}
           onClick={() => action(indexQuestion + 1)}
           type="button"
