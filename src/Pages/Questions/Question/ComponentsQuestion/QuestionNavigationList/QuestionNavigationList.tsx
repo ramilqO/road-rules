@@ -9,6 +9,7 @@ interface IQuestionNavigationList {
   isFirstQuestion: boolean;
   isLastQuestion: boolean;
   action: (newIndex: number) => void;
+  findNextQuestionWithoutAnswer: (currentIndex: number) => number;
 }
 
 const QuestionNavigationList = ({
@@ -16,20 +17,8 @@ const QuestionNavigationList = ({
   isFirstQuestion,
   isLastQuestion,
   action,
+  findNextQuestionWithoutAnswer,
 }: IQuestionNavigationList) => {
-  const findNextQuestionWithoutAnswer = (currentIndex: number): number => {
-    for (let i = currentIndex + 1; i < ticketsStore.questions.length; i += 1) {
-      const question = ticketsStore.questions[i];
-      const answerExists = ticketsStore.answers.some(
-        (answer) => answer.questionId === question.questionId
-      );
-      if (!answerExists) {
-        return i;
-      }
-    }
-    return currentIndex;
-  };
-
   const findPreviousQuestionWithoutAnswer = (currentIndex: number) => {
     for (let i = currentIndex - 1; i >= 0; i -= 1) {
       const question = ticketsStore.questions[i];

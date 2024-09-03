@@ -53,13 +53,30 @@ const Question = observer(
     );
     const checkIsAnswer = !!currentAnswer;
 
-    const handleAnswerClick = (answerId: string) => {
+    const handleAnswerClick = (answerId: string, indexQuestion: number) => {
       ticketsStore.sendingAnswer({
         ticketId: currentQuestion.ticketId,
         questionId: currentQuestion.questionId,
         answerId,
       });
-      action(indexQuestion + 1);
+      action(indexQuestion);
+    };
+
+    const findNextQuestionWithoutAnswer = (currentIndex: number): number => {
+      for (
+        let i = currentIndex + 1;
+        i < ticketsStore.questions.length;
+        i += 1
+      ) {
+        const question = ticketsStore.questions[i];
+        const answerExists = ticketsStore.answers.some(
+          (answer) => answer.questionId === question.questionId
+        );
+        if (!answerExists) {
+          return i;
+        }
+      }
+      return currentIndex;
     };
 
     return (
@@ -99,7 +116,11 @@ const Question = observer(
                     checkIsAnswer ? style.listAnswers_button__answer : ""
                   }`}
                   disabled={checkIsAnswer}
-                  onClick={() => handleAnswerClick(answerId)}
+                  onClick={() => {
+                    const indexNextQuestion =
+                      findNextQuestionWithoutAnswer(indexQuestion);
+                    handleAnswerClick(answerId, indexNextQuestion);
+                  }}
                 >
                   {answerText}
                 </button>
@@ -119,6 +140,7 @@ const Question = observer(
           isFirstQuestion={isFirstQuestion}
           isLastQuestion={isLastQuestion}
           action={action}
+          findNextQuestionWithoutAnswer={findNextQuestionWithoutAnswer}
         />
       </div>
     );
