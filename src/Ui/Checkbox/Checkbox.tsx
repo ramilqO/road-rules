@@ -21,8 +21,8 @@ export default function Checkbox({
           defaultChecked={defaultChecked}
         />
         <span className={style.checkbox__inputCheckBoxCustom} />
+        <span className={style.checkbox__label}>{label}</span>
       </label>
-      <span className={style.checkbox__label}>{label}</span>
     </div>
   );
 }
