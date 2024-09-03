@@ -1,5 +1,4 @@
-import React from "react";
-
+import ticketsStore from "@/stores/Tickets/ticketsStore";
 import style from "./QuestionNavigationList.module.scss";
 
 import ArrowLeftIcon from "/public/svg/question/ArrowLeftIcon";
@@ -12,19 +11,49 @@ interface IQuestionNavigationList {
   action: (newIndex: number) => void;
 }
 
-const QuestionNavigationList: React.FC<IQuestionNavigationList> = ({
+const QuestionNavigationList = ({
   indexQuestion,
   isFirstQuestion,
   isLastQuestion,
   action,
-}) => {
+}: IQuestionNavigationList) => {
+  const findNextQuestionWithoutAnswer = (currentIndex: number): number => {
+    for (let i = currentIndex + 1; i < ticketsStore.questions.length; i += 1) {
+      const question = ticketsStore.questions[i];
+      const answerExists = ticketsStore.answers.some(
+        (answer) => answer.questionId === question.questionId
+      );
+      if (!answerExists) {
+        return i;
+      }
+    }
+    return currentIndex;
+  };
+
+  const findPreviousQuestionWithoutAnswer = (currentIndex: number) => {
+    for (let i = currentIndex - 1; i >= 0; i -= 1) {
+      const question = ticketsStore.questions[i];
+      const answerExists = ticketsStore.answers.some(
+        (answer) => answer.questionId === question.questionId
+      );
+      if (!answerExists) {
+        return i;
+      }
+    }
+    return currentIndex;
+  };
+
   return (
     <ul className={style.navigationList}>
       <li>
         <button
           className={style.navigationList_button}
           disabled={isFirstQuestion}
-          onClick={() => action(indexQuestion - 1)}
+          onClick={() => {
+            const indexPreviousQuestion =
+              findPreviousQuestionWithoutAnswer(indexQuestion);
+            action(indexPreviousQuestion);
+          }}
           type="button"
         >
           <span>
@@ -37,7 +66,11 @@ const QuestionNavigationList: React.FC<IQuestionNavigationList> = ({
         <button
           className={style.navigationList_button}
           disabled={isLastQuestion}
-          onClick={() => action(indexQuestion + 1)}
+          onClick={() => {
+            const indexNextQuestion =
+              findNextQuestionWithoutAnswer(indexQuestion);
+            action(indexNextQuestion);
+          }}
           type="button"
         >
           Следующий вопрос
