@@ -6,6 +6,7 @@ import style from "./Questions.module.scss";
 
 const Question = lazy(() => import("./Question/Question"));
 const Loader = lazy(() => import("@/Ui/Loader/Loader"));
+import { IoMdExit } from "react-icons/io";
 
 import authStore from "@/stores/Auth/authStore";
 import examStore from "@/stores/Exam/examStore";
@@ -65,6 +66,12 @@ const Questions = observer(() => {
 
   return (
     <div className={style.questions}>
+      <button
+        className={style.questions__exit}
+        onClick={() => navigate("/menu")}
+      >
+        <IoMdExit size="24px" color="#F5F5F5" />
+      </button>
       <div className={style.paginationWrapper}>
         <ul className={style.listPagination}>
           {questionsToRender.map((question, i) => {
