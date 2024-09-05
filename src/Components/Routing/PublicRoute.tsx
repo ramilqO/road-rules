@@ -8,7 +8,7 @@ interface IPublicRoute {
   children: React.ReactElement;
 }
 
-const PublicRoute: React.FC<IPublicRoute> = observer(({ children }) => {
+const PublicRoute = observer(({ children }: IPublicRoute) => {
   const isAuth = authStore.isAuth;
 
   return !isAuth ? children : <Navigate to="/menu" replace />;
