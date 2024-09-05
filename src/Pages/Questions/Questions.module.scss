@@ -8,10 +8,11 @@
 
   margin-top: 45px;
 
-  &__exit {
+  &_exit {
     background-color: transparent;
-    border-style: none;
+    color: var(--color-dark-bg);
 
+    border-style: none;
     cursor: pointer;
   }
 }
