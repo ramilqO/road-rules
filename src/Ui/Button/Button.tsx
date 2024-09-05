@@ -35,10 +35,10 @@ const Button = observer(
           (buttonStyle === "button" && style.button) ||
           (buttonStyle === "link" && style.link) ||
           (buttonStyle === "ticketButton" &&
-            ` ${style.button} ${style["button--ticket"]}`)
+            ` ${style.button} ${style.button__ticket}`)
         } ${
           ((type === "submit" && authStore.isLoading) || disabled) &&
-          style["button--disabled"]
+          style.button__disabled
         } `}
       >
         {type === "submit" && authStore.isLoading ? <Loader /> : text}

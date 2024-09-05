@@ -20,12 +20,12 @@
   background-color: var(--color-dark-bg);
   color: var(--color-light-bg);
 
-  &--disabled {
+  &__disabled {
     cursor: not-allowed;
     opacity: 0.4;
   }
 
-  &--ticket {
+  &__ticket {
     width: 100%;
   }
 }

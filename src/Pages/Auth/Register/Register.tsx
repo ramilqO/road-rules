@@ -21,8 +21,8 @@ const Register = observer(() => {
   return (
     <div className={style.register}>
       <div className={style.infoSection}>
-        <h2 className={style.infoSection__title}>Регистрация</h2>
-        <p className={style.infoSection__description}>Создайте новый аккаунт</p>
+        <h2 className={style.infoSection_title}>Регистрация</h2>
+        <p className={style.infoSection_description}>Создайте новый аккаунт</p>
       </div>
 
       <Form method="POST" className={style.form}>

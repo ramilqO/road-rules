@@ -31,9 +31,9 @@ const Menu = observer(() => {
       <div className={style.menu}>
         <Button text="Экзамен" onClick={() => navigate("/exam")} />
 
-        <ul className={style.menu__listTickets}>
+        <ul className={style.listTickets}>
           {ticketsToRender.map((ticket, i) => (
-            <li className={style.listTickets__itemTicket} key={ticket}>
+            <li className={style.listTickets_itemTicket} key={ticket}>
               <Button
                 buttonStyle="ticketButton"
                 text={`Билет ${i + 1}`}

@@ -11,8 +11,8 @@ export default function PageNotFound() {
     <div className={style.pageNotFound}>
       <div className={style.container}>
         <div className={style.infoSection}>
-          <h3 className={style.infoSection__title}>Страница не найдена</h3>
-          <p className={style.infoSection__description}>
+          <h3 className={style.infoSection_title}>Страница не найдена</h3>
+          <p className={style.infoSection_description}>
             Возможно вы опечатались в адресе URL
           </p>
         </div>

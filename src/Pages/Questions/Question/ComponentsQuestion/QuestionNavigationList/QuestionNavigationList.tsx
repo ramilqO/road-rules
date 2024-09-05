@@ -1,5 +1,4 @@
-import React from "react";
-
+import ticketsStore from "@/stores/Tickets/ticketsStore";
 import style from "./QuestionNavigationList.module.scss";
 
 import ArrowLeftIcon from "/public/svg/question/ArrowLeftIcon";
@@ -10,24 +9,40 @@ interface IQuestionNavigationList {
   isFirstQuestion: boolean;
   isLastQuestion: boolean;
   action: (newIndex: number) => void;
+  findNextQuestionWithoutAnswer: (currentIndex: number) => number;
 }
 
-const QuestionNavigationList: React.FC<IQuestionNavigationList> = ({
+const QuestionNavigationList = ({
   indexQuestion,
   isFirstQuestion,
   isLastQuestion,
   action,
-}) => {
+  findNextQuestionWithoutAnswer,
+}: IQuestionNavigationList) => {
+  const findPreviousQuestionWithoutAnswer = (currentIndex: number) => {
+    for (let i = currentIndex - 1; i >= 0; i -= 1) {
+      const question = ticketsStore.questions[i];
+      const answerExists = ticketsStore.answers.some(
+        (answer) => answer.questionId === question.questionId
+      );
+      if (!answerExists) {
+        return i;
+      }
+    }
+    return currentIndex;
+  };
+
   return (
     <ul className={style.navigationList}>
-      <li className={style.navigationList__item}>
+      <li>
         <button
-          className={`${style.navigationList__button} ${
-            // TODO: В css есть псевдокласс :disabled ты можешь опирется на него и тогда не придется создавать свой класс
-            isFirstQuestion ? style["navigationList__button--disabled"] : ""
-          }`}
+          className={style.navigationList_button}
           disabled={isFirstQuestion}
-          onClick={() => action(indexQuestion - 1)}
+          onClick={() => {
+            const indexPreviousQuestion =
+              findPreviousQuestionWithoutAnswer(indexQuestion);
+            action(indexPreviousQuestion);
+          }}
           type="button"
         >
           <span>
@@ -36,14 +51,15 @@ const QuestionNavigationList: React.FC<IQuestionNavigationList> = ({
           Предыдущий вопрос
         </button>
       </li>
-      <li className={style.navigationList__item}>
+      <li className={style.navigationList_item}>
         <button
-          className={`${style.navigationList__button} ${
-            // TODO: В css есть псевдокласс :disabled ты можешь опирется на него и тогда не придется создавать свой класс
-            isLastQuestion ? style["navigationList__button--disabled"] : ""
-          }`}
+          className={style.navigationList_button}
           disabled={isLastQuestion}
-          onClick={() => action(indexQuestion + 1)}
+          onClick={() => {
+            const indexNextQuestion =
+              findNextQuestionWithoutAnswer(indexQuestion);
+            action(indexNextQuestion);
+          }}
           type="button"
         >
           Следующий вопрос

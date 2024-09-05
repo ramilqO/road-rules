@@ -10,8 +10,8 @@ function QuestionNotFound() {
     <div className={style.questionNotFound}>
       <div className={style.container}>
         <div className={style.infoSection}>
-          <h3 className={style.infoSection__title}>Билет не найден</h3>
-          <p className={style.infoSection__description}>
+          <h3 className={style.infoSection_title}>Билет не найден</h3>
+          <p className={style.infoSection_description}>
             Пожалуйста, проверьте, правильный ли билет указан в URL, или
             убедитесь, что билет еще не был удален. Возможно, произошла ошибка
             при его загрузке.

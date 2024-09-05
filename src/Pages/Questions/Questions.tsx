@@ -1,11 +1,12 @@
 import { observer } from "mobx-react-lite";
 import { lazy, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import style from "./Questions.module.scss";
 
 const Question = lazy(() => import("./Question/Question"));
 const Loader = lazy(() => import("@/Ui/Loader/Loader"));
+import { IoMdExit } from "react-icons/io";
 
 import authStore from "@/stores/Auth/authStore";
 import examStore from "@/stores/Exam/examStore";
@@ -15,11 +16,13 @@ import storageSelectors from "@/stores/Selectors/storageSelectors";
 import helpers from "@/tools/Helpers/helpers";
 
 const localStorageCurrentQuestionPage = helpers.getLocalStorage(
-  storageSelectors.currentQuestionPage,
+  storageSelectors.currentQuestionPage
 );
 
 const Questions = observer(() => {
   const { ticketId } = useParams();
+  const navigate = useNavigate();
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
     const localData = Number(localStorageCurrentQuestionPage);
     return Number.isNaN(localData) ? 0 : localData;
@@ -43,6 +46,15 @@ const Questions = observer(() => {
     }
   }, [ticketId]);
 
+  useEffect(
+    function () {
+      if (ticketsStore.questions.length === ticketsStore.answers.length) {
+        navigate("/results");
+      } // засунул в useEffect потому что, navigate должен быть в useEffect warning был
+    },
+    [ticketsStore.answers.length]
+  );
+
   function handleButtonClick(index: number) {
     if (index >= 0 && index < questionsToRender.length) {
       setCurrentQuestionIndex(index);
@@ -54,11 +66,17 @@ const Questions = observer(() => {
 
   return (
     <div className={style.questions}>
+      <button
+        className={style.questions__exit}
+        onClick={() => navigate("/menu")}
+      >
+        <IoMdExit size="24px" color="#F5F5F5" />
+      </button>
       <div className={style.paginationWrapper}>
         <ul className={style.listPagination}>
           {questionsToRender.map((question, i) => {
             const answer = ticketsStore.answers.find(
-              (answer) => answer.questionId === question.questionId,
+              (answer) => answer.questionId === question.questionId
             );
 
             const isCorrect = answer?.isCorrect;
@@ -66,23 +84,20 @@ const Questions = observer(() => {
             const isCurrent = currentQuestionIndex === i;
 
             return (
-              <li
-                className={style.listPagination__item}
-                key={question.questionId + i}
-              >
+              <li key={question.questionId + i}>
                 <button
-                  className={`${style.listPagination__button} ${
+                  className={`${style.listPagination_button} ${
                     isCorrect || isInvalid
                       ? ""
                       : isCurrent
-                        ? style["listPagination__button--current"]
-                        : ""
+                      ? style.listPagination_button__current
+                      : ""
                   } ${
                     isCorrect
-                      ? style["listPagination__button--isCorrect"]
+                      ? style.listPagination_button__isCorrect
                       : isInvalid
-                        ? style["listPagination__button--isInvalid"]
-                        : ""
+                      ? style.listPagination_button__isInvalid
+                      : ""
                   }`}
                   onClick={() => handleButtonClick(i)}
                   type="button"

@@ -72,6 +72,7 @@ class TicketsStore {
   }
 
   resetAnswers() {
+    localStorage.removeItem(storageSelectors.answers)
     this.answers = [];
   }
 

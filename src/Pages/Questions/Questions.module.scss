@@ -7,6 +7,13 @@
   align-items: center;
 
   margin-top: 45px;
+
+  &__exit {
+    background-color: transparent;
+    border-style: none;
+
+    cursor: pointer;
+  }
 }
 
 .paginationWrapper {
@@ -26,7 +33,7 @@
 
   gap: 8px;
 
-  &__button {
+  &_button {
     text-align: center;
 
     width: 32px;
@@ -44,16 +51,16 @@
     background-color: transparent;
     color: var(--color-dark-bg);
 
-    &--current {
+    &__current {
       color: var(--color-light-bg);
       background-color: var(--color-dark-bg);
     }
 
-    &--isCorrect {
+    &__isCorrect {
       background-color: var(--color-accent-green);
     }
 
-    &--isInvalid {
+    &__isInvalid {
       background-color: var(--color-error-button-bg);
     }
   }

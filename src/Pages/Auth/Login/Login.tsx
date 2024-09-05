@@ -26,8 +26,8 @@ const Login = observer(() => {
   return (
     <div className={style.login}>
       <div className={style.infoSection}>
-        <h2 className={style.infoSection__title}>Логин</h2>
-        <p className={style.infoSection__description}>Войдите в свой аккаунт</p>
+        <h2 className={style.infoSection_title}>Логин</h2>
+        <p className={style.infoSection_description}>Войдите в свой аккаунт</p>
       </div>
 
       <Form method="POST" className={style.form}>

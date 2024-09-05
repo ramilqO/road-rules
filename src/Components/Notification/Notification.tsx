@@ -29,16 +29,16 @@ const Notification = observer(() => {
   return (
     <div
       className={`${style.notification} ${
-        style[`notification--${notification.type}`]
+        style[`notification_${notification.type}`] // nt, тут никак, из-за notification.type... ццц
       }`}
     >
       <div className={style.cross}>
         <button
           type="button"
-          className={`${style.cross__button} ${
+          className={`${style.cross_button} ${
             notification.type === "error"
-              ? style["cross__buttonIcon--error"]
-              : style["cross__buttonIcon--basic"]
+              ? style.cross_buttonIcon__error
+              : style.cross_buttonIcon__basic
           }`}
           onClick={() => {
             notificationStore.deleteNotification();
@@ -51,10 +51,10 @@ const Notification = observer(() => {
       <div className={style.info}>
         <button
           type="button"
-          className={`${style.info__button} ${
+          className={`${style.info_button} ${
             notification.type === "error"
-              ? style["info__buttonIcon--error"]
-              : style["info__buttonIcon--basic"]
+              ? style.info_buttonIcon__error
+              : style.info_buttonIcon__basic
           }`}
         >
           <InfoIcon />
@@ -64,15 +64,15 @@ const Notification = observer(() => {
       <div className={style.container}>
         <div className={style.aboutNotification}>
           <h4
-            className={`${style.aboutNotification__title} ${
-              style[`aboutNotification__title--${notification.type}`]
+            className={`${style.aboutNotification_title} ${
+              style[`aboutNotification_title__${notification.type}`]
             }`}
           >
             {notification.titleText}
           </h4>
           <p
-            className={`${style.aboutNotification__description} ${
-              style[`aboutNotification__description--${notification.type}`]
+            className={`${style.aboutNotification_description} ${
+              style[`aboutNotification_description__${notification.type}`]
             }`}
           >
             {notification.bodyText}
@@ -81,8 +81,8 @@ const Notification = observer(() => {
 
         {notification.button && notification.button.text.length > 0 && (
           <button
-            className={`${style.container__button} ${
-              style[`container__button--${notification.type}`]
+            className={`${style.container_button} ${
+              style[`container_button__${notification.type}`]
             }`}
             onClick={() => {
               notification.button?.onClick();
