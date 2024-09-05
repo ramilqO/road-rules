@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { lazy, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import style from "./Questions.module.scss";
 
@@ -20,6 +20,8 @@ const localStorageCurrentQuestionPage = helpers.getLocalStorage(
 
 const Questions = observer(() => {
   const { ticketId } = useParams();
+  const navigate = useNavigate();
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
     const localData = Number(localStorageCurrentQuestionPage);
     return Number.isNaN(localData) ? 0 : localData;
@@ -42,6 +44,15 @@ const Questions = observer(() => {
       examStore.getExam();
     }
   }, [ticketId]);
+
+  useEffect(
+    function () {
+      if (ticketsStore.questions.length === ticketsStore.answers.length) {
+        navigate("/results");
+      } // засунул в useEffect потому что, navigate должен быть в useEffect warning был
+    },
+    [ticketsStore.answers.length]
+  );
 
   function handleButtonClick(index: number) {
     if (index >= 0 && index < questionsToRender.length) {
