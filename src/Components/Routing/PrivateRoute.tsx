@@ -1,9 +1,11 @@
 import type React from "react";
 import { observer } from "mobx-react-lite";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 import authStore from "@/stores/Auth/authStore";
 import ticketsStore from "@/stores/Tickets/ticketsStore";
+import { useEffect, useState } from "react";
+import storageSelectors from "@/stores/Selectors/storageSelectors";
 
 interface IPrivateRoute {
   children: React.ReactElement;
@@ -12,6 +14,22 @@ interface IPrivateRoute {
 
 const PrivateRoute = observer(
   ({ children, checkIsResult = false }: IPrivateRoute) => {
+    const { pathname } = useLocation();
+
+    const [previousPathname, setPreviousPathname] = useState(() => {
+      return localStorage.getItem(storageSelectors.previousPathname);
+    });
+
+    useEffect(
+      function () {
+        setPreviousPathname(pathname);
+        localStorage.setItem(storageSelectors.previousPathname, pathname);
+      },
+      [pathname]
+    );
+
+    console.log(previousPathname);
+
     const isAuth = authStore.isAuth;
     const isAllAnswersForResults =
       ticketsStore.questions.length > 0 &&
@@ -21,7 +39,7 @@ const PrivateRoute = observer(
       return isAllAnswersForResults ? (
         children
       ) : (
-        <Navigate to="/menu" replace />
+        <Navigate to={previousPathname ? previousPathname : ""} replace />
       );
     return isAuth ? children : <Navigate to="/login" replace />;
   }
