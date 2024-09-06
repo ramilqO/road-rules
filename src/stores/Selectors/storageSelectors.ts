@@ -4,7 +4,8 @@ const storageSelectors = {
   questions: "questions",
   currentTicketId: "currentTicketId",
   currentQuestionPage: "currentQuestionPage",
-  answers: "answers"
+  answers: "answers",
+  previousPathname: "previousPathname",
 };
 
 export default storageSelectors;

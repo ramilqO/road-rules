@@ -1,10 +1,8 @@
 @import "/src/Styles/Variables.module.scss";
 
-.question {
+.result {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   width: 100%;
   max-width: 768px;
@@ -16,10 +14,6 @@
   border: 1px solid var(--color-mid-grey);
   border-radius: 8px;
 
-  .hiddenImg {
-    display: none;
-  }
-
   &_img {
     object-fit: contain;
 
@@ -30,7 +24,7 @@
     border-radius: 8px;
   }
 
-  &_titleQuestion {
+  &_title {
     text-align: center;
 
     margin-bottom: 10px;
@@ -41,16 +35,29 @@
 
     color: var(--color-dark-text);
   }
+
+  &_checkCorrectAnswerText {
+    display: flex;
+    align-items: center;
+
+    column-gap: 8px;
+
+    width: 150px;
+    height: 32px;
+
+    padding: 8px;
+    border-radius: 8px;
+
+    background-color: var(--color-dark-bg);
+    color: var(--color-light-bg);
+  }
 }
 
 .listAnswers {
   display: flex;
   flex-direction: column;
 
-  width: 100%;
-
-  gap: 10px;
-  margin-bottom: 10px;
+  row-gap: 20px;
 
   &_item {
     display: flex;
@@ -60,52 +67,36 @@
   }
 
   &_button {
-    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22.4px;
 
-    width: 100%;
-    min-height: 40px;
+    border-style: none;
+    background-color: transparent;
+    color: var(--color-dark-text);
+  }
 
-    padding: 12px;
+  &_etcInfo {
+    position: absolute;
+    right: 0;
+
+    width: auto;
+    height: 32px;
+
+    padding: 8px;
 
     border-radius: 8px;
-    border-style: none;
 
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
-    cursor: pointer;
 
     background-color: var(--color-dark-bg);
     color: var(--color-light-bg);
-
-    &__answer {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-  }
-
-  &_thisAnswer {
-    position: absolute;
-
-    right: 12px;
-
-    padding: 8px;
-    border-radius: 8px;
-
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 16px;
-
-    color: var(--color-dark-bg);
-    background-color: var(--color-light-bg);
-
-    @media screen and (max-width: 375px) {
-      padding: 4px;
-    }
   }
 }
 
-.wrapperEmptyImage {
+.emptyImg {
   display: flex;
   justify-content: center;
 
@@ -122,6 +113,36 @@
 
     font-weight: 600;
     font-size: 22px;
+    line-height: 22.4px;
+
+    color: var(--color-dark-text);
+  }
+}
+
+.helpForCorrectAnswer {
+  display: flex;
+  flex-direction: column;
+
+  width: auto;
+  height: auto;
+
+  padding: 16px;
+  row-gap: 8px;
+
+  border: 1px solid var(--color-light-grey);
+  border-radius: 8px;
+
+  &_title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22.4px;
+
+    color: var(--color-dark-text);
+  }
+
+  &_text {
+    font-weight: 400;
+    font-size: 16px;
     line-height: 22.4px;
 
     color: var(--color-dark-text);

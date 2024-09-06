@@ -66,11 +66,8 @@ const Questions = observer(() => {
 
   return (
     <div className={style.questions}>
-      <button
-        className={style.questions__exit}
-        onClick={() => navigate("/menu")}
-      >
-        <IoMdExit size="24px" color="#F5F5F5" />
+      <button className={style.questions_exit} onClick={() => navigate("/menu")}>
+        <IoMdExit size="24px" />
       </button>
       <div className={style.paginationWrapper}>
         <ul className={style.listPagination}>

@@ -55,7 +55,7 @@ const router = createBrowserRouter([
       {
         path: "results",
         element: (
-          <PrivateRoute>
+          <PrivateRoute checkIsResult={true}>
             <Results />
           </PrivateRoute>
         ),
