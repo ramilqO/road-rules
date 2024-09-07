@@ -15,14 +15,16 @@ interface ICredentials {
 
 export async function RegisterAction({ request }: { request: Request }) {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+  const data = Object.fromEntries(formData) as {
+    [key: string]: string;
+  };
 
   const credentials: ICredentials = {
-    email: String(data.email),
-    password: String(data.userPassword),
-    firstName: helpers.capitalizeFirstLetter(String(data.userName)),
-    secondName: helpers.capitalizeFirstLetter(String(data.surName)),
-    department: String(data.department),
+    email: data.email,
+    password: data.userPassword,
+    firstName: helpers.capitalizeFirstLetter(data.userName),
+    secondName: helpers.capitalizeFirstLetter(data.surName),
+    department: data.department,
   };
 
   await registerStore.register(credentials);
