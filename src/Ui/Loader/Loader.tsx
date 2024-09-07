@@ -2,23 +2,38 @@ import style from "./Loader.module.scss";
 
 type LoaderStyle = "questionImgLoader" | "huge" | "buttonLoader";
 
-function Loader({
-  loaderStyle = "buttonLoader",
-}: {
+interface LoaderProps {
   loaderStyle?: LoaderStyle;
-}) {
-  if (loaderStyle === "buttonLoader") return <div className={style.loader} />;
-  if (loaderStyle === "questionImgLoader")
-    return (
-      <div className={style.questionImgLoader}>
-        <div className={style.loader__questionImgLoader} />;
-      </div>
-    );
-  if (loaderStyle === "huge")
-    return (
-      <div className={style.wrapper}>
-        <div className={style.loader__huge}></div>
-      </div>
-    );
 }
+
+function Loader({ loaderStyle = "buttonLoader" }: LoaderProps) {
+  let loaderWrapperStyle = "";
+  let selfLoaderStyle = "";
+
+  const loaderStyleClass = (() => {
+    switch (loaderStyle) {
+      case "questionImgLoader":
+        loaderWrapperStyle = style.wrapperQuestionImgLoader;
+        selfLoaderStyle = style.loader__questionImgLoader;
+        break;
+      case "huge":
+        loaderWrapperStyle = style.wrapperHuge;
+        selfLoaderStyle = style.loader__huge;
+        break;
+      default:
+        style.buttonLoader;
+    }
+  })();
+
+  if (loaderStyle === "buttonLoader") {
+    return <div className={style.loader} />;
+  } else {
+    return (
+      <div className={loaderWrapperStyle}>
+        <div className={selfLoaderStyle} />
+      </div>
+    );
+  }
+}
+
 export default Loader;
