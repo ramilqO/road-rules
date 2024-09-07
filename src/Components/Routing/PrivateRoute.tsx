@@ -28,8 +28,6 @@ const PrivateRoute = observer(
       [pathname]
     );
 
-    console.log(previousPathname);
-
     const isAuth = authStore.isAuth;
     const isAllAnswersForResults =
       ticketsStore.questions.length > 0 &&
