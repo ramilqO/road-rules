@@ -5,12 +5,12 @@ import Loader from "./Ui/Loader/Loader";
 
 import "./Styles/Main.module.scss";
 
-function App() {
+const App = () => {
   return (
     <Suspense fallback={<Loader loaderStyle="huge" />}>
       <Routing />
     </Suspense>
   );
-}
+};
 
 export default App;

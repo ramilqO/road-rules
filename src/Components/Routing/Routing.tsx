@@ -91,6 +91,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-export default function Routing() {
+const Routing = () => {
   return <RouterProvider router={router} />;
 }
+
+export default Routing

@@ -3,7 +3,7 @@ import style from "./Result.module.scss";
 import InCorrectIcon from "/public/svg/result/InCorrectIcon";
 import { IoMdCheckmark } from "react-icons/io";
 
-function Result() {
+const Result = () => {
   return (
     <div className={style.result}>
       {false ? (

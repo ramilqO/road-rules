@@ -1,27 +1,26 @@
 import { observer } from "mobx-react-lite";
-import {  useRef } from "react";
+import { useRef } from "react";
 import { Form, redirect, useNavigate } from "react-router-dom";
 
 import loginStore from "@/stores/Auth/loginStore";
 import style from "./Login.module.scss";
 
-import Button from"@/Ui/Button/Button";
-import Checkbox from"@/Ui/Checkbox/Checkbox";
-import Input from"@/Ui/Input/Input";
+import Button from "@/Ui/Button/Button";
+import Checkbox from "@/Ui/Checkbox/Checkbox";
+import Input from "@/Ui/Input/Input";
 
 const Login = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
-  const fieldIsSuccess =
-    loginStore.emailFieldIsSuccess && loginStore.passwordFieldIsSuccess;
+  const fieldIsSuccess = loginStore.getAllStatusField();
 
   const navigate = useNavigate();
 
-  function handleChangeVisibility() {
+  const handleChangeVisibility = () => {
     const input = passwordInputRef.current;
     if (!input) return;
 
     input.type = input.type === "password" ? "text" : "password";
-  }
+  };
 
   return (
     <div className={style.login}>

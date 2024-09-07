@@ -13,11 +13,14 @@ interface ICredentialsRegister {
 
 class RegisterStore {
   emailFieldIsSuccess: boolean;
-  nameFieldIsSuccess: boolean;
-  surnameFieldIsSuccess: boolean;
+
   userPassword: string;
   passwordFieldIsSuccess: boolean;
   repeatPasswordFieldIsSuccess: boolean;
+
+  nameFieldIsSuccess: boolean;
+  surnameFieldIsSuccess: boolean;
+
   departmentFieldIsSuccess: boolean;
 
   constructor() {
@@ -30,6 +33,18 @@ class RegisterStore {
     this.departmentFieldIsSuccess = false;
 
     makeAutoObservable(this);
+  }
+
+  getAllStatusField() {
+    return [
+      this.emailFieldIsSuccess,
+      this.userPassword,
+      this.passwordFieldIsSuccess,
+      this.repeatPasswordFieldIsSuccess,
+      this.nameFieldIsSuccess,
+      this.surnameFieldIsSuccess,
+      this.departmentFieldIsSuccess,
+    ].every(Boolean);
   }
 
   validateEmailField = (value: string): string => {

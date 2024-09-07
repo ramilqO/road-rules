@@ -1,4 +1,4 @@
-export default function MoonIcon() {
+const MoonIcon = () => {
   return (
     <svg
       width="24"
@@ -15,4 +15,6 @@ export default function MoonIcon() {
       />
     </svg>
   );
-}
+};
+
+export default MoonIcon;

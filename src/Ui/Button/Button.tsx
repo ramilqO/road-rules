@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 import { observer } from "mobx-react-lite";
 
-import style from "./Button.module.scss";
 import authStore from "@/stores/Auth/authStore";
+import style from "./Button.module.scss";
 
 import Loader from "../Loader/Loader";
 
@@ -25,23 +25,37 @@ const Button = observer(
     onClick,
     disabled = false,
   }: IButton) => {
+    const buttonStyleClass = (() => {
+      switch (buttonStyle) {
+        case "link":
+          return style.link;
+        case "ticketButton":
+          return `${style.button} ${style.button__ticket}`;
+        default:
+          return style.button;
+      }
+    })();
+
+    const isLoading = authStore.isLoading;
+    const isSubmitType = type === "submit";
+
+    const combinedClassNames = [
+      buttonStyleClass,
+      isSubmitType && isLoading && style.button__disabled,
+      disabled && style.button__disabled,
+    ]
+      .filter(Boolean)
+      .join(" ");
+
     return (
       <button
-        color="#ffffff"
         type={type}
-        disabled={authStore.isLoading || disabled}
+        className={combinedClassNames}
+        color="#FFFFFF"
+        disabled={isLoading || disabled}
         onClick={onClick}
-        className={`${
-          (buttonStyle === "button" && style.button) ||
-          (buttonStyle === "link" && style.link) ||
-          (buttonStyle === "ticketButton" &&
-            ` ${style.button} ${style.button__ticket}`)
-        } ${
-          ((type === "submit" && authStore.isLoading) || disabled) &&
-          style.button__disabled
-        } `}
       >
-        {type === "submit" && authStore.isLoading ? <Loader /> : text}
+        {isSubmitType && isLoading ? <Loader /> : text}
       </button>
     );
   }

@@ -1,4 +1,3 @@
-import ticketsStore from "@/stores/Tickets/ticketsStore";
 import style from "./QuestionNavigationList.module.scss";
 
 import ArrowLeftIcon from "/public/svg/question/ArrowLeftIcon";
@@ -9,7 +8,8 @@ interface IQuestionNavigationList {
   isFirstQuestion: boolean;
   isLastQuestion: boolean;
   action: (newIndex: number) => void;
-  findNextQuestionWithoutAnswer: (currentIndex: number) => number;
+  getNextQuestionWithoutAnswer: (currentIndex: number) => number;
+  getPreviousQuestionWithoutAnswer: (currentIndex: number) => number;
 }
 
 const QuestionNavigationList = ({
@@ -17,21 +17,9 @@ const QuestionNavigationList = ({
   isFirstQuestion,
   isLastQuestion,
   action,
-  findNextQuestionWithoutAnswer,
+  getNextQuestionWithoutAnswer,
+  getPreviousQuestionWithoutAnswer,
 }: IQuestionNavigationList) => {
-  const findPreviousQuestionWithoutAnswer = (currentIndex: number) => {
-    for (let i = currentIndex - 1; i >= 0; i -= 1) {
-      const question = ticketsStore.questions[i];
-      const answerExists = ticketsStore.answers.some(
-        (answer) => answer.questionId === question.questionId
-      );
-      if (!answerExists) {
-        return i;
-      }
-    }
-    return currentIndex;
-  };
-
   return (
     <ul className={style.navigationList}>
       <li>
@@ -40,7 +28,7 @@ const QuestionNavigationList = ({
           disabled={isFirstQuestion}
           onClick={() => {
             const indexPreviousQuestion =
-              findPreviousQuestionWithoutAnswer(indexQuestion);
+              getNextQuestionWithoutAnswer(indexQuestion);
             action(indexPreviousQuestion);
           }}
           type="button"
@@ -57,7 +45,7 @@ const QuestionNavigationList = ({
           disabled={isLastQuestion}
           onClick={() => {
             const indexNextQuestion =
-              findNextQuestionWithoutAnswer(indexQuestion);
+              getPreviousQuestionWithoutAnswer(indexQuestion);
             action(indexNextQuestion);
           }}
           type="button"

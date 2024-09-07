@@ -10,13 +10,7 @@ import Passwords from "./Passwords/Passwords";
 
 const Register = observer(() => {
   const navigate = useNavigate();
-  const fieldsIsSuccess =
-    registerStore.emailFieldIsSuccess &&
-    registerStore.nameFieldIsSuccess &&
-    registerStore.surnameFieldIsSuccess &&
-    registerStore.passwordFieldIsSuccess &&
-    registerStore.repeatPasswordFieldIsSuccess &&
-    registerStore.departmentFieldIsSuccess;
+  const fieldsIsSuccess = registerStore.getAllStatusField();
 
   return (
     <div className={style.register}>

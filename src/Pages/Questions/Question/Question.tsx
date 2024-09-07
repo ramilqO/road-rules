@@ -53,21 +53,31 @@ const Question = observer(
     );
     const checkIsAnswer = !!currentAnswer;
 
-    const handleAnswerClick = (answerId: string, indexQuestion: number) => {
+    const handleAnswerClick = (answerId: string) => {
       ticketsStore.sendingAnswer({
         ticketId: currentQuestion.ticketId,
         questionId: currentQuestion.questionId,
         answerId,
       });
-      action(indexQuestion);
+
+      const questionIndexWithoutAnswer =
+        getQuestionWithoutAnswer(indexQuestion);
+      action(questionIndexWithoutAnswer);
     };
 
-    const findNextQuestionWithoutAnswer = (currentIndex: number): number => {
-      for (
-        let i = currentIndex + 1;
-        i < ticketsStore.questions.length;
-        i += 1
-      ) {
+    const getQuestionWithoutAnswer = (currentIndexQuestion: number): number => {
+      let questionIndexWithoutAnswer =
+        getNextQuestionWithoutAnswer(currentIndexQuestion);
+
+      if (questionIndexWithoutAnswer === currentIndexQuestion) {
+        questionIndexWithoutAnswer =
+          getPreviousQuestionWithoutAnswer(currentIndexQuestion);
+      }
+      return questionIndexWithoutAnswer;
+    };
+
+    const getNextQuestionWithoutAnswer = (currentIndexQuestion: number): number => {
+      for (let i = currentIndexQuestion + 1; i < ticketsStore.questions.length; i++) {
         const question = ticketsStore.questions[i];
         const answerExists = ticketsStore.answers.some(
           (answer) => answer.questionId === question.questionId
@@ -76,7 +86,20 @@ const Question = observer(
           return i;
         }
       }
-      return currentIndex;
+      return currentIndexQuestion;
+    };
+
+    const getPreviousQuestionWithoutAnswer = (currentIndexQuestion: number): number => {
+      for (let i = currentIndexQuestion - 1; i >= 0; i--) {
+        const question = ticketsStore.questions[i];
+        const answerExists = ticketsStore.answers.some(
+          (answer) => answer.questionId === question.questionId
+        );
+        if (!answerExists) {
+          return i;
+        }
+      }
+      return currentIndexQuestion;
     };
 
     return (
@@ -116,11 +139,7 @@ const Question = observer(
                     checkIsAnswer ? style.listAnswers_button__answer : ""
                   }`}
                   disabled={checkIsAnswer}
-                  onClick={() => {
-                    const indexNextQuestion =
-                      findNextQuestionWithoutAnswer(indexQuestion);
-                    handleAnswerClick(answerId, indexNextQuestion);
-                  }}
+                  onClick={() => handleAnswerClick(answerId)}
                 >
                   {answerText}
                 </button>
@@ -140,7 +159,8 @@ const Question = observer(
           isFirstQuestion={isFirstQuestion}
           isLastQuestion={isLastQuestion}
           action={action}
-          findNextQuestionWithoutAnswer={findNextQuestionWithoutAnswer}
+          getNextQuestionWithoutAnswer={getNextQuestionWithoutAnswer}
+          getPreviousQuestionWithoutAnswer={getPreviousQuestionWithoutAnswer}
         />
       </div>
     );

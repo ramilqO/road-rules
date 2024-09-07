@@ -72,7 +72,7 @@ class TicketsStore {
   }
 
   resetAnswers() {
-    localStorage.removeItem(storageSelectors.answers)
+    localStorage.removeItem(storageSelectors.answers);
     this.answers = [];
   }
 
@@ -88,7 +88,7 @@ class TicketsStore {
     const listTicketsResponse = await api.getListTickets();
     if (!listTicketsResponse) {
       localStorage.removeItem(storageSelectors.currentTicketId);
-      return "";
+      return;
     }
     this.setTickets(listTicketsResponse);
   }

@@ -1,4 +1,4 @@
-function InCorrectIcon() {
+const InCorrectIcon = () => {
   return (
     <svg
       width="16"

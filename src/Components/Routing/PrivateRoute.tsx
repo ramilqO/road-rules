@@ -20,15 +20,10 @@ const PrivateRoute = observer(
       return localStorage.getItem(storageSelectors.previousPathname);
     });
 
-    useEffect(
-      function () {
-        setPreviousPathname(pathname);
-        localStorage.setItem(storageSelectors.previousPathname, pathname);
-      },
-      [pathname]
-    );
-
-    console.log(previousPathname);
+    useEffect(() => {
+      setPreviousPathname(pathname);
+      localStorage.setItem(storageSelectors.previousPathname, pathname);
+    }, [pathname]);
 
     const isAuth = authStore.isAuth;
     const isAllAnswersForResults =

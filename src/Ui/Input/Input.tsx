@@ -6,7 +6,6 @@ interface InputProps {
   label: string;
   name: string;
   placeholder: string;
-  // Делает проверку данных на правильность, принимает значение инпута, а возращает строку с ошибой!
   onValidate?: (value: string) => string;
   initialValue?: string;
   type?: string;
@@ -14,7 +13,7 @@ interface InputProps {
   disabled?: boolean;
 }
 
-export default function Input({
+const Input = ({
   label,
   type = "text",
   name,
@@ -23,7 +22,7 @@ export default function Input({
   placeholder,
   inputRef,
   disabled = false,
-}: InputProps) {
+}: InputProps) => {
   const [value, setValue] = useState(initialValue);
   const [validateError, setValidateError] = useState("");
 
@@ -31,15 +30,15 @@ export default function Input({
     <div className={style.field}>
       <label className={style.field_label}>{label}</label>
       <input
-        ref={inputRef}
         type={type}
         name={name}
+        placeholder={placeholder}
         className={`${style.field_input} ${
           disabled && style.field_input__disabled
         }`}
-        placeholder={placeholder}
         required
         disabled={disabled}
+        ref={inputRef}
         value={value}
         onChange={(e) => {
           setValue(e.target.value);
@@ -53,4 +52,6 @@ export default function Input({
       {validateError && <p className={style.field_error}>{validateError}</p>}
     </div>
   );
-}
+};
+
+export default Input;

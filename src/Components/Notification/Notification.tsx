@@ -10,36 +10,40 @@ import InfoIcon from "/public/svg/notification/InfoIcon";
 const Notification = observer(() => {
   const notification = notificationStore.notification;
 
+  if (!notification) return null;
+
+  const crossIconStyle =
+    notification.type === "error"
+      ? style.cross_buttonIcon__error
+      : style.cross_buttonIcon__basic;
+  const infoIconStyle =
+    notification.type === "error"
+      ? style.info_buttonIcon__error
+      : style.info_buttonIcon__basic;
+
   useEffect(() => {
-    function handleEscapeKeyPress(e: KeyboardEvent) {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         notificationStore.deleteNotification();
       }
     }
-
-    window.addEventListener("keydown", handleEscapeKeyPress);
+    window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleEscapeKeyPress);
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, []);
-
-  if (!notification) return null;
 
   return (
     <div
       className={`${style.notification} ${
-        style[`notification_${notification.type}`] // nt, тут никак, из-за notification.type... ццц
+        style[`notification_${notification.type}`]
       }`}
     >
       <div className={style.cross}>
         <button
           type="button"
-          className={`${style.cross_button} ${
-            notification.type === "error"
-              ? style.cross_buttonIcon__error
-              : style.cross_buttonIcon__basic
-          }`}
+          className={`${style.cross_button} ${crossIconStyle}`}
           onClick={() => {
             notificationStore.deleteNotification();
           }}
@@ -51,11 +55,7 @@ const Notification = observer(() => {
       <div className={style.info}>
         <button
           type="button"
-          className={`${style.info_button} ${
-            notification.type === "error"
-              ? style.info_buttonIcon__error
-              : style.info_buttonIcon__basic
-          }`}
+          className={`${style.info_button} ${infoIconStyle}`}
         >
           <InfoIcon />
         </button>

@@ -3,17 +3,17 @@ import { lazy, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import style from "./Questions.module.scss";
+import { IoMdExit } from "react-icons/io";
 
 const Question = lazy(() => import("./Question/Question"));
 const Loader = lazy(() => import("@/Ui/Loader/Loader"));
-import { IoMdExit } from "react-icons/io";
+
+import storageSelectors from "@/stores/Selectors/storageSelectors";
+import helpers from "@/tools/Helpers/helpers";
 
 import authStore from "@/stores/Auth/authStore";
 import examStore from "@/stores/Exam/examStore";
 import ticketsStore from "@/stores/Tickets/ticketsStore";
-
-import storageSelectors from "@/stores/Selectors/storageSelectors";
-import helpers from "@/tools/Helpers/helpers";
 
 const localStorageCurrentQuestionPage = helpers.getLocalStorage(
   storageSelectors.currentQuestionPage
@@ -46,27 +46,26 @@ const Questions = observer(() => {
     }
   }, [ticketId]);
 
-  useEffect(
-    function () {
-      if (ticketsStore.questions.length === ticketsStore.answers.length) {
-        navigate("/results");
-      } // засунул в useEffect потому что, navigate должен быть в useEffect warning был
-    },
-    [ticketsStore.answers.length]
-  );
+  useEffect(() => {
+    if (ticketsStore.questions.length === ticketsStore.answers.length) {
+      navigate("/results");
+    }
+  }, [ticketsStore.answers.length]);
 
-  function handleButtonClick(index: number) {
-    if (index >= 0 && index < questionsToRender.length) {
-      setCurrentQuestionIndex(index);
-      localStorage.setItem(storageSelectors.currentQuestionPage, String(index));
+  const handleButtonClick = (indexQuestion: number) => {
+    if (indexQuestion >= 0 && indexQuestion < questionsToRender.length) {
+      setCurrentQuestionIndex(indexQuestion);
+      localStorage.setItem(storageSelectors.currentQuestionPage, String(indexQuestion));
     }
   }
 
   if (authStore.isLoading) return <Loader loaderStyle="huge" />;
-
   return (
     <div className={style.questions}>
-      <button className={style.questions_exit} onClick={() => navigate("/menu")}>
+      <button
+        className={style.questions_exit}
+        onClick={() => navigate("/menu")}
+      >
         <IoMdExit size="24px" />
       </button>
       <div className={style.paginationWrapper}>
