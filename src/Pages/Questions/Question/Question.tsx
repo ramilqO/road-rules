@@ -65,19 +65,19 @@ const Question = observer(
       action(questionIndexWithoutAnswer);
     };
 
-    const getQuestionWithoutAnswer = (currentIndex: number): number => {
+    const getQuestionWithoutAnswer = (currentIndexQuestion: number): number => {
       let questionIndexWithoutAnswer =
-        getNextQuestionWithoutAnswer(currentIndex);
+        getNextQuestionWithoutAnswer(currentIndexQuestion);
 
-      if (questionIndexWithoutAnswer === currentIndex) {
+      if (questionIndexWithoutAnswer === currentIndexQuestion) {
         questionIndexWithoutAnswer =
-          getPreviousQuestionWithoutAnswer(currentIndex);
+          getPreviousQuestionWithoutAnswer(currentIndexQuestion);
       }
       return questionIndexWithoutAnswer;
     };
 
-    const getNextQuestionWithoutAnswer = (currentIndex: number): number => {
-      for (let i = currentIndex + 1; i < ticketsStore.questions.length; i++) {
+    const getNextQuestionWithoutAnswer = (currentIndexQuestion: number): number => {
+      for (let i = currentIndexQuestion + 1; i < ticketsStore.questions.length; i++) {
         const question = ticketsStore.questions[i];
         const answerExists = ticketsStore.answers.some(
           (answer) => answer.questionId === question.questionId
@@ -86,11 +86,11 @@ const Question = observer(
           return i;
         }
       }
-      return currentIndex;
+      return currentIndexQuestion;
     };
 
-    const getPreviousQuestionWithoutAnswer = (currentIndex: number): number => {
-      for (let i = currentIndex - 1; i >= 0; i--) {
+    const getPreviousQuestionWithoutAnswer = (currentIndexQuestion: number): number => {
+      for (let i = currentIndexQuestion - 1; i >= 0; i--) {
         const question = ticketsStore.questions[i];
         const answerExists = ticketsStore.answers.some(
           (answer) => answer.questionId === question.questionId
@@ -99,7 +99,7 @@ const Question = observer(
           return i;
         }
       }
-      return currentIndex;
+      return currentIndexQuestion;
     };
 
     return (

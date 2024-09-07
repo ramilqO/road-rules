@@ -52,10 +52,10 @@ const Questions = observer(() => {
     }
   }, [ticketsStore.answers.length]);
 
-  const handleButtonClick = (index: number) => {
-    if (index >= 0 && index < questionsToRender.length) {
-      setCurrentQuestionIndex(index);
-      localStorage.setItem(storageSelectors.currentQuestionPage, String(index));
+  const handleButtonClick = (indexQuestion: number) => {
+    if (indexQuestion >= 0 && indexQuestion < questionsToRender.length) {
+      setCurrentQuestionIndex(indexQuestion);
+      localStorage.setItem(storageSelectors.currentQuestionPage, String(indexQuestion));
     }
   }
 
