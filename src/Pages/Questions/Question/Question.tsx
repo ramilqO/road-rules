@@ -67,16 +67,16 @@ const Question = observer(
 
     const getQuestionWithoutAnswer = (currentIndex: number): number => {
       let questionIndexWithoutAnswer =
-        findNextQuestionWithoutAnswer(currentIndex);
+        getNextQuestionWithoutAnswer(currentIndex);
 
       if (questionIndexWithoutAnswer === currentIndex) {
         questionIndexWithoutAnswer =
-          findPreviousQuestionWithoutAnswer(currentIndex);
+          getPreviousQuestionWithoutAnswer(currentIndex);
       }
       return questionIndexWithoutAnswer;
     };
 
-    const findNextQuestionWithoutAnswer = (currentIndex: number): number => {
+    const getNextQuestionWithoutAnswer = (currentIndex: number): number => {
       for (let i = currentIndex + 1; i < ticketsStore.questions.length; i++) {
         const question = ticketsStore.questions[i];
         const answerExists = ticketsStore.answers.some(
@@ -89,9 +89,7 @@ const Question = observer(
       return currentIndex;
     };
 
-    const findPreviousQuestionWithoutAnswer = (
-      currentIndex: number
-    ): number => {
+    const getPreviousQuestionWithoutAnswer = (currentIndex: number): number => {
       for (let i = currentIndex - 1; i >= 0; i--) {
         const question = ticketsStore.questions[i];
         const answerExists = ticketsStore.answers.some(
@@ -161,8 +159,8 @@ const Question = observer(
           isFirstQuestion={isFirstQuestion}
           isLastQuestion={isLastQuestion}
           action={action}
-          findNextQuestionWithoutAnswer={findNextQuestionWithoutAnswer}
-          findPreviousQuestionWithoutAnswer={findPreviousQuestionWithoutAnswer}
+          getNextQuestionWithoutAnswer={getNextQuestionWithoutAnswer}
+          getPreviousQuestionWithoutAnswer={getPreviousQuestionWithoutAnswer}
         />
       </div>
     );

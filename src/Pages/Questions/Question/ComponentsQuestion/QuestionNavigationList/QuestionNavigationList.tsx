@@ -8,8 +8,8 @@ interface IQuestionNavigationList {
   isFirstQuestion: boolean;
   isLastQuestion: boolean;
   action: (newIndex: number) => void;
-  findNextQuestionWithoutAnswer: (currentIndex: number) => number;
-  findPreviousQuestionWithoutAnswer: (currentIndex: number) => number;
+  getNextQuestionWithoutAnswer: (currentIndex: number) => number;
+  getPreviousQuestionWithoutAnswer: (currentIndex: number) => number;
 }
 
 const QuestionNavigationList = ({
@@ -17,8 +17,8 @@ const QuestionNavigationList = ({
   isFirstQuestion,
   isLastQuestion,
   action,
-  findNextQuestionWithoutAnswer,
-  findPreviousQuestionWithoutAnswer,
+  getNextQuestionWithoutAnswer,
+  getPreviousQuestionWithoutAnswer,
 }: IQuestionNavigationList) => {
   return (
     <ul className={style.navigationList}>
@@ -28,7 +28,7 @@ const QuestionNavigationList = ({
           disabled={isFirstQuestion}
           onClick={() => {
             const indexPreviousQuestion =
-              findPreviousQuestionWithoutAnswer(indexQuestion);
+              getNextQuestionWithoutAnswer(indexQuestion);
             action(indexPreviousQuestion);
           }}
           type="button"
@@ -45,7 +45,7 @@ const QuestionNavigationList = ({
           disabled={isLastQuestion}
           onClick={() => {
             const indexNextQuestion =
-              findNextQuestionWithoutAnswer(indexQuestion);
+              getPreviousQuestionWithoutAnswer(indexQuestion);
             action(indexNextQuestion);
           }}
           type="button"

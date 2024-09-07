@@ -13,7 +13,6 @@ import authStore from "@/stores/Auth/authStore";
 const Menu = observer(() => {
   const navigate = useNavigate();
   const [countTicketToRenderCount, setCountTicketToRender] = useState(8);
-
   const ticketsToRender = ticketsStore.tickets.slice(
     0,
     countTicketToRenderCount

@@ -19,6 +19,12 @@ class LoginStore {
     makeAutoObservable(this);
   }
 
+  getAllStatusField() {
+    return [this.emailFieldIsSuccess, this.passwordFieldIsSuccess].every(
+      Boolean
+    );
+  }
+
   validateEmailField = (value: string): string => {
     if (value.length < 6) {
       this.emailFieldIsSuccess = false;
