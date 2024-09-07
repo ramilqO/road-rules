@@ -1,4 +1,3 @@
-import ticketsStore from "@/stores/Tickets/ticketsStore";
 import style from "./QuestionNavigationList.module.scss";
 
 import ArrowLeftIcon from "/public/svg/question/ArrowLeftIcon";
@@ -10,6 +9,7 @@ interface IQuestionNavigationList {
   isLastQuestion: boolean;
   action: (newIndex: number) => void;
   findNextQuestionWithoutAnswer: (currentIndex: number) => number;
+  findPreviousQuestionWithoutAnswer: (currentIndex: number) => number;
 }
 
 const QuestionNavigationList = ({
@@ -18,20 +18,8 @@ const QuestionNavigationList = ({
   isLastQuestion,
   action,
   findNextQuestionWithoutAnswer,
+  findPreviousQuestionWithoutAnswer,
 }: IQuestionNavigationList) => {
-  const findPreviousQuestionWithoutAnswer = (currentIndex: number) => {
-    for (let i = currentIndex - 1; i >= 0; i -= 1) {
-      const question = ticketsStore.questions[i];
-      const answerExists = ticketsStore.answers.some(
-        (answer) => answer.questionId === question.questionId
-      );
-      if (!answerExists) {
-        return i;
-      }
-    }
-    return currentIndex;
-  };
-
   return (
     <ul className={style.navigationList}>
       <li>
