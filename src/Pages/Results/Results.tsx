@@ -1,7 +1,7 @@
 import Result from "./Result/Result";
 import style from "./Results.module.scss";
 
-export default function Results() {
+const Results = () => {
   return (
     <div className={style.results}>
       <Result />
@@ -9,3 +9,5 @@ export default function Results() {
     </div>
   );
 }
+
+export default Results

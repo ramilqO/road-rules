@@ -8,7 +8,7 @@ interface ICredentials {
   password: string;
 }
 
-export async function LoginAction({ request }: { request: Request }) {
+export const LoginAction = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData) as {
     [key: string]: string;
@@ -24,4 +24,4 @@ export async function LoginAction({ request }: { request: Request }) {
   if (!authStore.isAuth) return redirect("/login");
 
   return redirect("/menu");
-}
+};

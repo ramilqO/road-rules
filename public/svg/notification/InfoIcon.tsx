@@ -1,4 +1,4 @@
-export default function InfoIcon() {
+const InfoIcon = () => {
   return (
     <svg
       width="20"
@@ -25,4 +25,6 @@ export default function InfoIcon() {
       </defs>
     </svg>
   );
-}
+};
+
+export default InfoIcon;

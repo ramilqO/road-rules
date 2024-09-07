@@ -13,7 +13,7 @@ interface ICredentials {
   department: string;
 }
 
-export async function RegisterAction({ request }: { request: Request }) {
+export const RegisterAction = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData) as {
     [key: string]: string;
@@ -32,4 +32,4 @@ export async function RegisterAction({ request }: { request: Request }) {
   if (!authStore.isAuth) return redirect("/register");
 
   return redirect("/menu");
-}
+};

@@ -14,7 +14,7 @@ const Passwords = observer(() => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const repeatPasswordInputRef = useRef<HTMLInputElement>(null);
 
-  function handleChangeVisibility(ref: RefObject<HTMLInputElement>) {
+  const handleChangeVisibility = (ref: RefObject<HTMLInputElement>) => {
     const input = ref.current;
     if (!input) return;
 

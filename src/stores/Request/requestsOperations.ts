@@ -24,7 +24,7 @@ export const token = {
   },
 };
 
-export function errorHandling(error: unknown, titleText?: string) {
+export const errorHandling = (error: unknown, titleText?: string) => {
   if (axios.isAxiosError(error) && error.response?.data?.message) {
     notificationStore.setNotification({
       type: "error",
@@ -40,7 +40,7 @@ export function errorHandling(error: unknown, titleText?: string) {
   });
 }
 
-export function checkInternetConnection(titleText: string) {
+export const checkInternetConnection = (titleText: string) => {
   const isOnline = navigator.onLine;
   if (!isOnline) {
     notificationStore.setNotification({
@@ -53,7 +53,7 @@ export function checkInternetConnection(titleText: string) {
   return isOnline;
 }
 
-export function checkToken(titleText: string) {
+export const checkToken = (titleText: string) => {
   const tokenAuthorization = authStore.userInfo?.token;
   if (!tokenAuthorization) {
     notificationStore.setNotification({

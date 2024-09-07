@@ -6,7 +6,7 @@ import SunIcon from "/public/svg/header/SunIcon";
 import Button from "@/Ui/Button/Button";
 import storageSelectors from "@/stores/Selectors/storageSelectors";
 
-export default function ThemeToggle() {
+const ThemeToggle = () => {
   const [themeMode, setThemeMode] = useState(() => {
     const savedTheme = localStorage.getItem(storageSelectors.theme);
     return savedTheme || "whiteMode";
@@ -31,4 +31,6 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
     />
   );
-}
+};
+
+export default ThemeToggle;

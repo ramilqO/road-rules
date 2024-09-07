@@ -1,4 +1,4 @@
-function ArrowLeftIcon() {
+const ArrowLeftIcon = () => {
   return (
     <svg
       width="16"

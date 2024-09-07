@@ -1,4 +1,4 @@
-export default function SunIcon() {
+const SunIcon = () => {
   return (
     <svg
       width="24"
@@ -17,3 +17,5 @@ export default function SunIcon() {
     </svg>
   );
 }
+
+export default SunIcon

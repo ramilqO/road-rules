@@ -4,7 +4,7 @@ import style from "./PageNotFound.module.scss";
 
 import Button from "@/Ui/Button/Button";
 
-export default function PageNotFound() {
+const PageNotFound = () => {
   const navigate = useNavigate();
 
   return (
@@ -27,4 +27,6 @@ export default function PageNotFound() {
       </div>
     </div>
   );
-}
+};
+
+export default PageNotFound;

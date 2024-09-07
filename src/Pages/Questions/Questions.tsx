@@ -46,16 +46,13 @@ const Questions = observer(() => {
     }
   }, [ticketId]);
 
-  useEffect(
-    function () {
-      if (ticketsStore.questions.length === ticketsStore.answers.length) {
-        navigate("/results");
-      }
-    },
-    [ticketsStore.answers.length]
-  );
+  useEffect(() => {
+    if (ticketsStore.questions.length === ticketsStore.answers.length) {
+      navigate("/results");
+    }
+  }, [ticketsStore.answers.length]);
 
-  function handleButtonClick(index: number) {
+  const handleButtonClick = (index: number) => {
     if (index >= 0 && index < questionsToRender.length) {
       setCurrentQuestionIndex(index);
       localStorage.setItem(storageSelectors.currentQuestionPage, String(index));

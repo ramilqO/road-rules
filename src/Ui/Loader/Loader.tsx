@@ -6,7 +6,7 @@ interface LoaderProps {
   loaderStyle?: LoaderStyle;
 }
 
-function Loader({ loaderStyle = "buttonLoader" }: LoaderProps) {
+const Loader = ({ loaderStyle = "buttonLoader" }: LoaderProps) => {
   let loaderWrapperStyle = "";
   let selfLoaderStyle = "";
 
@@ -34,6 +34,6 @@ function Loader({ loaderStyle = "buttonLoader" }: LoaderProps) {
       </div>
     );
   }
-}
+};
 
 export default Loader;

@@ -15,12 +15,12 @@ const Login = observer(() => {
 
   const navigate = useNavigate();
 
-  function handleChangeVisibility() {
+  const handleChangeVisibility = () => {
     const input = passwordInputRef.current;
     if (!input) return;
 
     input.type = input.type === "password" ? "text" : "password";
-  }
+  };
 
   return (
     <div className={style.login}>

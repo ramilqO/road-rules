@@ -6,11 +6,11 @@ interface CheckboxProps {
   defaultChecked?: boolean;
 }
 
-export default function Checkbox({
+const Checkbox = ({
   onToggle,
   label,
   defaultChecked = false,
-}: CheckboxProps) {
+}: CheckboxProps) => {
   return (
     <div className={style.checkbox}>
       <label className={style.wrapper}>
@@ -25,4 +25,6 @@ export default function Checkbox({
       </label>
     </div>
   );
-}
+};
+
+export default Checkbox;

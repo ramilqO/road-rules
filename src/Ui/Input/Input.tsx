@@ -13,7 +13,7 @@ interface InputProps {
   disabled?: boolean;
 }
 
-export default function Input({
+const Input = ({
   label,
   type = "text",
   name,
@@ -22,7 +22,7 @@ export default function Input({
   placeholder,
   inputRef,
   disabled = false,
-}: InputProps) {
+}: InputProps) => {
   const [value, setValue] = useState(initialValue);
   const [validateError, setValidateError] = useState("");
 
@@ -52,4 +52,6 @@ export default function Input({
       {validateError && <p className={style.field_error}>{validateError}</p>}
     </div>
   );
-}
+};
+
+export default Input;

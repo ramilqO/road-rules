@@ -22,7 +22,7 @@ const Notification = observer(() => {
       : style.info_buttonIcon__basic;
 
   useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         notificationStore.deleteNotification();
       }
