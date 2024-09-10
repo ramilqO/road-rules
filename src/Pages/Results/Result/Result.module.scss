@@ -1,19 +1,6 @@
 @import "/src/Styles/Variables.module.scss";
 
 .result {
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  max-width: 768px;
-  height: auto;
-
-  gap: 10px;
-  padding: 10px;
-
-  border: 1px solid var(--color-mid-grey);
-  border-radius: 8px;
-
   &_img {
     object-fit: contain;
 
@@ -36,7 +23,7 @@
     color: var(--color-dark-text);
   }
 
-  &_checkCorrectAnswerText {
+  &_checkCorrectAnswer {
     display: flex;
     align-items: center;
 
@@ -47,6 +34,10 @@
 
     padding: 8px;
     border-radius: 8px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
 
     background-color: var(--color-dark-bg);
     color: var(--color-light-bg);

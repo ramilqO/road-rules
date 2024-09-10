@@ -76,8 +76,14 @@ const Question = observer(
       return questionIndexWithoutAnswer;
     };
 
-    const getNextQuestionWithoutAnswer = (currentIndexQuestion: number): number => {
-      for (let i = currentIndexQuestion + 1; i < ticketsStore.questions.length; i++) {
+    const getNextQuestionWithoutAnswer = (
+      currentIndexQuestion: number
+    ): number => {
+      for (
+        let i = currentIndexQuestion + 1;
+        i < ticketsStore.questions.length;
+        i++
+      ) {
         const question = ticketsStore.questions[i];
         const answerExists = ticketsStore.answers.some(
           (answer) => answer.questionId === question.questionId
@@ -89,7 +95,9 @@ const Question = observer(
       return currentIndexQuestion;
     };
 
-    const getPreviousQuestionWithoutAnswer = (currentIndexQuestion: number): number => {
+    const getPreviousQuestionWithoutAnswer = (
+      currentIndexQuestion: number
+    ): number => {
       for (let i = currentIndexQuestion - 1; i >= 0; i--) {
         const question = ticketsStore.questions[i];
         const answerExists = ticketsStore.answers.some(
@@ -129,7 +137,7 @@ const Question = observer(
 
         <ul className={style.listAnswers}>
           {currentQuestion.answers.map(({ answerId, answerText }) => {
-            const isAnswer = currentAnswer?.ourAnswer === answerId;
+            const isOurAnswer = currentAnswer?.ourAnswer === answerId;
 
             return (
               <li className={style.listAnswers_item} key={answerId}>
@@ -144,7 +152,7 @@ const Question = observer(
                   {answerText}
                 </button>
 
-                {isAnswer && (
+                {isOurAnswer && (
                   <span className={style.listAnswers_thisAnswer}>
                     Ваш ответ
                   </span>
