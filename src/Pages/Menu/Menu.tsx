@@ -20,6 +20,8 @@ const Menu = observer(() => {
 
   useEffect(() => {
     ticketsStore.getListTickets();
+    ticketsStore.resetAnswers();
+    ticketsStore.resetCurrentQuestionPage();
   }, []);
 
   if (authStore.isLoading) return <Loader loaderStyle="huge" />;
