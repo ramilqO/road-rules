@@ -12,32 +12,31 @@ interface IPrivateRoute {
   checkIsResult?: boolean;
 }
 
-const PrivateRoute = observer(
-  ({ children, checkIsResult = false }: IPrivateRoute) => {
-    const { pathname } = useLocation();
+const PrivateRoute = observer((props: IPrivateRoute) => {
+  const { children, checkIsResult = false } = props;
 
-    const [previousPathname, setPreviousPathname] = useState(() => {
-      return localStorage.getItem(storageSelectors.previousPathname);
-    });
+  const { pathname } = useLocation();
+  const [previousPathname, setPreviousPathname] = useState(() => {
+    return localStorage.getItem(storageSelectors.previousPathname);
+  });
 
-    useEffect(() => {
-      setPreviousPathname(pathname);
-      localStorage.setItem(storageSelectors.previousPathname, pathname);
-    }, [pathname]);
+  useEffect(() => {
+    setPreviousPathname(pathname);
+    localStorage.setItem(storageSelectors.previousPathname, pathname);
+  }, [pathname]);
 
-    const isAuth = authStore.isAuth;
-    const isAllAnswersForResults =
-      ticketsStore.questions.length > 0 &&
-      ticketsStore.questions.length === ticketsStore.answers.length;
+  const isAuth = authStore.isAuth;
+  const isAllAnswersForResults =
+    ticketsStore.questions.length > 0 &&
+    ticketsStore.questions.length === ticketsStore.answers.length;
 
-    if (checkIsResult)
-      return isAllAnswersForResults ? (
-        children
-      ) : (
-        <Navigate to={previousPathname ? previousPathname : ""} replace />
-      );
-    return isAuth ? children : <Navigate to="/login" replace />;
-  }
-);
+  if (checkIsResult)
+    return isAllAnswersForResults ? (
+      children
+    ) : (
+      <Navigate to={previousPathname ? previousPathname : ""} replace />
+    );
+  return isAuth ? children : <Navigate to="/login" replace />;
+});
 
 export default PrivateRoute;

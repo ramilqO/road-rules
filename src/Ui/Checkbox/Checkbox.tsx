@@ -6,11 +6,9 @@ interface CheckboxProps {
   defaultChecked?: boolean;
 }
 
-const Checkbox = ({
-  onToggle,
-  label,
-  defaultChecked = false,
-}: CheckboxProps) => {
+const Checkbox = (props: CheckboxProps) => {
+  const { onToggle, label, defaultChecked = false } = props;
+
   return (
     <div className={style.checkbox}>
       <label className={style.wrapper}>
