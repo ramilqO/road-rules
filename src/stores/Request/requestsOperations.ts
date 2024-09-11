@@ -38,7 +38,7 @@ export const errorHandling = (error: unknown, titleText?: string) => {
     titleText: `Ошибка ${titleText}`,
     bodyText: "Неизвестная ошибка",
   });
-}
+};
 
 export const checkInternetConnection = (titleText: string) => {
   const isOnline = navigator.onLine;
@@ -51,7 +51,7 @@ export const checkInternetConnection = (titleText: string) => {
   }
 
   return isOnline;
-}
+};
 
 export const checkToken = (titleText: string) => {
   const tokenAuthorization = authStore.userInfo?.token;
@@ -66,7 +66,7 @@ export const checkToken = (titleText: string) => {
   }
   token.set(tokenAuthorization);
   return token;
-}
+};
 
 const api = {
   login: authOperations.login,

@@ -20,13 +20,15 @@ const Notification = observer(() => {
     notification.type === "error"
       ? style.info_buttonIcon__error
       : style.info_buttonIcon__basic;
+  const checkIsButton =
+    notification.button && notification.button.text.length > 0;
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         notificationStore.deleteNotification();
       }
-    }
+    };
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
@@ -79,7 +81,7 @@ const Notification = observer(() => {
           </p>
         </div>
 
-        {notification.button && notification.button.text.length > 0 && (
+        {checkIsButton && (
           <button
             className={`${style.container_button} ${
               style[`container_button__${notification.type}`]
@@ -90,7 +92,7 @@ const Notification = observer(() => {
             }}
             type="button"
           >
-            {notification.button.text}
+            {notification.button?.text}
           </button>
         )}
       </div>

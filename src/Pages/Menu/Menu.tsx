@@ -5,10 +5,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./Menu.module.scss";
 
 import Button from "@/Ui/Button/Button";
-import Loader from "@/Ui/Loader/Loader";
-
 import ticketsStore from "@/stores/Tickets/ticketsStore";
-import authStore from "@/stores/Auth/authStore";
 
 const Menu = observer(() => {
   const navigate = useNavigate();
@@ -17,6 +14,8 @@ const Menu = observer(() => {
     0,
     countTicketToRenderCount
   );
+  const checkIsRenderAllTicket =
+    countTicketToRenderCount !== ticketsStore.tickets.length;
 
   useEffect(() => {
     ticketsStore.getListTickets();
@@ -24,7 +23,6 @@ const Menu = observer(() => {
     ticketsStore.resetCurrentQuestionPage();
   }, []);
 
-  if (authStore.isLoading) return <Loader loaderStyle="huge" />;
   if (ticketsStore.tickets.length === 0) return null;
 
   return (
@@ -43,7 +41,7 @@ const Menu = observer(() => {
             </li>
           ))}
         </ul>
-        {countTicketToRenderCount !== ticketsStore.tickets.length ? (
+        {checkIsRenderAllTicket ? (
           <Button
             text="Показать больше"
             onClick={() =>

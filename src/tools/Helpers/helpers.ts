@@ -13,7 +13,7 @@ const helpers = {
 
     try {
       return JSON.parse(storedData) as T;
-    } catch (error) {
+    } catch {
       notificationStore.setNotification({
         type: "error",
         titleText: "Ошибка формата данных",

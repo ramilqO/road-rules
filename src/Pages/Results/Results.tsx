@@ -11,10 +11,7 @@ const Results = () => {
 
   return (
     <ul className={style.results}>
-      <button
-        className={style.results_exit}
-        onClick={() => navigate("/menu")}
-      >
+      <button className={style.results_exit} onClick={() => navigate("/menu")}>
         <IoMdExit size="24px" />
       </button>
       {ticketsStore.answers.map((answer, i) => (
