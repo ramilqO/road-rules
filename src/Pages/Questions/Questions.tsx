@@ -48,8 +48,8 @@ const Questions = observer(() => {
     if (ticketsStore.questions.length === ticketsStore.answers.length) {
       navigate("/results");
     }
-    // TODO тут может быть ошибка гараниторвано из-за eslint
-  }, [navigate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ticketsStore.questions.length]);
 
   const handleButtonClick = (indexQuestion: number) => {
     if (indexQuestion >= 0 && indexQuestion < questionsToRender.length) {

@@ -31,13 +31,8 @@ interface QuestionProps {
 }
 
 const Question = observer(
-  ({
-    indexQuestion,
-    action,
-    currentQuestion,
-    isFirstQuestion,
-    isLastQuestion,
-  }: QuestionProps) => {
+  ({ indexQuestion, action, currentQuestion }: QuestionProps) => {
+    // TODO вынести props в const { }
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -162,14 +157,7 @@ const Question = observer(
           })}
         </ul>
 
-        <QuestionNavigationList
-          indexQuestion={indexQuestion}
-          isFirstQuestion={isFirstQuestion}
-          isLastQuestion={isLastQuestion}
-          action={action}
-          getNextQuestionWithoutAnswer={getNextQuestionWithoutAnswer}
-          getPreviousQuestionWithoutAnswer={getPreviousQuestionWithoutAnswer}
-        />
+        <QuestionNavigationList indexQuestion={indexQuestion} action={action} />
       </div>
     );
   }
