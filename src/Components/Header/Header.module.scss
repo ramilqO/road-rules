@@ -1,12 +1,32 @@
 @import "/src/Styles/Variables.module.scss";
 
 .header {
+  position: fixed;
   display: flex;
+
+  z-index: 1000;
+
+  top: 0;
+  left: 0;
+
+  flex: 0 0 auto;
   justify-content: space-between;
   align-items: center;
+
+  width: 100%;
   padding: 24px;
+
   border-bottom: 1px solid var(--color-light-grey);
-  flex: 0 0 auto;
+  background-color: var(--color-light-bg);
+  transition: transform 0.3s ease-in-out;
+
+  &__hidden {
+    transform: translateY(-100%);
+  }
+
+  &__visible {
+    transform: translateY(0);
+  }
 
   @media screen and (max-width: 425px) {
     padding-top: 16px;
@@ -20,14 +40,12 @@
   display: flex;
   align-items: center;
   gap: 12px;
-
   list-style: none;
 
   &ItemDescription {
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
-
     color: var(--color-dark-text);
   }
 }

@@ -6,12 +6,10 @@ import style from "./Questions.module.scss";
 import { IoMdExit } from "react-icons/io";
 
 const Question = lazy(() => import("./Question/Question"));
-const Loader = lazy(() => import("@/Ui/Loader/Loader"));
 
 import storageSelectors from "@/stores/Selectors/storageSelectors";
 import helpers from "@/tools/Helpers/helpers";
 
-import authStore from "@/stores/Auth/authStore";
 import examStore from "@/stores/Exam/examStore";
 import ticketsStore from "@/stores/Tickets/ticketsStore";
 
@@ -50,16 +48,19 @@ const Questions = observer(() => {
     if (ticketsStore.questions.length === ticketsStore.answers.length) {
       navigate("/results");
     }
-  }, [ticketsStore.answers.length]);
+    // TODO тут может быть ошибка гараниторвано из-за eslint
+  }, [navigate]);
 
   const handleButtonClick = (indexQuestion: number) => {
     if (indexQuestion >= 0 && indexQuestion < questionsToRender.length) {
       setCurrentQuestionIndex(indexQuestion);
-      localStorage.setItem(storageSelectors.currentQuestionPage, String(indexQuestion));
+      localStorage.setItem(
+        storageSelectors.currentQuestionPage,
+        String(indexQuestion)
+      );
     }
-  }
+  };
 
-  if (authStore.isLoading) return <Loader loaderStyle="huge" />;
   return (
     <div className={style.questions}>
       <button
@@ -74,7 +75,6 @@ const Questions = observer(() => {
             const answer = ticketsStore.answers.find(
               (answer) => answer.questionId === question.questionId
             );
-
             const isCorrect = answer?.isCorrect;
             const isInvalid = answer !== undefined && !isCorrect;
             const isCurrent = currentQuestionIndex === i;

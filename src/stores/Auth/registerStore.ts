@@ -123,7 +123,7 @@ class RegisterStore {
       value.length >= 8 &&
       /[A-Z;А-Я]/.test(value) &&
       /[0-9]/.test(value) &&
-      /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value)
+      /[!@#$%^&*()_+{}\]:;<>,.?~\\/-]/.test(value)
     ) {
       steps = 4;
       message = "Безопасный";

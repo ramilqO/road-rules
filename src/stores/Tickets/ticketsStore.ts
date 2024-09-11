@@ -29,7 +29,6 @@ interface IAnswers {
   help: string;
   questionId: string;
 }
-[];
 
 const localStorageQuestions = helpers.getLocalStorage<IQuestion[]>(
   storageSelectors.questions
@@ -61,6 +60,10 @@ class TicketsStore {
 
   setTickets(tickets: string[]) {
     this.tickets = tickets;
+  }
+
+  resetCurrentQuestionPage() {
+    localStorage.removeItem(storageSelectors.currentQuestionPage);
   }
 
   setAnswers(answer: IAnswers) {

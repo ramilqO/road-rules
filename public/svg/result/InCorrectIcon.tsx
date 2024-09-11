@@ -10,12 +10,12 @@ const InCorrectIcon = () => {
       <path
         d="M12 4L4 12M4 4L12 12"
         stroke="currentColor"
-        stroke-width="1.6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
-}
+};
 
 export default InCorrectIcon;
