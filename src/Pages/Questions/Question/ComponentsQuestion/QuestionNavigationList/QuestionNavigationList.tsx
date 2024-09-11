@@ -7,43 +7,11 @@ import ArrowRightIcon from "/public/svg/question/ArrowRightIcon";
 interface IQuestionNavigationList {
   indexQuestion: number;
   action: (newIndex: number) => void;
+  getNextQuestionWithoutAnswer: (currentIndexQuestion: number) => number;
 }
 
 const QuestionNavigationList = (props: IQuestionNavigationList) => {
-  const { indexQuestion, action } = props;
-
-  const getNextQuestionWithoutAnswer = (
-    currentIndexQuestion: number
-  ): number => {
-    let nextIndex = currentIndexQuestion;
-    for (
-      let i = currentIndexQuestion + 1;
-      i < ticketsStore.questions.length;
-      i++
-    ) {
-      const question = ticketsStore.questions[i];
-      const answerExists = ticketsStore.answers.some(
-        (answer) => answer.questionId === question.questionId
-      );
-      if (!answerExists) {
-        nextIndex = i;
-        break;
-      }
-    }
-    if (nextIndex === currentIndexQuestion) {
-      for (let i = 0; i < currentIndexQuestion; i++) {
-        const question = ticketsStore.questions[i];
-        const answerExists = ticketsStore.answers.some(
-          (answer) => answer.questionId === question.questionId
-        );
-        if (!answerExists) {
-          nextIndex = i;
-          break;
-        }
-      }
-    }
-    return nextIndex;
-  };
+  const { indexQuestion, action, getNextQuestionWithoutAnswer } = props;
 
   const getPreviousQuestionWithoutAnswer = (
     currentIndexQuestion: number

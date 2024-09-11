@@ -46,17 +46,17 @@ const Questions = observer(() => {
     if (ticketsStore.questions.length === ticketsStore.answers.length) {
       navigate("/results");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ticketsStore.questions.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ticketsStore.answers.length]);
 
   const handleButtonClick = (indexQuestion: number) => {
-    if (indexQuestion >= 0 && indexQuestion < questionsToRender.length) {
-      setCurrentQuestionIndex(indexQuestion);
-      localStorage.setItem(
-        storageSelectors.currentQuestionPage,
-        String(indexQuestion)
-      );
-    }
+    if (indexQuestion <= 0 && indexQuestion > questionsToRender.length) return;
+
+    setCurrentQuestionIndex(indexQuestion);
+    localStorage.setItem(
+      storageSelectors.currentQuestionPage,
+      String(indexQuestion)
+    );
   };
 
   return (

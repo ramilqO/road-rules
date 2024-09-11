@@ -45,31 +45,25 @@ const Question = observer((props: QuestionProps) => {
   );
   const checkIsAnswer = !!currentAnswer;
 
-  const handleAnswerClick = (answerId: string) => {
+  const handleAnswerClick = (
+    answerId: string,
+    currentIndexQuestion: number
+  ) => {
     ticketsStore.sendingAnswer({
       ticketId: currentQuestion.ticketId,
       questionId: currentQuestion.questionId,
       answerId,
     });
 
-    const questionIndexWithoutAnswer = getQuestionWithoutAnswer(indexQuestion);
-    action(questionIndexWithoutAnswer);
-  };
-
-  const getQuestionWithoutAnswer = (currentIndexQuestion: number): number => {
-    let questionIndexWithoutAnswer =
+    const questionIndexWithoutAnswer =
       getNextQuestionWithoutAnswer(currentIndexQuestion);
-
-    if (questionIndexWithoutAnswer === currentIndexQuestion) {
-      questionIndexWithoutAnswer =
-        getPreviousQuestionWithoutAnswer(currentIndexQuestion);
-    }
-    return questionIndexWithoutAnswer;
+    action(questionIndexWithoutAnswer);
   };
 
   const getNextQuestionWithoutAnswer = (
     currentIndexQuestion: number
   ): number => {
+    let nextIndex = currentIndexQuestion;
     for (
       let i = currentIndexQuestion + 1;
       i < ticketsStore.questions.length;
@@ -80,25 +74,23 @@ const Question = observer((props: QuestionProps) => {
         (answer) => answer.questionId === question.questionId
       );
       if (!answerExists) {
-        return i;
+        nextIndex = i;
+        break;
       }
     }
-    return currentIndexQuestion;
-  };
-
-  const getPreviousQuestionWithoutAnswer = (
-    currentIndexQuestion: number
-  ): number => {
-    for (let i = currentIndexQuestion - 1; i >= 0; i--) {
-      const question = ticketsStore.questions[i];
-      const answerExists = ticketsStore.answers.some(
-        (answer) => answer.questionId === question.questionId
-      );
-      if (!answerExists) {
-        return i;
+    if (nextIndex === currentIndexQuestion) {
+      for (let i = 0; i < currentIndexQuestion; i++) {
+        const question = ticketsStore.questions[i];
+        const answerExists = ticketsStore.answers.some(
+          (answer) => answer.questionId === question.questionId
+        );
+        if (!answerExists) {
+          nextIndex = i;
+          break;
+        }
       }
     }
-    return currentIndexQuestion;
+    return nextIndex;
   };
 
   return (
@@ -138,7 +130,7 @@ const Question = observer((props: QuestionProps) => {
                   checkIsAnswer ? style.listAnswers_button__answer : ""
                 }`}
                 disabled={checkIsAnswer}
-                onClick={() => handleAnswerClick(answerId)}
+                onClick={() => handleAnswerClick(answerId, indexQuestion)}
               >
                 {answerText}
               </button>
@@ -151,7 +143,11 @@ const Question = observer((props: QuestionProps) => {
         })}
       </ul>
 
-      <QuestionNavigationList indexQuestion={indexQuestion} action={action} />
+      <QuestionNavigationList
+        indexQuestion={indexQuestion}
+        action={action}
+        getNextQuestionWithoutAnswer={getNextQuestionWithoutAnswer}
+      />
     </div>
   );
 });
