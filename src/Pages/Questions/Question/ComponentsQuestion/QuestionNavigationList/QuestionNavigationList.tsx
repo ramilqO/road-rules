@@ -9,10 +9,9 @@ interface IQuestionNavigationList {
   action: (newIndex: number) => void;
 }
 
-const QuestionNavigationList = ({
-  indexQuestion,
-  action,
-}: IQuestionNavigationList) => {
+const QuestionNavigationList = (props: IQuestionNavigationList) => {
+  const { indexQuestion, action } = props;
+
   const getNextQuestionWithoutAnswer = (
     currentIndexQuestion: number
   ): number => {

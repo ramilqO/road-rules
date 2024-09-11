@@ -27,8 +27,6 @@ const Questions = observer(() => {
   });
 
   const questionsToRender = ticketId ? ticketsStore.questions : examStore.exam;
-  const isFirstQuestion = currentQuestionIndex === 0;
-  const isLastQuestion = currentQuestionIndex === questionsToRender.length - 1;
 
   useEffect(() => {
     if (ticketId) {
@@ -110,8 +108,6 @@ const Questions = observer(() => {
         indexQuestion={currentQuestionIndex}
         action={handleButtonClick}
         currentQuestion={questionsToRender[currentQuestionIndex]}
-        isFirstQuestion={isFirstQuestion}
-        isLastQuestion={isLastQuestion}
       />
     </div>
   );
