@@ -17,48 +17,48 @@ interface IButton {
   disabled?: boolean;
 }
 
-const Button = observer(
-  ({
+const Button = observer((props: IButton) => {
+  const {
     type = "button",
     buttonStyle = "button",
     text = "",
     onClick,
     disabled = false,
-  }: IButton) => {
-    const buttonStyleClass = (() => {
-      switch (buttonStyle) {
-        case "link":
-          return style.link;
-        case "ticketButton":
-          return `${style.button} ${style.button__ticket}`;
-        default:
-          return style.button;
-      }
-    })();
+  } = props;
 
-    const isLoading = authStore.isLoading;
-    const isSubmitType = type === "submit";
+  const buttonStyleClass = (() => {
+    switch (buttonStyle) {
+      case "link":
+        return style.link;
+      case "ticketButton":
+        return `${style.button} ${style.button__ticket}`;
+      default:
+        return style.button;
+    }
+  })();
 
-    const combinedClassNames = [
-      buttonStyleClass,
-      isSubmitType && isLoading && style.button__disabled,
-      disabled && style.button__disabled,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  const isLoading = authStore.isLoading;
+  const isSubmitType = type === "submit";
 
-    return (
-      <button
-        type={type}
-        className={combinedClassNames}
-        color="#FFFFFF"
-        disabled={isLoading || disabled}
-        onClick={onClick}
-      >
-        {isSubmitType && isLoading ? <Loader /> : text}
-      </button>
-    );
-  }
-);
+  const combinedClassNames = [
+    buttonStyleClass,
+    isSubmitType && isLoading && style.button__disabled,
+    disabled && style.button__disabled,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <button
+      type={type}
+      className={combinedClassNames}
+      color="#FFFFFF"
+      disabled={isLoading || disabled}
+      onClick={onClick}
+    >
+      {isSubmitType && isLoading ? <Loader /> : text}
+    </button>
+  );
+});
 
 export default Button;

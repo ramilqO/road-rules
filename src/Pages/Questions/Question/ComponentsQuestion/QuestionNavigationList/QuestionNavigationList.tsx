@@ -1,3 +1,4 @@
+import ticketsStore from "@/stores/Tickets/ticketsStore";
 import style from "./QuestionNavigationList.module.scss";
 
 import ArrowLeftIcon from "/public/svg/question/ArrowLeftIcon";
@@ -5,30 +6,63 @@ import ArrowRightIcon from "/public/svg/question/ArrowRightIcon";
 
 interface IQuestionNavigationList {
   indexQuestion: number;
-  isFirstQuestion: boolean;
-  isLastQuestion: boolean;
   action: (newIndex: number) => void;
-  getNextQuestionWithoutAnswer: (currentIndex: number) => number;
-  getPreviousQuestionWithoutAnswer: (currentIndex: number) => number;
+  getNextQuestionWithoutAnswer: (currentIndexQuestion: number) => number;
 }
 
-const QuestionNavigationList = ({
-  indexQuestion,
-  isFirstQuestion,
-  isLastQuestion,
-  action,
-  getNextQuestionWithoutAnswer,
-  getPreviousQuestionWithoutAnswer,
-}: IQuestionNavigationList) => {
+const QuestionNavigationList = (props: IQuestionNavigationList) => {
+  const { indexQuestion, action, getNextQuestionWithoutAnswer } = props;
+
+  const getPreviousQuestionWithoutAnswer = (
+    currentIndexQuestion: number
+  ): number => {
+    let prevIndex = currentIndexQuestion;
+    for (let i = currentIndexQuestion - 1; i >= 0; i--) {
+      const question = ticketsStore.questions[i];
+      const answerExists = ticketsStore.answers.some(
+        (answer) => answer.questionId === question.questionId
+      );
+      if (!answerExists) {
+        prevIndex = i;
+        break;
+      }
+    }
+    if (prevIndex === currentIndexQuestion) {
+      for (
+        let i = ticketsStore.questions.length - 1;
+        i > currentIndexQuestion;
+        i--
+      ) {
+        const question = ticketsStore.questions[i];
+        const answerExists = ticketsStore.answers.some(
+          (answer) => answer.questionId === question.questionId
+        );
+        if (!answerExists) {
+          prevIndex = i;
+          break;
+        }
+      }
+    }
+    return prevIndex;
+  };
+
+  const hasNextQuestion = () => {
+    return getNextQuestionWithoutAnswer(indexQuestion) !== indexQuestion;
+  };
+
+  const hasPreviousQuestion = () => {
+    return getPreviousQuestionWithoutAnswer(indexQuestion) !== indexQuestion;
+  };
+
   return (
     <ul className={style.navigationList}>
       <li>
         <button
           className={style.navigationList_button}
-          disabled={isFirstQuestion}
+          disabled={!hasPreviousQuestion()}
           onClick={() => {
             const indexPreviousQuestion =
-              getNextQuestionWithoutAnswer(indexQuestion);
+              getPreviousQuestionWithoutAnswer(indexQuestion);
             action(indexPreviousQuestion);
           }}
           type="button"
@@ -42,10 +76,10 @@ const QuestionNavigationList = ({
       <li className={style.navigationList_item}>
         <button
           className={style.navigationList_button}
-          disabled={isLastQuestion}
+          disabled={!hasNextQuestion()}
           onClick={() => {
             const indexNextQuestion =
-              getPreviousQuestionWithoutAnswer(indexQuestion);
+              getNextQuestionWithoutAnswer(indexQuestion);
             action(indexNextQuestion);
           }}
           type="button"

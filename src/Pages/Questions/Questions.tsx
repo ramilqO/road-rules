@@ -27,8 +27,6 @@ const Questions = observer(() => {
   });
 
   const questionsToRender = ticketId ? ticketsStore.questions : examStore.exam;
-  const isFirstQuestion = currentQuestionIndex === 0;
-  const isLastQuestion = currentQuestionIndex === questionsToRender.length - 1;
 
   useEffect(() => {
     if (ticketId) {
@@ -48,17 +46,17 @@ const Questions = observer(() => {
     if (ticketsStore.questions.length === ticketsStore.answers.length) {
       navigate("/results");
     }
-    // TODO тут может быть ошибка гараниторвано из-за eslint
-  }, [navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ticketsStore.answers.length]);
 
   const handleButtonClick = (indexQuestion: number) => {
-    if (indexQuestion >= 0 && indexQuestion < questionsToRender.length) {
-      setCurrentQuestionIndex(indexQuestion);
-      localStorage.setItem(
-        storageSelectors.currentQuestionPage,
-        String(indexQuestion)
-      );
-    }
+    if (indexQuestion <= 0 && indexQuestion > questionsToRender.length) return;
+
+    setCurrentQuestionIndex(indexQuestion);
+    localStorage.setItem(
+      storageSelectors.currentQuestionPage,
+      String(indexQuestion)
+    );
   };
 
   return (
@@ -110,8 +108,6 @@ const Questions = observer(() => {
         indexQuestion={currentQuestionIndex}
         action={handleButtonClick}
         currentQuestion={questionsToRender[currentQuestionIndex]}
-        isFirstQuestion={isFirstQuestion}
-        isLastQuestion={isLastQuestion}
       />
     </div>
   );

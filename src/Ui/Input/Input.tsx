@@ -13,16 +13,18 @@ interface InputProps {
   disabled?: boolean;
 }
 
-const Input = ({
-  label,
-  type = "text",
-  name,
-  onValidate,
-  initialValue = "",
-  placeholder,
-  inputRef,
-  disabled = false,
-}: InputProps) => {
+const Input = (props: InputProps) => {
+  const {
+    label,
+    type = "text",
+    name,
+    onValidate,
+    initialValue = "",
+    placeholder,
+    inputRef,
+    disabled = false,
+  } = props;
+
   const [value, setValue] = useState(initialValue);
   const [validateError, setValidateError] = useState("");
 
